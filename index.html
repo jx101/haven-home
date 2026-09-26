@@ -159,7 +159,7 @@ h1 {
   font-weight: bold;
 }
 
-.memory-screen {
+.screen {
   display: none;
 }
 
@@ -178,6 +178,23 @@ h1 {
   border-radius: 20px;
   text-align: center;
   color: #777;
+}
+
+.setting {
+  background: white;
+  padding: 18px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+}
+
+.setting strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.setting span {
+  color: #777;
+  font-size: 14px;
 }
 
 .nav {
@@ -199,6 +216,7 @@ h1 {
   font-size: 12px;
   color: #777;
   cursor: pointer;
+  user-select: none;
 }
 
 .nav .active {
@@ -211,6 +229,8 @@ h1 {
 <body>
 
 <div class="app">
+
+  <!-- HOME -->
 
   <div id="homeScreen">
 
@@ -264,7 +284,7 @@ h1 {
 
       </div>
 
-      <button class="add" onclick="showForm()">＋ Add maintenance</button>
+      <button class="add" onclick="showAdd()">＋ Add maintenance</button>
 
       <div class="form" id="form">
 
@@ -281,11 +301,14 @@ h1 {
   </div>
 
 
-  <div class="memory-screen" id="memoryScreen">
+  <!-- MEMORY -->
+
+  <div class="screen" id="memoryScreen">
 
     <button class="back" onclick="showHome()">← Back to Home</button>
 
     <div class="small">Your home's history</div>
+
     <h1>Memory</h1>
 
     <div class="section">
@@ -298,112 +321,261 @@ h1 {
 
   </div>
 
+
+  <!-- SETTINGS -->
+
+  <div class="screen" id="settingsScreen">
+
+    <button class="back" onclick="showHome()">← Back to Home</button>
+
+    <div class="small">Make Haven yours</div>
+
+    <h1>Settings</h1>
+
+    <div class="section">
+
+      <div class="setting">
+        <strong>🏡 Your home</strong>
+        <span>Haven keeps your maintenance memories on this device.</span>
+      </div>
+
+      <div class="setting">
+        <strong>🔔 Reminders</strong>
+        <span>Coming soon.</span>
+      </div>
+
+      <div class="setting">
+        <strong>🧠 Home memory</strong>
+        <span>Your saved maintenance information stays in your browser.</span>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 
+<!-- BOTTOM NAV -->
+
 <div class="nav">
 
-  <div class="active" onclick="showHome()">⌂<br>Home</div>
+  <div id="homeNav" class="active" onclick="showHome()">
+    ⌂<br>Home
+  </div>
 
-  <div onclick="showMemory()">◷<br>Memory</div>
+  <div id="memoryNav" onclick="showMemory()">
+    ◷<br>Memory
+  </div>
 
-  <div onclick="showForm()">＋<br>Add</div>
+  <div id="addNav" onclick="showAdd()">
+    ＋<br>Add
+  </div>
 
-  <div>⚙<br>Settings</div>
+  <div id="settingsNav" onclick="showSettings()">
+    ⚙<br>Settings
+  </div>
 
 </div>
 
 
 <script>
 
-function showForm() {
+function hideScreens() {
+
+  document.getElementById("homeScreen").style.display = "none";
+  document.getElementById("memoryScreen").style.display = "none";
+  document.getElementById("settingsScreen").style.display = "none";
+
+}
+
+
+function clearActive() {
+
+  document.getElementById("homeNav").classList.remove("active");
+  document.getElementById("memoryNav").classList.remove("active");
+  document.getElementById("addNav").classList.remove("active");
+  document.getElementById("settingsNav").classList.remove("active");
+
+}
+
+
+function showHome() {
+
+  hideScreens();
 
   document.getElementById("homeScreen").style.display = "block";
-  document.getElementById("memoryScreen").style.display = "none";
+
+  clearActive();
+
+  document.getElementById("homeNav").classList.add("active");
+
+  window.scrollTo(0, 0);
+}
+
+
+function showMemory() {
+
+  hideScreens();
+
+  document.getElementById("memoryScreen").style.display = "block";
+
+  clearActive();
+
+  document.getElementById("memoryNav").classList.add("active");
+
+  loadMemory();
+
+  window.scrollTo(0, 0);
+}
+
+
+function showAdd() {
+
+  showHome();
 
   document.getElementById("form").style.display = "block";
 
+  document.getElementById("addNav").classList.add("active");
+
   window.scrollTo(0, document.body.scrollHeight);
+}
+
+
+function showSettings() {
+
+  hideScreens();
+
+  document.getElementById("settingsScreen").style.display = "block";
+
+  clearActive();
+
+  document.getElementById("settingsNav").classList.add("active");
+
+  window.scrollTo(0, 0);
 }
 
 
 function addMaintenance() {
 
   let name = document.getElementById("name").value.trim();
+
   let days = document.getElementById("days").value;
 
   if (name === "" || days === "") {
+
     alert("Please enter both details.");
+
     return;
   }
 
+
   let task = {
+
     name: name,
+
     days: days
+
   };
 
-  let savedTasks = JSON.parse(localStorage.getItem("havenTasks")) || [];
+
+  let savedTasks =
+    JSON.parse(localStorage.getItem("havenTasks")) || [];
+
 
   savedTasks.push(task);
 
-  localStorage.setItem("havenTasks", JSON.stringify(savedTasks));
+
+  localStorage.setItem(
+    "havenTasks",
+    JSON.stringify(savedTasks)
+  );
+
 
   displayTask(task);
 
+
   document.getElementById("name").value = "";
+
   document.getElementById("days").value = "";
 
   document.getElementById("form").style.display = "none";
+
 }
 
 
 function displayTask(task) {
 
   let card = document.createElement("div");
+
   card.className = "card";
 
+
   let icon = document.createElement("div");
+
   icon.className = "icon";
+
   icon.textContent = "🔧";
+
 
   let content = document.createElement("div");
 
+
   let title = document.createElement("strong");
+
   title.textContent = task.name;
 
+
   let details = document.createElement("span");
-  details.textContent = "Due in " + task.days + " days";
+
+  details.textContent =
+    "Due in " + task.days + " days";
+
 
   content.appendChild(title);
+
   content.appendChild(details);
 
+
   card.appendChild(icon);
+
   card.appendChild(content);
 
-  document.getElementById("maintenanceList").appendChild(card);
+
+  document
+    .getElementById("maintenanceList")
+    .appendChild(card);
+
 }
 
 
 function loadTasks() {
 
-  let savedTasks = JSON.parse(localStorage.getItem("havenTasks")) || [];
+  let savedTasks =
+    JSON.parse(localStorage.getItem("havenTasks")) || [];
+
 
   savedTasks.forEach(function(task) {
+
     displayTask(task);
+
   });
+
 }
 
 
-function showMemory() {
+function loadMemory() {
 
-  document.getElementById("homeScreen").style.display = "none";
-  document.getElementById("memoryScreen").style.display = "block";
+  let memoryList =
+    document.getElementById("memoryList");
 
-  let memoryList = document.getElementById("memoryList");
 
   memoryList.innerHTML = "";
 
-  let savedTasks = JSON.parse(localStorage.getItem("havenTasks")) || [];
+
+  let savedTasks =
+    JSON.parse(localStorage.getItem("havenTasks")) || [];
+
 
   if (savedTasks.length === 0) {
 
@@ -413,40 +585,48 @@ function showMemory() {
     return;
   }
 
+
   savedTasks.forEach(function(task) {
 
     let card = document.createElement("div");
+
     card.className = "card";
 
+
     let icon = document.createElement("div");
+
     icon.className = "icon";
+
     icon.textContent = "🔧";
+
 
     let content = document.createElement("div");
 
+
     let title = document.createElement("strong");
+
     title.textContent = task.name;
 
+
     let details = document.createElement("span");
-    details.textContent = "Due in " + task.days + " days";
+
+    details.textContent =
+      "Due in " + task.days + " days";
+
 
     content.appendChild(title);
+
     content.appendChild(details);
 
+
     card.appendChild(icon);
+
     card.appendChild(content);
+
 
     memoryList.appendChild(card);
 
   });
-
-}
-
-
-function showHome() {
-
-  document.getElementById("homeScreen").style.display = "block";
-  document.getElementById("memoryScreen").style.display = "none";
 
 }
 
