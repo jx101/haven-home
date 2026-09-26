@@ -3,47 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f7f5ef">
-
-<title>Haven — Your home remembers.</title>
+<meta name="theme-color" content="#f7f4ea">
+<title>Haven — Your home remembers</title>
 
 <style>
-
 :root{
   --ink:#303832;
   --muted:#7d857e;
-  --card:rgba(255,255,255,.88);
-  --line:#e8e7df;
-  --green:#64856d;
-  --green-dark:#4e7059;
-  --soft-green:#edf3ed;
-  --cream:#f7f5ef;
-  --danger:#bd7068;
-  --warning:#b28a4e;
-  --shadow:0 10px 30px rgba(63,76,67,.07);
+  --green:#6f9b78;
+  --green-dark:#4f7659;
+  --soft-green:#e9f1e7;
+  --cream:#f7f4ea;
+  --white:#ffffff;
+  --line:#e5e4dc;
+  --danger:#c96b67;
+  --warning:#c99855;
+  --shadow:0 10px 30px rgba(63,78,66,.08);
 }
 
 *{
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   margin:0;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:var(--ink);
-  background:var(--cream);
-  min-height:100vh;
+  background:#f8f7f1;
 }
 
 button,
@@ -56,820 +42,560 @@ button{
   cursor:pointer;
 }
 
-
-/* =========================
-   SEASONAL BACKGROUND
-========================= */
-
-.season-background{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:390px;
+.app{
+  max-width:600px;
+  min-height:100vh;
+  margin:auto;
+  background:#f8f7f1;
   overflow:hidden;
-  pointer-events:none;
-  z-index:0;
-
-  background:
-    linear-gradient(
-      180deg,
-      #e4eee9 0%,
-      #f7f5ef 100%
-    );
 }
 
-.season-sun{
+/* ---------- SEASONAL HERO ---------- */
+
+.season{
+  position:relative;
+  min-height:390px;
+  padding:18px 18px 0;
+  overflow:hidden;
+  background:linear-gradient(#e7f0ed,#f5f1e4);
+}
+
+.season.spring{
+  background:linear-gradient(#dceee9,#f6f2e6);
+}
+
+.season.summer{
+  background:linear-gradient(#cfe8f1,#f6efd9);
+}
+
+.season.autumn{
+  background:linear-gradient(#e8ddd0,#f6eee0);
+}
+
+.season.winter{
+  background:linear-gradient(#dce8ef,#f5f5f1);
+}
+
+/* mountains */
+
+.mountain{
   position:absolute;
+  left:-10%;
+  bottom:120px;
+  width:120%;
+  height:145px;
+  background:#b8c9bd;
+  clip-path:polygon(
+    0 100%,15% 52%,25% 72%,39% 20%,
+    51% 68%,66% 31%,78% 69%,91% 42%,100% 100%
+  );
+  opacity:.7;
+}
 
-  width:68px;
-  height:68px;
-
-  border-radius:50%;
-
-  right:19%;
-  top:55px;
-
-  background:#f3d78c;
+.mountain.back{
+  bottom:135px;
+  background:#d0dbd2;
   opacity:.8;
+  transform:scale(1.12);
 }
 
-.season-mountain{
+/* ground */
+
+.ground{
   position:absolute;
-
-  bottom:62px;
-
-  width:0;
-  height:0;
-
-  border-left:180px solid transparent;
-  border-right:180px solid transparent;
-  border-bottom:185px solid #b5c6bc;
-}
-
-.mountain-one{
-  left:-70px;
-}
-
-.mountain-two{
-  right:-80px;
-  border-bottom-color:#c4d0c8;
-}
-
-.season-ground{
-  position:absolute;
-
-  bottom:0;
   left:0;
-
-  width:100%;
-  height:90px;
-
-  background:#c9d7c9;
-
-  border-radius:50% 50% 0 0;
-}
-
-
-/* Spring */
-
-body[data-season="spring"] .season-background{
-  background:
-    linear-gradient(
-      180deg,
-      #dceee6 0%,
-      #f7f5ef 100%
-    );
-}
-
-body[data-season="spring"] .season-ground{
-  background:#b8d0b7;
-}
-
-
-/* Summer */
-
-body[data-season="summer"] .season-background{
-  background:
-    linear-gradient(
-      180deg,
-      #bfe4f0 0%,
-      #f7f5ef 100%
-    );
-}
-
-body[data-season="summer"] .season-sun{
-  background:#f4d36e;
-  opacity:1;
-}
-
-body[data-season="summer"] .season-ground{
-  background:#a9ca9d;
-}
-
-
-/* Autumn */
-
-body[data-season="autumn"] .season-background{
-  background:
-    linear-gradient(
-      180deg,
-      #ead9c8 0%,
-      #f7f5ef 100%
-    );
-}
-
-body[data-season="autumn"] .season-ground{
-  background:#cdb68f;
-}
-
-body[data-season="autumn"] .flower-box:after{
-  color:#bd8055;
-}
-
-
-/* Winter */
-
-body[data-season="winter"] .season-background{
-  background:
-    linear-gradient(
-      180deg,
-      #cbdce8 0%,
-      #f7f5ef 100%
-    );
-}
-
-body[data-season="winter"] .season-ground{
-  background:#edf1f0;
-}
-
-
-/* =========================
-   HOUSE
-========================= */
-
-.season-house{
-  position:absolute;
-
-  right:10%;
-  bottom:34px;
-
-  width:255px;
-  height:190px;
-}
-
-.house-body{
-  position:absolute;
-
-  left:38px;
+  right:0;
   bottom:0;
+  height:135px;
+  background:#c9d8bd;
+  border-radius:50% 50% 0 0/25% 25% 0 0;
+}
 
-  width:175px;
-  height:125px;
+.summer .ground{
+  background:#b9d39d;
+}
 
-  background:#fff4e4;
+.autumn .ground{
+  background:#cbbd9e;
+}
 
-  border:3px solid #82786a;
-  border-top:0;
+.winter .ground{
+  background:#e9eeee;
+}
 
-  box-shadow:
-    0 8px 18px rgba(0,0,0,.06);
+/* ---------- HOUSE ---------- */
+
+.house{
+  position:absolute;
+  right:38px;
+  bottom:72px;
+  width:245px;
+  height:150px;
+  background:#f8ead3;
+  border:3px solid #766b5d;
+  border-radius:3px;
+  box-shadow:0 9px 20px rgba(50,50,40,.12);
 }
 
 .house-roof{
   position:absolute;
-
-  left:17px;
-  top:28px;
-
-  width:220px;
-  height:80px;
-
-  background:#718078;
-
-  clip-path:
-    polygon(
-      50% 0,
-      100% 100%,
-      0 100%
-    );
+  left:-20px;
+  top:-65px;
+  width:280px;
+  height:85px;
+  background:#725d4d;
+  clip-path:polygon(0 100%,50% 0,100% 100%);
 }
 
-.house-chimney{
-  position:absolute;
-
-  right:55px;
-  top:8px;
-
-  width:25px;
-  height:65px;
-
-  background:#aa816b;
-
-  border:2px solid #786456;
-}
-
-.house-window{
-  position:absolute;
-
-  width:38px;
-  height:38px;
-
-  top:24px;
-
-  background:#bcdfe1;
-
-  border:3px solid #77736a;
-}
-
-.window-left{
-  left:20px;
-}
-
-.window-right{
-  right:20px;
-}
-
-.house-door{
-  position:absolute;
-
-  left:68px;
-  bottom:0;
-
-  width:43px;
-  height:73px;
-
-  background:#806b58;
-
-  border:3px solid #665646;
-}
-
-.house-door:after{
+.house-roof:after{
   content:"";
-
   position:absolute;
+  left:0;
+  right:0;
+  bottom:5px;
+  height:8px;
+  background:#604d41;
+}
 
+.chimney{
+  position:absolute;
+  right:36px;
+  top:-69px;
+  width:25px;
+  height:57px;
+  background:#8b7667;
+  border:2px solid #685a4f;
+}
+
+.chimney:after{
+  content:"";
+  position:absolute;
+  left:-5px;
+  top:-5px;
+  width:35px;
+  height:7px;
+  background:#65564b;
+}
+
+.window{
+  position:absolute;
+  top:37px;
+  width:43px;
+  height:48px;
+  background:#b9d9df;
+  border:4px solid #695e52;
+}
+
+.window:before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  height:3px;
+  background:#695e52;
+}
+
+.window:after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:3px;
+  background:#695e52;
+}
+
+.window.left{
+  left:30px;
+}
+
+.window.right{
+  right:30px;
+}
+
+.door{
+  position:absolute;
+  left:98px;
+  bottom:0;
+  width:52px;
+  height:88px;
+  background:#806754;
+  border:3px solid #625347;
+  border-bottom:0;
+}
+
+.door:after{
+  content:"";
+  position:absolute;
   right:7px;
-  top:36px;
-
+  top:45px;
   width:6px;
   height:6px;
-
   border-radius:50%;
-
-  background:#e1ca82;
+  background:#e2c276;
 }
 
 .porch{
   position:absolute;
-
-  left:48px;
-  bottom:0;
-
-  width:155px;
-  height:12px;
-
-  background:#776b59;
-}
-
-.flower-box{
-  position:absolute;
-
-  width:42px;
-  height:9px;
-
-  background:#806450;
-
-  top:64px;
-}
-
-.flower-left{
-  left:18px;
-}
-
-.flower-right{
-  right:18px;
-}
-
-.flower-box:after{
-  content:"• • •";
-
-  position:absolute;
-
-  color:#6b9268;
-
-  font-size:21px;
-
-  top:-17px;
-  left:3px;
-
-  letter-spacing:4px;
-}
-
-
-/* Winter snow */
-
-body[data-season="winter"] .house-roof:after{
-  content:"";
-
-  position:absolute;
-
-  left:18px;
-  top:8px;
-
-  width:180px;
+  left:78px;
+  bottom:-12px;
+  width:94px;
   height:14px;
-
-  background:#fafafa;
-
-  border-radius:50%;
+  background:#806f5e;
+  border-radius:3px;
 }
 
+.flower{
+  position:absolute;
+  bottom:8px;
+  width:58px;
+  height:15px;
+  background:#8e654f;
+  border-radius:3px;
+}
 
-/* =========================
-   APP
-========================= */
+.flower:before{
+  content:"✿ ✿ ✿";
+  position:absolute;
+  bottom:6px;
+  left:6px;
+  color:#e58c83;
+  font-size:17px;
+}
 
-.app{
+.flower.left{
+  left:22px;
+}
+
+.flower.right{
+  right:22px;
+}
+
+/* seasonal decorations */
+
+.season-decoration{
+  position:absolute;
+  pointer-events:none;
+}
+
+.spring .season-decoration:before{
+  content:"✿  ✿  ✿";
+  position:absolute;
+  left:45px;
+  bottom:180px;
+  color:#e79caa;
+  font-size:28px;
+  white-space:nowrap;
+}
+
+.summer .season-decoration:before{
+  content:"☀";
+  position:absolute;
+  left:35px;
+  top:15px;
+  color:#e6b94d;
+  font-size:48px;
+}
+
+.autumn .season-decoration:before{
+  content:"🍂  🍁  🍂";
+  position:absolute;
+  left:32px;
+  bottom:185px;
+  font-size:27px;
+  white-space:nowrap;
+}
+
+.winter .season-decoration:before{
+  content:"❄  ❄  ❄";
+  position:absolute;
+  left:35px;
+  top:50px;
+  color:#ffffff;
+  font-size:25px;
+  white-space:nowrap;
+}
+
+/* ---------- HEADER ---------- */
+
+.topbar{
   position:relative;
-  z-index:2;
-
-  max-width:760px;
-
-  margin:auto;
-
-  padding:
-    20px
-    18px
-    105px;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header{
+  z-index:5;
   display:flex;
-
   align-items:center;
   justify-content:space-between;
-
-  position:relative;
-  z-index:10;
 }
 
 .logo{
   font-size:25px;
-
-  font-weight:650;
-
-  letter-spacing:-.6px;
+  font-weight:800;
+  letter-spacing:-.7px;
 }
 
-.logo span{
-  display:block;
-
-  font-size:11px;
-
-  font-weight:400;
-
-  color:var(--muted);
-
-  margin-top:1px;
+.tagline{
+  margin-top:3px;
+  font-size:12px;
+  color:#68736c;
 }
 
-
-/* H button */
-
-.profile-button{
+.profile-btn{
   width:42px;
   height:42px;
-
+  border:1px solid rgba(70,85,73,.18);
   border-radius:50%;
-
-  border:1px solid rgba(70,85,75,.14);
-
-  background:rgba(255,255,255,.72);
-
+  background:rgba(255,255,255,.85);
   color:var(--green-dark);
-
-  font-weight:650;
-
-  box-shadow:
-    0 5px 16px rgba(0,0,0,.04);
+  font-weight:800;
+  box-shadow:0 5px 15px rgba(50,60,50,.08);
 }
 
-.profile-button.active{
+.profile-btn.selected{
   background:var(--green);
   color:white;
 }
 
-
-/* Profile popup */
-
 .profile-popup{
   display:none;
-
   position:absolute;
-
   right:0;
   top:52px;
-
-  width:225px;
-
+  width:205px;
   padding:15px;
-
   background:white;
-
   border:1px solid var(--line);
-
-  border-radius:17px;
-
+  border-radius:16px;
   box-shadow:var(--shadow);
+  z-index:20;
 }
 
 .profile-popup.show{
   display:block;
 }
 
-.profile-title{
-  font-weight:650;
-  margin-bottom:4px;
+.profile-popup strong{
+  display:block;
+  margin-bottom:5px;
 }
 
-.profile-text{
+.profile-popup p{
+  margin:0;
   color:var(--muted);
-
   font-size:12px;
-
   line-height:1.5;
 }
 
+/* ---------- HERO TEXT ---------- */
 
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  min-height:270px;
-
-  padding-top:115px;
+.hero-copy{
+  position:relative;
+  z-index:4;
+  margin-top:42px;
+  max-width:320px;
 }
 
-.hero-content{
-  max-width:450px;
-}
-
-.eyebrow{
-  color:var(--green-dark);
-
-  font-size:11px;
-
-  font-weight:600;
-
-  text-transform:uppercase;
-
-  letter-spacing:1.25px;
-}
-
-.hero h1{
-  margin:
-    7px
-    0
-    8px;
-
-  font-size:37px;
-
-  line-height:1.06;
-
-  font-weight:650;
-
-  letter-spacing:-1.4px;
-}
-
-.hero p{
+.hero-copy h1{
   margin:0;
-
-  color:var(--muted);
-
-  line-height:1.55;
-
-  font-size:14px;
-
-  font-weight:400;
+  font-size:34px;
+  line-height:1.08;
+  letter-spacing:-1.2px;
 }
 
+.hero-copy p{
+  margin:10px 0 0;
+  color:#667068;
+  font-size:14px;
+  line-height:1.5;
+}
 
-/* =========================
-   HEALTH CARD
-========================= */
+.status-pill{
+  display:inline-flex;
+  margin-top:17px;
+  padding:8px 13px;
+  border-radius:30px;
+  background:rgba(255,255,255,.82);
+  color:var(--green-dark);
+  font-size:12px;
+  font-weight:700;
+}
+
+/* ---------- CONTENT ---------- */
+
+.content{
+  position:relative;
+  z-index:6;
+  margin-top:-2px;
+  padding:20px 17px 100px;
+  background:#f8f7f1;
+  border-radius:28px 28px 0 0;
+}
 
 .health-card{
-  margin-top:19px;
-
-  padding:
-    14px
-    16px;
-
-  background:
-    rgba(255,255,255,.78);
-
-  border:
-    1px solid rgba(100,110,100,.11);
-
-  border-radius:17px;
-
-  box-shadow:
-    0 7px 22px rgba(53,64,57,.045);
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:15px;
-}
-
-.health-main{
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-}
-
-.health-dot{
-  width:9px;
-  height:9px;
-
-  border-radius:50%;
-
-  background:var(--green);
+  padding:18px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
 }
 
 .health-title{
-  font-size:13px;
-  font-weight:600;
-}
-
-.health-sub{
-  font-size:11px;
-
-  color:var(--muted);
-
-  margin-top:2px;
-}
-
-.health-count{
-  font-size:20px;
-
-  font-weight:650;
-
-  color:var(--green-dark);
-}
-
-
-/* =========================
-   SECTIONS
-========================= */
-
-.section{
-  margin-top:25px;
-}
-
-.section-heading{
   display:flex;
-
   justify-content:space-between;
-
-  align-items:end;
-
-  margin-bottom:11px;
+  align-items:center;
 }
 
-.section-heading h2{
-  margin:0;
-
-  font-size:19px;
-
-  font-weight:600;
-
-  letter-spacing:-.4px;
+.health-title strong{
+  font-size:16px;
 }
 
-.section-heading span{
+.health-title span{
+  font-size:12px;
+  color:var(--green-dark);
+  font-weight:700;
+}
+
+.health-bar{
+  height:8px;
+  margin-top:13px;
+  overflow:hidden;
+  border-radius:10px;
+  background:#e8eee6;
+}
+
+.health-fill{
+  width:82%;
+  height:100%;
+  background:var(--green);
+  border-radius:10px;
+}
+
+.health-note{
+  margin:10px 0 0;
   color:var(--muted);
-
-  font-size:11px;
+  font-size:12px;
 }
 
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:25px 2px 12px;
+}
 
-/* =========================
-   FILTERS
-========================= */
+.section-title h2{
+  margin:0;
+  font-size:20px;
+}
+
+.section-title span{
+  color:var(--muted);
+  font-size:12px;
+}
 
 .filters{
   display:flex;
-
   gap:7px;
-
-  overflow-x:auto;
-
-  padding-bottom:2px;
-
-  scrollbar-width:none;
-}
-
-.filters::-webkit-scrollbar{
-  display:none;
+  overflow:auto;
+  padding-bottom:3px;
 }
 
 .filter{
-  flex:none;
-
-  border:
-    1px solid
-    var(--line);
-
-  background:
-    rgba(255,255,255,.72);
-
-  color:var(--muted);
-
-  border-radius:999px;
-
-  padding:
-    7px
-    12px;
-
-  font-size:11px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:8px 13px;
+  background:white;
+  color:#6d766f;
+  white-space:nowrap;
+  font-size:12px;
 }
 
 .filter.active{
   background:var(--green);
-
   color:white;
-
   border-color:var(--green);
 }
 
-
-/* =========================
-   BANNERS
-========================= */
+/* ---------- BANNERS ---------- */
 
 .banner{
-  padding:
-    12px
-    14px;
-
-  border-radius:15px;
-
-  margin-top:10px;
-
-  font-size:12px;
-
-  line-height:1.45;
-
-  border:
-    1px solid
-    var(--line);
-
-  background:white;
+  display:none;
+  margin-top:14px;
+  padding:14px 15px;
+  border-radius:16px;
+  font-size:13px;
+  line-height:1.4;
 }
 
-.banner strong{
+.banner.show{
   display:block;
-
-  margin-bottom:2px;
-
-  font-weight:650;
 }
 
 .banner.overdue{
-  background:#fbefed;
-  border-color:#efd9d5;
+  background:#f8e8e5;
+  color:#8e514c;
 }
 
 .banner.soon{
-  background:#faf3e4;
-  border-color:#eddfc2;
+  background:#f7efdc;
+  color:#856a3c;
 }
 
 .banner.good{
-  background:#edf5ee;
-  border-color:#dbe8dc;
+  background:#eaf2e8;
+  color:#4d7357;
 }
 
-
-/* =========================
-   TASK CARDS
-========================= */
+/* ---------- TASK CARDS ---------- */
 
 .tasks{
   display:grid;
-  gap:9px;
-}
-
-.task-card{
-  background:var(--card);
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:18px;
-
-  padding:14px;
-
-  box-shadow:
-    0 5px 18px rgba(53,64,57,.045);
-}
-
-.task-card.overdue{
-  border-left:
-    3px solid
-    var(--danger);
-}
-
-.task-card.today{
-  border-left:
-    3px solid
-    var(--warning);
-}
-
-.task-card.upcoming{
-  border-left:
-    3px solid
-    var(--green);
-}
-
-.task-top{
-  display:flex;
-
-  align-items:flex-start;
-
   gap:11px;
+  margin-top:13px;
+}
+
+.task{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:15px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 5px 18px rgba(60,70,62,.05);
 }
 
 .task-icon{
-  width:42px;
-  height:42px;
-
-  flex:none;
-
-  border-radius:13px;
-
-  background:var(--soft-green);
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
-  font-size:19px;
-}
-
-.task-card.overdue .task-icon{
-  background:#f8e9e6;
-}
-
-.task-card.today .task-icon{
-  background:#f8efdf;
+  width:45px;
+  height:45px;
+  flex:none;
+  border-radius:14px;
+  background:var(--soft-green);
+  font-size:21px;
 }
 
 .task-info{
   flex:1;
-
   min-width:0;
 }
 
 .task-name{
   font-size:15px;
-
-  font-weight:600;
-
-  margin-bottom:3px;
+  font-weight:700;
 }
 
-.task-category{
+.task-meta{
+  margin-top:4px;
   color:var(--muted);
-
-  font-size:10px;
-
-  text-transform:uppercase;
-
-  letter-spacing:.65px;
+  font-size:11px;
 }
 
 .task-status{
-  margin-top:10px;
-
-  font-size:12px;
-
-  font-weight:600;
+  margin-top:5px;
+  font-size:11px;
+  font-weight:700;
 }
 
 .task-status.overdue{
@@ -884,441 +610,68 @@ header{
   color:var(--green-dark);
 }
 
-.task-status.unknown{
-  color:var(--muted);
-}
-
-.task-date{
-  color:var(--muted);
-
-  font-size:11px;
-
-  margin-top:2px;
-}
-
-.task-bottom{
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:10px;
-
-  margin-top:12px;
-
-  padding-top:10px;
-
-  border-top:
-    1px solid
-    var(--line);
-}
-
-.task-meta{
-  color:var(--muted);
-
-  font-size:10px;
-}
-
 .task-actions{
   display:flex;
-
-  gap:6px;
+  gap:5px;
 }
 
-.small-button{
-  border:
-    1px solid
-    var(--line);
-
-  background:white;
-
-  border-radius:9px;
-
-  padding:
-    6px
-    9px;
-
-  font-size:10px;
+.task-actions button{
+  width:31px;
+  height:31px;
+  border:0;
+  border-radius:10px;
+  background:#f1f3ee;
+  color:#667069;
+  font-weight:800;
 }
 
-.complete-button{
-  background:var(--green);
-
-  color:white;
-
-  border-color:var(--green);
+.task-actions button.complete{
+  color:var(--green-dark);
 }
 
-.delete-button{
+.task-actions button.delete{
   color:var(--danger);
 }
 
-
-/* =========================
-   EMPTY
-========================= */
+/* ---------- EMPTY ---------- */
 
 .empty{
-  padding:
-    24px
-    16px;
-
+  padding:28px 15px;
   text-align:center;
-
-  border:
-    1px dashed
-    #d9dbd5;
-
-  border-radius:17px;
-
   color:var(--muted);
-
-  background:
-    rgba(255,255,255,.45);
-
-  font-size:12px;
+  background:white;
+  border:1px dashed #d8d9d1;
+  border-radius:18px;
 }
 
 .empty strong{
   display:block;
-
+  margin-bottom:5px;
   color:var(--ink);
-
-  margin-bottom:4px;
-
-  font-weight:600;
 }
 
+/* ---------- COMING UP ---------- */
 
-/* =========================
-   COMING UP
-========================= */
-
-.due-soon-grid{
+.coming-up{
   display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
   gap:9px;
 }
 
-.mini-card{
-  padding:13px;
-
-  background:white;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:16px;
-}
-
-.mini-icon{
-  font-size:19px;
-}
-
-.mini-name{
-  margin-top:7px;
-
-  font-weight:600;
-
-  font-size:12px;
-}
-
-.mini-date{
-  color:var(--muted);
-
-  font-size:10px;
-
-  margin-top:3px;
-}
-
-
-/* =========================
-   ADD
-========================= */
-
-.add-panel{
-  background:white;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:20px;
-
-  padding:17px;
-
-  box-shadow:var(--shadow);
-}
-
-.form-group{
-  margin-bottom:13px;
-}
-
-.form-group label{
-  display:block;
-
-  font-size:11px;
-
-  font-weight:600;
-
-  margin-bottom:5px;
-}
-
-.form-group input,
-.form-group select{
-  width:100%;
-
-  padding:
-    11px
-    12px;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:12px;
-
-  background:#fcfcf9;
-
-  color:var(--ink);
-
-  outline:none;
-
-  font-size:13px;
-}
-
-.form-group input:focus,
-.form-group select:focus{
-  border-color:var(--green);
-}
-
-.primary-button{
-  width:100%;
-
-  border:0;
-
-  border-radius:13px;
-
-  padding:12px;
-
-  background:var(--green);
-
-  color:white;
-
-  font-weight:600;
-
-  font-size:13px;
-}
-
-
-/* =========================
-   QUICK ADD
-========================= */
-
-.library{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:8px;
-}
-
-.library-button{
-  border:
-    1px solid
-    var(--line);
-
-  background:white;
-
+.coming-item{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 14px;
+  background:#fff;
+  border:1px solid var(--line);
   border-radius:14px;
+}
 
-  padding:11px;
-
-  text-align:left;
-
-  color:var(--ink);
-
+.coming-item span{
+  color:var(--muted);
   font-size:11px;
 }
 
-.library-button span{
-  display:block;
-
-  font-size:18px;
-
-  margin-bottom:3px;
-}
-
-
-/* =========================
-   MEMORY
-========================= */
-
-.memory-list{
-  display:grid;
-
-  gap:8px;
-}
-
-.memory-card{
-  padding:
-    13px
-    14px;
-
-  background:white;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:16px;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:10px;
-}
-
-.memory-name{
-  font-weight:600;
-
-  font-size:13px;
-}
-
-.memory-date{
-  color:var(--muted);
-
-  font-size:10px;
-
-  margin-top:3px;
-}
-
-.memory-repeat{
-  color:var(--green-dark);
-
-  font-size:10px;
-
-  white-space:nowrap;
-}
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-.settings-card{
-  background:white;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius:19px;
-
-  padding:
-    14px
-    16px;
-}
-
-.setting-row{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:15px;
-
-  padding:12px 0;
-
-  border-bottom:
-    1px solid
-    var(--line);
-}
-
-.setting-row:last-child{
-  border-bottom:0;
-}
-
-.setting-title{
-  font-weight:600;
-
-  font-size:12px;
-}
-
-.setting-text{
-  color:var(--muted);
-
-  font-size:10px;
-
-  margin-top:3px;
-}
-
-.switch{
-  width:46px;
-  height:27px;
-
-  border:0;
-
-  border-radius:30px;
-
-  background:#d9ded9;
-
-  padding:3px;
-}
-
-.switch:after{
-  content:"";
-
-  display:block;
-
-  width:21px;
-  height:21px;
-
-  background:white;
-
-  border-radius:50%;
-
-  transition:.2s;
-}
-
-.switch.on{
-  background:var(--green);
-}
-
-.switch.on:after{
-  transform:translateX(19px);
-}
-
-.danger-button{
-  border:
-    1px solid
-    #ead4d0;
-
-  color:var(--danger);
-
-  background:#fcf2f0;
-
-  padding:
-    8px
-    11px;
-
-  border-radius:10px;
-
-  font-size:10px;
-}
-
-
-/* =========================
-   PAGES
-========================= */
+/* ---------- PAGES ---------- */
 
 .page{
   display:none;
@@ -1328,1139 +681,628 @@ header{
   display:block;
 }
 
+.form-card{
+  padding:18px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
 
-/* =========================
-   BOTTOM NAV
-========================= */
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.field input,
+.field select{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  outline:none;
+  background:#fbfbf8;
+  color:var(--ink);
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:#a9bea9;
+}
+
+.primary{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:13px;
+  background:var(--green);
+  color:white;
+  font-weight:700;
+}
+
+.secondary{
+  width:100%;
+  padding:13px;
+  margin-top:9px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  color:var(--ink);
+}
+
+.quick-add{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px;
+}
+
+.quick-add button{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:white;
+  color:var(--green-dark);
+  font-size:12px;
+}
+
+.memory-card{
+  padding:18px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+}
+
+.memory-stat{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eeeeea;
+}
+
+.memory-stat:last-child{
+  border-bottom:0;
+}
+
+.memory-stat span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.settings-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 0;
+  border-bottom:1px solid #eeeeea;
+}
+
+.settings-row:last-child{
+  border-bottom:0;
+}
+
+.settings-row strong{
+  font-size:14px;
+}
+
+.settings-row small{
+  display:block;
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.switch{
+  position:relative;
+  width:48px;
+  height:27px;
+  border:0;
+  border-radius:30px;
+  background:#d9ddd8;
+}
+
+.switch:after{
+  content:"";
+  position:absolute;
+  top:4px;
+  left:4px;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  background:white;
+  transition:.2s;
+}
+
+.switch.on{
+  background:var(--green);
+}
+
+.switch.on:after{
+  left:25px;
+}
+
+/* ---------- BOTTOM NAV ---------- */
 
 .bottom-nav{
   position:fixed;
-
-  z-index:20;
-
-  bottom:11px;
-
+  z-index:30;
   left:50%;
-
+  bottom:10px;
   transform:translateX(-50%);
-
-  width:
-    min(
-      720px,
-      calc(100% - 26px)
-    );
-
-  background:
-    rgba(255,255,255,.91);
-
-  backdrop-filter:blur(15px);
-
-  border:
-    1px solid
-    rgba(100,110,100,.12);
-
-  border-radius:20px;
-
-  padding:6px;
-
+  width:min(566px,calc(100% - 22px));
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  box-shadow:
-    0 10px 30px
-    rgba(35,45,39,.10);
+  grid-template-columns:repeat(4,1fr);
+  padding:8px;
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 12px 35px rgba(40,50,43,.13);
+  backdrop-filter:blur(10px);
 }
 
-.nav-button{
+.nav-btn{
+  padding:8px 3px;
   border:0;
-
   background:transparent;
-
-  color:var(--muted);
-
-  padding:
-    7px
-    4px;
-
-  border-radius:14px;
-
-  font-size:9px;
+  color:#858d86;
+  font-size:10px;
 }
 
-.nav-icon{
+.nav-btn .nav-icon{
   display:block;
-
-  font-size:17px;
-
-  margin-bottom:2px;
+  margin-bottom:3px;
+  font-size:18px;
 }
 
-.nav-button.active{
-  background:var(--soft-green);
-
+.nav-btn.active{
   color:var(--green-dark);
-
-  font-weight:600;
+  font-weight:700;
 }
 
+/* ---------- FLOATING ADD ---------- */
 
-/* =========================
-   FLOATING ADD
-========================= */
-
-.floating-add{
+.fab{
   position:fixed;
-
-  right:
-    max(
-      19px,
-      calc(
-        (100vw - 760px)/2 + 18px
-      )
-    );
-
-  bottom:84px;
-
-  z-index:15;
-
-  width:51px;
-  height:51px;
-
-  border-radius:17px;
-
+  z-index:31;
+  right:max(22px,calc((100vw - 600px)/2 + 22px));
+  bottom:83px;
+  width:52px;
+  height:52px;
   border:0;
-
+  border-radius:50%;
   background:var(--green);
-
   color:white;
-
-  font-size:25px;
-
-  box-shadow:
-    0 9px 23px
-    rgba(62,98,76,.20);
+  font-size:26px;
+  box-shadow:0 9px 22px rgba(75,105,80,.25);
 }
 
-
-/* =========================
-   TOAST
-========================= */
+/* ---------- TOAST ---------- */
 
 .toast{
   position:fixed;
-
   z-index:50;
-
   left:50%;
-
-  bottom:90px;
-
-  transform:
-    translate(-50%,20px);
-
-  opacity:0;
-
-  pointer-events:none;
-
+  bottom:145px;
+  transform:translateX(-50%) translateY(20px);
+  padding:11px 15px;
   background:#303832;
-
   color:white;
-
-  padding:
-    10px
-    14px;
-
-  border-radius:11px;
-
-  font-size:11px;
-
+  border-radius:12px;
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
   transition:.25s;
 }
 
 .toast.show{
   opacity:1;
-
-  transform:
-    translate(-50%,0);
+  transform:translateX(-50%) translateY(0);
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:560px){
-
-  .season-house{
-    right:-17px;
-
-    transform:scale(.77);
-
-    transform-origin:
-      bottom right;
+@media(max-width:430px){
+  .house{
+    right:18px;
+    transform:scale(.86);
+    transform-origin:right bottom;
   }
 
-  .hero{
-    padding-top:105px;
+  .hero-copy h1{
+    font-size:30px;
   }
 
-  .hero h1{
-    font-size:34px;
+  .hero-copy{
+    max-width:270px;
   }
-
 }
-
-@media(max-width:380px){
-
-  .app{
-    padding-left:13px;
-    padding-right:13px;
-  }
-
-  .hero h1{
-    font-size:31px;
-  }
-
-}
-
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     SEASONAL SCENE
-========================= -->
-
-<div class="season-background">
-
-  <div class="season-sun"></div>
-
-  <div class="season-mountain mountain-one"></div>
-
-  <div class="season-mountain mountain-two"></div>
-
-
-  <div class="season-house">
-
-    <div class="house-chimney"></div>
-
-    <div class="house-roof"></div>
-
-    <div class="house-body">
-
-      <div class="house-window window-left"></div>
-
-      <div class="house-window window-right"></div>
-
-      <div class="flower-box flower-left"></div>
-
-      <div class="flower-box flower-right"></div>
-
-      <div class="house-door"></div>
-
-    </div>
-
-    <div class="porch"></div>
-
-  </div>
-
-
-  <div class="season-ground"></div>
-
-</div>
-
-
 
 <div class="app">
 
+  <!-- SEASONAL HOME -->
+  <section id="season" class="season">
 
-<!-- =========================
-     HEADER
-========================= -->
+    <div class="topbar">
 
-<header>
-
-  <div class="logo">
-
-    Haven
-
-    <span>
-      Your home remembers.
-    </span>
-
-  </div>
-
-
-  <button
-    class="profile-button"
-    id="profileButton"
-    aria-label="Haven profile"
-    title="Haven profile"
-    onclick="toggleProfile(event)"
-  >
-    H
-  </button>
-
-
-  <div
-    class="profile-popup"
-    id="profilePopup"
-  >
-
-    <div class="profile-title">
-      Haven
-    </div>
-
-    <div class="profile-text">
-      A quiet place to remember the
-      little things your home needs.
-    </div>
-
-  </div>
-
-</header>
-
-
-
-<!-- =========================
-     HOME
-========================= -->
-
-<section
-  class="page active"
-  id="homePage"
->
-
-
-  <div class="hero">
-
-    <div class="hero-content">
-
-      <div
-        class="eyebrow"
-        id="seasonText"
-      >
-        A fresh season for your home
+      <div>
+        <div class="logo">Haven</div>
+        <div class="tagline">Your home remembers.</div>
       </div>
 
+      <button
+        id="profileButton"
+        class="profile-btn"
+        aria-label="Haven profile"
+        title="Haven profile"
+        onclick="toggleProfile(event)"
+      >H</button>
 
-      <h1 id="heroTitle">
-        Home is doing well
-      </h1>
+      <div id="profilePopup" class="profile-popup">
+        <strong>Haven</strong>
+        <p>A simple memory for the things your home needs.</p>
+      </div>
 
+    </div>
 
-      <p id="heroText">
-        Keep the little things cared for,
-        before they become big things.
+    <div class="hero-copy">
+      <h1 id="heroTitle">Home is doing well</h1>
+      <p id="heroSubtitle">
+        Keep the little things remembered, so your home stays cared for.
       </p>
-
+      <div id="statusPill" class="status-pill">Everything looks good</div>
     </div>
 
+    <div class="mountain back"></div>
+    <div class="mountain"></div>
 
-    <div class="health-card">
+    <div class="house">
+      <div class="house-roof"></div>
+      <div class="chimney"></div>
 
-      <div class="health-main">
+      <div class="window left"></div>
+      <div class="window right"></div>
 
-        <div
-          class="health-dot"
-          id="healthDot"
-        ></div>
+      <div class="door"></div>
+      <div class="porch"></div>
 
+      <div class="flower left"></div>
+      <div class="flower right"></div>
+    </div>
 
-        <div>
+    <div class="ground"></div>
+    <div class="season-decoration"></div>
 
-          <div
-            class="health-title"
-            id="healthTitle"
-          >
-            Everything is calm
-          </div>
+  </section>
 
+  <!-- CONTENT -->
+  <main class="content">
 
-          <div
-            class="health-sub"
-            id="healthSub"
-          >
-            Your maintenance is on track.
-          </div>
+    <!-- HOME -->
+    <section id="homePage" class="page active">
 
+      <div class="health-card">
+
+        <div class="health-title">
+          <strong>Home health</strong>
+          <span id="healthText">Looking good</span>
         </div>
 
-      </div>
-
-
-      <div
-        class="health-count"
-        id="healthCount"
-      >
-        0
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="section">
-
-
-    <div class="section-heading">
-
-      <h2>
-        Maintenance
-      </h2>
-
-      <span id="taskCountLabel">
-        0 tasks
-      </span>
-
-    </div>
-
-
-    <div class="filters">
-
-
-      <button
-        class="filter active"
-        onclick="setFilter('all',this)"
-      >
-        All
-      </button>
-
-
-      <button
-        class="filter"
-        onclick="setFilter('today',this)"
-      >
-        Today
-      </button>
-
-
-      <button
-        class="filter"
-        onclick="setFilter('upcoming',this)"
-      >
-        Upcoming
-      </button>
-
-
-      <button
-        class="filter"
-        onclick="setFilter('overdue',this)"
-      >
-        Overdue
-      </button>
-
-
-    </div>
-
-
-    <div id="banners"></div>
-
-
-    <div
-      class="tasks"
-      id="taskList"
-    ></div>
-
-
-  </div>
-
-
-
-  <div class="section">
-
-
-    <div class="section-heading">
-
-      <h2>
-        Coming up
-      </h2>
-
-      <span>
-        Next 7 days
-      </span>
-
-    </div>
-
-
-    <div
-      class="due-soon-grid"
-      id="dueSoon"
-    ></div>
-
-
-  </div>
-
-
-</section>
-
-
-
-<!-- =========================
-     MEMORY
-========================= -->
-
-<section
-  class="page"
-  id="memoryPage"
->
-
-  <div
-    class="section"
-    style="margin-top:30px"
-  >
-
-    <div class="section-heading">
-
-      <h2>
-        Memory
-      </h2>
-
-      <span>
-        What you've cared for
-      </span>
-
-    </div>
-
-
-    <div id="memoryList"></div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     ADD
-========================= -->
-
-<section
-  class="page"
-  id="addPage"
->
-
-  <div
-    class="section"
-    style="margin-top:30px"
-  >
-
-    <div class="section-heading">
-
-      <h2>
-        Add maintenance
-      </h2>
-
-      <span>
-        Keep it simple
-      </span>
-
-    </div>
-
-
-    <div class="add-panel">
-
-
-      <div class="form-group">
-
-        <label for="taskName">
-          What needs attention?
-        </label>
-
-        <input
-          id="taskName"
-          type="text"
-          placeholder="e.g. Clean water filter"
-        >
-
-      </div>
-
-
-
-      <div class="form-group">
-
-        <label for="taskDate">
-          Next due date
-        </label>
-
-        <input
-          id="taskDate"
-          type="date"
-        >
-
-      </div>
-
-
-
-      <div class="form-group">
-
-        <label for="taskRepeat">
-          Repeat every
-        </label>
-
-
-        <select id="taskRepeat">
-
-          <option value="7">
-            7 days
-          </option>
-
-          <option value="14">
-            14 days
-          </option>
-
-          <option
-            value="30"
-            selected
-          >
-            30 days
-          </option>
-
-          <option value="60">
-            60 days
-          </option>
-
-          <option value="90">
-            90 days
-          </option>
-
-          <option value="180">
-            6 months
-          </option>
-
-          <option value="365">
-            1 year
-          </option>
-
-        </select>
-
-      </div>
-
-
-
-      <button
-        class="primary-button"
-        onclick="addTask()"
-      >
-        Add to Haven
-      </button>
-
-
-    </div>
-
-  </div>
-
-
-
-  <div class="section">
-
-
-    <div class="section-heading">
-
-      <h2>
-        Quick add
-      </h2>
-
-      <span>
-        Common tasks
-      </span>
-
-    </div>
-
-
-    <div class="library">
-
-
-      <button
-        class="library-button"
-        onclick="quickAdd('Clean water filter',30)"
-      >
-        <span>💧</span>
-        Water filter
-      </button>
-
-
-      <button
-        class="library-button"
-        onclick="quickAdd('Clean AC filter',30)"
-      >
-        <span>❄️</span>
-        AC filter
-      </button>
-
-
-      <button
-        class="library-button"
-        onclick="quickAdd('Check smoke detector',180)"
-      >
-        <span>🔔</span>
-        Smoke detector
-      </button>
-
-
-      <button
-        class="library-button"
-        onclick="quickAdd('Clean refrigerator',30)"
-      >
-        <span>🧊</span>
-        Refrigerator
-      </button>
-
-
-      <button
-        class="library-button"
-        onclick="quickAdd('Check plumbing',90)"
-      >
-        <span>🚰</span>
-        Plumbing
-      </button>
-
-
-      <button
-        class="library-button"
-        onclick="quickAdd('Clean windows',90)"
-      >
-        <span>🪟</span>
-        Windows
-      </button>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     SETTINGS
-========================= -->
-
-<section
-  class="page"
-  id="settingsPage"
->
-
-  <div
-    class="section"
-    style="margin-top:30px"
-  >
-
-    <div class="section-heading">
-
-      <h2>
-        Settings
-      </h2>
-
-      <span>
-        Haven preferences
-      </span>
-
-    </div>
-
-
-    <div class="settings-card">
-
-
-      <div class="setting-row">
-
-        <div>
-
-          <div class="setting-title">
-            Reminders
-          </div>
-
-          <div
-            class="setting-text"
-            id="reminderStatus"
-          >
-            Reminders are off.
-          </div>
-
+        <div class="health-bar">
+          <div id="healthFill" class="health-fill"></div>
         </div>
 
-
-        <button
-          class="switch"
-          id="reminderSwitch"
-          onclick="toggleReminders()"
-          aria-label="Toggle reminders"
-        ></button>
+        <p class="health-note">
+          Haven keeps your maintenance memories in one place.
+        </p>
 
       </div>
 
+      <div class="section-title">
+        <h2>Maintenance</h2>
+        <span id="taskCount">0 memories</span>
+      </div>
 
+      <div class="filters">
+        <button class="filter active" onclick="setFilter('all',this)">All</button>
+        <button class="filter" onclick="setFilter('today',this)">Today</button>
+        <button class="filter" onclick="setFilter('upcoming',this)">Upcoming</button>
+        <button class="filter" onclick="setFilter('overdue',this)">Overdue</button>
+      </div>
 
-      <div class="setting-row">
+      <div id="overdueBanner" class="banner overdue"></div>
+      <div id="soonBanner" class="banner soon"></div>
+      <div id="goodBanner" class="banner good"></div>
 
-        <div>
+      <div id="tasks" class="tasks"></div>
 
-          <div class="setting-title">
-            Your data
-          </div>
+      <div class="section-title">
+        <h2>Coming up</h2>
+        <span>Next memories</span>
+      </div>
 
-          <div class="setting-text">
-            Tasks stay stored on this device.
-          </div>
+      <div id="comingUp" class="coming-up"></div>
 
+    </section>
+
+    <!-- ADD -->
+    <section id="addPage" class="page">
+
+      <div class="section-title">
+        <h2>Add memory</h2>
+        <span>Keep it simple</span>
+      </div>
+
+      <div class="form-card">
+
+        <div class="field">
+          <label for="taskName">What needs remembering?</label>
+          <input id="taskName" type="text" placeholder="e.g. Clean water tank">
         </div>
 
+        <div class="field">
+          <label for="taskDate">Next due date</label>
+          <input id="taskDate" type="date">
+        </div>
 
-        <button
-          class="danger-button"
-          onclick="clearAllData()"
-        >
-          Clear
+        <div class="field">
+          <label for="taskRepeat">Repeat</label>
+          <select id="taskRepeat">
+            <option value="none">One time</option>
+            <option value="7">Every week</option>
+            <option value="30">Every month</option>
+            <option value="90">Every 3 months</option>
+            <option value="180">Every 6 months</option>
+            <option value="365">Every year</option>
+          </select>
+        </div>
+
+        <button class="primary" onclick="addTask()">Save memory</button>
+
+      </div>
+
+      <div class="section-title">
+        <h2>Quick add</h2>
+        <span>Common tasks</span>
+      </div>
+
+      <div class="quick-add">
+        <button onclick="quickAdd('Clean water tank',30)">Water tank</button>
+        <button onclick="quickAdd('Clean air conditioner',90)">AC cleaning</button>
+        <button onclick="quickAdd('Check smoke alarm',180)">Smoke alarm</button>
+        <button onclick="quickAdd('Clean refrigerator',30)">Refrigerator</button>
+      </div>
+
+    </section>
+
+    <!-- MEMORY -->
+    <section id="memoryPage" class="page">
+
+      <div class="section-title">
+        <h2>Memory</h2>
+        <span>Your home history</span>
+      </div>
+
+      <div class="memory-card" id="memoryCard"></div>
+
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settingsPage" class="page">
+
+      <div class="section-title">
+        <h2>Settings</h2>
+        <span>Haven controls</span>
+      </div>
+
+      <div class="form-card">
+
+        <div class="settings-row">
+          <div>
+            <strong>Reminders</strong>
+            <small>Check for tasks that need attention.</small>
+          </div>
+
+          <button
+            id="reminderButton"
+            class="switch"
+            onclick="toggleReminders()"
+            aria-label="Toggle reminders"
+          ></button>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <strong>Stored memories</strong>
+            <small>Your maintenance data is saved on this device.</small>
+          </div>
+          <span id="storedCount">0</span>
+        </div>
+
+        <button class="secondary" onclick="clearAllData()">
+          Clear all memories
         </button>
 
       </div>
 
+    </section>
 
-    </div>
-
-  </div>
-
-</section>
-
+  </main>
 
 </div>
 
-
-
-<!-- =========================
-     FLOATING ADD
-========================= -->
-
-<button
-  class="floating-add"
-  onclick="showPage('add')"
-  aria-label="Add maintenance"
->
-  +
-</button>
-
-
-
-<!-- =========================
-     NAVIGATION
-========================= -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
-
-  <button
-    class="nav-button active"
-    data-page="home"
-    onclick="showPage('home')"
-  >
+  <button class="nav-btn active" onclick="showPage('home',this)">
     <span class="nav-icon">⌂</span>
     Home
   </button>
 
-
-  <button
-    class="nav-button"
-    data-page="memory"
-    onclick="showPage('memory')"
-  >
+  <button class="nav-btn" onclick="showPage('memory',this)">
     <span class="nav-icon">◷</span>
     Memory
   </button>
 
-
-  <button
-    class="nav-button"
-    data-page="add"
-    onclick="showPage('add')"
-  >
+  <button class="nav-btn" onclick="showPage('add',this)">
     <span class="nav-icon">＋</span>
     Add
   </button>
 
-
-  <button
-    class="nav-button"
-    data-page="settings"
-    onclick="showPage('settings')"
-  >
+  <button class="nav-btn" onclick="showPage('settings',this)">
     <span class="nav-icon">⚙</span>
     Settings
   </button>
 
-
 </nav>
 
+<button class="fab" onclick="showPage('add')">+</button>
 
-
-<div
-  class="toast"
-  id="toast"
-></div>
-
-
+<div id="toast" class="toast"></div>
 
 <script>
 
+const STORAGE_KEY = "havenTasksV3";
+const REMINDER_KEY = "havenRemindersV1";
 
-/* =========================
-   STORAGE
-========================= */
+let tasks = [];
+let currentFilter = "all";
 
-const STORAGE_KEY =
-  "havenTasksV3";
+/* ---------- STORAGE ---------- */
 
-const REMINDER_KEY =
-  "havenRemindersV1";
+function loadTasks(){
 
+  try{
 
-let tasks=[];
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
 
+    tasks =
+      saved ? JSON.parse(saved) : [];
 
-try{
+    if(!Array.isArray(tasks)){
+      tasks=[];
+    }
 
-  tasks=
-    JSON.parse(
-      localStorage.getItem(
-        STORAGE_KEY
-      ) || "[]"
-    );
+  }catch(error){
 
-  if(!Array.isArray(tasks)){
+    console.log("Could not load tasks:",error);
+
     tasks=[];
+
   }
 
-}catch(error){
+}
 
-  tasks=[];
+function saveTasks(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(tasks)
+    );
+
+  }catch(error){
+
+    console.log("Could not save tasks:",error);
+
+  }
 
 }
 
-
-let currentFilter="all";
-
-
-
-/* =========================
-   SAVE
-========================= */
-
-function save(){
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(tasks)
-  );
-
-}
-
-
-
-/* =========================
-   DATE HELPERS
-========================= */
+/* ---------- DATES ---------- */
 
 function todayStart(){
 
   const d=new Date();
 
-  d.setHours(
-    0,
-    0,
-    0,
-    0
-  );
+  d.setHours(0,0,0,0);
 
   return d;
 
 }
 
-
-/*
-  IMPORTANT:
-  Date strings like YYYY-MM-DD
-  must be interpreted as local dates.
-
-  This prevents timezone-related
-  date shifting and NaN problems.
-*/
-
 function dateOnly(value){
 
-  if(
-    value===undefined ||
-    value===null ||
-    value===""
-  ){
+  if(!value){
     return null;
   }
-
 
   if(
     typeof value==="string" &&
     /^\d{4}-\d{2}-\d{2}$/.test(value)
   ){
 
-    const parts=value.split("-");
+    const parts=value.split("-").map(Number);
 
     const d=
       new Date(
-        Number(parts[0]),
-        Number(parts[1])-1,
-        Number(parts[2])
+        parts[0],
+        parts[1]-1,
+        parts[2]
       );
 
-
-    if(
-      d.getFullYear()!==Number(parts[0]) ||
-      d.getMonth()!==Number(parts[1])-1 ||
-      d.getDate()!==Number(parts[2])
-    ){
-      return null;
-    }
-
-
-    d.setHours(
-      0,
-      0,
-      0,
-      0
-    );
+    d.setHours(0,0,0,0);
 
     return d;
-  }
 
+  }
 
   const d=new Date(value);
 
-
-  if(
-    Number.isNaN(
-      d.getTime()
-    )
-  ){
+  if(isNaN(d.getTime())){
     return null;
   }
 
-
-  d.setHours(
-    0,
-    0,
-    0,
-    0
-  );
-
+  d.setHours(0,0,0,0);
 
   return d;
 
 }
 
-
-
-/*
-  Supports old Haven versions too.
-*/
-
 function getDueDate(task){
 
-  if(!task){
-    return null;
-  }
-
-
-  const possible=[
-    task.nextDue,
-    task.dueDate,
-    task.date,
-    task.next_due,
+  return dateOnly(
+    task.nextDue ||
+    task.dueDate ||
+    task.date ||
+    task.next_due ||
     task.due
-  ];
-
-
-  for(
-    const value of possible
-  ){
-
-    const d=dateOnly(value);
-
-
-    if(d){
-      return d;
-    }
-
-  }
-
-
-  return null;
+  );
 
 }
 
-
-
-/*
-  Always returns either a real
-  number or null.
-
-  NEVER NaN.
-*/
-
 function daysBetween(task){
 
-  const due=
-    getDueDate(task);
-
+  const due=getDueDate(task);
 
   if(!due){
     return null;
   }
 
-
-  const today=
-    todayStart();
-
-
-  const difference=
-    Math.round(
-      (
-        due.getTime() -
-        today.getTime()
-      ) /
-      86400000
-    );
-
-
-  if(
-    !Number.isFinite(
-      difference
-    )
-  ){
-    return null;
-  }
-
-
-  return difference;
+  return Math.round(
+    (due.getTime()-todayStart().getTime())
+    /(1000*60*60*24)
+  );
 
 }
 
-
-
 function formatDate(value){
 
-  const d=
-    dateOnly(value);
-
+  const d=dateOnly(value);
 
   if(!d){
     return "Date needs checking";
   }
-
 
   return d.toLocaleDateString(
     undefined,
@@ -2473,1480 +1315,813 @@ function formatDate(value){
 
 }
 
-
-
-/* =========================
-   SEASON
-========================= */
+/* ---------- SEASON ---------- */
 
 function updateSeason(){
 
-  const month=
-    new Date().getMonth()+1;
+  const month=new Date().getMonth()+1;
 
+  const season=document.getElementById("season");
 
-  let season="winter";
+  season.className="season";
 
+  if(month>=3 && month<=5){
 
-  if(
-    month>=3 &&
-    month<=5
-  ){
-    season="spring";
+    season.classList.add("spring");
+
+  }else if(month>=6 && month<=8){
+
+    season.classList.add("summer");
+
+  }else if(month>=9 && month<=11){
+
+    season.classList.add("autumn");
+
+  }else{
+
+    season.classList.add("winter");
+
   }
-  else if(
-    month>=6 &&
-    month<=8
-  ){
-    season="summer";
-  }
-  else if(
-    month>=9 &&
-    month<=11
-  ){
-    season="autumn";
-  }
-
-
-  document.body.dataset.season=
-    season;
-
-
-  const names={
-
-    spring:
-      "A fresh season for your home",
-
-    summer:
-      "Long days, cared-for spaces",
-
-    autumn:
-      "A quieter season at home",
-
-    winter:
-      "A warm home through winter"
-
-  };
-
-
-  document.getElementById(
-    "seasonText"
-  ).textContent=
-    names[season];
 
 }
 
-
-
-/* =========================
-   STATUS
-========================= */
+/* ---------- TASK STATUS ---------- */
 
 function taskStatus(task){
 
-  const days=
-    daysBetween(task);
-
+  const days=daysBetween(task);
 
   if(days===null){
     return "unknown";
   }
 
-
   if(days<0){
     return "overdue";
   }
-
 
   if(days===0){
     return "today";
   }
 
-
   return "upcoming";
 
 }
 
-
-
 function statusText(task){
 
-  const days=
-    daysBetween(task);
-
+  const days=daysBetween(task);
 
   if(days===null){
     return "Date needs checking";
   }
 
-
   if(days<0){
 
-    const n=
-      Math.abs(days);
-
+    const n=Math.abs(days);
 
     return n===1
       ? "1 day overdue"
-      : `${n} days overdue`;
+      : n+" days overdue";
 
   }
-
 
   if(days===0){
     return "Due today";
   }
 
-
-  if(days===1){
-    return "Due tomorrow";
-  }
-
-
-  return `Due in ${days} days`;
+  return days===1
+    ? "Due in 1 day"
+    : "Due in "+days+" days";
 
 }
 
-
-
-/* =========================
-   ICONS
-========================= */
+/* ---------- ICONS ---------- */
 
 function getIcon(name){
 
-  const text=
-    String(
-      name || ""
-    ).toLowerCase();
+  const n=String(name||"").toLowerCase();
 
-
-  if(
-    text.includes("water") ||
-    text.includes("filter") ||
-    text.includes("plumb")
-  ){
+  if(n.includes("water")){
     return "💧";
   }
 
-
   if(
-    text.includes("ac") ||
-    text.includes("air") ||
-    text.includes("heater") ||
-    text.includes("furnace")
+    n.includes("air") ||
+    n.includes("ac")
   ){
-    return "❄️";
+    return "❄";
   }
 
-
-  if(
-    text.includes("window") ||
-    text.includes("glass")
-  ){
-    return "🪟";
-  }
-
-
-  if(
-    text.includes("garden") ||
-    text.includes("plant") ||
-    text.includes("lawn")
-  ){
+  if(n.includes("garden")){
     return "🌿";
   }
 
+  if(n.includes("alarm")){
+    return "🔔";
+  }
 
   if(
-    text.includes("clean") ||
-    text.includes("wash")
+    n.includes("clean") ||
+    n.includes("wash")
   ){
     return "🧹";
   }
 
-
   if(
-    text.includes("roof") ||
-    text.includes("gutter")
+    n.includes("roof") ||
+    n.includes("gutter")
   ){
     return "🏠";
   }
 
-
   if(
-    text.includes("electric") ||
-    text.includes("switch") ||
-    text.includes("light")
+    n.includes("fridge") ||
+    n.includes("refrigerator")
   ){
-    return "💡";
+    return "◫";
   }
 
-
-  if(
-    text.includes("smoke") ||
-    text.includes("alarm") ||
-    text.includes("detector")
-  ){
-    return "🔔";
-  }
-
-
-  if(
-    text.includes("fridge") ||
-    text.includes("refrigerator")
-  ){
-    return "🧊";
-  }
-
-
-  return "🔧";
+  return "✓";
 
 }
 
-
-
-/* =========================
-   CATEGORY
-========================= */
+/* ---------- CATEGORY ---------- */
 
 function getCategory(name){
 
-  const text=
-    String(
-      name || ""
-    ).toLowerCase();
+  const n=String(name||"").toLowerCase();
 
-
-  if(
-    text.includes("water") ||
-    text.includes("filter") ||
-    text.includes("plumb")
-  ){
-    return "Water & plumbing";
+  if(n.includes("water")){
+    return "Water";
   }
 
-
   if(
-    text.includes("ac") ||
-    text.includes("air") ||
-    text.includes("heater") ||
-    text.includes("furnace")
-  ){
-    return "Climate";
-  }
-
-
-  if(
-    text.includes("window") ||
-    text.includes("glass")
-  ){
-    return "Windows";
-  }
-
-
-  if(
-    text.includes("garden") ||
-    text.includes("plant") ||
-    text.includes("lawn")
+    n.includes("garden") ||
+    n.includes("plant")
   ){
     return "Garden";
   }
 
-
   if(
-    text.includes("electric") ||
-    text.includes("switch") ||
-    text.includes("light")
+    n.includes("air") ||
+    n.includes("ac")
   ){
-    return "Electrical";
+    return "Climate";
   }
 
-
   if(
-    text.includes("roof") ||
-    text.includes("gutter")
+    n.includes("clean") ||
+    n.includes("wash")
   ){
-    return "Exterior";
+    return "Cleaning";
   }
 
-
-  return "General care";
+  return "Home";
 
 }
 
+/* ---------- FILTER ---------- */
 
+function setFilter(filter,button){
 
-/* =========================
-   FILTER
-========================= */
-
-function setFilter(
-  filter,
-  button
-){
-
-  currentFilter=
-    filter;
-
+  currentFilter=filter;
 
   document
-    .querySelectorAll(
-      ".filter"
-    )
+    .querySelectorAll(".filter")
     .forEach(
-      el=>
-        el.classList.remove(
-          "active"
-        )
+      b=>b.classList.remove("active")
     );
-
 
   if(button){
-
-    button.classList.add(
-      "active"
-    );
-
+    button.classList.add("active");
   }
-
 
   render();
 
 }
 
-
-
-/* =========================
-   FILTERED TASKS
-========================= */
-
 function filteredTasks(){
 
-  return tasks.filter(
-    task=>{
+  return tasks.filter(task=>{
 
-      if(
-        currentFilter==="all"
-      ){
-        return true;
-      }
+    const status=taskStatus(task);
 
-
-      return (
-        taskStatus(task) ===
-        currentFilter
-      );
-
+    if(currentFilter==="today"){
+      return status==="today";
     }
-  );
+
+    if(currentFilter==="upcoming"){
+      return status==="upcoming";
+    }
+
+    if(currentFilter==="overdue"){
+      return status==="overdue";
+    }
+
+    return true;
+
+  });
 
 }
 
-
-
-/* =========================
-   HOME RENDER
-========================= */
+/* ---------- RENDER ---------- */
 
 function render(){
 
-  const list=
-    document.getElementById(
-      "taskList"
-    );
+  const container=
+    document.getElementById("tasks");
 
+  const list=filteredTasks();
 
-  const visible=
-    filteredTasks();
+  document.getElementById("taskCount").textContent=
+    tasks.length+
+    (tasks.length===1
+      ? " memory"
+      : " memories");
 
+  document.getElementById("storedCount").textContent=
+    tasks.length;
 
-  document.getElementById(
-    "taskCountLabel"
-  ).textContent=
-    `${visible.length} ${
-      visible.length===1
-        ? "task"
-        : "tasks"
-    }`;
+  if(list.length===0){
 
-
-  if(
-    visible.length===0
-  ){
-
-    list.innerHTML=`
+    container.innerHTML=`
 
       <div class="empty">
 
-        <strong>
-          ${
-            currentFilter==="all"
-              ? "Nothing here yet"
-              : `No ${currentFilter} tasks`
-          }
-        </strong>
+        <strong>No memories here</strong>
 
-        ${
-          currentFilter==="all"
-            ? "Add your first bit of home maintenance."
-            : "Your home is quiet for now."
-        }
+        <div>
+          Add a maintenance memory and Haven will remember it.
+        </div>
 
       </div>
 
     `;
 
-  }
-  else{
+  }else{
 
+    container.innerHTML=
+      list
+        .sort(
+          (a,b)=>{
+            const da=getDueDate(a);
+            const db=getDueDate(b);
 
-    visible.sort(
-      (a,b)=>{
+            if(!da) return 1;
+            if(!db) return -1;
 
-        const da=
-          daysBetween(a);
+            return da-db;
+          }
+        )
+        .map(task=>{
 
-        const db=
-          daysBetween(b);
-
-
-        if(
-          da===null &&
-          db===null
-        ){
-          return 0;
-        }
-
-
-        if(da===null){
-          return 1;
-        }
-
-
-        if(db===null){
-          return -1;
-        }
-
-
-        return da-db;
-
-      }
-    );
-
-
-    list.innerHTML=
-      visible.map(
-        task=>{
-
-          const status=
-            taskStatus(task);
-
-
-          const repeat=
-            Number(task.repeat);
-
-
-          const repeatText=
-            Number.isFinite(repeat) &&
-            repeat>0
-
-              ? `Every ${repeat} days`
-
-              : "Repeat not set";
-
+          const status=taskStatus(task);
 
           return `
 
-            <article
-              class="task-card ${status}"
-            >
+            <div class="task">
 
+              <div class="task-icon">
+                ${getIcon(task.name)}
+              </div>
 
-              <div class="task-top">
+              <div class="task-info">
 
-
-                <div class="task-icon">
-                  ${getIcon(task.name)}
+                <div class="task-name">
+                  ${escapeHtml(task.name || "Untitled")}
                 </div>
-
-
-                <div class="task-info">
-
-
-                  <div class="task-name">
-                    ${escapeHtml(
-                      task.name ||
-                      "Unnamed task"
-                    )}
-                  </div>
-
-
-                  <div class="task-category">
-                    ${getCategory(
-                      task.name
-                    )}
-                  </div>
-
-
-                </div>
-
-
-              </div>
-
-
-              <div
-                class="task-status ${status}"
-              >
-                ${statusText(task)}
-              </div>
-
-
-              <div class="task-date">
-                Next due · ${
-                  formatDate(
-                    getDueDate(task)
-                  )
-                }
-              </div>
-
-
-              <div class="task-bottom">
-
 
                 <div class="task-meta">
-                  ${repeatText}
+                  ${getCategory(task.name)}
+                  · Next due ${formatDate(getDueDate(task))}
                 </div>
 
-
-                <div class="task-actions">
-
-
-                  <button
-                    class="small-button complete-button"
-                    onclick="completeTask('${task.id}')"
-                  >
-                    ✓ Done
-                  </button>
-
-
-                  <button
-                    class="small-button delete-button"
-                    onclick="deleteTask('${task.id}')"
-                  >
-                    ×
-                  </button>
-
-
+                <div class="task-status ${status}">
+                  ${statusText(task)}
                 </div>
 
+                ${
+                  task.lastDone
+                  ? `
+                    <div class="task-meta">
+                      Last done ${formatDate(task.lastDone)}
+                    </div>
+                  `
+                  : ""
+                }
 
               </div>
 
+              <div class="task-actions">
 
-            </article>
+                <button
+                  class="complete"
+                  title="Complete"
+                  onclick="completeTask('${task.id}')"
+                >✓</button>
+
+                <button
+                  class="delete"
+                  title="Delete"
+                  onclick="deleteTask('${task.id}')"
+                >×</button>
+
+              </div>
+
+            </div>
 
           `;
 
-        }
-      ).join("");
+        })
+        .join("");
 
   }
 
-
   renderBanners();
-
   renderDueSoon();
-
   updateHero();
 
 }
 
-
-
-/* =========================
-   BANNERS
-========================= */
+/* ---------- BANNERS ---------- */
 
 function renderBanners(){
 
-  const box=
-    document.getElementById(
-      "banners"
-    );
-
-
   const overdue=
     tasks.filter(
-      t=>
-        taskStatus(t)==="overdue"
+      t=>taskStatus(t)==="overdue"
     ).length;
-
 
   const today=
     tasks.filter(
-      t=>
-        taskStatus(t)==="today"
+      t=>taskStatus(t)==="today"
     ).length;
 
+  const overdueBanner=
+    document.getElementById("overdueBanner");
 
-  let html="";
+  const soonBanner=
+    document.getElementById("soonBanner");
 
+  const goodBanner=
+    document.getElementById("goodBanner");
+
+  overdueBanner.classList.remove("show");
+  soonBanner.classList.remove("show");
+  goodBanner.classList.remove("show");
 
   if(overdue>0){
 
-    html=`
+    overdueBanner.textContent=
+      overdue+
+      (overdue===1
+        ? " maintenance memory is overdue."
+        : " maintenance memories are overdue.");
 
-      <div class="banner overdue">
+    overdueBanner.classList.add("show");
 
-        <strong>
-          ${overdue}
-          ${
-            overdue===1
-              ? "task needs"
-              : "tasks need"
-          }
-          attention
-        </strong>
+  }else if(today>0){
 
-        A small thing today can prevent
-        a bigger thing later.
+    soonBanner.textContent=
+      today+
+      (today===1
+        ? " memory is due today."
+        : " memories are due today.");
 
-      </div>
+    soonBanner.classList.add("show");
 
-    `;
+  }else{
 
-  }
-  else if(today>0){
+    goodBanner.textContent=
+      "Nothing needs attention right now.";
 
-    html=`
-
-      <div class="banner soon">
-
-        <strong>
-          Something needs attention today
-        </strong>
-
-        You have ${today}
-        ${
-          today===1
-            ? "maintenance task"
-            : "maintenance tasks"
-        }
-        due today.
-
-      </div>
-
-    `;
+    goodBanner.classList.add("show");
 
   }
-  else if(tasks.length>0){
-
-    html=`
-
-      <div class="banner good">
-
-        <strong>
-          Your home is on track
-        </strong>
-
-        Nothing is overdue right now.
-
-      </div>
-
-    `;
-
-  }
-
-
-  box.innerHTML=html;
 
 }
 
-
-
-/* =========================
-   COMING UP
-========================= */
+/* ---------- COMING UP ---------- */
 
 function renderDueSoon(){
 
-  const box=
-    document.getElementById(
-      "dueSoon"
-    );
-
+  const container=
+    document.getElementById("comingUp");
 
   const upcoming=
     tasks
-      .filter(
-        task=>{
+      .filter(t=>{
+        const d=daysBetween(t);
 
-          const d=
-            daysBetween(task);
-
-
-          return (
-            d!==null &&
-            d>=0 &&
-            d<=7
-          );
-
-        }
-      )
+        return d!==null && d>=0;
+      })
       .sort(
-        (a,b)=>
-          daysBetween(a)-
-          daysBetween(b)
+        (a,b)=>{
+          return daysBetween(a)-daysBetween(b);
+        }
       )
       .slice(0,4);
 
+  if(upcoming.length===0){
 
-  if(
-    upcoming.length===0
-  ){
-
-    box.innerHTML=`
-
-      <div
-        class="empty"
-        style="grid-column:1/-1"
-      >
-
-        <strong>
-          Nothing coming up
-        </strong>
-
-        Your next seven days are clear.
-
-      </div>
-
-    `;
+    container.innerHTML=
+      `<div class="empty">
+        No upcoming maintenance yet.
+      </div>`;
 
     return;
+
   }
 
+  container.innerHTML=
+    upcoming
+      .map(task=>`
 
-  box.innerHTML=
-    upcoming.map(
-      task=>`
+        <div class="coming-item">
 
-        <div class="mini-card">
+          <strong>
+            ${escapeHtml(task.name || "Untitled")}
+          </strong>
 
-          <div class="mini-icon">
-            ${getIcon(task.name)}
-          </div>
-
-          <div class="mini-name">
-            ${escapeHtml(
-              task.name ||
-              "Unnamed"
-            )}
-          </div>
-
-          <div class="mini-date">
+          <span>
             ${statusText(task)}
-          </div>
+          </span>
 
         </div>
 
-      `
-    ).join("");
+      `)
+      .join("");
 
 }
 
-
-
-/* =========================
-   HERO
-========================= */
+/* ---------- HERO ---------- */
 
 function updateHero(){
 
   const overdue=
-    tasks.filter(
-      t=>
-        taskStatus(t)==="overdue"
-    ).length;
-
+    tasks.some(
+      t=>taskStatus(t)==="overdue"
+    );
 
   const today=
-    tasks.filter(
-      t=>
-        taskStatus(t)==="today"
-    ).length;
-
-
-  const upcoming=
-    tasks.filter(
-      t=>{
-
-        const d=
-          daysBetween(t);
-
-
-        return (
-          d!==null &&
-          d>0 &&
-          d<=7
-        );
-
-      }
-    ).length;
-
+    tasks.some(
+      t=>taskStatus(t)==="today"
+    );
 
   const title=
-    document.getElementById(
-      "heroTitle"
-    );
+    document.getElementById("heroTitle");
 
+  const subtitle=
+    document.getElementById("heroSubtitle");
 
-  const text=
-    document.getElementById(
-      "heroText"
-    );
+  const pill=
+    document.getElementById("statusPill");
 
+  const health=
+    document.getElementById("healthText");
 
-  const healthTitle=
-    document.getElementById(
-      "healthTitle"
-    );
+  const fill=
+    document.getElementById("healthFill");
 
-
-  const healthSub=
-    document.getElementById(
-      "healthSub"
-    );
-
-
-  const healthCount=
-    document.getElementById(
-      "healthCount"
-    );
-
-
-  const dot=
-    document.getElementById(
-      "healthDot"
-    );
-
-
-  if(overdue>0){
+  if(overdue){
 
     title.textContent=
       "A little attention needed";
 
+    subtitle.textContent=
+      "A few home memories are waiting for you.";
 
-    text.textContent=
-      "A few home tasks have slipped past their due date.";
+    pill.textContent=
+      "Some things need attention";
 
+    health.textContent=
+      "Needs attention";
 
-    healthTitle.textContent=
-      `${overdue} ${
-        overdue===1
-          ? "overdue task"
-          : "overdue tasks"
-      }`;
+    fill.style.width="58%";
 
-
-    healthSub.textContent=
-      "Take care of these when you can.";
-
-
-    healthCount.textContent=
-      overdue;
-
-
-    dot.style.background=
-      "var(--danger)";
-
-
-    return;
-  }
-
-
-  if(today>0){
+  }else if(today){
 
     title.textContent=
       "Something needs attention";
 
+    subtitle.textContent=
+      "A home memory is due today.";
 
-    text.textContent=
-      "Your home has something waiting for you today.";
+    pill.textContent=
+      "Due today";
 
+    health.textContent=
+      "Almost there";
 
-    healthTitle.textContent=
-      `${today} due today`;
+    fill.style.width="72%";
 
+  }else{
 
-    healthSub.textContent=
-      upcoming>0
-        ? `${upcoming} more coming up soon.`
-        : "Everything else is on track.";
+    title.textContent=
+      "Home is doing well";
 
+    subtitle.textContent=
+      "Keep the little things remembered, so your home stays cared for.";
 
-    healthCount.textContent=
-      today;
+    pill.textContent=
+      "Everything looks good";
 
+    health.textContent=
+      "Looking good";
 
-    dot.style.background=
-      "var(--warning)";
+    fill.style.width="82%";
 
-
-    return;
   }
-
-
-  title.textContent=
-    "Home is doing well";
-
-
-  text.textContent=
-    "Keep the little things cared for, before they become big things.";
-
-
-  healthTitle.textContent=
-    "Everything is calm";
-
-
-  healthSub.textContent=
-    upcoming>0
-      ? `${upcoming} ${
-          upcoming===1
-            ? "thing"
-            : "things"
-        } coming up this week.`
-      : "Your maintenance is on track.";
-
-
-  healthCount.textContent=
-    tasks.length;
-
-
-  dot.style.background=
-    "var(--green)";
 
 }
 
-
-
-/* =========================
-   ADD TASK
-========================= */
+/* ---------- ADD TASK ---------- */
 
 function addTask(){
 
-  const nameInput=
-    document.getElementById(
-      "taskName"
-    );
-
-
-  const dateInput=
-    document.getElementById(
-      "taskDate"
-    );
-
-
-  const repeatInput=
-    document.getElementById(
-      "taskRepeat"
-    );
-
-
   const name=
-    nameInput.value.trim();
-
+    document.getElementById("taskName")
+      .value
+      .trim();
 
   const date=
-    dateInput.value;
-
+    document.getElementById("taskDate")
+      .value;
 
   const repeat=
-    Number(
-      repeatInput.value
-    );
-
+    document.getElementById("taskRepeat")
+      .value;
 
   if(!name){
 
-    showToast(
-      "Give the task a name."
-    );
-
-    nameInput.focus();
+    showToast("Please enter a task.");
 
     return;
-  }
 
+  }
 
   if(!date){
 
-    showToast(
-      "Choose a due date."
-    );
-
-    dateInput.focus();
+    showToast("Please choose a due date.");
 
     return;
+
   }
 
-
-  if(!dateOnly(date)){
-
-    showToast(
-      "Please choose a valid date."
-    );
-
-    return;
-  }
-
-
-  tasks.push({
+  const task={
 
     id:
-      Date.now().toString() +
-      Math.random()
-        .toString(16)
-        .slice(2),
+      Date.now().toString(),
 
     name:name,
 
     nextDue:date,
 
     repeat:
-      Number.isFinite(repeat) &&
-      repeat>0
-        ? repeat
-        : 30,
-
-    createdAt:
-      new Date()
-        .toISOString(),
+      repeat==="none"
+        ? 0
+        : Number(repeat),
 
     lastDone:null
 
-  });
+  };
 
+  tasks.push(task);
 
-  save();
+  saveTasks();
 
+  document.getElementById("taskName").value="";
+  document.getElementById("taskDate").value="";
+  document.getElementById("taskRepeat").value="none";
 
-  nameInput.value="";
-
-  dateInput.value="";
-
-
-  render();
-
-
-  showToast(
-    "Added to Haven."
-  );
-
+  showToast("Memory saved.");
 
   showPage("home");
 
+  render();
+
 }
 
+/* ---------- QUICK ADD ---------- */
 
+function quickAdd(name,days){
 
-/* =========================
-   QUICK ADD
-========================= */
+  const d=new Date();
 
-function quickAdd(
-  name,
-  repeat
-){
-
-  const today=
-    new Date();
-
-
-  today.setHours(
-    0,
-    0,
-    0,
-    0
+  d.setDate(
+    d.getDate()+days
   );
 
-
   const date=
-    today
-      .toISOString()
+    d.toISOString()
       .split("T")[0];
-
 
   tasks.push({
 
     id:
-      Date.now().toString() +
-      Math.random()
-        .toString(16)
-        .slice(2),
+      Date.now().toString(),
 
     name:name,
 
     nextDue:date,
 
-    repeat:repeat,
-
-    createdAt:
-      new Date()
-        .toISOString(),
+    repeat:days,
 
     lastDone:null
 
   });
 
+  saveTasks();
 
-  save();
-
-  render();
-
-  showToast(
-    `${name} added.`
-  );
+  showToast("Memory added.");
 
   showPage("home");
 
+  render();
+
 }
 
-
-
-/* =========================
-   COMPLETE TASK
-========================= */
+/* ---------- COMPLETE ---------- */
 
 function completeTask(id){
 
   const task=
     tasks.find(
-      t=>
-        String(t.id)===
-        String(id)
+      t=>String(t.id)===String(id)
     );
-
 
   if(!task){
     return;
   }
 
-
-  const currentDue=
-    getDueDate(task);
-
-
-  const repeat=
-    Number(task.repeat);
-
-
-  const safeRepeat=
-    Number.isFinite(repeat) &&
-    repeat>0
-      ? repeat
-      : 30;
-
-
-  const base=
-    currentDue ||
-    todayStart();
-
-
-  const next=
-    new Date(base);
-
-
-  next.setDate(
-    next.getDate()+
-    safeRepeat
-  );
-
+  const today=
+    new Date();
 
   task.lastDone=
-    new Date()
-      .toISOString();
+    today.toISOString();
 
+  const repeat=
+    Number(task.repeat||0);
 
-  task.nextDue=
-    next
-      .toISOString()
-      .split("T")[0];
+  if(repeat>0){
 
+    const due=
+      getDueDate(task) || today;
 
-  save();
+    due.setDate(
+      due.getDate()+repeat
+    );
+
+    task.nextDue=
+      due.getFullYear()+
+      "-" +
+      String(due.getMonth()+1).padStart(2,"0")+
+      "-" +
+      String(due.getDate()).padStart(2,"0");
+
+  }else{
+
+    task.nextDue=null;
+
+  }
+
+  saveTasks();
+
+  showToast("Marked complete.");
 
   render();
 
-  renderMemory();
-
-  showToast(
-    "Marked as done. Haven remembers."
-  );
-
 }
 
-
-
-/* =========================
-   DELETE
-========================= */
+/* ---------- DELETE ---------- */
 
 function deleteTask(id){
 
   const task=
     tasks.find(
-      t=>
-        String(t.id)===
-        String(id)
+      t=>String(t.id)===String(id)
     );
-
 
   if(!task){
     return;
   }
 
-
-  const ok=
-    confirm(
-      `Delete "${
-        task.name ||
-        "this task"
-      }"?`
-    );
-
-
-  if(!ok){
+  if(
+    !confirm(
+      "Delete this maintenance memory?"
+    )
+  ){
     return;
   }
-
 
   tasks=
     tasks.filter(
-      t=>
-        String(t.id)!==
-        String(id)
+      t=>String(t.id)!==String(id)
     );
 
+  saveTasks();
 
-  save();
+  showToast("Memory deleted.");
 
   render();
 
-  renderMemory();
-
-  showToast(
-    "Task removed."
-  );
-
 }
 
-
-
-/* =========================
-   MEMORY
-========================= */
+/* ---------- MEMORY PAGE ---------- */
 
 function renderMemory(){
 
-  const box=
-    document.getElementById(
-      "memoryList"
-    );
-
+  const container=
+    document.getElementById("memoryCard");
 
   const completed=
-    tasks
-      .filter(
-        task=>
-          task.lastDone
-      )
-      .sort(
-        (a,b)=>
-          new Date(
-            b.lastDone
-          ) -
-          new Date(
-            a.lastDone
-          )
-      );
+    tasks.filter(
+      t=>t.lastDone
+    ).length;
 
+  const overdue=
+    tasks.filter(
+      t=>taskStatus(t)==="overdue"
+    ).length;
 
-  if(
-    completed.length===0
-  ){
+  container.innerHTML=`
 
-    box.innerHTML=`
+    <div class="memory-stat">
+      <strong>Total memories</strong>
+      <span>${tasks.length}</span>
+    </div>
 
-      <div class="empty">
+    <div class="memory-stat">
+      <strong>Completed memories</strong>
+      <span>${completed}</span>
+    </div>
 
-        <strong>
-          Your home has no memories yet
-        </strong>
+    <div class="memory-stat">
+      <strong>Needs attention</strong>
+      <span>${overdue}</span>
+    </div>
 
-        When you complete maintenance,
-        Haven will keep a record here.
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  box.innerHTML=`
-
-    <div class="memory-list">
-
-      ${
-        completed.map(
-          task=>{
-
-            const repeat=
-              Number(task.repeat);
-
-
-            return `
-
-              <div class="memory-card">
-
-                <div>
-
-                  <div class="memory-name">
-
-                    ${getIcon(
-                      task.name
-                    )}
-
-                    ${escapeHtml(
-                      task.name ||
-                      "Maintenance"
-                    )}
-
-                  </div>
-
-
-                  <div class="memory-date">
-
-                    Last done ·
-                    ${
-                      formatDate(
-                        task.lastDone
-                      )
-                    }
-
-                  </div>
-
-                </div>
-
-
-                <div class="memory-repeat">
-
-                  ${
-                    Number.isFinite(
-                      repeat
-                    )
-                      ? `Every ${repeat} days`
-                      : ""
-                  }
-
-                </div>
-
-              </div>
-
-            `;
-
-          }
-        ).join("")
-      }
-
+    <div class="memory-stat">
+      <strong>Storage</strong>
+      <span>On this device</span>
     </div>
 
   `;
 
 }
 
+/* ---------- NAVIGATION ---------- */
 
-
-/* =========================
-   PAGE NAVIGATION
-========================= */
-
-function showPage(page){
+function showPage(page,button){
 
   document
-    .querySelectorAll(
-      ".page"
-    )
+    .querySelectorAll(".page")
     .forEach(
-      el=>
-        el.classList.remove(
-          "active"
-        )
+      p=>p.classList.remove("active")
     );
 
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(
+      b=>b.classList.remove("active")
+    );
 
   const target=
     document.getElementById(
-      `${page}Page`
+      page+"Page"
     );
-
 
   if(target){
+    target.classList.add("active");
+  }
 
-    target.classList.add(
-      "active"
-    );
+  if(button){
+    button.classList.add("active");
+  }else{
+
+    const nav=
+      document.querySelector(
+        `.nav-btn[onclick*="'${page}'"]`
+      );
+
+    if(nav){
+      nav.classList.add("active");
+    }
 
   }
 
-
-  document
-    .querySelectorAll(
-      ".nav-button"
-    )
-    .forEach(
-      button=>{
-
-        button.classList.toggle(
-          "active",
-          button.dataset.page===
-          page
-        );
-
-      }
-    );
-
-
-  if(
-    page==="memory"
-  ){
+  if(page==="memory"){
     renderMemory();
   }
 
-
-  if(
-    page==="home"
-  ){
-    render();
-  }
-
-
-  window.scrollTo(
-    {
-      top:0,
-      behavior:"smooth"
-    }
-  );
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
-
-
-/* =========================
-   PROFILE
-========================= */
+/* ---------- PROFILE ---------- */
 
 function toggleProfile(event){
 
@@ -3954,349 +2129,226 @@ function toggleProfile(event){
     event.stopPropagation();
   }
 
-
   const popup=
-    document.getElementById(
-      "profilePopup"
-    );
-
+    document.getElementById("profilePopup");
 
   const button=
-    document.getElementById(
-      "profileButton"
-    );
+    document.getElementById("profileButton");
 
-
-  popup.classList.toggle(
-    "show"
-  );
-
-
+  popup.classList.toggle("show");
   button.classList.toggle(
-    "active",
-    popup.classList.contains(
-      "show"
-    )
+    "selected",
+    popup.classList.contains("show")
   );
 
 }
 
-
 document.addEventListener(
   "click",
-  event=>{
+  function(event){
 
     const popup=
-      document.getElementById(
-        "profilePopup"
-      );
-
+      document.getElementById("profilePopup");
 
     const button=
-      document.getElementById(
-        "profileButton"
-      );
-
+      document.getElementById("profileButton");
 
     if(
-      popup.classList.contains(
-        "show"
-      ) &&
-      !popup.contains(
-        event.target
-      ) &&
+      !popup.contains(event.target) &&
       event.target!==button
     ){
 
-      popup.classList.remove(
-        "show"
-      );
-
-      button.classList.remove(
-        "active"
-      );
+      popup.classList.remove("show");
+      button.classList.remove("selected");
 
     }
 
   }
 );
 
+/* ---------- TOAST ---------- */
 
-
-/* =========================
-   TOAST
-========================= */
-
-let toastTimer=null;
-
+let toastTimer;
 
 function showToast(message){
 
   const toast=
-    document.getElementById(
-      "toast"
-    );
+    document.getElementById("toast");
 
+  toast.textContent=message;
 
-  toast.textContent=
-    message;
+  toast.classList.add("show");
 
-
-  toast.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    toastTimer
-  );
-
+  clearTimeout(toastTimer);
 
   toastTimer=
     setTimeout(
       ()=>{
-        toast.classList.remove(
-          "show"
-        );
+        toast.classList.remove("show");
       },
       2200
     );
 
 }
 
+/* ---------- REMINDERS ---------- */
 
+function remindersEnabled(){
 
-/* =========================
-   REMINDERS
-========================= */
-
-async function toggleReminders(){
-
-  if(
-    !("Notification" in window)
-  ){
-
-    showToast(
-      "This browser does not support reminders."
-    );
-
-    return;
-  }
-
-
-  if(
-    Notification.permission===
-    "denied"
-  ){
-
-    showToast(
-      "Reminders are blocked in browser settings."
-    );
-
-    return;
-  }
-
-
-  if(
-    Notification.permission!==
-    "granted"
-  ){
-
-    const permission=
-      await Notification
-        .requestPermission();
-
-
-    if(
-      permission!==
-      "granted"
-    ){
-
-      showToast(
-        "Reminder permission was not enabled."
-      );
-
-      updateReminderButton();
-
-      return;
-    }
-
-  }
-
-
-  localStorage.setItem(
-    REMINDER_KEY,
-    "true"
-  );
-
-
-  updateReminderButton();
-
-  checkReminders();
-
-
-  showToast(
-    "Reminders enabled."
+  return (
+    localStorage.getItem(
+      REMINDER_KEY
+    )==="true"
   );
 
 }
 
+function toggleReminders(){
 
+  const enabled=
+    remindersEnabled();
+
+  if(!enabled){
+
+    if(
+      "Notification" in window &&
+      Notification.permission!=="granted"
+    ){
+
+      Notification.requestPermission()
+        .then(
+          permission=>{
+
+            if(
+              permission==="granted"
+            ){
+
+              localStorage.setItem(
+                REMINDER_KEY,
+                "true"
+              );
+
+              updateReminderButton();
+
+              checkReminders();
+
+              showToast(
+                "Reminders enabled."
+              );
+
+            }else{
+
+              showToast(
+                "Notification permission was not granted."
+              );
+
+            }
+
+          }
+        );
+
+    }else{
+
+      localStorage.setItem(
+        REMINDER_KEY,
+        "true"
+      );
+
+      updateReminderButton();
+
+      checkReminders();
+
+      showToast(
+        "Reminders enabled."
+      );
+
+    }
+
+  }else{
+
+    localStorage.setItem(
+      REMINDER_KEY,
+      "false"
+    );
+
+    updateReminderButton();
+
+    showToast(
+      "Reminders disabled."
+    );
+
+  }
+
+}
 
 function updateReminderButton(){
 
   const button=
     document.getElementById(
-      "reminderSwitch"
+      "reminderButton"
     );
 
-
-  const text=
-    document.getElementById(
-      "reminderStatus"
-    );
-
-
-  const enabled=
-    localStorage.getItem(
-      REMINDER_KEY
-    ) === "true";
-
-
-  const granted=
-    "Notification" in window &&
-    Notification.permission===
-    "granted";
-
-
-  const active=
-    enabled &&
-    granted;
-
-
-  button.classList.toggle(
-    "on",
-    active
-  );
-
-
-  if(active){
-
-    text.textContent=
-      "Reminders are enabled.";
-
-  }
-  else if(
-    "Notification" in window &&
-    Notification.permission===
-    "denied"
+  if(
+    remindersEnabled()
   ){
 
-    text.textContent=
-      "Blocked by browser settings.";
+    button.classList.add("on");
 
-  }
-  else{
+  }else{
 
-    text.textContent=
-      "Reminders are off.";
+    button.classList.remove("on");
 
   }
 
 }
-
-
 
 function scheduleReminderCheck(){
 
-  checkReminders();
-
-
   setInterval(
     checkReminders,
-    30*60*1000
+    60*60*1000
   );
 
 }
 
-
-
 function checkReminders(){
 
-  const enabled=
-    localStorage.getItem(
-      REMINDER_KEY
-    ) === "true";
-
-
-  if(!enabled){
+  if(!remindersEnabled()){
     return;
   }
 
-
   if(
     !("Notification" in window) ||
-    Notification.permission!==
-    "granted"
+    Notification.permission!=="granted"
   ){
     return;
   }
 
-
   const today=
-    todayStart().getTime();
+    todayStart()
+      .getTime();
 
+  tasks.forEach(task=>{
 
-  tasks.forEach(
-    task=>{
+    const due=
+      getDueDate(task);
 
-      const due=
-        getDueDate(task);
+    if(!due){
+      return;
+    }
 
-
-      if(!due){
-        return;
-      }
-
-
-      const difference=
-        Math.round(
-          (
-            due.getTime()-
-            today
-          )/
-          86400000
-        );
-
-
-      if(
-        difference!==0
-      ){
-        return;
-      }
-
-
-      const dateKey=
-        due
-          .toISOString()
-          .slice(
-            0,
-            10
-          );
-
+    if(
+      due.getTime()===today
+    ){
 
       const key=
-        `haven-notified-${task.id}-${dateKey}`;
-
+        "haven-notified-"+task.id+"-"+today;
 
       if(
-        localStorage.getItem(
-          key
-        )
+        localStorage.getItem(key)
       ){
         return;
       }
-
 
       try{
 
@@ -4304,15 +2356,10 @@ function checkReminders(){
           "Haven reminder",
           {
             body:
-              `${
-                task.name ||
-                "A home task"
-              } is due today.`,
-
-            icon:"./"
+              (task.name||"Maintenance")+
+              " is due today."
           }
         );
-
 
         localStorage.setItem(
           key,
@@ -4329,91 +2376,60 @@ function checkReminders(){
       }
 
     }
-  );
+
+  });
 
 }
 
-
-
-/* =========================
-   CLEAR DATA
-========================= */
+/* ---------- CLEAR DATA ---------- */
 
 function clearAllData(){
 
-  const ok=
-    confirm(
-      "Clear all Haven maintenance data from this device?"
-    );
-
-
-  if(!ok){
+  if(
+    !confirm(
+      "Clear all Haven memories? This cannot be undone."
+    )
+  ){
     return;
   }
 
-
   tasks=[];
 
-  save();
-
-  render();
+  saveTasks();
 
   renderMemory();
+  render();
 
   showToast(
-    "Haven data cleared."
+    "All memories cleared."
   );
 
 }
 
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
+/* ---------- HTML SAFETY ---------- */
 
 function escapeHtml(value){
 
-  return String(
-    value ?? ""
-  )
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+  return String(value||"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
-
-
-/* =========================
-   SERVICE WORKER
-========================= */
+/* ---------- SERVICE WORKER ---------- */
 
 async function registerServiceWorker(){
 
   if(
     !("serviceWorker" in navigator)
   ){
-    return false;
-  }
 
+    return false;
+
+  }
 
   try{
 
@@ -4423,13 +2439,11 @@ async function registerServiceWorker(){
         window.location.href
       );
 
-
     const scope=
       new URL(
         "./",
         window.location.href
       ).pathname;
-
 
     await navigator.serviceWorker.register(
       swUrl.href,
@@ -4438,20 +2452,16 @@ async function registerServiceWorker(){
       }
     );
 
-
     await navigator.serviceWorker.ready;
-
 
     return true;
 
-  }
-  catch(error){
+  }catch(error){
 
     console.log(
       "Service worker registration failed:",
       error
     );
-
 
     return false;
 
@@ -4459,13 +2469,11 @@ async function registerServiceWorker(){
 
 }
 
-
-
-/* =========================
-   START
-========================= */
+/* ---------- START ---------- */
 
 updateSeason();
+
+loadTasks();
 
 render();
 
@@ -4475,12 +2483,11 @@ updateReminderButton();
 
 registerServiceWorker();
 
-
 if(
-  localStorage.getItem(
-    REMINDER_KEY
-  ) === "true"
+  remindersEnabled()
 ){
+
+  checkReminders();
 
   scheduleReminderCheck();
 
