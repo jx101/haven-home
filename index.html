@@ -231,6 +231,77 @@ color:#986153;
 color:#6c756e;
 }
 
+.due-soon-box{
+background:#eef3ea;
+border:1px solid #dce6d8;
+border-radius:20px;
+padding:16px;
+margin:0 0 20px;
+}
+
+.due-soon-header{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:12px;
+}
+
+.due-soon-icon{
+width:38px;
+height:38px;
+border-radius:12px;
+background:#dfe9dc;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:19px;
+}
+
+.due-soon-title{
+font-size:16px;
+font-weight:700;
+}
+
+.due-soon-subtitle{
+font-size:12px;
+color:#778178;
+margin-top:2px;
+}
+
+.due-soon-item{
+display:flex;
+align-items:center;
+gap:11px;
+padding:11px 0;
+border-top:1px solid #dce5d9;
+}
+
+.due-soon-item:first-of-type{
+border-top:none;
+}
+
+.due-soon-item-icon{
+font-size:21px;
+width:32px;
+text-align:center;
+}
+
+.due-soon-info{
+flex:1;
+min-width:0;
+}
+
+.due-soon-name{
+font-size:13px;
+font-weight:600;
+}
+
+.due-soon-date{
+font-size:12px;
+color:#728077;
+margin-top:3px;
+}
+
 .form{
 background:#fffdf8;
 border:1px solid #ebe6dc;
@@ -403,6 +474,9 @@ font-weight:600;
 </div>
 
 <div class="section">
+
+<!-- DUE SOON -->
+<div id="dueSoon"></div>
 
 <div class="section-title">
 <h2>Maintenance</h2>
@@ -800,6 +874,84 @@ text.textContent="Haven quietly remembers what your home needs.";
 }
 
 
+function renderDueSoon(tasks){
+
+const container=document.getElementById("dueSoon");
+
+const soon=tasks
+.filter(task=>{
+const days=getDayDifference(task.dueDate||calculateDueDate(task));
+return days>=1&&days<=7;
+})
+.sort((a,b)=>{
+const aDays=getDayDifference(a.dueDate||calculateDueDate(a));
+const bDays=getDayDifference(b.dueDate||calculateDueDate(b));
+return aDays-bDays;
+});
+
+if(!soon.length){
+
+container.innerHTML="";
+
+return;
+
+}
+
+container.innerHTML=`
+
+<div class="due-soon-box">
+
+<div class="due-soon-header">
+
+<div class="due-soon-icon">🔔</div>
+
+<div>
+
+<div class="due-soon-title">Due soon</div>
+
+<div class="due-soon-subtitle">Things coming up in the next 7 days</div>
+
+</div>
+
+</div>
+
+${soon.map(task=>{
+
+const dueDate=task.dueDate||calculateDueDate(task);
+
+return`
+
+<div class="due-soon-item">
+
+<div class="due-soon-item-icon">
+${getIcon(task.name)}
+</div>
+
+<div class="due-soon-info">
+
+<div class="due-soon-name">
+${escapeHTML(task.name)}
+</div>
+
+<div class="due-soon-date">
+${getRemainingText(dueDate)} · ${formatDate(dueDate)}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("")}
+
+</div>
+
+`;
+
+}
+
+
 function taskHTML(task){
 
 const dueDate=task.dueDate||calculateDueDate(task);
@@ -872,6 +1024,8 @@ const container=document.getElementById("homeTasks");
 const tasks=getTasks();
 
 updateHomeStatus(tasks);
+
+renderDueSoon(tasks);
 
 if(!tasks.length){
 
