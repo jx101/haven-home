@@ -531,6 +531,26 @@ header{
   color:#43564a;
 }
 
+/* CUSTOM REPEAT */
+
+.custom-repeat{
+  display:none;
+  gap:8px;
+  margin-top:9px;
+}
+
+.custom-repeat.show{
+  display:flex;
+}
+
+.custom-repeat input{
+  flex:1;
+}
+
+.custom-repeat select{
+  flex:1;
+}
+
 /* SETTINGS */
 
 .setting-card{
@@ -687,8 +707,6 @@ header{
   font-size:13px;
 }
 
-/* stair-like fields */
-
 .edit-step{
   background:#f7faf6;
   border:1px solid #dce5dc;
@@ -772,6 +790,7 @@ header{
 }
 
 @media(max-width:500px){
+
   .hero-status{
     font-size:27px;
   }
@@ -788,6 +807,11 @@ header{
   .edit-card{
     padding:17px;
   }
+
+  .custom-repeat{
+    flex-direction:column;
+  }
+
 }
 </style>
 </head>
@@ -799,6 +823,7 @@ header{
 <header>
 
   <div class="header-top">
+
     <div>
       <div class="logo">Haven</div>
       <div class="tagline">Your home remembers.</div>
@@ -811,13 +836,24 @@ header{
       onclick="toggleProfile()">
       H
     </button>
+
   </div>
 
+
   <div class="profile-popup" id="profilePopup">
+
     <strong>Haven</strong>
-    <p>Your private home-maintenance memory.</p>
-    <p style="margin-top:8px;">Your memories are stored on this device.</p>
+
+    <p>
+      Your private home-maintenance memory.
+    </p>
+
+    <p style="margin-top:8px;">
+      Your memories are stored on this device.
+    </p>
+
   </div>
+
 
   <div class="landscape" id="landscape">
 
@@ -825,14 +861,18 @@ header{
 
     <div class="mountain one"></div>
     <div class="mountain two"></div>
+
     <div class="ground"></div>
+
 
     <div class="house">
 
       <div class="chimney"></div>
+
       <div class="roof"></div>
 
       <div class="house-body">
+
         <div class="window left"></div>
         <div class="window right"></div>
 
@@ -844,11 +884,14 @@ header{
         </div>
 
         <div class="porch"></div>
+
       </div>
 
     </div>
 
+
     <div class="season" id="seasonDecor">
+
       <div class="leaf l1"></div>
       <div class="leaf l2"></div>
       <div class="leaf l3"></div>
@@ -859,6 +902,7 @@ header{
       <div class="snow s3"></div>
       <div class="snow s4"></div>
       <div class="snow s5"></div>
+
     </div>
 
   </div>
@@ -886,31 +930,47 @@ header{
 
   </div>
 
+
   <div class="content">
 
-    <div class="section-title">Maintenance</div>
+    <div class="section-title">
+      Maintenance
+    </div>
+
 
     <div class="filters">
 
-      <button class="filter active" onclick="setFilter('all',this)">
+      <button
+        class="filter active"
+        onclick="setFilter('all',this)">
         All
       </button>
 
-      <button class="filter" onclick="setFilter('today',this)">
+      <button
+        class="filter"
+        onclick="setFilter('today',this)">
         Today
       </button>
 
-      <button class="filter" onclick="setFilter('upcoming',this)">
+      <button
+        class="filter"
+        onclick="setFilter('upcoming',this)">
         Upcoming
       </button>
 
-      <button class="filter" onclick="setFilter('overdue',this)">
+      <button
+        class="filter"
+        onclick="setFilter('overdue',this)">
         Overdue
       </button>
 
     </div>
 
-    <div id="taskList" style="margin-top:14px;"></div>
+
+    <div
+      id="taskList"
+      style="margin-top:14px;">
+    </div>
 
   </div>
 
@@ -923,7 +983,10 @@ header{
 
   <div class="content">
 
-    <div class="section-title">Home memory</div>
+    <div class="section-title">
+      Home memory
+    </div>
+
 
     <div class="form-card">
 
@@ -938,7 +1001,11 @@ header{
 
     </div>
 
-    <div id="memoryList" style="margin-top:14px;"></div>
+
+    <div
+      id="memoryList"
+      style="margin-top:14px;">
+    </div>
 
   </div>
 
@@ -951,7 +1018,10 @@ header{
 
   <div class="content">
 
-    <div class="section-title">Add maintenance</div>
+    <div class="section-title">
+      Add maintenance
+    </div>
+
 
     <div class="form-card">
 
@@ -964,8 +1034,7 @@ header{
         <input
           id="taskName"
           type="text"
-          placeholder="e.g. Clean water filter"
-        >
+          placeholder="e.g. Clean water filter">
 
       </div>
 
@@ -978,8 +1047,7 @@ header{
 
         <input
           id="taskDate"
-          type="date"
-        >
+          type="date">
 
       </div>
 
@@ -990,7 +1058,9 @@ header{
           Repeat
         </label>
 
-        <select id="taskRepeat">
+        <select
+          id="taskRepeat"
+          onchange="toggleCustomRepeat('add')">
 
           <option value="0">
             One time
@@ -1016,7 +1086,45 @@ header{
             Every year
           </option>
 
+          <option value="custom">
+            Custom
+          </option>
+
         </select>
+
+
+        <div
+          class="custom-repeat"
+          id="addCustomRepeat">
+
+          <input
+            id="customRepeatValue"
+            type="number"
+            min="1"
+            step="1"
+            placeholder="Number">
+
+          <select id="customRepeatUnit">
+
+            <option value="days">
+              Days
+            </option>
+
+            <option value="weeks">
+              Weeks
+            </option>
+
+            <option value="months">
+              Months
+            </option>
+
+            <option value="years">
+              Years
+            </option>
+
+          </select>
+
+        </div>
 
       </div>
 
@@ -1040,7 +1148,9 @@ header{
 
   <div class="content">
 
-    <div class="section-title">Settings</div>
+    <div class="section-title">
+      Settings
+    </div>
 
 
     <div class="setting-card">
@@ -1127,7 +1237,9 @@ header{
 
     <div class="edit-header">
 
-      <h2>Edit memory</h2>
+      <h2>
+        Edit memory
+      </h2>
 
       <button
         class="close-edit"
@@ -1144,7 +1256,7 @@ header{
     </div>
 
 
-    <!-- STEP 1 -->
+    <!-- NAME -->
 
     <div class="edit-step">
 
@@ -1161,13 +1273,12 @@ header{
       <input
         id="editTaskName"
         type="text"
-        placeholder="Task name"
-      >
+        placeholder="Task name">
 
     </div>
 
 
-    <!-- STEP 2 -->
+    <!-- DATE -->
 
     <div class="edit-step step-two">
 
@@ -1183,13 +1294,12 @@ header{
 
       <input
         id="editTaskDate"
-        type="date"
-      >
+        type="date">
 
     </div>
 
 
-    <!-- STEP 3 -->
+    <!-- REPEAT -->
 
     <div class="edit-step step-three">
 
@@ -1203,7 +1313,10 @@ header{
 
       </div>
 
-      <select id="editTaskRepeat">
+
+      <select
+        id="editTaskRepeat"
+        onchange="toggleCustomRepeat('edit')">
 
         <option value="0">
           One time
@@ -1229,7 +1342,45 @@ header{
           Every year
         </option>
 
+        <option value="custom">
+          Custom
+        </option>
+
       </select>
+
+
+      <div
+        class="custom-repeat"
+        id="editCustomRepeat">
+
+        <input
+          id="editCustomRepeatValue"
+          type="number"
+          min="1"
+          step="1"
+          placeholder="Number">
+
+        <select id="editCustomRepeatUnit">
+
+          <option value="days">
+            Days
+          </option>
+
+          <option value="weeks">
+            Weeks
+          </option>
+
+          <option value="months">
+            Months
+          </option>
+
+          <option value="years">
+            Years
+          </option>
+
+        </select>
+
+      </div>
 
     </div>
 
@@ -1255,7 +1406,10 @@ header{
 </div>
 
 
-<div class="toast" id="toast"></div>
+<div
+  class="toast"
+  id="toast">
+</div>
 
 
 <script>
@@ -1280,7 +1434,8 @@ function loadTasks(){
 
   try{
 
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
 
     if(saved){
 
@@ -1298,7 +1453,11 @@ function loadTasks(){
 
   }catch(error){
 
-    console.log("Could not load Haven data:",error);
+    console.log(
+      "Could not load Haven data:",
+      error
+    );
+
     tasks = [];
 
   }
@@ -1321,7 +1480,10 @@ function saveTasks(){
 
   }catch(error){
 
-    console.log("Could not save Haven data:",error);
+    console.log(
+      "Could not save Haven data:",
+      error
+    );
 
   }
 
@@ -1334,19 +1496,23 @@ function saveTasks(){
 
 async function registerServiceWorker(){
 
-  if(!("serviceWorker" in navigator)) return false;
+  if(!("serviceWorker" in navigator)){
+    return false;
+  }
 
   try{
 
-    const swUrl = new URL(
-      "sw.js",
-      window.location.href
-    );
+    const swUrl =
+      new URL(
+        "sw.js",
+        window.location.href
+      );
 
-    const scope = new URL(
-      "./",
-      window.location.href
-    ).pathname;
+    const scope =
+      new URL(
+        "./",
+        window.location.href
+      ).pathname;
 
     await navigator.serviceWorker.register(
       swUrl.href,
@@ -1464,7 +1630,9 @@ function showPage(pageId,button){
 function toggleProfile(){
 
   const popup =
-    document.getElementById("profilePopup");
+    document.getElementById(
+      "profilePopup"
+    );
 
   popup.classList.toggle("show");
 
@@ -1482,7 +1650,9 @@ function formatDate(dateString){
   }
 
   const date =
-    new Date(dateString + "T00:00:00");
+    new Date(
+      dateString + "T00:00:00"
+    );
 
   if(Number.isNaN(date.getTime())){
     return "No date";
@@ -1502,7 +1672,8 @@ function formatDate(dateString){
 
 function getToday(){
 
-  const now = new Date();
+  const now =
+    new Date();
 
   const year =
     now.getFullYear();
@@ -1527,10 +1698,14 @@ function daysBetween(dateString){
   }
 
   const today =
-    new Date(getToday() + "T00:00:00");
+    new Date(
+      getToday() + "T00:00:00"
+    );
 
   const date =
-    new Date(dateString + "T00:00:00");
+    new Date(
+      dateString + "T00:00:00"
+    );
 
   return Math.round(
     (date - today) / 86400000
@@ -1620,9 +1795,20 @@ function getTaskIcon(name){
    REPEAT TEXT
 ========================= */
 
-function repeatText(days){
+function repeatText(task){
 
-  days = Number(days) || 0;
+  if(
+    task.repeatType === "custom" &&
+    task.repeatValue &&
+    task.repeatUnit
+  ){
+
+    return `Every ${task.repeatValue} ${task.repeatUnit}`;
+
+  }
+
+  const days =
+    Number(task.repeat) || 0;
 
   if(days === 0){
     return "One time";
@@ -1694,7 +1880,8 @@ function getTaskStatus(task){
 
     return {
       type:"overdue",
-      text:`Overdue by ${Math.abs(difference)} day${Math.abs(difference) === 1 ? "" : "s"}`
+      text:
+        `Overdue by ${Math.abs(difference)} day${Math.abs(difference) === 1 ? "" : "s"}`
     };
 
   }
@@ -1762,7 +1949,8 @@ function taskMatchesFilter(task){
 
 function setFilter(filter,button){
 
-  currentFilter = filter;
+  currentFilter =
+    filter;
 
   document.querySelectorAll(".filter")
     .forEach(btn=>{
@@ -1783,12 +1971,16 @@ function setFilter(filter,button){
 function render(){
 
   const list =
-    document.getElementById("taskList");
+    document.getElementById(
+      "taskList"
+    );
 
   if(!list) return;
 
   const filtered =
-    tasks.filter(taskMatchesFilter);
+    tasks.filter(
+      taskMatchesFilter
+    );
 
   if(filtered.length === 0){
 
@@ -1802,7 +1994,9 @@ function render(){
   }else{
 
     list.innerHTML =
-      filtered.map(renderTaskCard).join("");
+      filtered
+        .map(renderTaskCard)
+        .join("");
 
   }
 
@@ -1824,7 +2018,7 @@ function renderTaskCard(task){
     getTaskStatus(task);
 
   const repeat =
-    repeatText(task.repeat);
+    repeatText(task);
 
   const id =
     String(task.id);
@@ -1846,9 +2040,13 @@ function renderTaskCard(task){
           </div>
 
           <div class="task-meta">
+
             Due: ${formatDate(due)}
+
             <br>
-            ${repeat}
+
+            ${escapeHtml(repeat)}
+
           </div>
 
         </div>
@@ -1897,27 +2095,39 @@ function renderTaskCard(task){
 function updateHero(){
 
   const hero =
-    document.getElementById("heroStatus");
+    document.getElementById(
+      "heroStatus"
+    );
 
   const banner =
-    document.getElementById("statusBanner");
+    document.getElementById(
+      "statusBanner"
+    );
 
   if(!hero || !banner) return;
 
   const overdue =
     tasks.filter(task=>{
+
       const d =
-        daysBetween(getDueDate(task));
+        daysBetween(
+          getDueDate(task)
+        );
 
       return d !== null && d < 0;
+
     });
+
 
   const today =
     tasks.filter(task=>{
+
       return daysBetween(
         getDueDate(task)
       ) === 0;
+
     });
+
 
   if(overdue.length > 0){
 
@@ -1958,19 +2168,176 @@ function updateHero(){
 
 
 /* =========================
+   CUSTOM REPEAT UI
+========================= */
+
+function toggleCustomRepeat(type){
+
+  if(type === "add"){
+
+    const select =
+      document.getElementById(
+        "taskRepeat"
+      );
+
+    const box =
+      document.getElementById(
+        "addCustomRepeat"
+      );
+
+    box.classList.toggle(
+      "show",
+      select.value === "custom"
+    );
+
+  }
+
+
+  if(type === "edit"){
+
+    const select =
+      document.getElementById(
+        "editTaskRepeat"
+      );
+
+    const box =
+      document.getElementById(
+        "editCustomRepeat"
+      );
+
+    box.classList.toggle(
+      "show",
+      select.value === "custom"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   READ REPEAT
+========================= */
+
+function getRepeatFromAddForm(){
+
+  const select =
+    document.getElementById(
+      "taskRepeat"
+    );
+
+  if(select.value !== "custom"){
+
+    return {
+      repeat:Number(select.value),
+      repeatType:"standard",
+      repeatValue:null,
+      repeatUnit:null
+    };
+
+  }
+
+
+  const value =
+    Number(
+      document.getElementById(
+        "customRepeatValue"
+      ).value
+    );
+
+  const unit =
+    document.getElementById(
+      "customRepeatUnit"
+    ).value;
+
+
+  if(
+    !Number.isInteger(value) ||
+    value < 1
+  ){
+
+    return null;
+
+  }
+
+
+  return {
+    repeat:0,
+    repeatType:"custom",
+    repeatValue:value,
+    repeatUnit:unit
+  };
+
+}
+
+
+function getRepeatFromEditForm(){
+
+  const select =
+    document.getElementById(
+      "editTaskRepeat"
+    );
+
+  if(select.value !== "custom"){
+
+    return {
+      repeat:Number(select.value),
+      repeatType:"standard",
+      repeatValue:null,
+      repeatUnit:null
+    };
+
+  }
+
+
+  const value =
+    Number(
+      document.getElementById(
+        "editCustomRepeatValue"
+      ).value
+    );
+
+  const unit =
+    document.getElementById(
+      "editCustomRepeatUnit"
+    ).value;
+
+
+  if(
+    !Number.isInteger(value) ||
+    value < 1
+  ){
+
+    return null;
+
+  }
+
+
+  return {
+    repeat:0,
+    repeatType:"custom",
+    repeatValue:value,
+    repeatUnit:unit
+  };
+
+}
+
+
+/* =========================
    ADD TASK
 ========================= */
 
 function addTask(){
 
   const nameInput =
-    document.getElementById("taskName");
+    document.getElementById(
+      "taskName"
+    );
 
   const dateInput =
-    document.getElementById("taskDate");
-
-  const repeatInput =
-    document.getElementById("taskRepeat");
+    document.getElementById(
+      "taskDate"
+    );
 
   const name =
     nameInput.value.trim();
@@ -1978,8 +2345,6 @@ function addTask(){
   const date =
     dateInput.value;
 
-  const repeat =
-    Number(repeatInput.value);
 
   if(!name){
 
@@ -1991,6 +2356,7 @@ function addTask(){
 
   }
 
+
   if(!date){
 
     showToast(
@@ -2000,6 +2366,22 @@ function addTask(){
     return;
 
   }
+
+
+  const repeatData =
+    getRepeatFromAddForm();
+
+
+  if(!repeatData){
+
+    showToast(
+      "Please enter a valid custom repeat."
+    );
+
+    return;
+
+  }
+
 
   const task = {
 
@@ -2011,11 +2393,18 @@ function addTask(){
 
     nextDue:date,
 
-    repeat:repeat,
+    repeat:repeatData.repeat,
+
+    repeatType:repeatData.repeatType,
+
+    repeatValue:repeatData.repeatValue,
+
+    repeatUnit:repeatData.repeatUnit,
 
     lastDone:null
 
   };
+
 
   tasks.push(task);
 
@@ -2023,19 +2412,115 @@ function addTask(){
 
   nameInput.value = "";
   dateInput.value = "";
-  repeatInput.value = "0";
+
+  document.getElementById(
+    "taskRepeat"
+  ).value = "0";
+
+  document.getElementById(
+    "addCustomRepeat"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "customRepeatValue"
+  ).value = "";
+
 
   render();
   renderMemory();
+
 
   showToast(
     "Memory saved."
   );
 
+
   showPage(
     "homePage",
     document.querySelector(".nav-btn")
   );
+
+}
+
+
+/* =========================
+   ADD INTERVAL TO DATE
+========================= */
+
+function addInterval(dateString,task){
+
+  const date =
+    new Date(
+      dateString + "T00:00:00"
+    );
+
+
+  /*
+    Custom repeat
+  */
+
+  if(
+    task.repeatType === "custom" &&
+    task.repeatValue &&
+    task.repeatUnit
+  ){
+
+    const value =
+      Number(task.repeatValue);
+
+    if(task.repeatUnit === "days"){
+
+      date.setDate(
+        date.getDate() + value
+      );
+
+    }
+
+    if(task.repeatUnit === "weeks"){
+
+      date.setDate(
+        date.getDate() + (value * 7)
+      );
+
+    }
+
+    if(task.repeatUnit === "months"){
+
+      date.setMonth(
+        date.getMonth() + value
+      );
+
+    }
+
+    if(task.repeatUnit === "years"){
+
+      date.setFullYear(
+        date.getFullYear() + value
+      );
+
+    }
+
+  }else{
+
+    /*
+      Existing standard Haven repeat system
+    */
+
+    const repeat =
+      Number(task.repeat) || 0;
+
+    date.setDate(
+      date.getDate() + repeat
+    );
+
+  }
+
+
+  return `${date.getFullYear()}-${
+    String(date.getMonth()+1).padStart(2,"0")
+  }-${
+    String(date.getDate()).padStart(2,"0")
+  }`;
 
 }
 
@@ -2048,10 +2533,13 @@ function completeTask(id){
 
   const task =
     tasks.find(
-      item => String(item.id) === String(id)
+      item =>
+        String(item.id) ===
+        String(id)
     );
 
   if(!task) return;
+
 
   const today =
     getToday();
@@ -2059,43 +2547,47 @@ function completeTask(id){
   task.lastDone =
     today;
 
-  const repeat =
+
+  const hasCustomRepeat =
+    task.repeatType === "custom" &&
+    Number(task.repeatValue) > 0 &&
+    task.repeatUnit;
+
+
+  const standardRepeat =
     Number(task.repeat) || 0;
 
-  if(repeat > 0){
+
+  if(
+    hasCustomRepeat ||
+    standardRepeat > 0
+  ){
 
     const currentDue =
       getDueDate(task) || today;
 
-    const date =
-      new Date(
-        currentDue + "T00:00:00"
-      );
-
-    date.setDate(
-      date.getDate() + repeat
-    );
-
     task.nextDue =
-      `${date.getFullYear()}-${
-        String(date.getMonth()+1).padStart(2,"0")
-      }-${
-        String(date.getDate()).padStart(2,"0")
-      }`;
+      addInterval(
+        currentDue,
+        task
+      );
 
   }else{
 
-    task.nextDue = null;
+    task.nextDue =
+      null;
 
   }
+
 
   saveTasks();
 
   render();
   renderMemory();
 
+
   showToast(
-    repeat > 0
+    hasCustomRepeat || standardRepeat > 0
       ? "Completed. Next memory scheduled."
       : "Memory completed."
   );
@@ -2111,10 +2603,13 @@ function deleteTask(id){
 
   const task =
     tasks.find(
-      item => String(item.id) === String(id)
+      item =>
+        String(item.id) ===
+        String(id)
     );
 
   if(!task) return;
+
 
   const confirmed =
     confirm(
@@ -2125,15 +2620,20 @@ function deleteTask(id){
     return;
   }
 
+
   tasks =
     tasks.filter(
-      item => String(item.id) !== String(id)
+      item =>
+        String(item.id) !==
+        String(id)
     );
+
 
   saveTasks();
 
   render();
   renderMemory();
+
 
   showToast(
     "Memory deleted."
@@ -2146,16 +2646,6 @@ function deleteTask(id){
    EDIT TASK
 ========================= */
 
-/*
-   This opens ONE panel containing:
-   1. Task name
-   2. Due date
-   3. Repeat
-
-   You can change any one of them
-   without changing the others.
-*/
-
 function editTask(id){
 
   openEditModal(id);
@@ -2167,7 +2657,9 @@ function openEditModal(id){
 
   const task =
     tasks.find(
-      item => String(item.id) === String(id)
+      item =>
+        String(item.id) ===
+        String(id)
     );
 
   if(!task){
@@ -2180,64 +2672,115 @@ function openEditModal(id){
 
   }
 
+
   editingTaskId =
     String(id);
+
 
   document.getElementById(
     "editTaskName"
   ).value =
     task.name || "";
 
+
   document.getElementById(
     "editTaskDate"
   ).value =
     getDueDate(task) || "";
+
 
   const repeatSelect =
     document.getElementById(
       "editTaskRepeat"
     );
 
-  const repeat =
-    Number(task.repeat) || 0;
 
   /*
-    If an older memory contains a custom
-    repeat value, keep that value visible
-    instead of silently changing it.
+    Custom repeat
   */
 
-  let existingOption =
-    Array.from(
-      repeatSelect.options
-    ).find(
-      option =>
-        Number(option.value) === repeat
-    );
+  if(
+    task.repeatType === "custom" &&
+    task.repeatValue &&
+    task.repeatUnit
+  ){
 
-  if(!existingOption && repeat > 0){
+    repeatSelect.value =
+      "custom";
 
-    existingOption =
-      document.createElement("option");
 
-    existingOption.value =
+    document.getElementById(
+      "editCustomRepeatValue"
+    ).value =
+      task.repeatValue;
+
+
+    document.getElementById(
+      "editCustomRepeatUnit"
+    ).value =
+      task.repeatUnit;
+
+
+    document.getElementById(
+      "editCustomRepeat"
+    ).classList.add("show");
+
+
+  }else{
+
+    /*
+      Standard repeat
+    */
+
+    const repeat =
+      Number(task.repeat) || 0;
+
+
+    let option =
+      Array.from(
+        repeatSelect.options
+      ).find(
+        item =>
+          item.value ===
+          String(repeat)
+      );
+
+
+    if(!option && repeat > 0){
+
+      option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        String(repeat);
+
+      option.textContent =
+        `Every ${repeat} days`;
+
+      repeatSelect.appendChild(
+        option
+      );
+
+    }
+
+
+    repeatSelect.value =
       String(repeat);
 
-    existingOption.textContent =
-      `Every ${repeat} days`;
 
-    repeatSelect.appendChild(
-      existingOption
-    );
+    document.getElementById(
+      "editCustomRepeat"
+    ).classList.remove("show");
 
   }
 
-  repeatSelect.value =
-    String(repeat);
 
   document.getElementById(
     "editModal"
   ).classList.add("show");
+
 
   setTimeout(()=>{
 
@@ -2252,7 +2795,8 @@ function openEditModal(id){
 
 function closeEditModal(){
 
-  editingTaskId = null;
+  editingTaskId =
+    null;
 
   document.getElementById(
     "editModal"
@@ -2266,9 +2810,11 @@ function saveEditedTask(){
   if(!editingTaskId){
 
     closeEditModal();
+
     return;
 
   }
+
 
   const task =
     tasks.find(
@@ -2276,6 +2822,7 @@ function saveEditedTask(){
         String(item.id) ===
         String(editingTaskId)
     );
+
 
   if(!task){
 
@@ -2295,17 +2842,11 @@ function saveEditedTask(){
       "editTaskName"
     ).value.trim();
 
+
   const newDate =
     document.getElementById(
       "editTaskDate"
     ).value;
-
-  const newRepeat =
-    Number(
-      document.getElementById(
-        "editTaskRepeat"
-      ).value
-    ) || 0;
 
 
   if(!newName){
@@ -2319,16 +2860,32 @@ function saveEditedTask(){
   }
 
 
+  const repeatData =
+    getRepeatFromEditForm();
+
+
+  if(!repeatData){
+
+    showToast(
+      "Please enter a valid custom repeat."
+    );
+
+    return;
+
+  }
+
+
   /*
-    Update only the fields shown in the
-    edit panel. lastDone stays untouched.
+    Update name
   */
 
   task.name =
     newName;
 
-  task.repeat =
-    newRepeat;
+
+  /*
+    Update date
+  */
 
   if(newDate){
 
@@ -2349,12 +2906,30 @@ function saveEditedTask(){
   }
 
 
+  /*
+    Update repeat
+  */
+
+  task.repeat =
+    repeatData.repeat;
+
+  task.repeatType =
+    repeatData.repeatType;
+
+  task.repeatValue =
+    repeatData.repeatValue;
+
+  task.repeatUnit =
+    repeatData.repeatUnit;
+
+
   saveTasks();
 
   closeEditModal();
 
   render();
   renderMemory();
+
 
   showToast(
     "Memory updated."
@@ -2376,6 +2951,7 @@ function renderMemory(){
 
   if(!list) return;
 
+
   if(tasks.length === 0){
 
     list.innerHTML = `
@@ -2388,6 +2964,7 @@ function renderMemory(){
     return;
 
   }
+
 
   list.innerHTML =
     tasks
@@ -2418,7 +2995,9 @@ function renderMemory(){
 
                   <br>
 
-                  ${repeatText(task.repeat)}
+                  ${escapeHtml(
+                    repeatText(task)
+                  )}
 
                 </div>
 
@@ -2456,9 +3035,11 @@ function showToast(message){
     "show"
   );
 
+
   clearTimeout(
     toastTimer
   );
+
 
   toastTimer =
     setTimeout(()=>{
@@ -2483,28 +3064,35 @@ function setSeason(){
 
   let season = "";
 
+
   if(month >= 3 && month <= 5){
 
-    season = "spring";
+    season =
+      "spring";
 
   }else if(month >= 6 && month <= 8){
 
-    season = "summer";
+    season =
+      "summer";
 
   }else if(month >= 9 && month <= 11){
 
-    season = "autumn";
+    season =
+      "autumn";
 
   }else{
 
-    season = "winter";
+    season =
+      "winter";
 
   }
+
 
   const decor =
     document.getElementById(
       "seasonDecor"
     );
+
 
   if(decor){
 
@@ -2518,7 +3106,7 @@ function setSeason(){
 
 
 /* =========================
-   CLOSE POPUP WHEN CLICKING OUTSIDE
+   CLOSE PROFILE OUTSIDE
 ========================= */
 
 document.addEventListener(
@@ -2534,6 +3122,7 @@ document.addEventListener(
       document.querySelector(
         ".profile-btn"
       );
+
 
     if(
       popup &&
@@ -2569,4 +3158,4 @@ registerServiceWorker();
 </script>
 
 </body>
-  </html>
+          </html>
