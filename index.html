@@ -264,6 +264,272 @@ h1 {
 </div>
 
 <script>
+  <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haven — Your home remembers</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f4ef;
+  color: #20231f;
+}
+
+.app {
+  max-width: 480px;
+  margin: auto;
+  padding: 24px 18px 90px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.small {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.profile {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #20231f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero {
+  margin-top: 24px;
+  background: white;
+  border-radius: 26px;
+  padding: 24px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.06);
+}
+
+.house {
+  font-size: 80px;
+  text-align: center;
+  margin: 8px 0 15px;
+}
+
+.status {
+  text-align: center;
+}
+
+.status strong {
+  font-size: 20px;
+}
+
+.status p {
+  color: #777;
+  margin-top: 7px;
+}
+
+.section {
+  margin-top: 28px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.card {
+  background: white;
+  padding: 17px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.05);
+}
+
+.icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  background: #f0eee6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+}
+
+.card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.card span {
+  color: #777;
+  font-size: 14px;
+}
+
+.add {
+  width: 100%;
+  border: none;
+  border-radius: 18px;
+  padding: 17px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #20231f;
+  color: white;
+  margin-top: 8px;
+}
+
+.form {
+  display: none;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
+.form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.save {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  background: #20231f;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 480px;
+  margin: auto;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 5px;
+  box-shadow: 0 -5px 20px rgba(0,0,0,.08);
+}
+
+.nav div {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+}
+
+.nav .active {
+  color: #20231f;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <div>
+      <div class="small">Good morning</div>
+      <h1>Welcome to Haven</h1>
+    </div>
+
+    <div class="profile">H</div>
+  </div>
+
+  <div class="hero">
+    <div class="house">🏡</div>
+
+    <div class="status">
+      <strong>Home is doing well</strong>
+      <p>Nothing urgent needs your attention.</p>
+    </div>
+  </div>
+
+  <div class="section">
+
+    <div class="section-title">Coming up</div>
+
+    <div id="maintenanceList">
+
+      <div class="card">
+        <div class="icon">🔧</div>
+        <div>
+          <strong>Water heater</strong>
+          <span>Service in 12 days</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧹</div>
+        <div>
+          <strong>Chimney</strong>
+          <span>Cleaning in 25 days</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon">💡</div>
+        <div>
+          <strong>Smoke detector</strong>
+          <span>Battery in 2 months</span>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="add" onclick="showForm()">＋ Add maintenance</button>
+
+    <div class="form" id="form">
+
+      <input id="name" type="text" placeholder="What needs maintenance?">
+
+      <input id="days" type="number" placeholder="Due in how many days?">
+
+      <button class="save" onclick="addMaintenance()">Save memory</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="nav">
+  <div class="active">⌂<br>Home</div>
+  <div>◷<br>Memory</div>
+  <div>＋<br>Add</div>
+  <div>⚙<br>Settings</div>
+</div>
+
+<script>
 
 function showForm() {
   document.getElementById("form").style.display = "block";
@@ -271,7 +537,7 @@ function showForm() {
 
 function addMaintenance() {
 
-  let name = document.getElementById("name").value;
+  let name = document.getElementById("name").value.trim();
   let days = document.getElementById("days").value;
 
   if (name === "" || days === "") {
@@ -279,25 +545,62 @@ function addMaintenance() {
     return;
   }
 
-  let card = document.createElement("div");
+  let task = {
+    name: name,
+    days: days
+  };
 
-  card.className = "card";
+  let savedTasks = JSON.parse(localStorage.getItem("havenTasks")) || [];
 
-  card.innerHTML = `
-    <div class="icon">🔧</div>
-    <div>
-      <strong>${name}</strong>
-      <span>Due in ${days} days</span>
-    </div>
-  `;
+  savedTasks.push(task);
 
-  document.getElementById("maintenanceList").appendChild(card);
+  localStorage.setItem("havenTasks", JSON.stringify(savedTasks));
+
+  displayTask(task);
 
   document.getElementById("name").value = "";
   document.getElementById("days").value = "";
 
   document.getElementById("form").style.display = "none";
 }
+
+function displayTask(task) {
+
+  let card = document.createElement("div");
+
+  card.className = "card";
+
+  let icon = document.createElement("div");
+  icon.className = "icon";
+  icon.textContent = "🔧";
+
+  let content = document.createElement("div");
+
+  let title = document.createElement("strong");
+  title.textContent = task.name;
+
+  let details = document.createElement("span");
+  details.textContent = "Due in " + task.days + " days";
+
+  content.appendChild(title);
+  content.appendChild(details);
+
+  card.appendChild(icon);
+  card.appendChild(content);
+
+  document.getElementById("maintenanceList").appendChild(card);
+}
+
+function loadTasks() {
+
+  let savedTasks = JSON.parse(localStorage.getItem("havenTasks")) || [];
+
+  savedTasks.forEach(function(task) {
+    displayTask(task);
+  });
+}
+
+loadTasks();
 
 </script>
 
