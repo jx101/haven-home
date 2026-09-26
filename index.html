@@ -14,34 +14,22 @@
   --green-dark:#4f7659;
   --soft-green:#e9f1e7;
   --cream:#f7f4ea;
-  --white:#ffffff;
+  --white:#fff;
   --line:#e5e4dc;
   --danger:#c96b67;
   --warning:#c99855;
   --shadow:0 10px 30px rgba(63,78,66,.08);
 }
 
-*{
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   color:var(--ink);
   background:#f8f7f1;
 }
-
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
+button,input,select{font:inherit}
+button{cursor:pointer}
 .app{
   max-width:600px;
   min-height:100vh;
@@ -50,8 +38,7 @@ button{
   overflow:hidden;
 }
 
-/* ---------- SEASONAL HERO ---------- */
-
+/* Seasonal background */
 .season{
   position:relative;
   min-height:390px;
@@ -59,24 +46,10 @@ button{
   overflow:hidden;
   background:linear-gradient(#e7f0ed,#f5f1e4);
 }
-
-.season.spring{
-  background:linear-gradient(#dceee9,#f6f2e6);
-}
-
-.season.summer{
-  background:linear-gradient(#cfe8f1,#f6efd9);
-}
-
-.season.autumn{
-  background:linear-gradient(#e8ddd0,#f6eee0);
-}
-
-.season.winter{
-  background:linear-gradient(#dce8ef,#f5f5f1);
-}
-
-/* mountains */
+.season.spring{background:linear-gradient(#dceee9,#f6f2e6)}
+.season.summer{background:linear-gradient(#cfe8f1,#f6efd9)}
+.season.autumn{background:linear-gradient(#e8ddd0,#f6eee0)}
+.season.winter{background:linear-gradient(#dce8ef,#f5f5f1)}
 
 .mountain{
   position:absolute;
@@ -85,22 +58,15 @@ button{
   width:120%;
   height:145px;
   background:#b8c9bd;
-  clip-path:polygon(
-    0 100%,15% 52%,25% 72%,39% 20%,
-    51% 68%,66% 31%,78% 69%,91% 42%,100% 100%
-  );
+  clip-path:polygon(0 100%,15% 52%,25% 72%,39% 20%,51% 68%,66% 31%,78% 69%,91% 42%,100% 100%);
   opacity:.7;
 }
-
 .mountain.back{
   bottom:135px;
   background:#d0dbd2;
   opacity:.8;
   transform:scale(1.12);
 }
-
-/* ground */
-
 .ground{
   position:absolute;
   left:0;
@@ -110,21 +76,11 @@ button{
   background:#c9d8bd;
   border-radius:50% 50% 0 0/25% 25% 0 0;
 }
+.summer .ground{background:#b9d39d}
+.autumn .ground{background:#cbbd9e}
+.winter .ground{background:#e9eeee}
 
-.summer .ground{
-  background:#b9d39d;
-}
-
-.autumn .ground{
-  background:#cbbd9e;
-}
-
-.winter .ground{
-  background:#e9eeee;
-}
-
-/* ---------- HOUSE ---------- */
-
+/* CSS house */
 .house{
   position:absolute;
   right:38px;
@@ -136,7 +92,6 @@ button{
   border-radius:3px;
   box-shadow:0 9px 20px rgba(50,50,40,.12);
 }
-
 .house-roof{
   position:absolute;
   left:-20px;
@@ -146,17 +101,6 @@ button{
   background:#725d4d;
   clip-path:polygon(0 100%,50% 0,100% 100%);
 }
-
-.house-roof:after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:5px;
-  height:8px;
-  background:#604d41;
-}
-
 .chimney{
   position:absolute;
   right:36px;
@@ -166,7 +110,6 @@ button{
   background:#8b7667;
   border:2px solid #685a4f;
 }
-
 .chimney:after{
   content:"";
   position:absolute;
@@ -176,7 +119,6 @@ button{
   height:7px;
   background:#65564b;
 }
-
 .window{
   position:absolute;
   top:37px;
@@ -185,7 +127,6 @@ button{
   background:#b9d9df;
   border:4px solid #695e52;
 }
-
 .window:before{
   content:"";
   position:absolute;
@@ -195,7 +136,6 @@ button{
   height:3px;
   background:#695e52;
 }
-
 .window:after{
   content:"";
   position:absolute;
@@ -205,15 +145,8 @@ button{
   width:3px;
   background:#695e52;
 }
-
-.window.left{
-  left:30px;
-}
-
-.window.right{
-  right:30px;
-}
-
+.window.left{left:30px}
+.window.right{right:30px}
 .door{
   position:absolute;
   left:98px;
@@ -224,7 +157,6 @@ button{
   border:3px solid #625347;
   border-bottom:0;
 }
-
 .door:after{
   content:"";
   position:absolute;
@@ -235,7 +167,6 @@ button{
   border-radius:50%;
   background:#e2c276;
 }
-
 .porch{
   position:absolute;
   left:78px;
@@ -245,7 +176,6 @@ button{
   background:#806f5e;
   border-radius:3px;
 }
-
 .flower{
   position:absolute;
   bottom:8px;
@@ -254,7 +184,6 @@ button{
   background:#8e654f;
   border-radius:3px;
 }
-
 .flower:before{
   content:"✿ ✿ ✿";
   position:absolute;
@@ -263,22 +192,13 @@ button{
   color:#e58c83;
   font-size:17px;
 }
-
-.flower.left{
-  left:22px;
-}
-
-.flower.right{
-  right:22px;
-}
-
-/* seasonal decorations */
+.flower.left{left:22px}
+.flower.right{right:22px}
 
 .season-decoration{
   position:absolute;
   pointer-events:none;
 }
-
 .spring .season-decoration:before{
   content:"✿  ✿  ✿";
   position:absolute;
@@ -288,7 +208,6 @@ button{
   font-size:28px;
   white-space:nowrap;
 }
-
 .summer .season-decoration:before{
   content:"☀";
   position:absolute;
@@ -297,7 +216,6 @@ button{
   color:#e6b94d;
   font-size:48px;
 }
-
 .autumn .season-decoration:before{
   content:"🍂  🍁  🍂";
   position:absolute;
@@ -306,19 +224,17 @@ button{
   font-size:27px;
   white-space:nowrap;
 }
-
 .winter .season-decoration:before{
   content:"❄  ❄  ❄";
   position:absolute;
   left:35px;
   top:50px;
-  color:#ffffff;
+  color:#fff;
   font-size:25px;
   white-space:nowrap;
 }
 
-/* ---------- HEADER ---------- */
-
+/* Header */
 .topbar{
   position:relative;
   z-index:5;
@@ -326,19 +242,16 @@ button{
   align-items:center;
   justify-content:space-between;
 }
-
 .logo{
   font-size:25px;
   font-weight:800;
   letter-spacing:-.7px;
 }
-
 .tagline{
   margin-top:3px;
   font-size:12px;
   color:#68736c;
 }
-
 .profile-btn{
   width:42px;
   height:42px;
@@ -349,12 +262,10 @@ button{
   font-weight:800;
   box-shadow:0 5px 15px rgba(50,60,50,.08);
 }
-
 .profile-btn.selected{
   background:var(--green);
   color:white;
 }
-
 .profile-popup{
   display:none;
   position:absolute;
@@ -368,16 +279,11 @@ button{
   box-shadow:var(--shadow);
   z-index:20;
 }
-
-.profile-popup.show{
-  display:block;
-}
-
+.profile-popup.show{display:block}
 .profile-popup strong{
   display:block;
   margin-bottom:5px;
 }
-
 .profile-popup p{
   margin:0;
   color:var(--muted);
@@ -385,29 +291,25 @@ button{
   line-height:1.5;
 }
 
-/* ---------- HERO TEXT ---------- */
-
+/* Hero text */
 .hero-copy{
   position:relative;
   z-index:4;
   margin-top:42px;
   max-width:320px;
 }
-
 .hero-copy h1{
   margin:0;
   font-size:34px;
   line-height:1.08;
   letter-spacing:-1.2px;
 }
-
 .hero-copy p{
   margin:10px 0 0;
   color:#667068;
   font-size:14px;
   line-height:1.5;
 }
-
 .status-pill{
   display:inline-flex;
   margin-top:17px;
@@ -419,8 +321,7 @@ button{
   font-weight:700;
 }
 
-/* ---------- CONTENT ---------- */
-
+/* Main content */
 .content{
   position:relative;
   z-index:6;
@@ -429,7 +330,6 @@ button{
   background:#f8f7f1;
   border-radius:28px 28px 0 0;
 }
-
 .health-card{
   padding:18px;
   background:white;
@@ -437,23 +337,17 @@ button{
   border-radius:20px;
   box-shadow:var(--shadow);
 }
-
 .health-title{
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-
-.health-title strong{
-  font-size:16px;
-}
-
+.health-title strong{font-size:16px}
 .health-title span{
   font-size:12px;
   color:var(--green-dark);
   font-weight:700;
 }
-
 .health-bar{
   height:8px;
   margin-top:13px;
@@ -461,44 +355,37 @@ button{
   border-radius:10px;
   background:#e8eee6;
 }
-
 .health-fill{
   width:82%;
   height:100%;
   background:var(--green);
   border-radius:10px;
 }
-
 .health-note{
   margin:10px 0 0;
   color:var(--muted);
   font-size:12px;
 }
-
 .section-title{
   display:flex;
   align-items:center;
   justify-content:space-between;
   margin:25px 2px 12px;
 }
-
 .section-title h2{
   margin:0;
   font-size:20px;
 }
-
 .section-title span{
   color:var(--muted);
   font-size:12px;
 }
-
 .filters{
   display:flex;
   gap:7px;
   overflow:auto;
   padding-bottom:3px;
 }
-
 .filter{
   border:1px solid var(--line);
   border-radius:30px;
@@ -508,15 +395,13 @@ button{
   white-space:nowrap;
   font-size:12px;
 }
-
 .filter.active{
   background:var(--green);
   color:white;
   border-color:var(--green);
 }
 
-/* ---------- BANNERS ---------- */
-
+/* Banners */
 .banner{
   display:none;
   margin-top:14px;
@@ -525,115 +410,78 @@ button{
   font-size:13px;
   line-height:1.4;
 }
+.banner.show{display:block}
+.banner.overdue{background:#f8e8e5;color:#8e514c}
+.banner.soon{background:#f7efdc;color:#856a3c}
+.banner.good{background:#eaf2e8;color:#4d7357}
 
-.banner.show{
-  display:block;
-}
-
-.banner.overdue{
-  background:#f8e8e5;
-  color:#8e514c;
-}
-
-.banner.soon{
-  background:#f7efdc;
-  color:#856a3c;
-}
-
-.banner.good{
-  background:#eaf2e8;
-  color:#4d7357;
-}
-
-/* ---------- TASK CARDS ---------- */
-
+/* Task cards */
 .tasks{
   display:grid;
   gap:11px;
   margin-top:13px;
 }
-
 .task{
   display:flex;
   align-items:center;
-  gap:13px;
+  gap:10px;
   padding:15px;
   background:white;
   border:1px solid var(--line);
   border-radius:18px;
   box-shadow:0 5px 18px rgba(60,70,62,.05);
 }
-
 .task-icon{
   display:flex;
   align-items:center;
   justify-content:center;
-  width:45px;
-  height:45px;
+  width:42px;
+  height:42px;
   flex:none;
   border-radius:14px;
   background:var(--soft-green);
-  font-size:21px;
+  font-size:20px;
 }
-
 .task-info{
   flex:1;
   min-width:0;
 }
-
 .task-name{
   font-size:15px;
   font-weight:700;
+  overflow-wrap:anywhere;
 }
-
 .task-meta{
   margin-top:4px;
   color:var(--muted);
   font-size:11px;
 }
-
 .task-status{
   margin-top:5px;
   font-size:11px;
   font-weight:700;
 }
-
-.task-status.overdue{
-  color:var(--danger);
-}
-
-.task-status.today{
-  color:var(--warning);
-}
-
-.task-status.upcoming{
-  color:var(--green-dark);
-}
-
+.task-status.overdue{color:var(--danger)}
+.task-status.today{color:var(--warning)}
+.task-status.upcoming{color:var(--green-dark)}
 .task-actions{
   display:flex;
-  gap:5px;
+  gap:4px;
+  flex:none;
 }
-
 .task-actions button{
-  width:31px;
+  width:29px;
   height:31px;
+  padding:0;
   border:0;
-  border-radius:10px;
+  border-radius:9px;
   background:#f1f3ee;
   color:#667069;
   font-weight:800;
 }
-
-.task-actions button.complete{
-  color:var(--green-dark);
-}
-
-.task-actions button.delete{
-  color:var(--danger);
-}
-
-/* ---------- EMPTY ---------- */
+.task-actions button.edit{color:#527b5d}
+.task-actions button.complete{color:var(--green-dark)}
+.task-actions button.delete{color:var(--danger)}
 
 .empty{
   padding:28px 15px;
@@ -643,44 +491,36 @@ button{
   border:1px dashed #d8d9d1;
   border-radius:18px;
 }
-
 .empty strong{
   display:block;
   margin-bottom:5px;
   color:var(--ink);
 }
 
-/* ---------- COMING UP ---------- */
-
+/* Coming up */
 .coming-up{
   display:grid;
   gap:9px;
 }
-
 .coming-item{
   display:flex;
   justify-content:space-between;
+  gap:10px;
   padding:12px 14px;
   background:#fff;
   border:1px solid var(--line);
   border-radius:14px;
 }
-
+.coming-item strong{font-size:13px}
 .coming-item span{
   color:var(--muted);
   font-size:11px;
+  text-align:right;
 }
 
-/* ---------- PAGES ---------- */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
+/* Pages and forms */
+.page{display:none}
+.page.active{display:block}
 .form-card{
   padding:18px;
   background:white;
@@ -688,20 +528,14 @@ button{
   border-radius:20px;
   box-shadow:var(--shadow);
 }
-
-.field{
-  margin-bottom:15px;
-}
-
+.field{margin-bottom:15px}
 .field label{
   display:block;
   margin-bottom:6px;
   font-size:12px;
   font-weight:700;
 }
-
-.field input,
-.field select{
+.field input,.field select{
   width:100%;
   padding:12px 13px;
   border:1px solid var(--line);
@@ -710,12 +544,7 @@ button{
   background:#fbfbf8;
   color:var(--ink);
 }
-
-.field input:focus,
-.field select:focus{
-  border-color:#a9bea9;
-}
-
+.field input:focus,.field select:focus{border-color:#a9bea9}
 .primary{
   width:100%;
   padding:13px;
@@ -725,7 +554,6 @@ button{
   color:white;
   font-weight:700;
 }
-
 .secondary{
   width:100%;
   padding:13px;
@@ -735,14 +563,12 @@ button{
   background:white;
   color:var(--ink);
 }
-
 .quick-add{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:9px;
   margin-top:12px;
 }
-
 .quick-add button{
   padding:12px;
   border:1px solid var(--line);
@@ -751,62 +577,49 @@ button{
   color:var(--green-dark);
   font-size:12px;
 }
-
 .memory-card{
   padding:18px;
   background:white;
   border:1px solid var(--line);
   border-radius:20px;
 }
-
 .memory-stat{
   display:flex;
   justify-content:space-between;
+  gap:10px;
   padding:12px 0;
   border-bottom:1px solid #eeeeea;
 }
-
-.memory-stat:last-child{
-  border-bottom:0;
-}
-
+.memory-stat:last-child{border-bottom:0}
 .memory-stat span{
   color:var(--muted);
   font-size:12px;
 }
-
 .settings-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:12px;
   padding:15px 0;
   border-bottom:1px solid #eeeeea;
 }
-
-.settings-row:last-child{
-  border-bottom:0;
-}
-
-.settings-row strong{
-  font-size:14px;
-}
-
+.settings-row:last-child{border-bottom:0}
+.settings-row strong{font-size:14px}
 .settings-row small{
   display:block;
   margin-top:4px;
   color:var(--muted);
   font-size:11px;
 }
-
 .switch{
   position:relative;
   width:48px;
   height:27px;
+  flex:none;
   border:0;
   border-radius:30px;
   background:#d9ddd8;
 }
-
 .switch:after{
   content:"";
   position:absolute;
@@ -818,17 +631,10 @@ button{
   background:white;
   transition:.2s;
 }
+.switch.on{background:var(--green)}
+.switch.on:after{left:25px}
 
-.switch.on{
-  background:var(--green);
-}
-
-.switch.on:after{
-  left:25px;
-}
-
-/* ---------- BOTTOM NAV ---------- */
-
+/* Bottom navigation */
 .bottom-nav{
   position:fixed;
   z-index:30;
@@ -845,7 +651,6 @@ button{
   box-shadow:0 12px 35px rgba(40,50,43,.13);
   backdrop-filter:blur(10px);
 }
-
 .nav-btn{
   padding:8px 3px;
   border:0;
@@ -853,20 +658,15 @@ button{
   color:#858d86;
   font-size:10px;
 }
-
 .nav-btn .nav-icon{
   display:block;
   margin-bottom:3px;
   font-size:18px;
 }
-
 .nav-btn.active{
   color:var(--green-dark);
   font-weight:700;
 }
-
-/* ---------- FLOATING ADD ---------- */
-
 .fab{
   position:fixed;
   z-index:31;
@@ -881,9 +681,6 @@ button{
   font-size:26px;
   box-shadow:0 9px 22px rgba(75,105,80,.25);
 }
-
-/* ---------- TOAST ---------- */
-
 .toast{
   position:fixed;
   z-index:50;
@@ -899,7 +696,6 @@ button{
   pointer-events:none;
   transition:.25s;
 }
-
 .toast.show{
   opacity:1;
   transform:translateX(-50%) translateY(0);
@@ -911,27 +707,20 @@ button{
     transform:scale(.86);
     transform-origin:right bottom;
   }
-
-  .hero-copy h1{
-    font-size:30px;
-  }
-
-  .hero-copy{
-    max-width:270px;
-  }
+  .hero-copy h1{font-size:30px}
+  .hero-copy{max-width:270px}
+  .task{gap:8px;padding:12px}
+  .task-actions{gap:3px}
+  .task-actions button{width:27px}
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-  <!-- SEASONAL HOME -->
   <section id="season" class="season">
-
     <div class="topbar">
-
       <div>
         <div class="logo">Haven</div>
         <div class="tagline">Your home remembers.</div>
@@ -949,14 +738,11 @@ button{
         <strong>Haven</strong>
         <p>A simple memory for the things your home needs.</p>
       </div>
-
     </div>
 
     <div class="hero-copy">
       <h1 id="heroTitle">Home is doing well</h1>
-      <p id="heroSubtitle">
-        Keep the little things remembered, so your home stays cared for.
-      </p>
+      <p id="heroSubtitle">Keep the little things remembered, so your home stays cared for.</p>
       <div id="statusPill" class="status-pill">Everything looks good</div>
     </div>
 
@@ -966,43 +752,31 @@ button{
     <div class="house">
       <div class="house-roof"></div>
       <div class="chimney"></div>
-
       <div class="window left"></div>
       <div class="window right"></div>
-
       <div class="door"></div>
       <div class="porch"></div>
-
       <div class="flower left"></div>
       <div class="flower right"></div>
     </div>
 
     <div class="ground"></div>
     <div class="season-decoration"></div>
-
   </section>
 
-  <!-- CONTENT -->
   <main class="content">
 
     <!-- HOME -->
     <section id="homePage" class="page active">
-
       <div class="health-card">
-
         <div class="health-title">
           <strong>Home health</strong>
           <span id="healthText">Looking good</span>
         </div>
-
         <div class="health-bar">
           <div id="healthFill" class="health-fill"></div>
         </div>
-
-        <p class="health-note">
-          Haven keeps your maintenance memories in one place.
-        </p>
-
+        <p class="health-note">Haven keeps your maintenance memories in one place.</p>
       </div>
 
       <div class="section-title">
@@ -1027,21 +801,17 @@ button{
         <h2>Coming up</h2>
         <span>Next memories</span>
       </div>
-
       <div id="comingUp" class="coming-up"></div>
-
     </section>
 
     <!-- ADD -->
     <section id="addPage" class="page">
-
       <div class="section-title">
         <h2>Add memory</h2>
         <span>Keep it simple</span>
       </div>
 
       <div class="form-card">
-
         <div class="field">
           <label for="taskName">What needs remembering?</label>
           <input id="taskName" type="text" placeholder="e.g. Clean water tank">
@@ -1065,7 +835,6 @@ button{
         </div>
 
         <button class="primary" onclick="addTask()">Save memory</button>
-
       </div>
 
       <div class="section-title">
@@ -1079,37 +848,30 @@ button{
         <button onclick="quickAdd('Check smoke alarm',180)">Smoke alarm</button>
         <button onclick="quickAdd('Clean refrigerator',30)">Refrigerator</button>
       </div>
-
     </section>
 
     <!-- MEMORY -->
     <section id="memoryPage" class="page">
-
       <div class="section-title">
         <h2>Memory</h2>
         <span>Your home history</span>
       </div>
-
       <div class="memory-card" id="memoryCard"></div>
-
     </section>
 
     <!-- SETTINGS -->
     <section id="settingsPage" class="page">
-
       <div class="section-title">
         <h2>Settings</h2>
         <span>Haven controls</span>
       </div>
 
       <div class="form-card">
-
         <div class="settings-row">
           <div>
             <strong>Reminders</strong>
             <small>Check for tasks that need attention.</small>
           </div>
-
           <button
             id="reminderButton"
             class="switch"
@@ -1126,151 +888,82 @@ button{
           <span id="storedCount">0</span>
         </div>
 
-        <button class="secondary" onclick="clearAllData()">
-          Clear all memories
-        </button>
-
+        <button class="secondary" onclick="clearAllData()">Clear all memories</button>
       </div>
-
     </section>
 
   </main>
-
 </div>
 
-<!-- BOTTOM NAV -->
-
 <nav class="bottom-nav">
-
   <button class="nav-btn active" onclick="showPage('home',this)">
-    <span class="nav-icon">⌂</span>
-    Home
+    <span class="nav-icon">⌂</span>Home
   </button>
-
   <button class="nav-btn" onclick="showPage('memory',this)">
-    <span class="nav-icon">◷</span>
-    Memory
+    <span class="nav-icon">◷</span>Memory
   </button>
-
   <button class="nav-btn" onclick="showPage('add',this)">
-    <span class="nav-icon">＋</span>
-    Add
+    <span class="nav-icon">＋</span>Add
   </button>
-
   <button class="nav-btn" onclick="showPage('settings',this)">
-    <span class="nav-icon">⚙</span>
-    Settings
+    <span class="nav-icon">⚙</span>Settings
   </button>
-
 </nav>
 
 <button class="fab" onclick="showPage('add')">+</button>
-
 <div id="toast" class="toast"></div>
 
 <script>
-
 const STORAGE_KEY = "havenTasksV3";
 const REMINDER_KEY = "havenRemindersV1";
 
 let tasks = [];
 let currentFilter = "all";
 
-/* ---------- STORAGE ---------- */
-
+/* Storage */
 function loadTasks(){
-
   try{
-
-    const saved =
-      localStorage.getItem(STORAGE_KEY);
-
-    tasks =
-      saved ? JSON.parse(saved) : [];
-
-    if(!Array.isArray(tasks)){
-      tasks=[];
-    }
-
+    const saved=localStorage.getItem(STORAGE_KEY);
+    tasks=saved?JSON.parse(saved):[];
+    if(!Array.isArray(tasks)) tasks=[];
   }catch(error){
-
     console.log("Could not load tasks:",error);
-
     tasks=[];
-
   }
-
 }
 
 function saveTasks(){
-
   try{
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(tasks)
-    );
-
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
   }catch(error){
-
     console.log("Could not save tasks:",error);
-
   }
-
 }
 
-/* ---------- DATES ---------- */
-
+/* Date helpers */
 function todayStart(){
-
   const d=new Date();
-
   d.setHours(0,0,0,0);
-
   return d;
-
 }
 
 function dateOnly(value){
+  if(!value) return null;
 
-  if(!value){
-    return null;
-  }
-
-  if(
-    typeof value==="string" &&
-    /^\d{4}-\d{2}-\d{2}$/.test(value)
-  ){
-
+  if(typeof value==="string" && /^\d{4}-\d{2}-\d{2}$/.test(value)){
     const parts=value.split("-").map(Number);
-
-    const d=
-      new Date(
-        parts[0],
-        parts[1]-1,
-        parts[2]
-      );
-
+    const d=new Date(parts[0],parts[1]-1,parts[2]);
     d.setHours(0,0,0,0);
-
     return d;
-
   }
 
   const d=new Date(value);
-
-  if(isNaN(d.getTime())){
-    return null;
-  }
-
+  if(isNaN(d.getTime())) return null;
   d.setHours(0,0,0,0);
-
   return d;
-
 }
 
 function getDueDate(task){
-
   return dateOnly(
     task.nextDue ||
     task.dueDate ||
@@ -1278,1222 +971,577 @@ function getDueDate(task){
     task.next_due ||
     task.due
   );
-
 }
 
 function daysBetween(task){
-
   const due=getDueDate(task);
-
-  if(!due){
-    return null;
-  }
-
+  if(!due) return null;
   return Math.round(
-    (due.getTime()-todayStart().getTime())
-    /(1000*60*60*24)
+    (due.getTime()-todayStart().getTime())/(1000*60*60*24)
   );
-
 }
 
 function formatDate(value){
-
   const d=dateOnly(value);
-
-  if(!d){
-    return "Date needs checking";
-  }
-
-  return d.toLocaleDateString(
-    undefined,
-    {
-      day:"numeric",
-      month:"short",
-      year:"numeric"
-    }
-  );
-
+  if(!d) return "Date needs checking";
+  return d.toLocaleDateString(undefined,{
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  });
 }
 
-/* ---------- SEASON ---------- */
+function localDateString(date){
+  return date.getFullYear()+"-"+
+    String(date.getMonth()+1).padStart(2,"0")+"-"+
+    String(date.getDate()).padStart(2,"0");
+}
 
+/* Season */
 function updateSeason(){
-
   const month=new Date().getMonth()+1;
-
   const season=document.getElementById("season");
-
   season.className="season";
 
-  if(month>=3 && month<=5){
-
-    season.classList.add("spring");
-
-  }else if(month>=6 && month<=8){
-
-    season.classList.add("summer");
-
-  }else if(month>=9 && month<=11){
-
-    season.classList.add("autumn");
-
-  }else{
-
-    season.classList.add("winter");
-
-  }
-
+  if(month>=3 && month<=5) season.classList.add("spring");
+  else if(month>=6 && month<=8) season.classList.add("summer");
+  else if(month>=9 && month<=11) season.classList.add("autumn");
+  else season.classList.add("winter");
 }
 
-/* ---------- TASK STATUS ---------- */
-
+/* Task status */
 function taskStatus(task){
-
   const days=daysBetween(task);
-
-  if(days===null){
-    return "unknown";
-  }
-
-  if(days<0){
-    return "overdue";
-  }
-
-  if(days===0){
-    return "today";
-  }
-
+  if(days===null) return "unknown";
+  if(days<0) return "overdue";
+  if(days===0) return "today";
   return "upcoming";
-
 }
 
 function statusText(task){
-
   const days=daysBetween(task);
-
-  if(days===null){
-    return "Date needs checking";
-  }
-
+  if(days===null) return "Date needs checking";
   if(days<0){
-
     const n=Math.abs(days);
-
-    return n===1
-      ? "1 day overdue"
-      : n+" days overdue";
-
+    return n===1?"1 day overdue":n+" days overdue";
   }
-
-  if(days===0){
-    return "Due today";
-  }
-
-  return days===1
-    ? "Due in 1 day"
-    : "Due in "+days+" days";
-
+  if(days===0) return "Due today";
+  return days===1?"Due in 1 day":"Due in "+days+" days";
 }
 
-/* ---------- ICONS ---------- */
-
+/* Icons and categories */
 function getIcon(name){
-
   const n=String(name||"").toLowerCase();
-
-  if(n.includes("water")){
-    return "💧";
-  }
-
-  if(
-    n.includes("air") ||
-    n.includes("ac")
-  ){
-    return "❄";
-  }
-
-  if(n.includes("garden")){
-    return "🌿";
-  }
-
-  if(n.includes("alarm")){
-    return "🔔";
-  }
-
-  if(
-    n.includes("clean") ||
-    n.includes("wash")
-  ){
-    return "🧹";
-  }
-
-  if(
-    n.includes("roof") ||
-    n.includes("gutter")
-  ){
-    return "🏠";
-  }
-
-  if(
-    n.includes("fridge") ||
-    n.includes("refrigerator")
-  ){
-    return "◫";
-  }
-
+  if(n.includes("water")) return "💧";
+  if(n.includes("air")||n.includes("ac")) return "❄";
+  if(n.includes("garden")) return "🌿";
+  if(n.includes("alarm")) return "🔔";
+  if(n.includes("clean")||n.includes("wash")) return "🧹";
+  if(n.includes("roof")||n.includes("gutter")) return "🏠";
+  if(n.includes("fridge")||n.includes("refrigerator")) return "◫";
   return "✓";
-
 }
-
-/* ---------- CATEGORY ---------- */
 
 function getCategory(name){
-
   const n=String(name||"").toLowerCase();
-
-  if(n.includes("water")){
-    return "Water";
-  }
-
-  if(
-    n.includes("garden") ||
-    n.includes("plant")
-  ){
-    return "Garden";
-  }
-
-  if(
-    n.includes("air") ||
-    n.includes("ac")
-  ){
-    return "Climate";
-  }
-
-  if(
-    n.includes("clean") ||
-    n.includes("wash")
-  ){
-    return "Cleaning";
-  }
-
+  if(n.includes("water")) return "Water";
+  if(n.includes("garden")||n.includes("plant")) return "Garden";
+  if(n.includes("air")||n.includes("ac")) return "Climate";
+  if(n.includes("clean")||n.includes("wash")) return "Cleaning";
   return "Home";
-
 }
 
-/* ---------- FILTER ---------- */
-
+/* Filters */
 function setFilter(filter,button){
-
   currentFilter=filter;
-
-  document
-    .querySelectorAll(".filter")
-    .forEach(
-      b=>b.classList.remove("active")
-    );
-
-  if(button){
-    button.classList.add("active");
-  }
-
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  if(button) button.classList.add("active");
   render();
-
 }
 
 function filteredTasks(){
-
   return tasks.filter(task=>{
-
     const status=taskStatus(task);
-
-    if(currentFilter==="today"){
-      return status==="today";
-    }
-
-    if(currentFilter==="upcoming"){
-      return status==="upcoming";
-    }
-
-    if(currentFilter==="overdue"){
-      return status==="overdue";
-    }
-
+    if(currentFilter==="today") return status==="today";
+    if(currentFilter==="upcoming") return status==="upcoming";
+    if(currentFilter==="overdue") return status==="overdue";
     return true;
-
   });
-
 }
 
-/* ---------- RENDER ---------- */
-
+/* Render task list */
 function render(){
-
-  const container=
-    document.getElementById("tasks");
-
+  const container=document.getElementById("tasks");
   const list=filteredTasks();
 
   document.getElementById("taskCount").textContent=
-    tasks.length+
-    (tasks.length===1
-      ? " memory"
-      : " memories");
-
-  document.getElementById("storedCount").textContent=
-    tasks.length;
+    tasks.length+(tasks.length===1?" memory":" memories");
+  document.getElementById("storedCount").textContent=tasks.length;
 
   if(list.length===0){
-
     container.innerHTML=`
-
       <div class="empty">
-
         <strong>No memories here</strong>
-
-        <div>
-          Add a maintenance memory and Haven will remember it.
-        </div>
-
-      </div>
-
-    `;
-
+        <div>Add a maintenance memory and Haven will remember it.</div>
+      </div>`;
   }else{
+    container.innerHTML=list
+      .sort((a,b)=>{
+        const da=getDueDate(a);
+        const db=getDueDate(b);
+        if(!da) return 1;
+        if(!db) return -1;
+        return da-db;
+      })
+      .map(task=>{
+        const status=taskStatus(task);
+        const id=escapeHtml(String(task.id));
 
-    container.innerHTML=
-      list
-        .sort(
-          (a,b)=>{
-            const da=getDueDate(a);
-            const db=getDueDate(b);
+        return `
+          <div class="task">
+            <div class="task-icon">${getIcon(task.name)}</div>
 
-            if(!da) return 1;
-            if(!db) return -1;
-
-            return da-db;
-          }
-        )
-        .map(task=>{
-
-          const status=taskStatus(task);
-
-          return `
-
-            <div class="task">
-
-              <div class="task-icon">
-                ${getIcon(task.name)}
+            <div class="task-info">
+              <div class="task-name">${escapeHtml(task.name||"Untitled")}</div>
+              <div class="task-meta">
+                ${getCategory(task.name)} · Next due ${formatDate(getDueDate(task))}
               </div>
-
-              <div class="task-info">
-
-                <div class="task-name">
-                  ${escapeHtml(task.name || "Untitled")}
-                </div>
-
-                <div class="task-meta">
-                  ${getCategory(task.name)}
-                  · Next due ${formatDate(getDueDate(task))}
-                </div>
-
-                <div class="task-status ${status}">
-                  ${statusText(task)}
-                </div>
-
-                ${
-                  task.lastDone
-                  ? `
-                    <div class="task-meta">
-                      Last done ${formatDate(task.lastDone)}
-                    </div>
-                  `
-                  : ""
-                }
-
-              </div>
-
-              <div class="task-actions">
-
-                <button
-                  class="complete"
-                  title="Complete"
-                  onclick="completeTask('${task.id}')"
-                >✓</button>
-
-                <button
-                  class="delete"
-                  title="Delete"
-                  onclick="deleteTask('${task.id}')"
-                >×</button>
-
-              </div>
-
+              <div class="task-status ${status}">${statusText(task)}</div>
+              ${task.lastDone?`
+                <div class="task-meta">Last done ${formatDate(task.lastDone)}</div>
+              `:""}
             </div>
 
-          `;
-
-        })
-        .join("");
-
+            <div class="task-actions">
+              <button class="edit" title="Edit" aria-label="Edit task"
+                onclick="editTask('${id}')">✎</button>
+              <button class="complete" title="Complete" aria-label="Complete task"
+                onclick="completeTask('${id}')">✓</button>
+              <button class="delete" title="Delete" aria-label="Delete task"
+                onclick="deleteTask('${id}')">×</button>
+            </div>
+          </div>`;
+      }).join("");
   }
 
   renderBanners();
   renderDueSoon();
   updateHero();
-
 }
 
-/* ---------- BANNERS ---------- */
-
+/* Banners */
 function renderBanners(){
+  const overdue=tasks.filter(t=>taskStatus(t)==="overdue").length;
+  const today=tasks.filter(t=>taskStatus(t)==="today").length;
 
-  const overdue=
-    tasks.filter(
-      t=>taskStatus(t)==="overdue"
-    ).length;
-
-  const today=
-    tasks.filter(
-      t=>taskStatus(t)==="today"
-    ).length;
-
-  const overdueBanner=
-    document.getElementById("overdueBanner");
-
-  const soonBanner=
-    document.getElementById("soonBanner");
-
-  const goodBanner=
-    document.getElementById("goodBanner");
+  const overdueBanner=document.getElementById("overdueBanner");
+  const soonBanner=document.getElementById("soonBanner");
+  const goodBanner=document.getElementById("goodBanner");
 
   overdueBanner.classList.remove("show");
   soonBanner.classList.remove("show");
   goodBanner.classList.remove("show");
 
   if(overdue>0){
-
-    overdueBanner.textContent=
-      overdue+
-      (overdue===1
-        ? " maintenance memory is overdue."
-        : " maintenance memories are overdue.");
-
+    overdueBanner.textContent=overdue+
+      (overdue===1?" maintenance memory is overdue.":" maintenance memories are overdue.");
     overdueBanner.classList.add("show");
-
   }else if(today>0){
-
-    soonBanner.textContent=
-      today+
-      (today===1
-        ? " memory is due today."
-        : " memories are due today.");
-
+    soonBanner.textContent=today+
+      (today===1?" memory is due today.":" memories are due today.");
     soonBanner.classList.add("show");
-
   }else{
-
-    goodBanner.textContent=
-      "Nothing needs attention right now.";
-
+    goodBanner.textContent="Nothing needs attention right now.";
     goodBanner.classList.add("show");
-
   }
-
 }
 
-/* ---------- COMING UP ---------- */
-
+/* Coming up */
 function renderDueSoon(){
-
-  const container=
-    document.getElementById("comingUp");
-
-  const upcoming=
-    tasks
-      .filter(t=>{
-        const d=daysBetween(t);
-
-        return d!==null && d>=0;
-      })
-      .sort(
-        (a,b)=>{
-          return daysBetween(a)-daysBetween(b);
-        }
-      )
-      .slice(0,4);
+  const container=document.getElementById("comingUp");
+  const upcoming=tasks
+    .filter(t=>{
+      const d=daysBetween(t);
+      return d!==null && d>=0;
+    })
+    .sort((a,b)=>daysBetween(a)-daysBetween(b))
+    .slice(0,4);
 
   if(upcoming.length===0){
-
-    container.innerHTML=
-      `<div class="empty">
-        No upcoming maintenance yet.
-      </div>`;
-
+    container.innerHTML=`<div class="empty">No upcoming maintenance yet.</div>`;
     return;
-
   }
 
-  container.innerHTML=
-    upcoming
-      .map(task=>`
-
-        <div class="coming-item">
-
-          <strong>
-            ${escapeHtml(task.name || "Untitled")}
-          </strong>
-
-          <span>
-            ${statusText(task)}
-          </span>
-
-        </div>
-
-      `)
-      .join("");
-
+  container.innerHTML=upcoming.map(task=>`
+    <div class="coming-item">
+      <strong>${escapeHtml(task.name||"Untitled")}</strong>
+      <span>${statusText(task)}</span>
+    </div>
+  `).join("");
 }
 
-/* ---------- HERO ---------- */
-
+/* Hero status */
 function updateHero(){
+  const overdue=tasks.some(t=>taskStatus(t)==="overdue");
+  const today=tasks.some(t=>taskStatus(t)==="today");
 
-  const overdue=
-    tasks.some(
-      t=>taskStatus(t)==="overdue"
-    );
-
-  const today=
-    tasks.some(
-      t=>taskStatus(t)==="today"
-    );
-
-  const title=
-    document.getElementById("heroTitle");
-
-  const subtitle=
-    document.getElementById("heroSubtitle");
-
-  const pill=
-    document.getElementById("statusPill");
-
-  const health=
-    document.getElementById("healthText");
-
-  const fill=
-    document.getElementById("healthFill");
+  const title=document.getElementById("heroTitle");
+  const subtitle=document.getElementById("heroSubtitle");
+  const pill=document.getElementById("statusPill");
+  const health=document.getElementById("healthText");
+  const fill=document.getElementById("healthFill");
 
   if(overdue){
-
-    title.textContent=
-      "A little attention needed";
-
-    subtitle.textContent=
-      "A few home memories are waiting for you.";
-
-    pill.textContent=
-      "Some things need attention";
-
-    health.textContent=
-      "Needs attention";
-
+    title.textContent="A little attention needed";
+    subtitle.textContent="A few home memories are waiting for you.";
+    pill.textContent="Some things need attention";
+    health.textContent="Needs attention";
     fill.style.width="58%";
-
   }else if(today){
-
-    title.textContent=
-      "Something needs attention";
-
-    subtitle.textContent=
-      "A home memory is due today.";
-
-    pill.textContent=
-      "Due today";
-
-    health.textContent=
-      "Almost there";
-
+    title.textContent="Something needs attention";
+    subtitle.textContent="A home memory is due today.";
+    pill.textContent="Due today";
+    health.textContent="Almost there";
     fill.style.width="72%";
-
   }else{
-
-    title.textContent=
-      "Home is doing well";
-
-    subtitle.textContent=
-      "Keep the little things remembered, so your home stays cared for.";
-
-    pill.textContent=
-      "Everything looks good";
-
-    health.textContent=
-      "Looking good";
-
+    title.textContent="Home is doing well";
+    subtitle.textContent="Keep the little things remembered, so your home stays cared for.";
+    pill.textContent="Everything looks good";
+    health.textContent="Looking good";
     fill.style.width="82%";
-
   }
-
 }
 
-/* ---------- ADD TASK ---------- */
-
+/* Add a task */
 function addTask(){
-
-  const name=
-    document.getElementById("taskName")
-      .value
-      .trim();
-
-  const date=
-    document.getElementById("taskDate")
-      .value;
-
-  const repeat=
-    document.getElementById("taskRepeat")
-      .value;
+  const name=document.getElementById("taskName").value.trim();
+  const date=document.getElementById("taskDate").value;
+  const repeat=document.getElementById("taskRepeat").value;
 
   if(!name){
-
     showToast("Please enter a task.");
-
     return;
-
   }
-
   if(!date){
-
     showToast("Please choose a due date.");
-
     return;
-
   }
 
-  const task={
-
-    id:
-      Date.now().toString(),
-
+  tasks.push({
+    id:Date.now().toString(),
     name:name,
-
     nextDue:date,
-
-    repeat:
-      repeat==="none"
-        ? 0
-        : Number(repeat),
-
+    repeat:repeat==="none"?0:Number(repeat),
     lastDone:null
-
-  };
-
-  tasks.push(task);
+  });
 
   saveTasks();
-
   document.getElementById("taskName").value="";
   document.getElementById("taskDate").value="";
   document.getElementById("taskRepeat").value="none";
 
   showToast("Memory saved.");
-
   showPage("home");
-
   render();
-
 }
 
-/* ---------- QUICK ADD ---------- */
-
+/* Quick add */
 function quickAdd(name,days){
-
   const d=new Date();
-
-  d.setDate(
-    d.getDate()+days
-  );
-
-  const date=
-    d.toISOString()
-      .split("T")[0];
+  d.setDate(d.getDate()+days);
 
   tasks.push({
-
-    id:
-      Date.now().toString(),
-
+    id:Date.now().toString(),
     name:name,
-
-    nextDue:date,
-
+    nextDue:localDateString(d),
     repeat:days,
-
     lastDone:null
-
   });
 
   saveTasks();
-
   showToast("Memory added.");
-
   showPage("home");
-
   render();
-
 }
 
-/* ---------- COMPLETE ---------- */
+/* EDIT TASK */
+function editTask(id){
+  const task=tasks.find(t=>String(t.id)===String(id));
+  if(!task) return;
 
-function completeTask(id){
+  const currentName=task.name||"";
+  const currentDate=getDueDate(task);
+  const currentDateText=currentDate?localDateString(currentDate):"";
+  const currentRepeat=Number(task.repeat||0);
 
-  const task=
-    tasks.find(
-      t=>String(t.id)===String(id)
-    );
+  const newName=prompt("Edit task name:",currentName);
+  if(newName===null) return;
 
-  if(!task){
+  if(!newName.trim()){
+    showToast("Task name cannot be empty.");
     return;
   }
 
-  const today=
-    new Date();
+  const newDate=prompt(
+    "Edit due date (YYYY-MM-DD):",
+    currentDateText
+  );
+  if(newDate===null) return;
 
-  task.lastDone=
-    today.toISOString();
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(newDate)){
+    showToast("Please enter the date as YYYY-MM-DD.");
+    return;
+  }
 
-  const repeat=
-    Number(task.repeat||0);
+  const checkedDate=dateOnly(newDate);
+  if(!checkedDate || localDateString(checkedDate)!==newDate){
+    showToast("That date is not valid.");
+    return;
+  }
+
+  const repeatAnswer=prompt(
+    "Repeat interval in days. Enter 0 for one time.",
+    String(currentRepeat)
+  );
+  if(repeatAnswer===null) return;
+
+  const newRepeat=Number(repeatAnswer);
+  if(!Number.isInteger(newRepeat)||newRepeat<0){
+    showToast("Repeat must be 0 or a positive whole number.");
+    return;
+  }
+
+  task.name=newName.trim();
+  task.nextDue=newDate;
+  task.repeat=newRepeat;
+
+  saveTasks();
+  render();
+  renderMemory();
+  showToast("Memory updated.");
+}
+
+/* Complete task */
+function completeTask(id){
+  const task=tasks.find(t=>String(t.id)===String(id));
+  if(!task) return;
+
+  const today=new Date();
+  task.lastDone=today.toISOString();
+
+  const repeat=Number(task.repeat||0);
 
   if(repeat>0){
-
-    const due=
-      getDueDate(task) || today;
-
-    due.setDate(
-      due.getDate()+repeat
-    );
-
-    task.nextDue=
-      due.getFullYear()+
-      "-" +
-      String(due.getMonth()+1).padStart(2,"0")+
-      "-" +
-      String(due.getDate()).padStart(2,"0");
-
+    const due=getDueDate(task)||today;
+    due.setDate(due.getDate()+repeat);
+    task.nextDue=localDateString(due);
   }else{
-
     task.nextDue=null;
-
   }
 
   saveTasks();
-
   showToast("Marked complete.");
-
   render();
-
 }
 
-/* ---------- DELETE ---------- */
-
+/* Delete task */
 function deleteTask(id){
+  const task=tasks.find(t=>String(t.id)===String(id));
+  if(!task) return;
 
-  const task=
-    tasks.find(
-      t=>String(t.id)===String(id)
-    );
+  if(!confirm("Delete this maintenance memory?")) return;
 
-  if(!task){
-    return;
-  }
-
-  if(
-    !confirm(
-      "Delete this maintenance memory?"
-    )
-  ){
-    return;
-  }
-
-  tasks=
-    tasks.filter(
-      t=>String(t.id)!==String(id)
-    );
-
+  tasks=tasks.filter(t=>String(t.id)!==String(id));
   saveTasks();
-
   showToast("Memory deleted.");
-
   render();
-
 }
 
-/* ---------- MEMORY PAGE ---------- */
-
+/* Memory page */
 function renderMemory(){
-
-  const container=
-    document.getElementById("memoryCard");
-
-  const completed=
-    tasks.filter(
-      t=>t.lastDone
-    ).length;
-
-  const overdue=
-    tasks.filter(
-      t=>taskStatus(t)==="overdue"
-    ).length;
+  const container=document.getElementById("memoryCard");
+  const completed=tasks.filter(t=>t.lastDone).length;
+  const overdue=tasks.filter(t=>taskStatus(t)==="overdue").length;
 
   container.innerHTML=`
-
-    <div class="memory-stat">
-      <strong>Total memories</strong>
-      <span>${tasks.length}</span>
-    </div>
-
-    <div class="memory-stat">
-      <strong>Completed memories</strong>
-      <span>${completed}</span>
-    </div>
-
-    <div class="memory-stat">
-      <strong>Needs attention</strong>
-      <span>${overdue}</span>
-    </div>
-
-    <div class="memory-stat">
-      <strong>Storage</strong>
-      <span>On this device</span>
-    </div>
-
+    <div class="memory-stat"><strong>Total memories</strong><span>${tasks.length}</span></div>
+    <div class="memory-stat"><strong>Completed memories</strong><span>${completed}</span></div>
+    <div class="memory-stat"><strong>Needs attention</strong><span>${overdue}</span></div>
+    <div class="memory-stat"><strong>Storage</strong><span>On this device</span></div>
   `;
-
 }
 
-/* ---------- NAVIGATION ---------- */
-
+/* Navigation */
 function showPage(page,button){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
 
-  document
-    .querySelectorAll(".page")
-    .forEach(
-      p=>p.classList.remove("active")
-    );
-
-  document
-    .querySelectorAll(".nav-btn")
-    .forEach(
-      b=>b.classList.remove("active")
-    );
-
-  const target=
-    document.getElementById(
-      page+"Page"
-    );
-
-  if(target){
-    target.classList.add("active");
-  }
+  const target=document.getElementById(page+"Page");
+  if(target) target.classList.add("active");
 
   if(button){
     button.classList.add("active");
   }else{
-
-    const nav=
-      document.querySelector(
-        `.nav-btn[onclick*="'${page}'"]`
-      );
-
-    if(nav){
-      nav.classList.add("active");
-    }
-
+    const nav=document.querySelector(`.nav-btn[onclick*="'${page}'"]`);
+    if(nav) nav.classList.add("active");
   }
 
-  if(page==="memory"){
-    renderMemory();
-  }
+  if(page==="memory") renderMemory();
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-/* ---------- PROFILE ---------- */
-
+/* Profile popup */
 function toggleProfile(event){
+  if(event) event.stopPropagation();
 
-  if(event){
-    event.stopPropagation();
-  }
-
-  const popup=
-    document.getElementById("profilePopup");
-
-  const button=
-    document.getElementById("profileButton");
+  const popup=document.getElementById("profilePopup");
+  const button=document.getElementById("profileButton");
 
   popup.classList.toggle("show");
-  button.classList.toggle(
-    "selected",
-    popup.classList.contains("show")
-  );
-
+  button.classList.toggle("selected",popup.classList.contains("show"));
 }
 
-document.addEventListener(
-  "click",
-  function(event){
+document.addEventListener("click",function(event){
+  const popup=document.getElementById("profilePopup");
+  const button=document.getElementById("profileButton");
 
-    const popup=
-      document.getElementById("profilePopup");
-
-    const button=
-      document.getElementById("profileButton");
-
-    if(
-      !popup.contains(event.target) &&
-      event.target!==button
-    ){
-
-      popup.classList.remove("show");
-      button.classList.remove("selected");
-
-    }
-
+  if(!popup.contains(event.target)&&event.target!==button){
+    popup.classList.remove("show");
+    button.classList.remove("selected");
   }
-);
+});
 
-/* ---------- TOAST ---------- */
-
+/* Toast message */
 let toastTimer;
 
 function showToast(message){
-
-  const toast=
-    document.getElementById("toast");
-
+  const toast=document.getElementById("toast");
   toast.textContent=message;
-
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
-
-  toastTimer=
-    setTimeout(
-      ()=>{
-        toast.classList.remove("show");
-      },
-      2200
-    );
-
+  toastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
 }
 
-/* ---------- REMINDERS ---------- */
-
+/* Reminders */
 function remindersEnabled(){
-
-  return (
-    localStorage.getItem(
-      REMINDER_KEY
-    )==="true"
-  );
-
+  return localStorage.getItem(REMINDER_KEY)==="true";
 }
 
 function toggleReminders(){
-
-  const enabled=
-    remindersEnabled();
+  const enabled=remindersEnabled();
 
   if(!enabled){
-
-    if(
-      "Notification" in window &&
-      Notification.permission!=="granted"
-    ){
-
-      Notification.requestPermission()
-        .then(
-          permission=>{
-
-            if(
-              permission==="granted"
-            ){
-
-              localStorage.setItem(
-                REMINDER_KEY,
-                "true"
-              );
-
-              updateReminderButton();
-
-              checkReminders();
-
-              showToast(
-                "Reminders enabled."
-              );
-
-            }else{
-
-              showToast(
-                "Notification permission was not granted."
-              );
-
-            }
-
-          }
-        );
-
+    if("Notification" in window && Notification.permission!=="granted"){
+      Notification.requestPermission().then(permission=>{
+        if(permission==="granted"){
+          localStorage.setItem(REMINDER_KEY,"true");
+          updateReminderButton();
+          checkReminders();
+          showToast("Reminders enabled.");
+        }else{
+          showToast("Notification permission was not granted.");
+        }
+      });
     }else{
-
-      localStorage.setItem(
-        REMINDER_KEY,
-        "true"
-      );
-
+      localStorage.setItem(REMINDER_KEY,"true");
       updateReminderButton();
-
       checkReminders();
-
-      showToast(
-        "Reminders enabled."
-      );
-
+      showToast("Reminders enabled.");
     }
-
   }else{
-
-    localStorage.setItem(
-      REMINDER_KEY,
-      "false"
-    );
-
+    localStorage.setItem(REMINDER_KEY,"false");
     updateReminderButton();
-
-    showToast(
-      "Reminders disabled."
-    );
-
+    showToast("Reminders disabled.");
   }
-
 }
 
 function updateReminderButton(){
-
-  const button=
-    document.getElementById(
-      "reminderButton"
-    );
-
-  if(
-    remindersEnabled()
-  ){
-
-    button.classList.add("on");
-
-  }else{
-
-    button.classList.remove("on");
-
-  }
-
+  const button=document.getElementById("reminderButton");
+  button.classList.toggle("on",remindersEnabled());
 }
 
 function scheduleReminderCheck(){
-
-  setInterval(
-    checkReminders,
-    60*60*1000
-  );
-
+  setInterval(checkReminders,60*60*1000);
 }
 
 function checkReminders(){
+  if(!remindersEnabled()) return;
+  if(!("Notification" in window)||Notification.permission!=="granted") return;
 
-  if(!remindersEnabled()){
-    return;
-  }
-
-  if(
-    !("Notification" in window) ||
-    Notification.permission!=="granted"
-  ){
-    return;
-  }
-
-  const today=
-    todayStart()
-      .getTime();
+  const today=todayStart().getTime();
 
   tasks.forEach(task=>{
+    const due=getDueDate(task);
+    if(!due) return;
 
-    const due=
-      getDueDate(task);
-
-    if(!due){
-      return;
-    }
-
-    if(
-      due.getTime()===today
-    ){
-
-      const key=
-        "haven-notified-"+task.id+"-"+today;
-
-      if(
-        localStorage.getItem(key)
-      ){
-        return;
-      }
+    if(due.getTime()===today){
+      const key="haven-notified-"+task.id+"-"+today;
+      if(localStorage.getItem(key)) return;
 
       try{
-
-        new Notification(
-          "Haven reminder",
-          {
-            body:
-              (task.name||"Maintenance")+
-              " is due today."
-          }
-        );
-
-        localStorage.setItem(
-          key,
-          "true"
-        );
-
+        new Notification("Haven reminder",{
+          body:(task.name||"Maintenance")+" is due today."
+        });
+        localStorage.setItem(key,"true");
       }catch(error){
-
-        console.log(
-          "Notification failed:",
-          error
-        );
-
+        console.log("Notification failed:",error);
       }
-
     }
-
   });
-
 }
 
-/* ---------- CLEAR DATA ---------- */
-
+/* Clear data */
 function clearAllData(){
-
-  if(
-    !confirm(
-      "Clear all Haven memories? This cannot be undone."
-    )
-  ){
-    return;
-  }
+  if(!confirm("Clear all Haven memories? This cannot be undone.")) return;
 
   tasks=[];
-
   saveTasks();
-
   renderMemory();
   render();
-
-  showToast(
-    "All memories cleared."
-  );
-
+  showToast("All memories cleared.");
 }
 
-/* ---------- HTML SAFETY ---------- */
-
+/* Escape user-entered text */
 function escapeHtml(value){
-
   return String(value||"")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
-
 }
 
-/* ---------- SERVICE WORKER ---------- */
-
+/* Service worker — keep sw.js in your repository */
 async function registerServiceWorker(){
-
-  if(
-    !("serviceWorker" in navigator)
-  ){
-
-    return false;
-
-  }
+  if(!("serviceWorker" in navigator)) return false;
 
   try{
+    const swUrl=new URL("sw.js",window.location.href);
+    const scope=new URL("./",window.location.href).pathname;
 
-    const swUrl=
-      new URL(
-        "sw.js",
-        window.location.href
-      );
-
-    const scope=
-      new URL(
-        "./",
-        window.location.href
-      ).pathname;
-
-    await navigator.serviceWorker.register(
-      swUrl.href,
-      {
-        scope:scope
-      }
-    );
-
+    await navigator.serviceWorker.register(swUrl.href,{scope:scope});
     await navigator.serviceWorker.ready;
-
     return true;
-
   }catch(error){
-
-    console.log(
-      "Service worker registration failed:",
-      error
-    );
-
+    console.log("Service worker registration failed:",error);
     return false;
-
   }
-
 }
 
-/* ---------- START ---------- */
-
+/* Start app */
 updateSeason();
-
 loadTasks();
-
 render();
-
 renderMemory();
-
 updateReminderButton();
-
 registerServiceWorker();
 
-if(
-  remindersEnabled()
-){
-
+if(remindersEnabled()){
   checkReminders();
-
   scheduleReminderCheck();
-
 }
-
 </script>
-
 </body>
-</html>
+    </html>
