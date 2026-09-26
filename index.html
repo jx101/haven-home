@@ -15,12 +15,10 @@
 :root{
   --ink:#24352d;
   --muted:#68776f;
-  --cream:#fffdf8;
-  --card:rgba(255,255,255,.88);
+  --card:rgba(255,255,255,.90);
   --line:rgba(49,73,60,.13);
   --green:#47785c;
   --green-dark:#315a43;
-  --accent:#e59a4c;
   --shadow:0 14px 40px rgba(42,62,50,.10);
 }
 
@@ -32,7 +30,7 @@ body{
 }
 
 /* =========================
-   TOP SEASONAL WORLD
+   SEASONAL TOP WORLD
 ========================= */
 
 .season-background{
@@ -45,12 +43,6 @@ body{
   pointer-events:none;
   z-index:0;
   background:linear-gradient(#b9dded,#edf4e8);
-  transition:background .5s ease;
-}
-
-.season-sky{
-  position:absolute;
-  inset:0;
 }
 
 .season-sun{
@@ -61,8 +53,9 @@ body{
   right:12%;
   top:55px;
   background:#ffd66b;
-  box-shadow:0 0 0 14px rgba(255,214,107,.16),
-             0 0 45px rgba(255,207,84,.35);
+  box-shadow:
+    0 0 0 14px rgba(255,214,107,.16),
+    0 0 45px rgba(255,207,84,.35);
 }
 
 .season-mountain{
@@ -100,28 +93,11 @@ body{
   bottom:0;
   height:125px;
   border-radius:50% 50% 0 0;
-  background:linear-gradient(
-    to bottom,
-    #72a76f,
-    #4e8158
-  );
-}
-
-.season-ground:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.22;
-  background:
-    radial-gradient(circle at 10% 35%,#fff 0 2px,transparent 3px),
-    radial-gradient(circle at 25% 65%,#fff 0 2px,transparent 3px),
-    radial-gradient(circle at 42% 35%,#fff 0 2px,transparent 3px),
-    radial-gradient(circle at 68% 70%,#fff 0 2px,transparent 3px),
-    radial-gradient(circle at 88% 30%,#fff 0 2px,transparent 3px);
+  background:linear-gradient(#72a76f,#4e8158);
 }
 
 /* =========================
-   SWISS HOUSE
+   HOUSE
 ========================= */
 
 .season-house{
@@ -156,12 +132,7 @@ body{
   top:18px;
   width:239px;
   height:100px;
-  background:
-    linear-gradient(
-      145deg,
-      #5d5048 0 49%,
-      #786258 50% 100%
-    );
+  background:linear-gradient(145deg,#5d5048 0 49%,#786258 50%);
   clip-path:polygon(
     50% 0,
     100% 64%,
@@ -170,18 +141,6 @@ body{
     5% 72%,
     0 64%
   );
-}
-
-.house-roof:after{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:12px;
-  width:7px;
-  height:92px;
-  background:rgba(255,255,255,.13);
-  transform:rotate(31deg);
-  transform-origin:top;
 }
 
 .house-chimney{
@@ -252,8 +211,7 @@ body{
   left:112px;
   width:43px;
   height:75px;
-  background:
-    linear-gradient(#8b6248,#704b38);
+  background:linear-gradient(#8b6248,#704b38);
   border:3px solid #5c4437;
   border-bottom:0;
 }
@@ -286,7 +244,9 @@ body{
   width:65px;
   height:8px;
   background:#8a674c;
-  box-shadow:0 7px 0 #72523e,0 14px 0 #5d4436;
+  box-shadow:
+    0 7px 0 #72523e,
+    0 14px 0 #5d4436;
 }
 
 .flower-box{
@@ -362,6 +322,7 @@ body{
 }
 
 /* AUTUMN */
+
 body[data-season="autumn"] .season-background{
   background:linear-gradient(
     #f2bd78 0%,
@@ -392,10 +353,13 @@ body[data-season="autumn"] .decor{
   border-radius:80% 10% 80% 10%;
   background:#d76d3e;
   transform:rotate(35deg);
-  box-shadow:20px 15px 0 #bd5538,45px -8px 0 #e29a42;
+  box-shadow:
+    20px 15px 0 #bd5538,
+    45px -8px 0 #e29a42;
 }
 
 /* WINTER */
+
 body[data-season="winter"] .season-background{
   background:linear-gradient(
     #9bc7df,
@@ -421,17 +385,12 @@ body[data-season="winter"] .season-sun{
   box-shadow:0 0 30px rgba(255,255,255,.7);
 }
 
-body[data-season="winter"] .season-house{
-  filter:drop-shadow(0 15px 15px rgba(39,62,75,.18));
-}
-
 body[data-season="winter"] .house-roof{
-  background:
-    linear-gradient(
-      145deg,
-      #f8fbfa 0 44%,
-      #6b6763 45% 100%
-    );
+  background:linear-gradient(
+    145deg,
+    #f8fbfa 0 44%,
+    #6b6763 45% 100%
+  );
 }
 
 body[data-season="winter"] .decor{
@@ -447,6 +406,7 @@ body[data-season="winter"] .decor{
 }
 
 /* SPRING */
+
 body[data-season="spring"] .season-background{
   background:linear-gradient(
     #a9dce9,
@@ -479,6 +439,7 @@ body[data-season="spring"] .decor{
 }
 
 /* SUMMER */
+
 body[data-season="summer"] .season-background{
   background:linear-gradient(
     #68c2e2,
@@ -545,8 +506,8 @@ header{
   width:43px;
   height:43px;
   border-radius:50%;
-  border:1px solid rgba(255,255,255,.7);
-  background:rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.8);
+  background:rgba(255,255,255,.86);
   color:#315a43;
   font-size:17px;
   font-weight:800;
@@ -570,10 +531,10 @@ header{
   overflow:hidden;
   background:linear-gradient(
     135deg,
-    rgba(255,255,255,.90),
-    rgba(246,250,239,.76)
+    rgba(255,255,255,.92),
+    rgba(248,250,239,.78)
   );
-  border:1px solid rgba(255,255,255,.85);
+  border:1px solid rgba(255,255,255,.9);
   box-shadow:var(--shadow);
   backdrop-filter:blur(5px);
 }
@@ -666,7 +627,7 @@ header{
 .filter{
   flex:none;
   border:1px solid var(--line);
-  background:rgba(255,255,255,.72);
+  background:rgba(255,255,255,.75);
   color:#63736a;
   border-radius:20px;
   padding:9px 14px;
@@ -712,8 +673,7 @@ header{
 .banner small{
   position:relative;
   z-index:1;
-  color:inherit;
-  opacity:.78;
+  opacity:.8;
 }
 
 .banner.soon{
@@ -771,12 +731,6 @@ header{
   font-size:11px;
 }
 
-.task-date{
-  font-size:11px;
-  font-weight:700;
-  color:#5b7865;
-}
-
 .task-actions{
   display:flex;
   gap:6px;
@@ -808,7 +762,7 @@ header{
 }
 
 /* =========================
-   FORMS
+   FORM
 ========================= */
 
 .form-card{
@@ -827,11 +781,12 @@ label{
   color:#53665a;
 }
 
-input,select{
+input,
+select{
   width:100%;
   border:1px solid #dce3dc;
   background:#fbfcf9;
-  padding:13px 13px;
+  padding:13px;
   border-radius:13px;
   outline:none;
   font-size:14px;
@@ -839,7 +794,8 @@ input,select{
   margin-bottom:16px;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
   border-color:#79a58a;
   box-shadow:0 0 0 3px rgba(90,139,105,.10);
 }
@@ -856,12 +812,8 @@ input:focus,select:focus{
   box-shadow:0 9px 20px rgba(52,98,70,.18);
 }
 
-.primary:active{
-  transform:translateY(1px);
-}
-
 /* =========================
-   BOTTOM NAV
+   NAV
 ========================= */
 
 .bottom-nav{
@@ -872,7 +824,7 @@ input:focus,select:focus{
   width:min(720px,calc(100% - 26px));
   padding:8px;
   border-radius:24px;
-  background:rgba(255,255,255,.91);
+  background:rgba(255,255,255,.92);
   border:1px solid rgba(255,255,255,.95);
   box-shadow:0 15px 40px rgba(34,51,42,.17);
   backdrop-filter:blur(18px);
@@ -903,7 +855,7 @@ input:focus,select:focus{
 }
 
 /* =========================
-   PROFILE POPUP
+   PROFILE
 ========================= */
 
 .profile-popup{
@@ -935,7 +887,7 @@ input:focus,select:focus{
 }
 
 /* =========================
-   MEMORY / SETTINGS
+   SETTINGS / MEMORY
 ========================= */
 
 .info-card{
@@ -1015,7 +967,7 @@ input:focus,select:focus{
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:560px){
@@ -1075,49 +1027,46 @@ input:focus,select:focus{
 
 <body>
 
-<!-- Seasonal background -->
 <div class="season-background">
 
-  <div class="season-sky">
-    <div class="season-sun"></div>
+  <div class="season-sun"></div>
 
-    <div class="season-mountain mountain-back"></div>
-    <div class="season-mountain mountain-front"></div>
+  <div class="season-mountain mountain-back"></div>
+  <div class="season-mountain mountain-front"></div>
 
-    <div class="season-ground"></div>
+  <div class="season-ground"></div>
 
-    <!-- Static Swiss-style house -->
-    <div class="season-house">
+  <!-- Static one-story Alpine house -->
+  <div class="season-house">
 
-      <div class="house-chimney"></div>
+    <div class="house-chimney"></div>
 
-      <div class="house-roof"></div>
+    <div class="house-roof"></div>
 
-      <div class="house-body">
+    <div class="house-body">
 
-        <div class="house-window window-left"></div>
-        <div class="house-window window-right"></div>
+      <div class="house-window window-left"></div>
+      <div class="house-window window-right"></div>
 
-        <div class="flower-box flower-left"></div>
-        <div class="flower-box flower-right"></div>
+      <div class="flower-box flower-left"></div>
+      <div class="flower-box flower-right"></div>
 
-        <div class="house-door"></div>
-        <div class="house-porch"></div>
-
-      </div>
-
-      <div class="house-fence"></div>
+      <div class="house-door"></div>
+      <div class="house-porch"></div>
 
     </div>
 
-    <div class="season-decoration">
-      <div class="decor decor-1"></div>
-      <div class="decor decor-2"></div>
-      <div class="decor decor-3"></div>
-      <div class="decor decor-4"></div>
-    </div>
+    <div class="house-fence"></div>
 
   </div>
+
+  <div class="season-decoration">
+    <div class="decor decor-1"></div>
+    <div class="decor decor-2"></div>
+    <div class="decor decor-3"></div>
+    <div class="decor decor-4"></div>
+  </div>
+
 </div>
 
 
@@ -1141,11 +1090,14 @@ input:focus,select:focus{
 
 
 <div class="profile-popup" id="profilePopup">
+
   <strong>Haven</strong>
+
   <small>
     Your home remembers the little things,
     so you don't have to.
   </small>
+
 </div>
 
 
@@ -1167,8 +1119,13 @@ input:focus,select:focus{
       </p>
 
       <div class="status">
+
         <span class="status-dot"></span>
-        <span id="seasonStatus">A peaceful day at home</span>
+
+        <span id="seasonStatus">
+          A peaceful day at home
+        </span>
+
       </div>
 
     </div>
@@ -1179,8 +1136,16 @@ input:focus,select:focus{
   <section class="section">
 
     <div class="section-title">
+
       <h2>Maintenance</h2>
-      <span class="count" id="taskCount">0 tasks</span>
+
+      <span
+        class="count"
+        id="taskCount"
+      >
+        0 tasks
+      </span>
+
     </div>
 
 
@@ -1188,27 +1153,31 @@ input:focus,select:focus{
 
       <button
         class="filter active"
-        data-filter="all"
         onclick="setFilter('all',this)"
-      >All</button>
+      >
+        All
+      </button>
 
       <button
         class="filter"
-        data-filter="today"
         onclick="setFilter('today',this)"
-      >Today</button>
+      >
+        Today
+      </button>
 
       <button
         class="filter"
-        data-filter="upcoming"
         onclick="setFilter('upcoming',this)"
-      >Upcoming</button>
+      >
+        Upcoming
+      </button>
 
       <button
         class="filter"
-        data-filter="overdue"
         onclick="setFilter('overdue',this)"
-      >Overdue</button>
+      >
+        Overdue
+      </button>
 
     </div>
 
@@ -1229,8 +1198,11 @@ input:focus,select:focus{
   <section class="section">
 
     <div class="section-title">
+
       <h2>Add maintenance</h2>
+
     </div>
+
 
     <div class="form-card">
 
@@ -1261,11 +1233,25 @@ input:focus,select:focus{
 
       <select id="taskRepeat">
 
-        <option value="30">Every month</option>
-        <option value="60">Every 2 months</option>
-        <option value="90">Every 3 months</option>
-        <option value="180">Every 6 months</option>
-        <option value="365">Every year</option>
+        <option value="30">
+          Every month
+        </option>
+
+        <option value="60">
+          Every 2 months
+        </option>
+
+        <option value="90">
+          Every 3 months
+        </option>
+
+        <option value="180">
+          Every 6 months
+        </option>
+
+        <option value="365">
+          Every year
+        </option>
 
       </select>
 
@@ -1291,8 +1277,13 @@ input:focus,select:focus{
   <section class="section">
 
     <div class="section-title">
+
       <h2>Memory</h2>
-      <span class="count">Your home history</span>
+
+      <span class="count">
+        Your home history
+      </span>
+
     </div>
 
     <div id="memoryList"></div>
@@ -1309,7 +1300,9 @@ input:focus,select:focus{
   <section class="section">
 
     <div class="section-title">
+
       <h2>Settings</h2>
+
     </div>
 
 
@@ -1318,10 +1311,15 @@ input:focus,select:focus{
       <div class="setting-row">
 
         <div>
-          <strong>Reminders</strong>
+
+          <strong>
+            Reminders
+          </strong>
+
           <small>
             Allow Haven to remind you about maintenance.
           </small>
+
         </div>
 
         <button
@@ -1336,16 +1334,23 @@ input:focus,select:focus{
       <div class="setting-row">
 
         <div>
-          <strong>Your data</strong>
+
+          <strong>
+            Your data
+          </strong>
+
           <small>
             Tasks are stored on this device.
           </small>
+
         </div>
 
         <button
           class="action delete"
           onclick="clearAllData()"
-        >×</button>
+        >
+          ×
+        </button>
 
       </div>
 
@@ -1354,7 +1359,9 @@ input:focus,select:focus{
 
     <div class="info-card">
 
-      <h3>Maintenance library</h3>
+      <h3>
+        Maintenance library
+      </h3>
 
       <p>
         Haven remembers common home jobs such as AC cleaning,
@@ -1368,7 +1375,7 @@ input:focus,select:focus{
 </main>
 
 
-<!-- BOTTOM NAV -->
+<!-- NAV -->
 
 <nav class="bottom-nav">
 
@@ -1381,6 +1388,7 @@ input:focus,select:focus{
     Home
   </button>
 
+
   <button
     class="nav-btn"
     id="navMemory"
@@ -1390,6 +1398,7 @@ input:focus,select:focus{
     Memory
   </button>
 
+
   <button
     class="nav-btn"
     id="navAdd"
@@ -1398,6 +1407,7 @@ input:focus,select:focus{
     <div>＋</div>
     Add
   </button>
+
 
   <button
     class="nav-btn"
@@ -1416,14 +1426,16 @@ input:focus,select:focus{
 <script>
 
 /* =========================
-   HAVEN DATA
+   STORAGE
 ========================= */
 
 const STORAGE_KEY = "havenTasksV3";
 const REMINDER_KEY = "havenRemindersV1";
 
 let tasks =
-  JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+  );
 
 let currentFilter = "all";
 
@@ -1434,112 +1446,110 @@ let currentFilter = "all";
 
 function updateSeason(){
 
-  const month = new Date().getMonth() + 1;
+  const month =
+    new Date().getMonth() + 1;
 
   let season = "winter";
   let label = "A peaceful winter day at home";
 
+
   if(month >= 3 && month <= 5){
+
     season = "spring";
     label = "A fresh spring day at home";
+
   }
 
   else if(month >= 6 && month <= 8){
+
     season = "summer";
     label = "A bright summer day at home";
+
   }
 
   else if(month >= 9 && month <= 11){
+
     season = "autumn";
     label = "A calm autumn day at home";
+
   }
 
-  document.body.dataset.season = season;
 
-  const seasonStatus =
+  document.body.dataset.season =
+    season;
+
+
+  const status =
     document.getElementById("seasonStatus");
 
-  if(seasonStatus){
-    seasonStatus.textContent = label;
+
+  if(status){
+
+    status.textContent = label;
+
   }
+
 }
 
 
 /* =========================
-   SMART ICON
+   DATE COMPATIBILITY
 ========================= */
 
-function getIcon(name){
+/*
+  Haven previously used different date
+  property names while the app was being
+  developed.
 
-  const n = name.toLowerCase();
+  This function understands all of them.
+*/
 
-  if(n.includes("ac")) return "❄️";
+function getDueDate(task){
 
-  if(
-    n.includes("water") ||
-    n.includes("leak") ||
-    n.includes("tank") ||
-    n.includes("purifier")
-  ) return "💧";
+  if(!task){
+    return null;
+  }
 
-  if(
-    n.includes("plumb") ||
-    n.includes("pipe") ||
-    n.includes("tap") ||
-    n.includes("shower")
-  ) return "🚿";
 
-  if(
-    n.includes("chimney") ||
-    n.includes("clean")
-  ) return "🧹";
+  const possibleDates = [
 
-  if(
-    n.includes("smoke") ||
-    n.includes("detector") ||
-    n.includes("bulb") ||
-    n.includes("light")
-  ) return "💡";
+    task.nextDue,
+    task.dueDate,
+    task.date,
+    task.next_due,
+    task.due
 
-  if(
-    n.includes("garden") ||
-    n.includes("plant") ||
-    n.includes("lawn")
-  ) return "🌿";
+  ];
 
-  if(
-    n.includes("window") ||
-    n.includes("glass")
-  ) return "🪟";
 
-  if(
-    n.includes("pest") ||
-    n.includes("insect")
-  ) return "🐜";
+  for(const value of possibleDates){
 
-  if(
-    n.includes("roof") ||
-    n.includes("gutter")
-  ) return "🏠";
+    if(!value){
+      continue;
+    }
 
-  if(n.includes("fridge")) return "🧊";
 
-  if(n.includes("washing")) return "🫧";
+    const date =
+      new Date(
+        String(value).includes("T")
+        ? value
+        : String(value) + "T00:00:00"
+      );
 
-  if(n.includes("bathroom")) return "🛁";
 
-  if(n.includes("kitchen")) return "🍳";
+    if(!isNaN(date.getTime())){
 
-  if(
-    n.includes("door") ||
-    n.includes("lock")
-  ) return "🚪";
+      return date
+        .toISOString()
+        .slice(0,10);
 
-  if(n.includes("battery")) return "🔋";
+    }
 
-  if(n.includes("safety")) return "🛡️";
+  }
 
-  return "🔧";
+
+  return null;
+
 }
 
 
@@ -1554,36 +1564,91 @@ function todayStart(){
   d.setHours(0,0,0,0);
 
   return d;
+
 }
 
 
 function dateOnly(value){
 
-  const d = new Date(value + "T00:00:00");
+  if(!value){
+    return null;
+  }
+
+
+  const d =
+    new Date(
+      String(value).includes("T")
+      ? value
+      : String(value) + "T00:00:00"
+    );
+
+
+  if(isNaN(d.getTime())){
+    return null;
+  }
+
 
   return d;
+
 }
 
 
-function daysBetween(date){
+function daysBetween(task){
 
-  const today = todayStart();
+  const due =
+    getDueDate(task);
 
-  const target = dateOnly(date);
+
+  if(!due){
+
+    return null;
+
+  }
+
+
+  const target =
+    dateOnly(due);
+
+
+  if(!target){
+
+    return null;
+
+  }
+
+
+  const today =
+    todayStart();
+
 
   return Math.round(
     (target - today) / 86400000
   );
+
 }
 
 
-function formatDate(date){
+function formatDate(value){
 
-  if(!date) return "No date";
+  if(!value){
 
-  return new Date(
-    date + "T00:00:00"
-  ).toLocaleDateString(
+    return "No date";
+
+  }
+
+
+  const d =
+    dateOnly(value);
+
+
+  if(!d){
+
+    return "No date";
+
+  }
+
+
+  return d.toLocaleDateString(
     undefined,
     {
       day:"numeric",
@@ -1591,6 +1656,7 @@ function formatDate(date){
       year:"numeric"
     }
   );
+
 }
 
 
@@ -1609,47 +1675,82 @@ function save(){
 
 
 /* =========================
-   TASK STATUS
+   STATUS
 ========================= */
 
 function taskStatus(task){
 
-  const days = daysBetween(task.nextDue);
+  const days =
+    daysBetween(task);
+
+
+  if(days === null){
+
+    return "unknown";
+
+  }
+
 
   if(days < 0){
+
     return "overdue";
+
   }
+
 
   if(days === 0){
+
     return "today";
+
   }
 
+
   return "upcoming";
+
 }
 
 
 function statusText(task){
 
-  const days = daysBetween(task.nextDue);
+  const days =
+    daysBetween(task);
+
+
+  if(days === null){
+
+    return "Date needs checking";
+
+  }
+
 
   if(days < 0){
 
-    const n = Math.abs(days);
+    const n =
+      Math.abs(days);
 
     return n === 1
       ? "1 day overdue"
       : n + " days overdue";
+
   }
+
 
   if(days === 0){
+
     return "Due today";
+
   }
+
 
   if(days === 1){
+
     return "Due tomorrow";
+
   }
 
+
   return "Due in " + days + " days";
+
 }
 
 
@@ -1659,20 +1760,27 @@ function statusText(task){
 
 function setFilter(filter,button){
 
-  currentFilter = filter;
+  currentFilter =
+    filter;
+
 
   document
     .querySelectorAll(".filter")
-    .forEach(b => b.classList.remove("active"));
+    .forEach(
+      b => b.classList.remove("active")
+    );
+
 
   button.classList.add("active");
 
+
   render();
+
 }
 
 
 /* =========================
-   RENDER HOME
+   HOME
 ========================= */
 
 function render(){
@@ -1683,34 +1791,65 @@ function render(){
   const count =
     document.getElementById("taskCount");
 
-  if(!list) return;
 
-  let filtered = tasks.filter(task => {
+  if(!list){
+    return;
+  }
 
-    const status = taskStatus(task);
 
-    if(currentFilter === "all"){
-      return true;
-    }
+  let filtered =
+    tasks.filter(task => {
 
-    if(currentFilter === "upcoming"){
-      return status === "upcoming";
-    }
+      const status =
+        taskStatus(task);
 
-    return status === currentFilter;
+
+      if(currentFilter === "all"){
+
+        return true;
+
+      }
+
+
+      if(currentFilter === "upcoming"){
+
+        return status === "upcoming";
+
+      }
+
+
+      return status === currentFilter;
+
+    });
+
+
+  filtered.sort((a,b) => {
+
+    const da =
+      getDueDate(a);
+
+    const db =
+      getDueDate(b);
+
+
+    if(!da && !db) return 0;
+    if(!da) return 1;
+    if(!db) return -1;
+
+
+    return (
+      new Date(da) -
+      new Date(db)
+    );
+
   });
-
-
-  filtered.sort(
-    (a,b) =>
-      new Date(a.nextDue) -
-      new Date(b.nextDue)
-  );
 
 
   count.textContent =
     tasks.length +
-    (tasks.length === 1 ? " task" : " tasks");
+    (tasks.length === 1
+      ? " task"
+      : " tasks");
 
 
   list.innerHTML = "";
@@ -1719,13 +1858,17 @@ function render(){
   if(filtered.length === 0){
 
     list.innerHTML = `
+
       <div class="empty">
+
         ${
           currentFilter === "all"
           ? "Nothing to remember yet."
           : "Nothing here right now."
         }
+
       </div>
+
     `;
 
   }
@@ -1734,26 +1877,40 @@ function render(){
 
     filtered.forEach(task => {
 
+      const dueDate =
+        getDueDate(task);
+
+
       const card =
         document.createElement("div");
 
-      card.className = "task-card";
+
+      card.className =
+        "task-card";
+
 
       card.innerHTML = `
 
         <div class="task-icon">
-          ${getIcon(task.name)}
+          ${getIcon(task.name || "")}
         </div>
 
         <div class="task-info">
 
           <strong>
-            ${escapeHtml(task.name)}
+            ${escapeHtml(task.name || "Untitled task")}
           </strong>
 
           <small>
+
             ${statusText(task)}
-            · ${formatDate(task.nextDue)}
+
+            ${
+              dueDate
+              ? " · " + formatDate(dueDate)
+              : ""
+            }
+
           </small>
 
         </div>
@@ -1764,16 +1921,22 @@ function render(){
             class="action"
             title="Complete"
             onclick="completeTask('${task.id}')"
-          >✓</button>
+          >
+            ✓
+          </button>
 
           <button
             class="action delete"
             title="Delete"
             onclick="deleteTask('${task.id}')"
-          >×</button>
+          >
+            ×
+          </button>
 
         </div>
+
       `;
+
 
       list.appendChild(card);
 
@@ -1781,7 +1944,9 @@ function render(){
 
   }
 
+
   renderBanners();
+
   updateHero();
 
 }
@@ -1796,7 +1961,11 @@ function renderBanners(){
   const container =
     document.getElementById("banners");
 
-  if(!container) return;
+
+  if(!container){
+    return;
+  }
+
 
   container.innerHTML = "";
 
@@ -1810,9 +1979,15 @@ function renderBanners(){
   const soon =
     tasks.filter(t => {
 
-      const d = daysBetween(t.nextDue);
+      const d =
+        daysBetween(t);
 
-      return d >= 1 && d <= 7;
+
+      return (
+        d !== null &&
+        d >= 1 &&
+        d <= 7
+      );
 
     }).length;
 
@@ -1828,14 +2003,17 @@ function renderBanners(){
         </strong>
 
         <small>
+
           ${overdue}
           ${overdue === 1 ? "task is" : "tasks are"}
           overdue.
+
         </small>
 
       </div>
 
     `;
+
   }
 
 
@@ -1850,14 +2028,17 @@ function renderBanners(){
         </strong>
 
         <small>
+
           ${soon}
           ${soon === 1 ? "task is" : "tasks are"}
           coming up within 7 days.
+
         </small>
 
       </div>
 
     `;
+
   }
 
 
@@ -1878,6 +2059,7 @@ function renderBanners(){
       </div>
 
     `;
+
   }
 
 }
@@ -1917,6 +2099,7 @@ function updateHero(){
       "A few things have waited long enough. Haven remembers them for you.";
 
     return;
+
   }
 
 
@@ -1929,6 +2112,7 @@ function updateHero(){
       "Haven has remembered something for today.";
 
     return;
+
   }
 
 
@@ -1948,33 +2132,45 @@ function updateHero(){
 function addTask(){
 
   const name =
-    document.getElementById("taskName")
-      .value.trim();
+    document
+      .getElementById("taskName")
+      .value
+      .trim();
+
 
   const date =
-    document.getElementById("taskDate")
+    document
+      .getElementById("taskDate")
       .value;
+
 
   const repeat =
     Number(
-      document.getElementById("taskRepeat")
+      document
+        .getElementById("taskRepeat")
         .value
     );
 
 
   if(!name){
 
-    alert("Please enter what needs to be remembered.");
+    alert(
+      "Please enter what needs to be remembered."
+    );
 
     return;
+
   }
 
 
   if(!date){
 
-    alert("Please choose a date.");
+    alert(
+      "Please choose a date."
+    );
 
     return;
+
   }
 
 
@@ -2001,10 +2197,14 @@ function addTask(){
 
   save();
 
-  document.getElementById("taskName")
+
+  document
+    .getElementById("taskName")
     .value = "";
 
-  document.getElementById("taskDate")
+
+  document
+    .getElementById("taskDate")
     .value = "";
 
 
@@ -2016,35 +2216,68 @@ function addTask(){
 
 
 /* =========================
-   COMPLETE TASK
+   COMPLETE
 ========================= */
 
 function completeTask(id){
 
   const task =
-    tasks.find(t => t.id === id);
+    tasks.find(
+      t => t.id === id
+    );
 
-  if(!task) return;
+
+  if(!task){
+    return;
+  }
 
 
   const previousDue =
-    task.nextDue;
+    getDueDate(task);
+
+
+  if(!previousDue){
+
+    alert(
+      "This task has no valid due date yet."
+    );
+
+    return;
+
+  }
 
 
   const base =
     dateOnly(previousDue);
 
 
+  if(!base){
+
+    alert(
+      "This task has an invalid date."
+    );
+
+    return;
+
+  }
+
+
+  const repeat =
+    Number(task.repeat) || 30;
+
+
   base.setDate(
-    base.getDate() + task.repeat
+    base.getDate() + repeat
   );
 
 
   task.lastDone =
     previousDue;
 
+
   task.nextDue =
-    base.toISOString()
+    base
+      .toISOString()
       .slice(0,10);
 
 
@@ -2062,17 +2295,25 @@ function completeTask(id){
 function deleteTask(id){
 
   const task =
-    tasks.find(t => t.id === id);
+    tasks.find(
+      t => t.id === id
+    );
 
-  if(!task) return;
+
+  if(!task){
+    return;
+  }
 
 
   const ok =
     confirm(
-      `Delete "${task.name}"?`
+      `Delete "${task.name || "this task"}"?`
     );
 
-  if(!ok) return;
+
+  if(!ok){
+    return;
+  }
 
 
   tasks =
@@ -2097,7 +2338,10 @@ function renderMemory(){
   const list =
     document.getElementById("memoryList");
 
-  if(!list) return;
+
+  if(!list){
+    return;
+  }
 
 
   const completed =
@@ -2120,6 +2364,7 @@ function renderMemory(){
     `;
 
     return;
+
   }
 
 
@@ -2140,16 +2385,25 @@ function renderMemory(){
         <div class="info-card">
 
           <h3>
-            ${getIcon(task.name)}
-            ${escapeHtml(task.name)}
+
+            ${getIcon(task.name || "")}
+
+            ${escapeHtml(
+              task.name || "Untitled task"
+            )}
+
           </h3>
 
           <p>
+
             Last done:
             ${formatDate(task.lastDone)}
+
             <br>
+
             Next due:
-            ${formatDate(task.nextDue)}
+            ${formatDate(getDueDate(task))}
+
           </p>
 
         </div>
@@ -2259,8 +2513,10 @@ function toggleProfile(event){
 
   event.stopPropagation();
 
+
   const popup =
     document.getElementById("profilePopup");
+
 
   popup.classList.toggle("show");
 
@@ -2273,6 +2529,7 @@ document.addEventListener(
 
     const popup =
       document.getElementById("profilePopup");
+
 
     const button =
       document.getElementById("profileButton");
@@ -2301,6 +2558,7 @@ function reminderPermission(){
   return (
     "Notification" in window
   );
+
 }
 
 
@@ -2313,29 +2571,37 @@ async function toggleReminders(){
     );
 
     return;
+
   }
 
 
-  if(Notification.permission === "denied"){
+  if(
+    Notification.permission === "denied"
+  ){
 
     alert(
       "Notifications are blocked for Haven in your browser settings."
     );
 
     return;
+
   }
 
 
-  if(Notification.permission !== "granted"){
+  if(
+    Notification.permission !== "granted"
+  ){
 
     const permission =
       await Notification.requestPermission();
+
 
     if(permission !== "granted"){
 
       updateReminderButton();
 
       return;
+
     }
 
   }
@@ -2357,14 +2623,20 @@ async function toggleReminders(){
 function updateReminderButton(){
 
   const button =
-    document.getElementById("reminderToggle");
+    document.getElementById(
+      "reminderToggle"
+    );
 
-  if(!button) return;
+
+  if(!button){
+    return;
+  }
 
 
   const enabled =
-    localStorage.getItem(REMINDER_KEY)
-      === "enabled";
+    localStorage.getItem(
+      REMINDER_KEY
+    ) === "enabled";
 
 
   button.classList.toggle(
@@ -2379,6 +2651,7 @@ function scheduleReminderCheck(){
 
   checkReminders();
 
+
   setInterval(
     checkReminders,
     60 * 60 * 1000
@@ -2390,11 +2663,13 @@ function scheduleReminderCheck(){
 function checkReminders(){
 
   if(
-    localStorage.getItem(REMINDER_KEY)
-      !== "enabled"
+    localStorage.getItem(
+      REMINDER_KEY
+    ) !== "enabled"
   ){
 
     return;
+
   }
 
 
@@ -2404,6 +2679,7 @@ function checkReminders(){
   ){
 
     return;
+
   }
 
 
@@ -2422,16 +2698,21 @@ function checkReminders(){
   ){
 
     return;
+
   }
 
 
   const due =
     tasks.filter(
-      t => t.nextDue === today
+      t => getDueDate(t) === today
     );
 
 
-  if(due.length === 0) return;
+  if(due.length === 0){
+
+    return;
+
+  }
 
 
   new Notification(
@@ -2440,7 +2721,8 @@ function checkReminders(){
       body:
         due.length === 1
         ? due[0].name + " is due today."
-        : due.length + " home tasks are due today."
+        : due.length +
+          " home tasks are due today."
     }
   );
 
@@ -2464,7 +2746,10 @@ function clearAllData(){
       "Delete all Haven maintenance data?"
     );
 
-  if(!ok) return;
+
+  if(!ok){
+    return;
+  }
 
 
   tasks = [];
@@ -2479,7 +2764,120 @@ function clearAllData(){
 
 
 /* =========================
-   ESCAPE HTML
+   ICON
+========================= */
+
+function getIcon(name){
+
+  const n =
+    String(name).toLowerCase();
+
+
+  if(n.includes("ac"))
+    return "❄️";
+
+
+  if(
+    n.includes("water") ||
+    n.includes("leak") ||
+    n.includes("tank") ||
+    n.includes("purifier")
+  )
+    return "💧";
+
+
+  if(
+    n.includes("plumb") ||
+    n.includes("pipe") ||
+    n.includes("tap") ||
+    n.includes("shower")
+  )
+    return "🚿";
+
+
+  if(
+    n.includes("chimney") ||
+    n.includes("clean")
+  )
+    return "🧹";
+
+
+  if(
+    n.includes("smoke") ||
+    n.includes("detector") ||
+    n.includes("bulb") ||
+    n.includes("light")
+  )
+    return "💡";
+
+
+  if(
+    n.includes("garden") ||
+    n.includes("plant") ||
+    n.includes("lawn")
+  )
+    return "🌿";
+
+
+  if(
+    n.includes("window") ||
+    n.includes("glass")
+  )
+    return "🪟";
+
+
+  if(
+    n.includes("pest") ||
+    n.includes("insect")
+  )
+    return "🐜";
+
+
+  if(
+    n.includes("roof") ||
+    n.includes("gutter")
+  )
+    return "🏠";
+
+
+  if(n.includes("fridge"))
+    return "🧊";
+
+
+  if(n.includes("washing"))
+    return "🫧";
+
+
+  if(n.includes("bathroom"))
+    return "🛁";
+
+
+  if(n.includes("kitchen"))
+    return "🍳";
+
+
+  if(
+    n.includes("door") ||
+    n.includes("lock")
+  )
+    return "🚪";
+
+
+  if(n.includes("battery"))
+    return "🔋";
+
+
+  if(n.includes("safety"))
+    return "🛡️";
+
+
+  return "🔧";
+
+}
+
+
+/* =========================
+   SECURITY
 ========================= */
 
 function escapeHtml(value){
@@ -2547,6 +2945,7 @@ async function registerServiceWorker(){
       error
     );
 
+
     return false;
 
   }
@@ -2555,41 +2954,41 @@ async function registerServiceWorker(){
 
 
 /* =========================
-   LIBRARY
+   MAINTENANCE LIBRARY
 ========================= */
 
 const maintenanceLibrary = [
 
-  ["AC filter","30"],
-  ["AC cleaning","90"],
-  ["Water heater","180"],
-  ["Water tank cleaning","180"],
-  ["Water purifier filter","180"],
-  ["Chimney cleaning","30"],
-  ["Smoke detector","365"],
-  ["Light bulbs","180"],
-  ["Plumbing check","180"],
-  ["Shower check","180"],
-  ["Garden","30"],
-  ["Lawn care","30"],
-  ["Window cleaning","90"],
-  ["Pest control","90"],
-  ["Roof inspection","365"],
-  ["Check for leaks","30"],
-  ["Fridge cleaning","30"],
-  ["Washing machine cleaning","30"],
-  ["Bathroom deep clean","30"],
-  ["Kitchen deep clean","30"],
-  ["Gutter cleaning","180"],
-  ["Door & lock check","180"],
-  ["Smoke alarm batteries","365"],
-  ["Home safety check","365"]
+  ["AC filter",30],
+  ["AC cleaning",90],
+  ["Water heater",180],
+  ["Water tank cleaning",180],
+  ["Water purifier filter",180],
+  ["Chimney cleaning",30],
+  ["Smoke detector",365],
+  ["Light bulbs",180],
+  ["Plumbing check",180],
+  ["Shower check",180],
+  ["Garden",30],
+  ["Lawn care",30],
+  ["Window cleaning",90],
+  ["Pest control",90],
+  ["Roof inspection",365],
+  ["Check for leaks",30],
+  ["Fridge cleaning",30],
+  ["Washing machine cleaning",30],
+  ["Bathroom deep clean",30],
+  ["Kitchen deep clean",30],
+  ["Gutter cleaning",180],
+  ["Door & lock check",180],
+  ["Smoke alarm batteries",365],
+  ["Home safety check",365]
 
 ];
 
 
 /* =========================
-   STARTUP
+   START
 ========================= */
 
 updateSeason();
@@ -2600,9 +2999,11 @@ updateReminderButton();
 
 registerServiceWorker();
 
+
 if(
-  localStorage.getItem(REMINDER_KEY)
-    === "enabled"
+  localStorage.getItem(
+    REMINDER_KEY
+  ) === "enabled"
 ){
 
   if(
@@ -2619,4 +3020,4 @@ if(
 </script>
 
 </body>
-     </html>
+      </html>
