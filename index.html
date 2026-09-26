@@ -22,8 +22,6 @@ body {
   padding: 28px 18px 100px;
 }
 
-/* HEADER */
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -34,14 +32,12 @@ body {
   color: #7d887e;
   font-size: 13px;
   margin-bottom: 6px;
-  letter-spacing: .3px;
 }
 
 h1 {
   margin: 0;
   font-size: 28px;
   font-weight: 600;
-  letter-spacing: -0.5px;
 }
 
 .profile {
@@ -55,8 +51,6 @@ h1 {
   justify-content: center;
   font-weight: bold;
 }
-
-/* HERO */
 
 .hero {
   margin-top: 25px;
@@ -114,8 +108,6 @@ h1 {
   font-size: 14px;
 }
 
-/* SECTIONS */
-
 .section {
   margin-top: 30px;
 }
@@ -126,8 +118,6 @@ h1 {
   margin-bottom: 13px;
 }
 
-/* MAINTENANCE CARDS */
-
 .card {
   background: #fffdf8;
   padding: 16px;
@@ -137,7 +127,7 @@ h1 {
   align-items: center;
   gap: 14px;
   border: 1px solid #ebe8dd;
-  box-shadow: 0 6px 18px rgba(55, 70, 58, .05);
+  box-shadow: 0 6px 18px rgba(55,70,58,.05);
 }
 
 .icon {
@@ -164,8 +154,6 @@ h1 {
   font-size: 13px;
 }
 
-/* ADD BUTTON */
-
 .add {
   width: 100%;
   border: none;
@@ -176,10 +164,8 @@ h1 {
   background: #536b5a;
   color: white;
   margin-top: 8px;
-  box-shadow: 0 8px 18px rgba(83, 107, 90, .18);
+  box-shadow: 0 8px 18px rgba(83,107,90,.18);
 }
-
-/* FORM */
 
 .form {
   display: none;
@@ -211,8 +197,6 @@ h1 {
   font-size: 15px;
   font-weight: 600;
 }
-
-/* OTHER SCREENS */
 
 .screen {
   display: none;
@@ -256,8 +240,6 @@ h1 {
   font-size: 13px;
 }
 
-/* BOTTOM NAV */
-
 .nav {
   position: fixed;
   bottom: 0;
@@ -265,7 +247,7 @@ h1 {
   right: 0;
   max-width: 480px;
   margin: auto;
-  background: rgba(255, 253, 248, .96);
+  background: rgba(255,253,248,.96);
   display: flex;
   justify-content: space-around;
   padding: 13px 5px 14px;
@@ -469,62 +451,50 @@ function clearActive() {
 
 
 function showHome() {
-
   hideScreens();
-
   document.getElementById("homeScreen").style.display = "block";
-
   document.getElementById("form").style.display = "none";
 
   clearActive();
-
   document.getElementById("homeNav").classList.add("active");
 
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
 
 function showMemory() {
-
   hideScreens();
-
   document.getElementById("memoryScreen").style.display = "block";
 
   clearActive();
-
   document.getElementById("memoryNav").classList.add("active");
 
   loadMemory();
 
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
 
 function showAdd() {
-
   showHome();
 
   document.getElementById("form").style.display = "block";
 
   clearActive();
-
   document.getElementById("addNav").classList.add("active");
 
-  window.scrollTo(0, document.body.scrollHeight);
+  window.scrollTo(0,document.body.scrollHeight);
 }
 
 
 function showSettings() {
-
   hideScreens();
-
   document.getElementById("settingsScreen").style.display = "block";
 
   clearActive();
-
   document.getElementById("settingsNav").classList.add("active");
 
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
 
@@ -534,12 +504,11 @@ function getDueDate(days) {
 
   let date = new Date();
 
-  date.setHours(0, 0, 0, 0);
+  date.setHours(0,0,0,0);
 
   date.setDate(date.getDate() + Number(days));
 
   return date.toISOString();
-
 }
 
 
@@ -547,18 +516,17 @@ function getRemainingDays(dueDate) {
 
   let today = new Date();
 
-  today.setHours(0, 0, 0, 0);
+  today.setHours(0,0,0,0);
 
   let due = new Date(dueDate);
 
-  due.setHours(0, 0, 0, 0);
+  due.setHours(0,0,0,0);
 
   let difference = due - today;
 
   return Math.ceil(
     difference / (1000 * 60 * 60 * 24)
   );
-
 }
 
 
@@ -604,22 +572,38 @@ function getDueText(task) {
 }
 
 
-/* ICON SYSTEM */
+/* SMART ICONS */
 
 function getIcon(name) {
 
   let text = name.toLowerCase();
 
 
+  /* AIR CONDITIONER */
+
   if (
     text.includes("ac") ||
     text.includes("air conditioner") ||
-    text.includes("aircon") ||
-    text.includes("filter")
+    text.includes("aircon")
   ) {
     return "❄️";
   }
 
+
+  /* WATER */
+
+  if (
+    text.includes("water heater") ||
+    text.includes("water tank") ||
+    text.includes("water purifier") ||
+    text.includes("water filter") ||
+    text.includes("water")
+  ) {
+    return "💧";
+  }
+
+
+  /* CHIMNEY */
 
   if (
     text.includes("chimney") ||
@@ -628,6 +612,8 @@ function getIcon(name) {
     return "🧹";
   }
 
+
+  /* SMOKE / LIGHT */
 
   if (
     text.includes("smoke") ||
@@ -639,15 +625,19 @@ function getIcon(name) {
   }
 
 
+  /* PLUMBING */
+
   if (
-    text.includes("water") ||
-    text.includes("heater") ||
     text.includes("plumb") ||
-    text.includes("pipe")
+    text.includes("pipe") ||
+    text.includes("tap") ||
+    text.includes("shower")
   ) {
     return "🚿";
   }
 
+
+  /* GARDEN */
 
   if (
     text.includes("garden") ||
@@ -658,6 +648,8 @@ function getIcon(name) {
   }
 
 
+  /* WINDOWS */
+
   if (
     text.includes("window") ||
     text.includes("glass")
@@ -666,6 +658,8 @@ function getIcon(name) {
   }
 
 
+  /* PEST CONTROL */
+
   if (
     text.includes("pest") ||
     text.includes("insect")
@@ -673,6 +667,8 @@ function getIcon(name) {
     return "🐜";
   }
 
+
+  /* ROOF */
 
   if (
     text.includes("roof") ||
