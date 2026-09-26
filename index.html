@@ -352,6 +352,37 @@ padding:12px;
 margin-top:4px;
 }
 
+.reminder-status{
+display:flex;
+align-items:center;
+gap:12px;
+background:#eef3ea;
+border:1px solid #dce6d8;
+padding:13px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.reminder-icon{
+font-size:23px;
+}
+
+.reminder-info{
+flex:1;
+}
+
+.reminder-title{
+font-size:14px;
+font-weight:650;
+}
+
+.reminder-text{
+font-size:12px;
+color:#778178;
+margin-top:3px;
+line-height:1.4;
+}
+
 .library-item{
 display:flex;
 align-items:center;
@@ -403,10 +434,6 @@ background:#fffdf8;
 border-radius:18px;
 border:1px solid #ebe6dc;
 line-height:1.6;
-}
-
-.hidden{
-display:none;
 }
 
 .page{
@@ -475,7 +502,6 @@ font-weight:600;
 
 <div class="section">
 
-<!-- DUE SOON -->
 <div id="dueSoon"></div>
 
 <div class="section-title">
@@ -592,6 +618,34 @@ Cancel
 Haven stores your maintenance information on this device.
 </p>
 
+</div>
+
+
+<div class="form">
+
+<h3>🔔 Reminders</h3>
+
+<p style="color:#788078;font-size:14px;line-height:1.6;">
+Allow Haven to show maintenance reminders on your phone.
+</p>
+
+<button id="reminderButton" class="save" onclick="enableReminders()">
+Enable reminders
+</button>
+
+<div id="reminderStatus"></div>
+
+</div>
+
+
+<div class="form">
+
+<h3>Data</h3>
+
+<p style="color:#788078;font-size:14px;line-height:1.6;">
+Your maintenance memories stay on this device.
+</p>
+
 <button class="save" onclick="clearAll()">
 Clear all maintenance
 </button>
@@ -628,6 +682,7 @@ Clear all maintenance
 <script>
 
 const STORAGE_KEY="havenTasksV3";
+const REMINDER_KEY="havenRemindersV1";
 
 let currentFilter="all";
 
@@ -1217,6 +1272,8 @@ renderHome();
 
 renderMemory();
 
+checkReminders();
+
 }
 
 
@@ -1392,6 +1449,243 @@ ${exists?"Added":"Add"}
 }
 
 
+/* ---------------- REMINDERS ---------------- */
+
+async function registerServiceWorker(){
+
+if(!("serviceWorker" in navigator)){
+
+return false;
+
+}
+
+try{
+
+await navigator.serviceWorker.register("./sw.js");
+
+return true;
+
+}catch(error){
+
+console.log("Service worker registration failed:",error);
+
+return false;
+
+}
+
+}
+
+
+function getReminderState(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem(REMINDER_KEY)
+)||{enabled:false,lastShown:{}};
+
+}catch{
+
+return{enabled:false,lastShown:{}};
+
+}
+
+}
+
+
+function saveReminderState(state){
+
+localStorage.setItem(
+REMINDER_KEY,
+JSON.stringify(state)
+);
+
+}
+
+
+async function enableReminders(){
+
+if(!("Notification" in window)){
+
+alert("Notifications are not supported by this browser.");
+
+return;
+
+}
+
+const registrationWorked=await registerServiceWorker();
+
+if(!registrationWorked){
+
+alert("Haven could not activate its reminder system yet.");
+
+return;
+
+}
+
+
+const permission=await Notification.requestPermission();
+
+if(permission!=="granted"){
+
+updateReminderStatus();
+
+alert("Notifications were not allowed. You can enable them later in your browser settings.");
+
+return;
+
+}
+
+
+const state=getReminderState();
+
+state.enabled=true;
+
+saveReminderState(state);
+
+updateReminderStatus();
+
+showTestNotification();
+
+}
+
+
+function showTestNotification(){
+
+if(Notification.permission!=="granted")return;
+
+navigator.serviceWorker.ready.then(registration=>{
+
+registration.showNotification("Haven 🔔",{
+
+body:"Reminders are now enabled for your home.",
+
+icon:"",
+
+tag:"haven-test-reminder",
+
+silent:true
+
+});
+
+});
+
+}
+
+
+function checkReminders(){
+
+const state=getReminderState();
+
+if(!state.enabled)return;
+
+if(!("Notification" in window))return;
+
+if(Notification.permission!=="granted")return;
+
+const tasks=getTasks();
+
+const todayKey=new Date().toISOString().slice(0,10);
+
+tasks.forEach(task=>{
+
+const dueDate=task.dueDate||calculateDueDate(task);
+
+const days=getDayDifference(dueDate);
+
+if(days<0||days>1)return;
+
+const reminderKey=task.id+"-"+todayKey;
+
+if(state.lastShown[reminderKey])return;
+
+let message="";
+
+if(days===0){
+
+message=`${task.name} is due today.`;
+
+}else{
+
+message=`${task.name} is due tomorrow.`;
+
+}
+
+navigator.serviceWorker.ready.then(registration=>{
+
+registration.showNotification("Haven reminder 🔔",{
+
+body:message,
+
+tag:"haven-"+task.id,
+
+icon:"",
+
+data:{url:"./"}
+
+});
+
+});
+
+state.lastShown[reminderKey]=true;
+
+});
+
+saveReminderState(state);
+
+}
+
+
+function updateReminderStatus(){
+
+const container=document.getElementById("reminderStatus");
+const button=document.getElementById("reminderButton");
+
+if(!container||!button)return;
+
+const state=getReminderState();
+
+if(
+state.enabled &&
+"Notification" in window &&
+Notification.permission==="granted"
+){
+
+button.textContent="Reminders enabled ✓";
+
+container.innerHTML=`
+
+<div class="reminder-status">
+
+<div class="reminder-icon">🔔</div>
+
+<div class="reminder-info">
+
+<div class="reminder-title">Haven can send reminders</div>
+
+<div class="reminder-text">
+Notifications are allowed on this device.
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}else{
+
+button.textContent="Enable reminders";
+
+container.innerHTML="";
+
+}
+
+}
+
+
+/* ---------------- NAVIGATION ---------------- */
+
 function showPage(pageId){
 
 document.querySelectorAll(".page").forEach(page=>{
@@ -1433,6 +1727,8 @@ if(pageId==="settingsPage"){
 
 document.getElementById("navSettings").classList.add("active");
 
+updateReminderStatus();
+
 }
 
 }
@@ -1467,9 +1763,16 @@ return String(text)
 }
 
 
+/* ---------------- START HAVEN ---------------- */
+
+registerServiceWorker();
+
 renderHome();
 renderMemory();
 renderLibrary();
+updateReminderStatus();
+
+setTimeout(checkReminders,1500);
 
 </script>
 
