@@ -19,6 +19,10 @@ body {
   color: #26352d;
 }
 
+button {
+  font-family: inherit;
+}
+
 .app {
   max-width: 480px;
   margin: auto;
@@ -157,6 +161,11 @@ h1 {
   flex-shrink: 0;
 }
 
+.card-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .card strong {
   display: block;
   margin-bottom: 5px;
@@ -167,6 +176,33 @@ h1 {
 .card span {
   color: #7b847c;
   font-size: 13px;
+}
+
+
+/* ACTIONS */
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 7px;
+}
+
+.action {
+  border: none;
+  border-radius: 10px;
+  padding: 7px 9px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.complete {
+  background: #e5eee2;
+  color: #536b5a;
+}
+
+.delete {
+  background: #f2e6e2;
+  color: #8b5c50;
 }
 
 
@@ -197,7 +233,8 @@ h1 {
   border: 1px solid #ebe8dd;
 }
 
-.form input {
+.form input,
+.form select {
   width: 100%;
   padding: 14px;
   margin-bottom: 12px;
@@ -220,7 +257,7 @@ h1 {
 }
 
 
-/* QUICK MAINTENANCE */
+/* QUICK ITEMS */
 
 .quick-title {
   font-size: 14px;
@@ -266,6 +303,18 @@ h1 {
 }
 
 
+/* EMPTY */
+
+.empty {
+  background: #fffdf8;
+  padding: 28px 20px;
+  border-radius: 20px;
+  text-align: center;
+  color: #7b847c;
+  border: 1px solid #ebe8dd;
+}
+
+
 /* OTHER SCREENS */
 
 .screen {
@@ -281,14 +330,6 @@ h1 {
   color: #536b5a;
   margin-bottom: 20px;
   border: 1px solid #ebe8dd;
-}
-
-.empty {
-  background: #fffdf8;
-  padding: 25px;
-  border-radius: 20px;
-  text-align: center;
-  color: #7b847c;
 }
 
 
@@ -313,6 +354,17 @@ h1 {
   font-size: 13px;
 }
 
+.danger {
+  width: 100%;
+  border: none;
+  border-radius: 15px;
+  padding: 14px;
+  background: #f0e1dc;
+  color: #8b5c50;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
 
 /* NAVIGATION */
 
@@ -328,6 +380,7 @@ h1 {
   justify-content: space-around;
   padding: 13px 5px 14px;
   border-top: 1px solid #e6e3d8;
+  z-index: 10;
 }
 
 .nav div {
@@ -342,6 +395,33 @@ h1 {
 .nav .active {
   color: #536b5a;
   font-weight: 600;
+}
+
+
+/* RECENTLY COMPLETED */
+
+.completed-card {
+  opacity: .75;
+}
+
+.completed-label {
+  color: #536b5a !important;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 360px) {
+
+  .app {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
 }
 
 </style>
@@ -377,9 +457,11 @@ h1 {
 
     <div class="status">
 
-      <strong>Home is doing well</strong>
+      <strong id="homeStatus">
+        Home is doing well
+      </strong>
 
-      <p>
+      <p id="homeMessage">
         Nothing urgent needs your attention.
       </p>
 
@@ -395,19 +477,34 @@ h1 {
     </div>
 
 
-    <div id="maintenanceList">
+    <div id="maintenanceList"></div>
+
+
+    <div id="emptyHome" class="empty">
+
+      Your home has no maintenance memories yet.
+
+      <br><br>
+
+      Haven is ready when you are.
 
     </div>
 
 
-    <button class="add" onclick="showAdd()">
+    <button
+      class="add"
+      onclick="showAdd()"
+    >
       ＋ Add maintenance
     </button>
 
 
-    <!-- ADD FORM -->
+    <!-- FORM -->
 
-    <div class="form" id="form">
+    <div
+      class="form"
+      id="form"
+    >
 
       <input
         id="name"
@@ -419,8 +516,38 @@ h1 {
       <input
         id="days"
         type="number"
+        min="1"
         placeholder="Due in how many days?"
       >
+
+
+      <select id="repeat">
+
+        <option value="0">
+          One time
+        </option>
+
+        <option value="7">
+          Repeat every week
+        </option>
+
+        <option value="30">
+          Repeat every month
+        </option>
+
+        <option value="90">
+          Repeat every 3 months
+        </option>
+
+        <option value="180">
+          Repeat every 6 months
+        </option>
+
+        <option value="365">
+          Repeat every year
+        </option>
+
+      </select>
 
 
       <button
@@ -432,217 +559,175 @@ h1 {
 
 
       <div class="quick-title">
-        Or choose something common
+        Common maintenance
       </div>
 
 
       <div class="quick-grid">
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Water heater',30)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Water heater',30,180)">
           <div class="quick-icon">💧</div>
           <div class="quick-name">Water heater</div>
           <span class="quick-days">30 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('AC filter',30)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('AC filter',30,30)">
           <div class="quick-icon">❄️</div>
           <div class="quick-name">AC filter</div>
           <span class="quick-days">30 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('AC service',180)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('AC service',180,180)">
           <div class="quick-icon">❄️</div>
           <div class="quick-name">AC service</div>
           <span class="quick-days">6 months</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Chimney cleaning',90)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Chimney cleaning',90,90)">
           <div class="quick-icon">🧹</div>
           <div class="quick-name">Chimney</div>
           <span class="quick-days">90 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Smoke detector battery',180)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Smoke detector battery',180,180)">
           <div class="quick-icon">💡</div>
           <div class="quick-name">Smoke detector</div>
           <span class="quick-days">6 months</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Plumbing check',180)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Plumbing check',180,180)">
           <div class="quick-icon">🚿</div>
           <div class="quick-name">Plumbing</div>
           <span class="quick-days">6 months</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Garden / lawn',14)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Garden / lawn',14,14)">
           <div class="quick-icon">🌿</div>
           <div class="quick-name">Garden / lawn</div>
           <span class="quick-days">14 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Window cleaning',90)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Window cleaning',90,90)">
           <div class="quick-icon">🪟</div>
           <div class="quick-name">Windows</div>
           <span class="quick-days">90 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Roof inspection',365)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Roof inspection',365,365)">
           <div class="quick-icon">🏠</div>
           <div class="quick-name">Roof</div>
           <span class="quick-days">1 year</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Pest control',90)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Pest control',90,90)">
           <div class="quick-icon">🐜</div>
           <div class="quick-name">Pest control</div>
           <span class="quick-days">90 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Gas stove check',180)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Gas stove check',180,180)">
           <div class="quick-icon">🔥</div>
           <div class="quick-name">Gas stove</div>
           <span class="quick-days">6 months</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Toilet maintenance',90)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Toilet maintenance',90,90)">
           <div class="quick-icon">🚽</div>
           <div class="quick-name">Toilet</div>
           <span class="quick-days">90 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Washing machine service',180)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Washing machine service',180,180)">
           <div class="quick-icon">🧺</div>
           <div class="quick-name">Washing machine</div>
           <span class="quick-days">6 months</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Refrigerator cleaning',90)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Refrigerator cleaning',90,90)">
           <div class="quick-icon">🧊</div>
           <div class="quick-name">Refrigerator</div>
           <span class="quick-days">90 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Exhaust fan cleaning',90)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Exhaust fan cleaning',90,90)">
           <div class="quick-icon">🌀</div>
           <div class="quick-name">Exhaust fan</div>
           <span class="quick-days">90 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Water tank cleaning',180)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Water tank cleaning',180,180)">
           <div class="quick-icon">💧</div>
           <div class="quick-name">Water tank</div>
           <span class="quick-days">6 months</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Electrical check',365)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Electrical check',365,365)">
           <div class="quick-icon">🔌</div>
           <div class="quick-name">Electrical</div>
           <span class="quick-days">1 year</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Fire extinguisher check',365)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Fire extinguisher check',365,365)">
           <div class="quick-icon">🧯</div>
           <div class="quick-name">Fire extinguisher</div>
           <span class="quick-days">1 year</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Geyser cleaning',180)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Geyser cleaning',180,180)">
           <div class="quick-icon">💧</div>
           <div class="quick-name">Geyser</div>
           <span class="quick-days">6 months</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Bathroom cleaning',30)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Bathroom cleaning',30,30)">
           <div class="quick-icon">🛁</div>
           <div class="quick-name">Bathroom</div>
           <span class="quick-days">30 days</span>
         </div>
 
 
-        <div
-          class="quick-item"
-          onclick="quickAdd('Deep cleaning',90)"
-        >
+        <div class="quick-item"
+          onclick="quickAdd('Deep cleaning',90,90)">
           <div class="quick-icon">🧹</div>
           <div class="quick-name">Deep cleaning</div>
           <span class="quick-days">90 days</span>
@@ -661,7 +746,10 @@ h1 {
 
 <!-- MEMORY -->
 
-<div class="screen" id="memoryScreen">
+<div
+  class="screen"
+  id="memoryScreen"
+>
 
   <button
     class="back"
@@ -696,7 +784,10 @@ h1 {
 
 <!-- SETTINGS -->
 
-<div class="screen" id="settingsScreen">
+<div
+  class="screen"
+  id="settingsScreen"
+>
 
   <button
     class="back"
@@ -734,7 +825,19 @@ h1 {
       <strong>🔔 Reminders</strong>
 
       <span>
-        Coming soon.
+        Notifications will come later.
+      </span>
+
+    </div>
+
+
+    <div class="setting">
+
+      <strong>🔄 Recurring maintenance</strong>
+
+      <span>
+        Complete a recurring task and Haven
+        automatically schedules the next one.
       </span>
 
     </div>
@@ -745,9 +848,27 @@ h1 {
       <strong>🧠 Home memory</strong>
 
       <span>
-        Your saved maintenance information
-        stays in your browser.
+        Your saved information stays in this
+        browser on this device.
       </span>
+
+    </div>
+
+
+    <div class="setting">
+
+      <strong>🗑️ Start fresh</strong>
+
+      <span>
+        Permanently remove all Haven memories.
+      </span>
+
+      <button
+        class="danger"
+        onclick="clearAll()"
+      >
+        Clear all memories
+      </button>
 
     </div>
 
@@ -757,11 +878,8 @@ h1 {
 </div>
 
 
-</div>
 
-
-
-<!-- BOTTOM NAV -->
+<!-- NAVIGATION -->
 
 <div class="nav">
 
@@ -806,8 +924,16 @@ h1 {
 </div>
 
 
-
 <script>
+
+
+/*
+  NEW STORAGE
+  This intentionally starts Haven fresh.
+  Old AC test entries are ignored.
+*/
+
+const STORAGE_KEY = "havenTasksV3";
 
 
 /* SCREEN CONTROL */
@@ -848,6 +974,8 @@ function showHome() {
   clearActive();
 
   document.getElementById("homeNav").classList.add("active");
+
+  renderHome();
 
   window.scrollTo(0,0);
 
@@ -937,27 +1065,32 @@ function getRemainingDays(dueDate) {
 
   due.setHours(0,0,0,0);
 
-  let difference =
-    due - today;
-
   return Math.ceil(
-    difference /
+    (due - today) /
     (1000 * 60 * 60 * 24)
   );
 
 }
 
 
+function formatDate(dateString) {
+
+  let date =
+    new Date(dateString);
+
+  return date.toLocaleDateString(
+    undefined,
+    {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    }
+  );
+
+}
+
+
 function getDueText(task) {
-
-  if (!task.dueDate) {
-
-    return "Due in " +
-      task.days +
-      " days";
-
-  }
-
 
   let days =
     getRemainingDays(task.dueDate);
@@ -968,15 +1101,9 @@ function getDueText(task) {
     let overdue =
       Math.abs(days);
 
-    if (overdue === 1) {
-
-      return "Overdue by 1 day";
-
-    }
-
-    return "Overdue by " +
-      overdue +
-      " days";
+    return overdue === 1
+      ? "Overdue by 1 day"
+      : "Overdue by " + overdue + " days";
 
   }
 
@@ -1015,7 +1142,7 @@ function getDueText(task) {
 
 
 
-/* SMART ICON SYSTEM */
+/* ICON SYSTEM */
 
 
 function getIcon(name) {
@@ -1024,20 +1151,14 @@ function getIcon(name) {
     name.toLowerCase();
 
 
-  /* AC */
-
   if (
     /\bac\b/.test(text) ||
     text.includes("air conditioner") ||
     text.includes("aircon")
   ) {
-
     return "❄️";
-
   }
 
-
-  /* WATER */
 
   if (
     text.includes("water heater") ||
@@ -1047,26 +1168,18 @@ function getIcon(name) {
     text.includes("geyser") ||
     text.includes("water")
   ) {
-
     return "💧";
-
   }
 
-
-  /* CHIMNEY / CLEANING */
 
   if (
     text.includes("chimney") ||
     text.includes("deep cleaning") ||
     text.includes("cleaning")
   ) {
-
     return "🧹";
-
   }
 
-
-  /* SMOKE / LIGHT */
 
   if (
     text.includes("smoke") ||
@@ -1074,13 +1187,9 @@ function getIcon(name) {
     text.includes("light") ||
     text.includes("bulb")
   ) {
-
     return "💡";
-
   }
 
-
-  /* PLUMBING */
 
   if (
     text.includes("plumb") ||
@@ -1088,161 +1197,131 @@ function getIcon(name) {
     text.includes("tap") ||
     text.includes("shower")
   ) {
-
     return "🚿";
-
   }
 
-
-  /* GARDEN */
 
   if (
     text.includes("garden") ||
     text.includes("plant") ||
     text.includes("lawn")
   ) {
-
     return "🌿";
-
   }
 
-
-  /* WINDOW */
 
   if (
     text.includes("window") ||
     text.includes("glass")
   ) {
-
     return "🪟";
-
   }
 
-
-  /* PEST */
 
   if (
     text.includes("pest") ||
     text.includes("insect")
   ) {
-
     return "🐜";
-
   }
 
-
-  /* ROOF */
 
   if (
     text.includes("roof") ||
     text.includes("leak")
   ) {
-
     return "🏠";
-
   }
 
-
-  /* GAS */
 
   if (
     text.includes("gas stove") ||
     text.includes("stove")
   ) {
-
     return "🔥";
-
   }
 
-
-  /* TOILET */
 
   if (
     text.includes("toilet") ||
     text.includes("wc")
   ) {
-
     return "🚽";
-
   }
 
-
-  /* WASHING MACHINE */
 
   if (
     text.includes("washing machine") ||
     text.includes("washer")
   ) {
-
     return "🧺";
-
   }
 
-
-  /* REFRIGERATOR */
 
   if (
     text.includes("refrigerator") ||
     text.includes("fridge")
   ) {
-
     return "🧊";
-
   }
 
-
-  /* EXHAUST */
 
   if (
     text.includes("exhaust") ||
     text.includes("fan")
   ) {
-
     return "🌀";
-
   }
 
-
-  /* ELECTRICAL */
 
   if (
     text.includes("electric") ||
-    text.includes("electrical") ||
     text.includes("socket") ||
     text.includes("wiring")
   ) {
-
     return "🔌";
-
   }
 
-
-  /* FIRE */
 
   if (
     text.includes("fire extinguisher")
   ) {
-
     return "🧯";
-
   }
 
-
-  /* BATHROOM */
 
   if (
     text.includes("bathroom") ||
     text.includes("bathtub")
   ) {
-
     return "🛁";
-
   }
 
 
-  /* DEFAULT */
-
   return "🔧";
+
+}
+
+
+
+/* STORAGE */
+
+
+function getTasks() {
+
+  return JSON.parse(
+    localStorage.getItem(STORAGE_KEY)
+  ) || [];
+
+}
+
+
+function saveTasks(tasks) {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(tasks)
+  );
 
 }
 
@@ -1251,17 +1330,30 @@ function getIcon(name) {
 /* CREATE TASK */
 
 
-function createTask(name, days) {
+function createTask(
+  name,
+  days,
+  repeat
+) {
 
   return {
 
+    id:
+      Date.now().toString() +
+      Math.random().toString(36).slice(2),
+
     name: name,
 
-    days: Number(days),
+    dueDate:
+      getDueDate(days),
 
-    added: new Date().toISOString(),
+    repeat:
+      Number(repeat),
 
-    dueDate: getDueDate(days)
+    created:
+      new Date().toISOString(),
+
+    completed: false
 
   };
 
@@ -1269,34 +1361,39 @@ function createTask(name, days) {
 
 
 
-/* QUICK ADD */
+/* ADD TASK */
 
 
-function quickAdd(name, days) {
+function quickAdd(
+  name,
+  days,
+  repeat
+) {
 
   let task =
-    createTask(name, days);
+    createTask(
+      name,
+      days,
+      repeat
+    );
 
 
-  let savedTasks =
-    JSON.parse(
-      localStorage.getItem("havenTasks")
-    ) || [];
+  let tasks =
+    getTasks();
 
 
-  savedTasks.push(task);
+  tasks.push(task);
 
 
-  localStorage.setItem(
-    "havenTasks",
-    JSON.stringify(savedTasks)
-  );
+  saveTasks(tasks);
 
 
-  displayTask(task);
+  document.getElementById(
+    "form"
+  ).style.display = "none";
 
 
-  document.getElementById("form").style.display = "none";
+  renderHome();
 
 
   alert(
@@ -1305,10 +1402,6 @@ function quickAdd(name, days) {
   );
 
 }
-
-
-
-/* NORMAL ADD */
 
 
 function addMaintenance() {
@@ -1326,13 +1419,20 @@ function addMaintenance() {
       .value;
 
 
+  let repeat =
+    document
+      .getElementById("repeat")
+      .value;
+
+
   if (
     name === "" ||
-    days === ""
+    days === "" ||
+    Number(days) < 1
   ) {
 
     alert(
-      "Please enter both details."
+      "Please enter what needs maintenance and the number of days."
     );
 
     return;
@@ -1341,54 +1441,199 @@ function addMaintenance() {
 
 
   let task =
-    createTask(name, days);
+    createTask(
+      name,
+      days,
+      repeat
+    );
 
 
-  let savedTasks =
-    JSON.parse(
-      localStorage.getItem("havenTasks")
-    ) || [];
+  let tasks =
+    getTasks();
 
 
-  savedTasks.push(task);
+  tasks.push(task);
 
 
-  localStorage.setItem(
-    "havenTasks",
-    JSON.stringify(savedTasks)
-  );
+  saveTasks(tasks);
 
 
-  displayTask(task);
+  document.getElementById(
+    "name"
+  ).value = "";
 
 
-  document.getElementById("name").value = "";
+  document.getElementById(
+    "days"
+  ).value = "";
 
-  document.getElementById("days").value = "";
 
-  document.getElementById("form").style.display = "none";
+  document.getElementById(
+    "repeat"
+  ).value = "0";
+
+
+  document.getElementById(
+    "form"
+  ).style.display = "none";
+
+
+  renderHome();
 
 }
 
 
 
-/* DISPLAY TASK */
+/* COMPLETE TASK */
 
 
-function displayTask(task) {
+function completeTask(id) {
+
+  let tasks =
+    getTasks();
+
+
+  let index =
+    tasks.findIndex(
+      function(task) {
+
+        return task.id === id;
+
+      }
+    );
+
+
+  if (index === -1) {
+    return;
+  }
+
+
+  let task =
+    tasks[index];
+
+
+  /*
+    Recurring task:
+    move it forward instead of deleting it.
+  */
+
+  if (
+    Number(task.repeat) > 0
+  ) {
+
+    let nextDate =
+      new Date(task.dueDate);
+
+
+    nextDate.setDate(
+      nextDate.getDate() +
+      Number(task.repeat)
+    );
+
+
+    task.dueDate =
+      nextDate.toISOString();
+
+
+    task.completed = false;
+
+
+    task.lastCompleted =
+      new Date().toISOString();
+
+  }
+
+  else {
+
+    task.completed = true;
+
+    task.completedDate =
+      new Date().toISOString();
+
+  }
+
+
+  tasks[index] =
+    task;
+
+
+  saveTasks(tasks);
+
+
+  renderHome();
+
+}
+
+
+
+/* DELETE TASK */
+
+
+function deleteTask(id) {
+
+  let confirmDelete =
+    confirm(
+      "Remove this memory from Haven?"
+    );
+
+
+  if (!confirmDelete) {
+    return;
+  }
+
+
+  let tasks =
+    getTasks();
+
+
+  tasks =
+    tasks.filter(
+      function(task) {
+
+        return task.id !== id;
+
+      }
+    );
+
+
+  saveTasks(tasks);
+
+
+  renderHome();
+
+}
+
+
+
+/* BUILD CARD */
+
+
+function createCard(task) {
 
   let card =
     document.createElement("div");
+
 
   card.className =
     "card";
 
 
+  if (task.completed) {
+
+    card.classList.add(
+      "completed-card"
+    );
+
+  }
+
+
   let icon =
     document.createElement("div");
 
+
   icon.className =
     "icon";
+
 
   icon.textContent =
     getIcon(task.name);
@@ -1398,8 +1643,13 @@ function displayTask(task) {
     document.createElement("div");
 
 
+  content.className =
+    "card-content";
+
+
   let title =
     document.createElement("strong");
+
 
   title.textContent =
     task.name;
@@ -1408,46 +1658,246 @@ function displayTask(task) {
   let details =
     document.createElement("span");
 
-  details.textContent =
-    getDueText(task);
+
+  if (task.completed) {
+
+    details.className =
+      "completed-label";
+
+    details.textContent =
+      "Completed " +
+      formatDate(task.completedDate);
+
+  }
+
+  else {
+
+    details.textContent =
+      getDueText(task) +
+      " • " +
+      formatDate(task.dueDate);
+
+  }
 
 
-  content.appendChild(title);
+  content.appendChild(
+    title
+  );
 
-  content.appendChild(details);
+  content.appendChild(
+    details
+  );
 
 
-  card.appendChild(icon);
+  let actions =
+    document.createElement("div");
 
-  card.appendChild(content);
+
+  actions.className =
+    "actions";
 
 
-  document
-    .getElementById("maintenanceList")
-    .appendChild(card);
+  if (!task.completed) {
+
+    let complete =
+      document.createElement("button");
+
+
+    complete.className =
+      "action complete";
+
+
+    complete.textContent =
+      "✓ Complete";
+
+
+    complete.onclick =
+      function() {
+
+        completeTask(task.id);
+
+      };
+
+
+    actions.appendChild(
+      complete
+    );
+
+  }
+
+
+  let remove =
+    document.createElement("button");
+
+
+  remove.className =
+    "action delete";
+
+
+  remove.textContent =
+    "Delete";
+
+
+  remove.onclick =
+    function() {
+
+      deleteTask(task.id);
+
+    };
+
+
+  actions.appendChild(
+    remove
+  );
+
+
+  content.appendChild(
+    actions
+  );
+
+
+  card.appendChild(
+    icon
+  );
+
+
+  card.appendChild(
+    content
+  );
+
+
+  return card;
 
 }
 
 
 
-/* LOAD SAVED TASKS */
+/* HOME */
 
 
-function loadTasks() {
+function renderHome() {
 
-  let savedTasks =
-    JSON.parse(
-      localStorage.getItem("havenTasks")
-    ) || [];
+  let list =
+    document.getElementById(
+      "maintenanceList"
+    );
 
 
-  savedTasks.forEach(
-    function(task) {
+  list.innerHTML = "";
 
-      displayTask(task);
+
+  let tasks =
+    getTasks();
+
+
+  let active =
+    tasks.filter(
+      function(task) {
+
+        return !task.completed;
+
+      }
+    );
+
+
+  let completed =
+    tasks.filter(
+      function(task) {
+
+        return task.completed;
+
+      }
+    );
+
+
+  active.sort(
+    function(a,b) {
+
+      return new Date(a.dueDate) -
+             new Date(b.dueDate);
 
     }
   );
+
+
+  document.getElementById(
+    "emptyHome"
+  ).style.display =
+    active.length === 0
+      ? "block"
+      : "none";
+
+
+  active.slice(0,8).forEach(
+    function(task) {
+
+      list.appendChild(
+        createCard(task)
+      );
+
+    }
+  );
+
+
+  let status =
+    document.getElementById(
+      "homeStatus"
+    );
+
+
+  let message =
+    document.getElementById(
+      "homeMessage"
+    );
+
+
+  let overdue =
+    active.filter(
+      function(task) {
+
+        return getRemainingDays(
+          task.dueDate
+        ) < 0;
+
+      }
+    );
+
+
+  if (overdue.length > 0) {
+
+    status.textContent =
+      "A little attention needed";
+
+
+    message.textContent =
+      overdue.length === 1
+        ? "One maintenance task is overdue."
+        : overdue.length +
+          " maintenance tasks are overdue.";
+
+  }
+
+  else if (active.length === 0) {
+
+    status.textContent =
+      "Home is peaceful";
+
+
+    message.textContent =
+      "Nothing is waiting for you.";
+
+  }
+
+  else {
+
+    status.textContent =
+      "Home is doing well";
+
+
+    message.textContent =
+      "Nothing urgent needs your attention.";
+
+  }
 
 }
 
@@ -1458,26 +1908,34 @@ function loadTasks() {
 
 function loadMemory() {
 
-  let memoryList =
+  let list =
     document.getElementById(
       "memoryList"
     );
 
 
-  memoryList.innerHTML = "";
+  list.innerHTML = "";
 
 
-  let savedTasks =
-    JSON.parse(
-      localStorage.getItem("havenTasks")
-    ) || [];
+  let tasks =
+    getTasks();
+
+
+  tasks.sort(
+    function(a,b) {
+
+      return new Date(b.created) -
+             new Date(a.created);
+
+    }
+  );
 
 
   if (
-    savedTasks.length === 0
+    tasks.length === 0
   ) {
 
-    memoryList.innerHTML =
+    list.innerHTML =
       '<div class="empty">Haven has no personal memories yet.<br><br>Add your first maintenance task.</div>';
 
     return;
@@ -1485,55 +1943,12 @@ function loadMemory() {
   }
 
 
-  savedTasks.forEach(
+  tasks.forEach(
     function(task) {
 
-      let card =
-        document.createElement("div");
-
-      card.className =
-        "card";
-
-
-      let icon =
-        document.createElement("div");
-
-      icon.className =
-        "icon";
-
-      icon.textContent =
-        getIcon(task.name);
-
-
-      let content =
-        document.createElement("div");
-
-
-      let title =
-        document.createElement("strong");
-
-      title.textContent =
-        task.name;
-
-
-      let details =
-        document.createElement("span");
-
-      details.textContent =
-        getDueText(task);
-
-
-      content.appendChild(title);
-
-      content.appendChild(details);
-
-
-      card.appendChild(icon);
-
-      card.appendChild(content);
-
-
-      memoryList.appendChild(card);
+      list.appendChild(
+        createCard(task)
+      );
 
     }
   );
@@ -1542,9 +1957,40 @@ function loadMemory() {
 
 
 
+/* CLEAR EVERYTHING */
+
+
+function clearAll() {
+
+  let answer =
+    confirm(
+      "Delete all Haven memories? This cannot be undone."
+    );
+
+
+  if (!answer) {
+    return;
+  }
+
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+
+  renderHome();
+
+  alert(
+    "Haven is now completely fresh."
+  );
+
+}
+
+
+
 /* START */
 
-loadTasks();
+renderHome();
 
 
 </script>
