@@ -6,10 +6,11 @@
 <title>Haven — Your home remembers.</title>
 
 <style>
+
 *{
 box-sizing:border-box;
 margin:0;
-padding:0
+padding:0;
 }
 
 body{
@@ -18,207 +19,511 @@ color:#29352d;
 background:#f5f1e8;
 min-height:100vh;
 overflow-x:hidden;
-transition:background .8s ease;
 }
 
-/* ---------- SEASONAL BACKGROUND ---------- */
+
+/* =========================================================
+   STATIC SEASONAL BACKGROUND
+   ========================================================= */
 
 .season-background{
-position:fixed;
-inset:0;
-z-index:-2;
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:390px;
+z-index:0;
 overflow:hidden;
 pointer-events:none;
 background:#eef2e9;
-transition:background .8s ease;
 }
 
 .season-sky{
 position:absolute;
 inset:0;
-background:linear-gradient(
+background:
+linear-gradient(
 180deg,
 #dce9e5 0%,
-#eef2e9 48%,
+#eef2e9 58%,
 #f5f1e8 100%
 );
-transition:background .8s ease;
 }
+
+
+/* soft sunlight */
 
 .season-glow{
 position:absolute;
-width:420px;
-height:420px;
+width:125px;
+height:125px;
 border-radius:50%;
-right:-170px;
-top:40px;
-background:rgba(255,255,255,.28);
-filter:blur(4px);
-transition:background .8s ease;
+right:28px;
+top:38px;
+background:rgba(255,255,255,.34);
 }
+
+
+/* distant mountains */
+
+.mountain-back{
+position:absolute;
+left:-10%;
+bottom:112px;
+width:120%;
+height:125px;
+background:#b9c9c0;
+clip-path:polygon(
+0 100%,
+0 75%,
+13% 45%,
+23% 72%,
+37% 24%,
+49% 67%,
+61% 35%,
+75% 73%,
+87% 42%,
+100% 70%,
+100% 100%
+);
+opacity:.45;
+}
+
+.mountain-front{
+position:absolute;
+left:-15%;
+bottom:92px;
+width:130%;
+height:105px;
+background:#9eb3a5;
+clip-path:polygon(
+0 100%,
+0 67%,
+15% 48%,
+27% 72%,
+41% 36%,
+54% 70%,
+68% 45%,
+80% 74%,
+91% 51%,
+100% 69%,
+100% 100%
+);
+opacity:.35;
+}
+
+
+/* ground */
 
 .season-ground{
 position:absolute;
 left:-10%;
 right:-10%;
-bottom:-90px;
-height:260px;
+bottom:-105px;
+height:205px;
 border-radius:50% 50% 0 0;
-background:#d8e1d2;
-transition:background .8s ease;
+background:#cbd9c5;
 }
+
+
+/* =========================================================
+   REAL CSS-BUILT SWISS HOUSE
+   ========================================================= */
 
 .season-house{
 position:absolute;
 left:50%;
-bottom:95px;
+bottom:82px;
+width:210px;
+height:150px;
 transform:translateX(-50%);
-font-size:150px;
-line-height:1;
-filter:drop-shadow(0 15px 15px rgba(45,55,45,.12));
-opacity:.30;
-transition:all .8s ease;
+filter:drop-shadow(0 10px 12px rgba(45,55,45,.16));
 }
+
+
+/* house body */
+
+.house-body{
+position:absolute;
+left:22px;
+bottom:0;
+width:166px;
+height:86px;
+background:#eee2cd;
+border:2px solid #90765e;
+border-radius:3px;
+z-index:2;
+}
+
+
+/* wooden upper trim */
+
+.house-trim{
+position:absolute;
+left:22px;
+bottom:79px;
+width:166px;
+height:7px;
+background:#765b47;
+z-index:3;
+}
+
+
+/* large pitched roof */
+
+.house-roof{
+position:absolute;
+left:5px;
+top:20px;
+width:200px;
+height:78px;
+background:#635449;
+clip-path:polygon(
+50% 0,
+100% 64%,
+96% 75%,
+50% 20%,
+4% 75%,
+0 64%
+);
+z-index:4;
+}
+
+
+/* roof lower edge */
+
+.house-roof-edge{
+position:absolute;
+left:11px;
+top:78px;
+width:188px;
+height:10px;
+background:#57493e;
+transform:skewX(-2deg);
+z-index:5;
+}
+
+
+/* chimney */
+
+.chimney{
+position:absolute;
+right:39px;
+top:13px;
+width:18px;
+height:47px;
+background:#806c5d;
+border:2px solid #69584d;
+z-index:3;
+}
+
+.chimney-cap{
+position:absolute;
+right:36px;
+top:9px;
+width:24px;
+height:6px;
+border-radius:2px;
+background:#5e5046;
+z-index:5;
+}
+
+
+/* windows */
+
+.house-window{
+position:absolute;
+width:38px;
+height:31px;
+background:#71939a;
+border:4px solid #f0e4d1;
+box-shadow:
+0 0 0 2px #806d5d;
+z-index:5;
+}
+
+.window-left{
+left:39px;
+bottom:34px;
+}
+
+.window-right{
+right:39px;
+bottom:34px;
+}
+
+
+/* window crossbars */
+
+.house-window::before{
+content:"";
+position:absolute;
+left:50%;
+top:0;
+bottom:0;
+width:3px;
+background:#e8dfd0;
+transform:translateX(-50%);
+}
+
+.house-window::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+top:50%;
+height:3px;
+background:#e8dfd0;
+transform:translateY(-50%);
+}
+
+
+/* front door */
+
+.house-door{
+position:absolute;
+left:77px;
+bottom:0;
+width:34px;
+height:58px;
+background:#805e48;
+border:3px solid #624a3a;
+z-index:6;
+}
+
+.house-door::before{
+content:"";
+position:absolute;
+right:5px;
+top:31px;
+width:5px;
+height:5px;
+border-radius:50%;
+background:#d5b879;
+}
+
+
+/* porch */
+
+.house-porch{
+position:absolute;
+left:67px;
+bottom:-5px;
+width:55px;
+height:9px;
+background:#765842;
+z-index:7;
+}
+
+.house-step{
+position:absolute;
+left:73px;
+bottom:-13px;
+width:43px;
+height:8px;
+background:#92765d;
+z-index:6;
+}
+
+
+/* flower boxes */
+
+.flower-box{
+position:absolute;
+width:43px;
+height:8px;
+background:#795842;
+z-index:7;
+bottom:27px;
+}
+
+.flower-box.left{
+left:37px;
+}
+
+.flower-box.right{
+right:37px;
+}
+
+.flower-box::before{
+content:"• • • • •";
+position:absolute;
+left:3px;
+top:-16px;
+font-size:17px;
+letter-spacing:1px;
+color:#c68b76;
+}
+
+
+/* =========================================================
+   SEASON DECORATIONS
+   ========================================================= */
 
 .season-decoration{
 position:absolute;
 inset:0;
-font-size:25px;
-opacity:.45;
-transition:all .8s ease;
+}
+
+.decor{
+position:absolute;
+font-size:22px;
+opacity:.65;
 }
 
 .decor-1{
-position:absolute;
-top:17%;
-left:12%;
+top:70px;
+left:11%;
 }
 
 .decor-2{
-position:absolute;
-top:28%;
-right:13%;
+top:125px;
+right:12%;
 }
 
 .decor-3{
-position:absolute;
-top:42%;
-left:25%;
+top:178px;
+left:21%;
 }
 
 .decor-4{
-position:absolute;
-top:12%;
-right:30%;
+top:103px;
+right:29%;
 }
 
 
-/* SPRING */
+/* =========================================================
+   SPRING
+   ========================================================= */
 
 body.spring .season-sky{
-background:linear-gradient(
+background:
+linear-gradient(
 180deg,
 #dcefe6 0%,
-#edf4e8 52%,
+#edf4e8 58%,
 #f5f1e8 100%
 );
 }
 
 body.spring .season-ground{
-background:#cbdcc7;
+background:#c7dbc2;
 }
 
-body.spring .season-house{
-filter:drop-shadow(0 15px 15px rgba(45,65,45,.12));
-}
-
-body.spring .season-decoration{
-color:#e9a6b5;
+body.spring .mountain-back{
+background:#b5cdbd;
 }
 
 
-/* SUMMER */
+/* =========================================================
+   SUMMER
+   ========================================================= */
 
 body.summer .season-sky{
-background:linear-gradient(
+background:
+linear-gradient(
 180deg,
-#bfe1ed 0%,
-#e5f0dc 52%,
+#b9dfea 0%,
+#e4efd9 58%,
 #f5f1e8 100%
 );
 }
 
 body.summer .season-ground{
-background:#bcd3a9;
+background:#b6d19d;
 }
 
 body.summer .season-glow{
-background:rgba(255,226,139,.30);
+background:rgba(255,221,126,.42);
 }
 
-body.summer .season-house{
-opacity:.34;
-}
-
-body.summer .season-decoration{
-color:#f0c85a;
+body.summer .mountain-back{
+background:#9bbda8;
 }
 
 
-/* AUTUMN */
+/* =========================================================
+   AUTUMN
+   ========================================================= */
 
 body.autumn .season-sky{
-background:linear-gradient(
+background:
+linear-gradient(
 180deg,
-#d9d8c9 0%,
-#eee8d8 52%,
+#d8d8c9 0%,
+#eee6d5 58%,
 #f5f1e8 100%
 );
 }
 
 body.autumn .season-ground{
-background:#c7b99a;
+background:#c7b58f;
 }
 
-body.autumn .season-house{
-opacity:.32;
+body.autumn .mountain-back{
+background:#a99e88;
 }
 
-body.autumn .season-decoration{
-color:#c98448;
+body.autumn .flower-box::before{
+color:#c87845;
 }
 
 
-/* WINTER */
+/* =========================================================
+   WINTER
+   ========================================================= */
 
 body.winter .season-sky{
-background:linear-gradient(
+background:
+linear-gradient(
 180deg,
 #cbd8e2 0%,
-#e8edf0 55%,
+#e7edf0 58%,
 #f5f1e8 100%
 );
 }
 
 body.winter .season-ground{
-background:#e4e9e8;
+background:#e2e8e8;
 }
 
-body.winter .season-glow{
-background:rgba(255,255,255,.48);
+body.winter .mountain-back{
+background:#aab9c0;
 }
 
-body.winter .season-house{
-opacity:.38;
-}
-
-body.winter .season-decoration{
-color:#ffffff;
-opacity:.75;
+body.winter .mountain-front{
+background:#9eafb7;
 }
 
 
-/* ---------- APP ---------- */
+/* snow on roof */
+
+body.winter .house-roof::after{
+content:"";
+position:absolute;
+left:21px;
+top:18px;
+width:158px;
+height:13px;
+background:rgba(255,255,255,.82);
+clip-path:polygon(
+0 20%,
+31% 42%,
+50% 0,
+69% 42%,
+100% 20%,
+94% 75%,
+69% 58%,
+50% 100%,
+31% 58%,
+6% 75%
+);
+}
+
+
+/* =========================================================
+   APP
+   ========================================================= */
 
 .app{
 max-width:480px;
@@ -226,6 +531,7 @@ margin:auto;
 min-height:100vh;
 padding-bottom:90px;
 position:relative;
+z-index:1;
 }
 
 header{
@@ -246,11 +552,16 @@ font-size:27px;
 font-weight:700;
 }
 
+
+/* =========================================================
+   PROFILE BUTTON
+   ========================================================= */
+
 .profile{
 width:44px;
 height:44px;
 border-radius:50%;
-background:rgba(255,253,248,.90);
+background:rgba(255,253,248,.92);
 border:1px solid rgba(75,95,78,.12);
 box-shadow:0 5px 18px rgba(50,60,50,.08);
 display:flex;
@@ -272,18 +583,21 @@ background:#dfe8dc;
 }
 
 
-/* ---------- HERO ---------- */
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero{
 margin:0 18px 20px;
 padding:25px 22px;
 border-radius:25px;
-background:rgba(223,232,220,.88);
+background:rgba(223,232,220,.84);
 border:1px solid rgba(255,255,255,.55);
 box-shadow:0 12px 30px rgba(50,60,50,.07);
 min-height:190px;
 position:relative;
 overflow:hidden;
+backdrop-filter:blur(3px);
 }
 
 .hero:after{
@@ -295,13 +609,6 @@ width:170px;
 height:170px;
 border-radius:50%;
 background:rgba(255,255,255,.20);
-}
-
-.hero-house{
-font-size:65px;
-margin-bottom:8px;
-position:relative;
-z-index:1;
 }
 
 .hero h2{
@@ -319,7 +626,9 @@ z-index:1;
 }
 
 
-/* ---------- SECTIONS ---------- */
+/* =========================================================
+   SECTIONS
+   ========================================================= */
 
 .section{
 padding:0 18px;
@@ -486,7 +795,9 @@ color:#6c756e;
 }
 
 
-/* ---------- DUE SOON ---------- */
+/* =========================================================
+   DUE SOON
+   ========================================================= */
 
 .due-soon-box{
 background:rgba(238,243,234,.94);
@@ -561,7 +872,9 @@ margin-top:3px;
 }
 
 
-/* ---------- FORMS ---------- */
+/* =========================================================
+   FORMS
+   ========================================================= */
 
 .form{
 background:rgba(255,253,248,.94);
@@ -646,7 +959,9 @@ line-height:1.4;
 }
 
 
-/* ---------- LIBRARY ---------- */
+/* =========================================================
+   LIBRARY
+   ========================================================= */
 
 .library-item{
 display:flex;
@@ -692,7 +1007,9 @@ opacity:.6;
 }
 
 
-/* ---------- EMPTY ---------- */
+/* =========================================================
+   EMPTY
+   ========================================================= */
 
 .empty{
 text-align:center;
@@ -705,7 +1022,9 @@ line-height:1.6;
 }
 
 
-/* ---------- PAGES ---------- */
+/* =========================================================
+   PAGES
+   ========================================================= */
 
 .page{
 display:none;
@@ -716,7 +1035,9 @@ display:block;
 }
 
 
-/* ---------- NAVIGATION ---------- */
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 nav{
 position:fixed;
@@ -753,7 +1074,9 @@ font-weight:600;
 }
 
 
-/* ---------- PROFILE POPUP ---------- */
+/* =========================================================
+   PROFILE POPUP
+   ========================================================= */
 
 .profile-popup{
 position:fixed;
@@ -798,7 +1121,9 @@ font-weight:600;
 }
 
 
-/* ---------- SEASON LABEL ---------- */
+/* =========================================================
+   SEASON LABEL
+   ========================================================= */
 
 .season-label{
 position:absolute;
@@ -809,16 +1134,32 @@ color:#738077;
 background:rgba(255,253,248,.72);
 padding:6px 9px;
 border-radius:12px;
+z-index:3;
 }
 
 
-/* ---------- MOBILE ---------- */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media(max-width:480px){
 
+.season-background{
+height:365px;
+}
+
 .season-house{
-font-size:125px;
-bottom:105px;
+transform:translateX(-50%) scale(.90);
+transform-origin:center bottom;
+bottom:74px;
+}
+
+.mountain-back{
+bottom:102px;
+}
+
+.mountain-front{
+bottom:84px;
 }
 
 .hero{
@@ -830,33 +1171,86 @@ right:18px;
 }
 
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- SEASONAL WORLD -->
+
+<!-- =====================================================
+     STATIC SEASONAL WORLD
+     ===================================================== -->
+
 <div class="season-background" aria-hidden="true">
 
 <div class="season-sky"></div>
+
 <div class="season-glow"></div>
+
+<div class="mountain-back"></div>
+
+<div class="mountain-front"></div>
+
 <div class="season-ground"></div>
 
-<div class="season-house">🏡</div>
+
+<!-- REAL ONE-STORY SWISS HOUSE -->
+
+<div class="season-house">
+
+<div class="house-body"></div>
+
+<div class="house-trim"></div>
+
+<div class="house-roof"></div>
+
+<div class="house-roof-edge"></div>
+
+<div class="chimney"></div>
+
+<div class="chimney-cap"></div>
+
+<div class="house-window window-left"></div>
+
+<div class="house-window window-right"></div>
+
+<div class="house-door"></div>
+
+<div class="house-porch"></div>
+
+<div class="house-step"></div>
+
+<div class="flower-box left"></div>
+
+<div class="flower-box right"></div>
+
+</div>
+
+
+<!-- seasonal decoration -->
 
 <div class="season-decoration">
-<div class="decor-1"></div>
-<div class="decor-2"></div>
-<div class="decor-3"></div>
-<div class="decor-4"></div>
+
+<div class="decor decor-1"></div>
+<div class="decor decor-2"></div>
+<div class="decor decor-3"></div>
+<div class="decor decor-4"></div>
+
 </div>
 
 </div>
+
 
 
 <div class="app">
 
-<!-- HOME -->
+
+<!-- =====================================================
+     HOME
+     ===================================================== -->
+
 <div id="homePage" class="page active">
 
 <header>
@@ -880,8 +1274,6 @@ H
 
 <div class="hero">
 
-<div class="hero-house">🏡</div>
-
 <h2 id="homeStatus">
 Home is doing well
 </h2>
@@ -901,6 +1293,7 @@ Season
 
 <div id="dueSoon"></div>
 
+
 <div class="section-title">
 <h2>Maintenance</h2>
 </div>
@@ -908,22 +1301,26 @@ Season
 
 <div class="filter-row">
 
-<button class="filter active"
+<button
+class="filter active"
 onclick="setFilter('all',this)">
 All
 </button>
 
-<button class="filter"
+<button
+class="filter"
 onclick="setFilter('today',this)">
 Today
 </button>
 
-<button class="filter"
+<button
+class="filter"
 onclick="setFilter('upcoming',this)">
 Upcoming
 </button>
 
-<button class="filter"
+<button
+class="filter"
 onclick="setFilter('overdue',this)">
 Overdue
 </button>
@@ -937,9 +1334,7 @@ Overdue
 <button
 class="add-btn"
 onclick="showPage('addPage')">
-
 ＋ Add maintenance
-
 </button>
 
 </div>
@@ -947,7 +1342,11 @@ onclick="showPage('addPage')">
 </div>
 
 
-<!-- MEMORY -->
+
+<!-- =====================================================
+     MEMORY
+     ===================================================== -->
+
 <div id="memoryPage" class="page">
 
 <header>
@@ -981,7 +1380,11 @@ H
 </div>
 
 
-<!-- ADD -->
+
+<!-- =====================================================
+     ADD
+     ===================================================== -->
+
 <div id="addPage" class="page">
 
 <header>
@@ -1024,18 +1427,14 @@ placeholder="e.g. Clean balcony">
 <button
 class="save"
 onclick="addCustomTask()">
-
 Save maintenance
-
 </button>
 
 
 <button
 class="cancel"
 onclick="showPage('homePage')">
-
 Cancel
-
 </button>
 
 </div>
@@ -1052,7 +1451,11 @@ Cancel
 </div>
 
 
-<!-- SETTINGS -->
+
+<!-- =====================================================
+     SETTINGS
+     ===================================================== -->
+
 <div id="settingsPage" class="page">
 
 <header>
@@ -1066,6 +1469,7 @@ Cancel
 
 
 <div class="section">
+
 
 <div class="form">
 
@@ -1091,9 +1495,7 @@ Allow Haven to show maintenance reminders on your phone.
 id="reminderButton"
 class="save"
 onclick="enableReminders()">
-
 Enable reminders
-
 </button>
 
 
@@ -1114,9 +1516,7 @@ Your maintenance memories stay on this device.
 <button
 class="save"
 onclick="clearAll()">
-
 Clear all maintenance
-
 </button>
 
 </div>
@@ -1126,7 +1526,10 @@ Clear all maintenance
 </div>
 
 
-<!-- PROFILE POPUP -->
+
+<!-- =====================================================
+     PROFILE POPUP
+     ===================================================== -->
 
 <div
 class="profile-popup"
@@ -1144,15 +1547,16 @@ Maintenance memories stay on this device.
 <button
 class="profile-popup-close"
 onclick="toggleProfile()">
-
 Close
-
 </button>
 
 </div>
 
 
-<!-- NAVIGATION -->
+
+<!-- =====================================================
+     NAVIGATION
+     ===================================================== -->
 
 <nav>
 
@@ -1160,9 +1564,7 @@ Close
 class="nav-btn active"
 id="navHome"
 onclick="showPage('homePage')">
-
 <span>⌂</span>Home
-
 </button>
 
 
@@ -1170,9 +1572,7 @@ onclick="showPage('homePage')">
 class="nav-btn"
 id="navMemory"
 onclick="showPage('memoryPage')">
-
 <span>◷</span>Memory
-
 </button>
 
 
@@ -1180,9 +1580,7 @@ onclick="showPage('memoryPage')">
 class="nav-btn"
 id="navAdd"
 onclick="showPage('addPage')">
-
 <span>＋</span>Add
-
 </button>
 
 
@@ -1190,12 +1588,11 @@ onclick="showPage('addPage')">
 class="nav-btn"
 id="navSettings"
 onclick="showPage('settingsPage')">
-
 <span>⚙</span>Settings
-
 </button>
 
 </nav>
+
 
 
 <script>
@@ -1206,7 +1603,9 @@ const REMINDER_KEY="havenRemindersV1";
 let currentFilter="all";
 
 
-/* ---------------- MAINTENANCE LIBRARY ---------------- */
+/* =====================================================
+   MAINTENANCE LIBRARY
+   ===================================================== */
 
 const library=[
 
@@ -1238,7 +1637,9 @@ const library=[
 ];
 
 
-/* ---------------- SEASON ---------------- */
+/* =====================================================
+   SEASON
+   ===================================================== */
 
 function applySeason(){
 
@@ -1247,6 +1648,7 @@ const month=new Date().getMonth();
 let season="summer";
 let label="☀️ Summer";
 let decorations=["☀️","🌿","🌱","🌼"];
+
 
 if(month===2||month===3||month===4){
 
@@ -1291,7 +1693,8 @@ document.body.classList.remove(
 document.body.classList.add(season);
 
 
-const labelElement=document.getElementById("seasonLabel");
+const labelElement=
+document.getElementById("seasonLabel");
 
 if(labelElement){
 labelElement.textContent=label;
@@ -1305,6 +1708,7 @@ document.querySelector(".decor-3"),
 document.querySelector(".decor-4")
 ];
 
+
 decorationElements.forEach((element,index)=>{
 
 if(element){
@@ -1316,18 +1720,23 @@ element.textContent=decorations[index];
 }
 
 
-/* ---------------- PROFILE ---------------- */
+/* =====================================================
+   PROFILE
+   ===================================================== */
 
 function toggleProfile(){
 
-const popup=document.getElementById("profilePopup");
+const popup=
+document.getElementById("profilePopup");
 
 popup.classList.toggle("show");
 
 }
 
 
-/* ---------------- TASK DATA ---------------- */
+/* =====================================================
+   TASK DATA
+   ===================================================== */
 
 function getTasks(){
 
@@ -1360,6 +1769,7 @@ function getIcon(name){
 
 const n=name.toLowerCase();
 
+
 if(
 n.includes("ac")||
 n.includes("air conditioner")||
@@ -1367,11 +1777,13 @@ n.includes("aircon")
 )
 return"❄️";
 
+
 if(
 n.includes("water")||
 n.includes("leak")
 )
 return"💧";
+
 
 if(
 n.includes("plumb")||
@@ -1381,11 +1793,13 @@ n.includes("shower")
 )
 return"🚿";
 
+
 if(
 n.includes("chimney")||
 n.includes("clean")
 )
 return"🧹";
+
 
 if(
 n.includes("smoke")||
@@ -1395,6 +1809,7 @@ n.includes("light")
 )
 return"💡";
 
+
 if(
 n.includes("garden")||
 n.includes("plant")||
@@ -1402,11 +1817,13 @@ n.includes("lawn")
 )
 return"🌿";
 
+
 if(
 n.includes("window")||
 n.includes("glass")
 )
 return"🪟";
+
 
 if(
 n.includes("pest")||
@@ -1414,23 +1831,29 @@ n.includes("insect")
 )
 return"🐜";
 
+
 if(
 n.includes("roof")||
 n.includes("gutter")
 )
 return"🏠";
 
+
 if(n.includes("fridge"))
 return"🧊";
+
 
 if(n.includes("washing"))
 return"🫧";
 
+
 if(n.includes("bathroom"))
 return"🛁";
 
+
 if(n.includes("kitchen"))
 return"🍳";
+
 
 if(
 n.includes("door")||
@@ -1438,23 +1861,32 @@ n.includes("lock")
 )
 return"🚪";
 
+
 if(n.includes("battery"))
 return"🔋";
 
+
 if(n.includes("safety"))
 return"🛡️";
+
 
 return"🔧";
 
 }
 
 
+/* =====================================================
+   DATE FUNCTIONS
+   ===================================================== */
+
 function formatDate(dateString){
 
 if(!dateString)
 return"Not completed yet";
 
+
 const date=new Date(dateString);
+
 
 return date.toLocaleDateString(
 "en-GB",
@@ -1471,7 +1903,9 @@ year:"numeric"
 function getDayDifference(dueDate){
 
 const now=new Date();
+
 const due=new Date(dueDate);
+
 
 const today=new Date(
 now.getFullYear(),
@@ -1479,11 +1913,13 @@ now.getMonth(),
 now.getDate()
 );
 
+
 const target=new Date(
 due.getFullYear(),
 due.getMonth(),
 due.getDate()
 );
+
 
 return Math.round(
 (target-today)/86400000
@@ -1497,7 +1933,9 @@ function getRemainingText(dueDate){
 if(!dueDate)
 return"No date set";
 
+
 const days=getDayDifference(dueDate);
+
 
 if(days<0){
 
@@ -1509,16 +1947,21 @@ return overdue===1
 
 }
 
+
 if(days===0)
 return"Due today";
+
 
 if(days===1)
 return"Due tomorrow";
 
+
 if(days<30)
 return`Due in ${days} days`;
 
+
 const months=Math.round(days/30);
+
 
 return months===1
 ?"Due in about 1 month"
@@ -1533,13 +1976,18 @@ const dueDate=
 task.dueDate||
 calculateDueDate(task);
 
-const days=getDayDifference(dueDate);
+
+const days=
+getDayDifference(dueDate);
+
 
 if(days<0)
 return"overdue";
 
+
 if(days===0)
 return"today";
+
 
 return"upcoming";
 
@@ -1552,34 +2000,43 @@ const base=task.lastDone
 ?new Date(task.lastDone)
 :new Date(task.added);
 
+
 base.setDate(
 base.getDate()+Number(task.days)
 );
+
 
 return base.toISOString();
 
 }
 
 
-/* ---------------- FILTERS ---------------- */
+/* =====================================================
+   FILTERS
+   ===================================================== */
 
 function setFilter(filter,button){
 
 currentFilter=filter;
+
 
 document.querySelectorAll(".filter")
 .forEach(btn=>{
 btn.classList.remove("active");
 });
 
+
 button.classList.add("active");
+
 
 renderHome();
 
 }
 
 
-/* ---------------- HOME STATUS ---------------- */
+/* =====================================================
+   HOME STATUS
+   ===================================================== */
 
 function updateHomeStatus(tasks){
 
@@ -1587,6 +2044,7 @@ const overdue=
 tasks.filter(
 t=>getTaskCategory(t)==="overdue"
 ).length;
+
 
 const today=
 tasks.filter(
@@ -1597,6 +2055,7 @@ t=>getTaskCategory(t)==="today"
 const title=
 document.getElementById("homeStatus");
 
+
 const text=
 document.getElementById("homeStatusText");
 
@@ -1606,6 +2065,7 @@ if(overdue>0){
 title.textContent=
 "A little attention needed";
 
+
 text.textContent=
 `${overdue} maintenance ${
 overdue===1?"item is":"items are"
@@ -1613,10 +2073,12 @@ overdue===1?"item is":"items are"
 
 }
 
+
 else if(today>0){
 
 title.textContent=
 "Something needs attention";
+
 
 text.textContent=
 `${today} maintenance ${
@@ -1625,10 +2087,12 @@ today===1?"item is":"items are"
 
 }
 
+
 else{
 
 title.textContent=
 "Home is doing well";
+
 
 text.textContent=
 "Haven quietly remembers what your home needs.";
@@ -1638,12 +2102,15 @@ text.textContent=
 }
 
 
-/* ---------------- DUE SOON ---------------- */
+/* =====================================================
+   DUE SOON
+   ===================================================== */
 
 function renderDueSoon(tasks){
 
 const container=
 document.getElementById("dueSoon");
+
 
 const soon=tasks
 
@@ -1711,11 +2178,13 @@ Things coming up in the next 7 days
 
 </div>
 
+
 ${soon.map(task=>{
 
 const dueDate=
 task.dueDate||
 calculateDueDate(task);
+
 
 return`
 
@@ -1752,13 +2221,16 @@ ${formatDate(dueDate)}
 }
 
 
-/* ---------------- TASK CARD ---------------- */
+/* =====================================================
+   TASK CARD
+   ===================================================== */
 
 function taskHTML(task){
 
 const dueDate=
 task.dueDate||
 calculateDueDate(task);
+
 
 return`
 
@@ -1769,6 +2241,7 @@ return`
 <div class="icon">
 ${getIcon(task.name)}
 </div>
+
 
 <div class="task-info">
 
@@ -1782,24 +2255,22 @@ ${getRemainingText(dueDate)}
 
 </div>
 
+
 <div class="actions">
 
 <button
 class="action complete"
 aria-label="Complete maintenance"
 onclick="completeTask('${task.id}')">
-
 ✓
-
 </button>
+
 
 <button
 class="action remove"
 aria-label="Remove maintenance"
 onclick="deleteTask('${task.id}')">
-
 ×
-
 </button>
 
 </div>
@@ -1816,6 +2287,7 @@ ${task.lastDone
 :"Not completed yet"}
 </div>
 
+
 <div class="next-due">
 Next due:
 ${formatDate(dueDate)}
@@ -1830,14 +2302,18 @@ ${formatDate(dueDate)}
 }
 
 
-/* ---------------- HOME ---------------- */
+/* =====================================================
+   HOME
+   ===================================================== */
 
 function renderHome(){
 
 const container=
 document.getElementById("homeTasks");
 
+
 const tasks=getTasks();
+
 
 updateHomeStatus(tasks);
 
@@ -1914,10 +2390,12 @@ filtered.filter(
 t=>getTaskCategory(t)==="overdue"
 );
 
+
 groups.today=
 filtered.filter(
 t=>getTaskCategory(t)==="today"
 );
+
 
 groups.upcoming=
 filtered.filter(
@@ -1944,6 +2422,7 @@ Overdue
 </div>
 `;
 
+
 html+=
 groups.overdue
 .map(taskHTML)
@@ -1959,6 +2438,7 @@ html+=`
 Today
 </div>
 `;
+
 
 html+=
 groups.today
@@ -1976,6 +2456,7 @@ Upcoming
 </div>
 `;
 
+
 html+=
 groups.upcoming
 .map(taskHTML)
@@ -1989,12 +2470,15 @@ container.innerHTML=html;
 }
 
 
-/* ---------------- MEMORY ---------------- */
+/* =====================================================
+   MEMORY
+   ===================================================== */
 
 function renderMemory(){
 
 const container=
 document.getElementById("memoryTasks");
+
 
 const tasks=getTasks();
 
@@ -2021,6 +2505,7 @@ const dueDate=
 task.dueDate||
 calculateDueDate(task);
 
+
 return`
 
 <div class="task">
@@ -2031,11 +2516,13 @@ return`
 ${getIcon(task.name)}
 </div>
 
+
 <div class="task-info">
 
 <div class="task-name">
 ${escapeHTML(task.name)}
 </div>
+
 
 <div class="task-due">
 ${getRemainingText(dueDate)}
@@ -2053,12 +2540,14 @@ Added:
 ${formatDate(task.added)}
 </div>
 
+
 <div class="last-done">
 Last done:
 ${task.lastDone
 ?formatDate(task.lastDone)
 :"Not completed yet"}
 </div>
+
 
 <div class="next-due">
 Next due:
@@ -2076,20 +2565,25 @@ ${formatDate(dueDate)}
 }
 
 
-/* ---------------- COMPLETE ---------------- */
+/* =====================================================
+   COMPLETE
+   ===================================================== */
 
 function completeTask(id){
 
 const tasks=getTasks();
 
+
 const task=
 tasks.find(t=>t.id===id);
+
 
 if(!task)
 return;
 
 
 const now=new Date();
+
 
 task.lastDone=
 now.toISOString();
@@ -2098,15 +2592,18 @@ now.toISOString();
 const next=
 new Date(now);
 
+
 next.setDate(
 next.getDate()+Number(task.days)
 );
+
 
 task.dueDate=
 next.toISOString();
 
 
 saveTasks(tasks);
+
 
 renderHome();
 
@@ -2117,7 +2614,9 @@ checkReminders();
 }
 
 
-/* ---------------- DELETE ---------------- */
+/* =====================================================
+   DELETE
+   ===================================================== */
 
 function deleteTask(id){
 
@@ -2132,7 +2631,9 @@ getTasks().filter(
 t=>t.id!==id
 );
 
+
 saveTasks(tasks);
+
 
 renderHome();
 
@@ -2143,15 +2644,19 @@ renderLibrary();
 }
 
 
-/* ---------------- ADD CUSTOM ---------------- */
+/* =====================================================
+   ADD CUSTOM
+   ===================================================== */
 
 function addCustomTask(){
 
 const nameInput=
 document.getElementById("taskName");
 
+
 const name=
 nameInput.value.trim();
+
 
 const days=
 Number(
@@ -2172,8 +2677,10 @@ return;
 
 const now=new Date();
 
+
 const due=
 new Date(now);
+
 
 due.setDate(
 due.getDate()+days
@@ -2202,7 +2709,9 @@ dueDate:due.toISOString()
 
 saveTasks(tasks);
 
+
 nameInput.value="";
+
 
 renderHome();
 
@@ -2215,12 +2724,15 @@ showPage("homePage");
 }
 
 
-/* ---------------- ADD LIBRARY TASK ---------------- */
+/* =====================================================
+   ADD LIBRARY TASK
+   ===================================================== */
 
 function addLibraryTask(index){
 
 const item=
 library[index];
+
 
 const tasks=
 getTasks();
@@ -2242,8 +2754,10 @@ return;
 
 const now=new Date();
 
+
 const due=
 new Date(now);
+
 
 due.setDate(
 due.getDate()+item.days
@@ -2271,6 +2785,7 @@ dueDate:due.toISOString()
 
 saveTasks(tasks);
 
+
 renderHome();
 
 renderMemory();
@@ -2282,12 +2797,15 @@ showPage("homePage");
 }
 
 
-/* ---------------- LIBRARY ---------------- */
+/* =====================================================
+   LIBRARY
+   ===================================================== */
 
 function renderLibrary(){
 
 const container=
 document.getElementById("library");
+
 
 const tasks=getTasks();
 
@@ -2310,17 +2828,20 @@ return`
 ${item.icon}
 </div>
 
+
 <div class="library-info">
 
 <div class="library-name">
 ${item.name}
 </div>
 
+
 <div class="library-days">
 Every ${item.days} days
 </div>
 
 </div>
+
 
 <button
 class="add-library"
@@ -2340,7 +2861,9 @@ ${exists?"Added":"Add"}
 }
 
 
-/* ---------------- REMINDERS ---------------- */
+/* =====================================================
+   REMINDERS
+   ===================================================== */
 
 async function registerServiceWorker(){
 
@@ -2377,6 +2900,7 @@ scope:scope
 
 await navigator.serviceWorker.ready;
 
+
 return true;
 
 
@@ -2386,6 +2910,7 @@ console.log(
 "Service worker registration failed:",
 error
 );
+
 
 return false;
 
@@ -2465,6 +2990,7 @@ if(permission!=="granted"){
 
 updateReminderStatus();
 
+
 alert(
 "Notifications were not allowed. You can enable them later in your browser settings."
 );
@@ -2477,11 +3003,15 @@ return;
 const state=
 getReminderState();
 
+
 state.enabled=true;
+
 
 saveReminderState(state);
 
+
 updateReminderStatus();
+
 
 showTestNotification();
 
@@ -2625,7 +3155,9 @@ saveReminderState(state);
 }
 
 
-/* ---------------- REMINDER STATUS ---------------- */
+/* =====================================================
+   REMINDER STATUS
+   ===================================================== */
 
 function updateReminderStatus(){
 
@@ -2633,6 +3165,7 @@ const container=
 document.getElementById(
 "reminderStatus"
 );
+
 
 const button=
 document.getElementById(
@@ -2666,11 +3199,13 @@ container.innerHTML=`
 🔔
 </div>
 
+
 <div class="reminder-info">
 
 <div class="reminder-title">
 Haven can send reminders
 </div>
+
 
 <div class="reminder-text">
 Notifications are allowed on this device.
@@ -2694,7 +3229,9 @@ container.innerHTML="";
 }
 
 
-/* ---------------- NAVIGATION ---------------- */
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
 
 function showPage(pageId){
 
@@ -2723,6 +3260,7 @@ document
 .getElementById("navHome")
 .classList.add("active");
 
+
 renderHome();
 
 }
@@ -2733,6 +3271,7 @@ if(pageId==="memoryPage"){
 document
 .getElementById("navMemory")
 .classList.add("active");
+
 
 renderMemory();
 
@@ -2745,6 +3284,7 @@ document
 .getElementById("navAdd")
 .classList.add("active");
 
+
 renderLibrary();
 
 }
@@ -2756,6 +3296,7 @@ document
 .getElementById("navSettings")
 .classList.add("active");
 
+
 updateReminderStatus();
 
 }
@@ -2763,7 +3304,9 @@ updateReminderStatus();
 }
 
 
-/* ---------------- CLEAR DATA ---------------- */
+/* =====================================================
+   CLEAR DATA
+   ===================================================== */
 
 function clearAll(){
 
@@ -2777,6 +3320,7 @@ localStorage.removeItem(
 STORAGE_KEY
 );
 
+
 renderHome();
 
 renderMemory();
@@ -2788,7 +3332,9 @@ showPage("homePage");
 }
 
 
-/* ---------------- SECURITY ---------------- */
+/* =====================================================
+   SECURITY
+   ===================================================== */
 
 function escapeHTML(text){
 
@@ -2822,7 +3368,9 @@ return String(text)
 }
 
 
-/* ---------------- START HAVEN ---------------- */
+/* =====================================================
+   START HAVEN
+   ===================================================== */
 
 applySeason();
 
@@ -2836,13 +3384,16 @@ renderLibrary();
 
 updateReminderStatus();
 
+
 setTimeout(
 checkReminders,
 1500
 );
 
 
-/* Close profile popup when tapping outside */
+/* =====================================================
+   CLOSE PROFILE WHEN TAPPING OUTSIDE
+   ===================================================== */
 
 document.addEventListener(
 "click",
@@ -2852,6 +3403,7 @@ const popup=
 document.getElementById(
 "profilePopup"
 );
+
 
 const button=
 document.getElementById(
@@ -2875,4 +3427,4 @@ popup.classList.remove("show");
 </script>
 
 </body>
-  </html>
+</html>
