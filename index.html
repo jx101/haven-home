@@ -230,8 +230,6 @@ h1 {
 
 <div class="app">
 
-  <!-- HOME -->
-
   <div id="homeScreen">
 
     <div class="header">
@@ -288,11 +286,15 @@ h1 {
 
       <div class="form" id="form">
 
-        <input id="name" type="text" placeholder="What needs maintenance?">
+        <input id="name" type="text"
+          placeholder="What needs maintenance?">
 
-        <input id="days" type="number" placeholder="Due in how many days?">
+        <input id="days" type="number"
+          placeholder="Due in how many days?">
 
-        <button class="save" onclick="addMaintenance()">Save memory</button>
+        <button class="save" onclick="addMaintenance()">
+          Save memory
+        </button>
 
       </div>
 
@@ -301,11 +303,11 @@ h1 {
   </div>
 
 
-  <!-- MEMORY -->
-
   <div class="screen" id="memoryScreen">
 
-    <button class="back" onclick="showHome()">← Back to Home</button>
+    <button class="back" onclick="showHome()">
+      ← Back to Home
+    </button>
 
     <div class="small">Your home's history</div>
 
@@ -313,7 +315,9 @@ h1 {
 
     <div class="section">
 
-      <div class="section-title">Everything Haven remembers</div>
+      <div class="section-title">
+        Everything Haven remembers
+      </div>
 
       <div id="memoryList"></div>
 
@@ -322,11 +326,11 @@ h1 {
   </div>
 
 
-  <!-- SETTINGS -->
-
   <div class="screen" id="settingsScreen">
 
-    <button class="back" onclick="showHome()">← Back to Home</button>
+    <button class="back" onclick="showHome()">
+      ← Back to Home
+    </button>
 
     <div class="small">Make Haven yours</div>
 
@@ -336,7 +340,9 @@ h1 {
 
       <div class="setting">
         <strong>🏡 Your home</strong>
-        <span>Haven keeps your maintenance memories on this device.</span>
+        <span>
+          Haven keeps your maintenance memories on this device.
+        </span>
       </div>
 
       <div class="setting">
@@ -346,7 +352,9 @@ h1 {
 
       <div class="setting">
         <strong>🧠 Home memory</strong>
-        <span>Your saved maintenance information stays in your browser.</span>
+        <span>
+          Your saved maintenance information stays in your browser.
+        </span>
       </div>
 
     </div>
@@ -355,8 +363,6 @@ h1 {
 
 </div>
 
-
-<!-- BOTTOM NAV -->
 
 <div class="nav">
 
@@ -384,7 +390,9 @@ h1 {
 function hideScreens() {
 
   document.getElementById("homeScreen").style.display = "none";
+
   document.getElementById("memoryScreen").style.display = "none";
+
   document.getElementById("settingsScreen").style.display = "none";
 
 }
@@ -393,8 +401,11 @@ function hideScreens() {
 function clearActive() {
 
   document.getElementById("homeNav").classList.remove("active");
+
   document.getElementById("memoryNav").classList.remove("active");
+
   document.getElementById("addNav").classList.remove("active");
+
   document.getElementById("settingsNav").classList.remove("active");
 
 }
@@ -406,11 +417,14 @@ function showHome() {
 
   document.getElementById("homeScreen").style.display = "block";
 
+  document.getElementById("form").style.display = "none";
+
   clearActive();
 
   document.getElementById("homeNav").classList.add("active");
 
   window.scrollTo(0, 0);
+
 }
 
 
@@ -427,6 +441,7 @@ function showMemory() {
   loadMemory();
 
   window.scrollTo(0, 0);
+
 }
 
 
@@ -436,9 +451,12 @@ function showAdd() {
 
   document.getElementById("form").style.display = "block";
 
+  clearActive();
+
   document.getElementById("addNav").classList.add("active");
 
   window.scrollTo(0, document.body.scrollHeight);
+
 }
 
 
@@ -453,20 +471,40 @@ function showSettings() {
   document.getElementById("settingsNav").classList.add("active");
 
   window.scrollTo(0, 0);
+
+}
+
+
+function getDueDate(days) {
+
+  let date = new Date();
+
+  date.setDate(date.getDate() + Number(days));
+
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
 }
 
 
 function addMaintenance() {
 
-  let name = document.getElementById("name").value.trim();
+  let name =
+    document.getElementById("name").value.trim();
 
-  let days = document.getElementById("days").value;
+  let days =
+    document.getElementById("days").value;
+
 
   if (name === "" || days === "") {
 
     alert("Please enter both details.");
 
     return;
+
   }
 
 
@@ -474,7 +512,11 @@ function addMaintenance() {
 
     name: name,
 
-    days: days
+    days: Number(days),
+
+    added: new Date().toISOString(),
+
+    dueDate: getDueDate(days)
 
   };
 
@@ -528,8 +570,17 @@ function displayTask(task) {
 
   let details = document.createElement("span");
 
-  details.textContent =
-    "Due in " + task.days + " days";
+  if (task.dueDate) {
+
+    details.textContent =
+      "Next maintenance: " + task.dueDate;
+
+  } else {
+
+    details.textContent =
+      "Due in " + task.days + " days";
+
+  }
 
 
   content.appendChild(title);
@@ -583,6 +634,7 @@ function loadMemory() {
       '<div class="empty">Haven has no personal memories yet.<br><br>Add your first maintenance task.</div>';
 
     return;
+
   }
 
 
@@ -610,8 +662,18 @@ function loadMemory() {
 
     let details = document.createElement("span");
 
-    details.textContent =
-      "Due in " + task.days + " days";
+
+    if (task.dueDate) {
+
+      details.textContent =
+        "Next maintenance: " + task.dueDate;
+
+    } else {
+
+      details.textContent =
+        "Due in " + task.days + " days";
+
+    }
 
 
     content.appendChild(title);
@@ -636,4 +698,4 @@ loadTasks();
 </script>
 
 </body>
-</html>
+</html>gb
