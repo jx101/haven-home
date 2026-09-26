@@ -89,6 +89,29 @@ margin:18px 4px 12px;
 font-size:18px;
 }
 
+.filter-row{
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding:2px 2px 12px;
+}
+
+.filter{
+border:1px solid #ddd8ce;
+background:#fffdf8;
+color:#667269;
+padding:9px 14px;
+border-radius:20px;
+font-size:13px;
+white-space:nowrap;
+}
+
+.filter.active{
+background:#34483a;
+color:white;
+border-color:#34483a;
+}
+
 .add-btn{
 width:100%;
 border:none;
@@ -187,8 +210,25 @@ color:#526553;
 color:#6e786f;
 }
 
-.hidden{
-display:none;
+.status-label{
+font-size:11px;
+font-weight:700;
+text-transform:uppercase;
+letter-spacing:.7px;
+margin:20px 4px 10px;
+color:#7d867e;
+}
+
+.status-label.today{
+color:#506b54;
+}
+
+.status-label.overdue{
+color:#986153;
+}
+
+.status-label.upcoming{
+color:#6c756e;
 }
 
 .form{
@@ -294,6 +334,10 @@ border:1px solid #ebe6dc;
 line-height:1.6;
 }
 
+.hidden{
+display:none;
+}
+
 .page{
 display:none;
 }
@@ -354,14 +398,21 @@ font-weight:600;
 
 <div class="hero">
 <div class="hero-house">🏡</div>
-<h2>Home is doing well</h2>
-<p>Haven quietly remembers what your home needs.</p>
+<h2 id="homeStatus">Home is doing well</h2>
+<p id="homeStatusText">Haven quietly remembers what your home needs.</p>
 </div>
 
 <div class="section">
 
 <div class="section-title">
-<h2>Upcoming maintenance</h2>
+<h2>Maintenance</h2>
+</div>
+
+<div class="filter-row">
+<button class="filter active" onclick="setFilter('all',this)">All</button>
+<button class="filter" onclick="setFilter('today',this)">Today</button>
+<button class="filter" onclick="setFilter('upcoming',this)">Upcoming</button>
+<button class="filter" onclick="setFilter('overdue',this)">Overdue</button>
 </div>
 
 <div id="homeTasks"></div>
@@ -479,7 +530,6 @@ Clear all maintenance
 </div>
 
 
-<!-- NAV -->
 <nav>
 
 <button class="nav-btn active" id="navHome" onclick="showPage('homePage')">
@@ -504,6 +554,8 @@ Clear all maintenance
 <script>
 
 const STORAGE_KEY="havenTasksV3";
+
+let currentFilter="all";
 
 
 const library=[
@@ -624,14 +676,33 @@ year:"numeric"
 }
 
 
-function getRemainingText(dueDate){
-
-if(!dueDate)return"No date set";
+function getDayDifference(dueDate){
 
 const now=new Date();
 const due=new Date(dueDate);
 
-const days=Math.ceil((due-now)/86400000);
+const today=new Date(
+now.getFullYear(),
+now.getMonth(),
+now.getDate()
+);
+
+const target=new Date(
+due.getFullYear(),
+due.getMonth(),
+due.getDate()
+);
+
+return Math.round((target-today)/86400000);
+
+}
+
+
+function getRemainingText(dueDate){
+
+if(!dueDate)return"No date set";
+
+const days=getDayDifference(dueDate);
 
 if(days<0){
 
@@ -658,6 +729,21 @@ return months===1
 }
 
 
+function getTaskCategory(task){
+
+const dueDate=task.dueDate||calculateDueDate(task);
+
+const days=getDayDifference(dueDate);
+
+if(days<0)return"overdue";
+
+if(days===0)return"today";
+
+return"upcoming";
+
+}
+
+
 function calculateDueDate(task){
 
 const base=task.lastDone
@@ -671,27 +757,50 @@ return base.toISOString();
 }
 
 
-function renderHome(){
+function setFilter(filter,button){
 
-const container=document.getElementById("homeTasks");
+currentFilter=filter;
 
-const tasks=getTasks();
+document.querySelectorAll(".filter").forEach(btn=>{
+btn.classList.remove("active");
+});
 
-if(!tasks.length){
+button.classList.add("active");
 
-container.innerHTML=`
-<div class="empty">
-<div style="font-size:35px;margin-bottom:8px;">🏡</div>
-No maintenance yet.<br>
-Add something your home needs.
-</div>
-`;
+renderHome();
 
-return;
 }
 
 
-container.innerHTML=tasks.map(task=>{
+function updateHomeStatus(tasks){
+
+const overdue=tasks.filter(t=>getTaskCategory(t)==="overdue").length;
+const today=tasks.filter(t=>getTaskCategory(t)==="today").length;
+
+const title=document.getElementById("homeStatus");
+const text=document.getElementById("homeStatusText");
+
+if(overdue>0){
+
+title.textContent="A little attention needed";
+text.textContent=`${overdue} maintenance ${overdue===1?"item is":"items are"} overdue.`;
+
+}else if(today>0){
+
+title.textContent="Something needs attention";
+text.textContent=`${today} maintenance ${today===1?"item is":"items are"} due today.`;
+
+}else{
+
+title.textContent="Home is doing well";
+text.textContent="Haven quietly remembers what your home needs.";
+
+}
+
+}
+
+
+function taskHTML(task){
 
 const dueDate=task.dueDate||calculateDueDate(task);
 
@@ -735,7 +844,6 @@ onclick="deleteTask('${task.id}')">
 
 </div>
 
-
 <div class="task-details">
 
 <div class="last-done">
@@ -754,7 +862,106 @@ Next due: ${formatDate(dueDate)}
 
 `;
 
-}).join("");
+}
+
+
+function renderHome(){
+
+const container=document.getElementById("homeTasks");
+
+const tasks=getTasks();
+
+updateHomeStatus(tasks);
+
+if(!tasks.length){
+
+container.innerHTML=`
+<div class="empty">
+<div style="font-size:35px;margin-bottom:8px;">🏡</div>
+No maintenance yet.<br>
+Add something your home needs.
+</div>
+`;
+
+return;
+}
+
+
+let filtered=tasks;
+
+if(currentFilter!=="all"){
+
+filtered=tasks.filter(
+task=>getTaskCategory(task)===currentFilter
+);
+
+}
+
+
+if(!filtered.length){
+
+const message={
+today:"Nothing is due today. 🌿",
+upcoming:"Nothing upcoming right now.",
+overdue:"Nothing is overdue. ✨"
+}[currentFilter];
+
+container.innerHTML=`
+<div class="empty">
+${message}
+</div>
+`;
+
+return;
+}
+
+
+const groups={};
+
+if(currentFilter==="all"){
+
+groups.overdue=filtered.filter(t=>getTaskCategory(t)==="overdue");
+groups.today=filtered.filter(t=>getTaskCategory(t)==="today");
+groups.upcoming=filtered.filter(t=>getTaskCategory(t)==="upcoming");
+
+}else{
+
+groups[currentFilter]=filtered;
+
+}
+
+
+let html="";
+
+
+if(groups.overdue.length){
+
+html+=`<div class="status-label overdue">Overdue</div>`;
+
+html+=groups.overdue.map(taskHTML).join("");
+
+}
+
+
+if(groups.today.length){
+
+html+=`<div class="status-label today">Today</div>`;
+
+html+=groups.today.map(taskHTML).join("");
+
+}
+
+
+if(groups.upcoming.length){
+
+html+=`<div class="status-label upcoming">Upcoming</div>`;
+
+html+=groups.upcoming.map(taskHTML).join("");
+
+}
+
+
+container.innerHTML=html;
 
 }
 
@@ -804,7 +1011,6 @@ ${getRemainingText(dueDate)}
 </div>
 
 </div>
-
 
 <div class="task-details">
 
@@ -924,6 +1130,8 @@ renderHome();
 
 renderMemory();
 
+renderLibrary();
+
 showPage("homePage");
 
 }
@@ -935,7 +1143,9 @@ const item=library[index];
 
 const tasks=getTasks();
 
-if(tasks.some(t=>t.name.toLowerCase()===item.name.toLowerCase())){
+if(tasks.some(
+t=>t.name.toLowerCase()===item.name.toLowerCase()
+)){
 
 alert("This maintenance is already added.");
 
