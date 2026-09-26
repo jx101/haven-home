@@ -3,1545 +3,2570 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f7f4ea">
-<title>Haven — Your home remembers</title>
+<meta name="theme-color" content="#f7f4ec">
+<title>Haven — Your home remembers.</title>
 
 <style>
-:root{
-  --ink:#303832;
-  --muted:#7d857e;
-  --green:#6f9b78;
-  --green-dark:#4f7659;
-  --soft-green:#e9f1e7;
-  --cream:#f7f4ea;
-  --white:#fff;
-  --line:#e5e4dc;
-  --danger:#c96b67;
-  --warning:#c99855;
-  --shadow:0 10px 30px rgba(63,78,66,.08);
+*{
+  box-sizing:border-box;
 }
 
-*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  color:var(--ink);
-  background:#f8f7f1;
+  background:#f7f4ec;
+  color:#26352d;
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
 .app{
-  max-width:600px;
-  min-height:100vh;
+  max-width:900px;
   margin:auto;
-  background:#f8f7f1;
-  overflow:hidden;
+  min-height:100vh;
+  padding-bottom:90px;
 }
 
-/* Seasonal background */
-.season{
+/* HEADER */
+
+header{
   position:relative;
-  min-height:390px;
-  padding:18px 18px 0;
+  padding:24px 18px 18px;
   overflow:hidden;
-  background:linear-gradient(#e7f0ed,#f5f1e4);
-}
-.season.spring{background:linear-gradient(#dceee9,#f6f2e6)}
-.season.summer{background:linear-gradient(#cfe8f1,#f6efd9)}
-.season.autumn{background:linear-gradient(#e8ddd0,#f6eee0)}
-.season.winter{background:linear-gradient(#dce8ef,#f5f5f1)}
-
-.mountain{
-  position:absolute;
-  left:-10%;
-  bottom:120px;
-  width:120%;
-  height:145px;
-  background:#b8c9bd;
-  clip-path:polygon(0 100%,15% 52%,25% 72%,39% 20%,51% 68%,66% 31%,78% 69%,91% 42%,100% 100%);
-  opacity:.7;
-}
-.mountain.back{
-  bottom:135px;
-  background:#d0dbd2;
-  opacity:.8;
-  transform:scale(1.12);
-}
-.ground{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:135px;
-  background:#c9d8bd;
-  border-radius:50% 50% 0 0/25% 25% 0 0;
-}
-.summer .ground{background:#b9d39d}
-.autumn .ground{background:#cbbd9e}
-.winter .ground{background:#e9eeee}
-
-/* CSS house */
-.house{
-  position:absolute;
-  right:38px;
-  bottom:72px;
-  width:245px;
-  height:150px;
-  background:#f8ead3;
-  border:3px solid #766b5d;
-  border-radius:3px;
-  box-shadow:0 9px 20px rgba(50,50,40,.12);
-}
-.house-roof{
-  position:absolute;
-  left:-20px;
-  top:-65px;
-  width:280px;
-  height:85px;
-  background:#725d4d;
-  clip-path:polygon(0 100%,50% 0,100% 100%);
-}
-.chimney{
-  position:absolute;
-  right:36px;
-  top:-69px;
-  width:25px;
-  height:57px;
-  background:#8b7667;
-  border:2px solid #685a4f;
-}
-.chimney:after{
-  content:"";
-  position:absolute;
-  left:-5px;
-  top:-5px;
-  width:35px;
-  height:7px;
-  background:#65564b;
-}
-.window{
-  position:absolute;
-  top:37px;
-  width:43px;
-  height:48px;
-  background:#b9d9df;
-  border:4px solid #695e52;
-}
-.window:before{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:0;
-  right:0;
-  height:3px;
-  background:#695e52;
-}
-.window:after{
-  content:"";
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:50%;
-  width:3px;
-  background:#695e52;
-}
-.window.left{left:30px}
-.window.right{right:30px}
-.door{
-  position:absolute;
-  left:98px;
-  bottom:0;
-  width:52px;
-  height:88px;
-  background:#806754;
-  border:3px solid #625347;
-  border-bottom:0;
-}
-.door:after{
-  content:"";
-  position:absolute;
-  right:7px;
-  top:45px;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#e2c276;
-}
-.porch{
-  position:absolute;
-  left:78px;
-  bottom:-12px;
-  width:94px;
-  height:14px;
-  background:#806f5e;
-  border-radius:3px;
-}
-.flower{
-  position:absolute;
-  bottom:8px;
-  width:58px;
-  height:15px;
-  background:#8e654f;
-  border-radius:3px;
-}
-.flower:before{
-  content:"✿ ✿ ✿";
-  position:absolute;
-  bottom:6px;
-  left:6px;
-  color:#e58c83;
-  font-size:17px;
-}
-.flower.left{left:22px}
-.flower.right{right:22px}
-
-.season-decoration{
-  position:absolute;
-  pointer-events:none;
-}
-.spring .season-decoration:before{
-  content:"✿  ✿  ✿";
-  position:absolute;
-  left:45px;
-  bottom:180px;
-  color:#e79caa;
-  font-size:28px;
-  white-space:nowrap;
-}
-.summer .season-decoration:before{
-  content:"☀";
-  position:absolute;
-  left:35px;
-  top:15px;
-  color:#e6b94d;
-  font-size:48px;
-}
-.autumn .season-decoration:before{
-  content:"🍂  🍁  🍂";
-  position:absolute;
-  left:32px;
-  bottom:185px;
-  font-size:27px;
-  white-space:nowrap;
-}
-.winter .season-decoration:before{
-  content:"❄  ❄  ❄";
-  position:absolute;
-  left:35px;
-  top:50px;
-  color:#fff;
-  font-size:25px;
-  white-space:nowrap;
+  background:linear-gradient(#e9f4ed,#f7f4ec);
 }
 
-/* Header */
-.topbar{
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   position:relative;
   z-index:5;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
 }
+
 .logo{
   font-size:25px;
   font-weight:800;
-  letter-spacing:-.7px;
+  letter-spacing:.5px;
 }
+
 .tagline{
+  font-size:13px;
+  color:#63756b;
   margin-top:3px;
-  font-size:12px;
-  color:#68736c;
 }
+
 .profile-btn{
   width:42px;
   height:42px;
-  border:1px solid rgba(70,85,73,.18);
   border-radius:50%;
-  background:rgba(255,255,255,.85);
-  color:var(--green-dark);
+  border:1px solid #b9c8be;
+  background:#ffffff;
+  color:#31473b;
   font-weight:800;
-  box-shadow:0 5px 15px rgba(50,60,50,.08);
+  box-shadow:0 5px 15px rgba(44,65,52,.10);
 }
-.profile-btn.selected{
-  background:var(--green);
+
+/* SEASONAL LANDSCAPE */
+
+.landscape{
+  height:190px;
+  position:relative;
+  margin-top:10px;
+  overflow:hidden;
+  border-radius:25px;
+  background:linear-gradient(#cfe6ef 0%,#e9f2e8 65%,#dbe5d7 100%);
+}
+
+.sun{
+  position:absolute;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#f7d987;
+  right:13%;
+  top:22px;
+  box-shadow:0 0 30px rgba(247,217,135,.55);
+}
+
+.mountain{
+  position:absolute;
+  bottom:45px;
+  width:0;
+  height:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-bottom:115px solid #a9c1b0;
+}
+
+.mountain.one{
+  left:-65px;
+}
+
+.mountain.two{
+  right:-85px;
+  border-left-width:175px;
+  border-right-width:175px;
+  border-bottom-width:135px;
+  border-bottom-color:#9fb8aa;
+}
+
+.ground{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:63px;
+  background:#b8cfad;
+}
+
+/* HOUSE */
+
+.house{
+  position:absolute;
+  width:185px;
+  height:105px;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  z-index:3;
+}
+
+.house-body{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:0;
+  height:75px;
+  background:#fffdf7;
+  border:2px solid #c7bca8;
+  border-radius:4px;
+}
+
+.roof{
+  position:absolute;
+  left:3px;
+  top:5px;
+  width:180px;
+  height:55px;
+  background:#8b6652;
+  clip-path:polygon(50% 0,100% 100%,0 100%);
+}
+
+.chimney{
+  position:absolute;
+  width:18px;
+  height:38px;
+  right:34px;
+  top:1px;
+  background:#8d7668;
+  z-index:2;
+}
+
+.window{
+  position:absolute;
+  width:28px;
+  height:28px;
+  top:24px;
+  background:#a9d5dc;
+  border:3px solid #6e8279;
+}
+
+.window.left{
+  left:38px;
+}
+
+.window.right{
+  right:38px;
+}
+
+.door{
+  position:absolute;
+  width:30px;
+  height:52px;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  background:#8a6d55;
+  border:2px solid #66513f;
+  border-bottom:0;
+}
+
+.door-knob{
+  position:absolute;
+  right:5px;
+  top:27px;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#ead48d;
+}
+
+.porch{
+  position:absolute;
+  left:9px;
+  right:9px;
+  bottom:-5px;
+  height:8px;
+  background:#846a52;
+  border-radius:3px;
+}
+
+.flower{
+  position:absolute;
+  bottom:17px;
+  width:38px;
+  height:10px;
+  background:#b77d62;
+  border-radius:3px;
+}
+
+.flower.left{
+  left:31px;
+}
+
+.flower.right{
+  right:31px;
+}
+
+.flower:before{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:13px;
+  background:#70966e;
+  left:8px;
+  bottom:7px;
+  box-shadow:8px -2px 0 #70966e,16px 1px 0 #70966e;
+}
+
+/* SEASON DECORATIONS */
+
+.season{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:4;
+}
+
+.leaf{
+  position:absolute;
+  width:13px;
+  height:20px;
+  border-radius:100% 0;
+  transform:rotate(35deg);
+}
+
+.spring .leaf{
+  background:#82b873;
+}
+
+.summer .leaf{
+  background:#5c9c5e;
+}
+
+.autumn .leaf{
+  background:#c8894c;
+}
+
+.winter .leaf{
+  background:#dce8e8;
+}
+
+.season .l1{left:7%;top:20%}
+.season .l2{left:13%;top:30%;transform:rotate(80deg)}
+.season .l3{right:8%;top:24%;transform:rotate(10deg)}
+.season .l4{right:15%;top:35%;transform:rotate(70deg)}
+
+.snow{
+  position:absolute;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.winter .s1{left:15%;top:25%}
+.winter .s2{left:30%;top:45%}
+.winter .s3{right:22%;top:22%}
+.winter .s4{right:9%;top:47%}
+.winter .s5{left:55%;top:15%}
+
+/* HERO */
+
+.hero{
+  padding:20px 18px 10px;
+}
+
+.hero-status{
+  font-size:31px;
+  line-height:1.1;
+  font-weight:800;
+  max-width:650px;
+}
+
+.hero-sub{
+  color:#6b7b72;
+  margin-top:8px;
+  line-height:1.5;
+}
+
+.status-banner{
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:16px;
+  background:#edf5ed;
+  border:1px solid #d3e2d3;
+  color:#3d6048;
+  font-weight:700;
+}
+
+.status-banner.warning{
+  background:#fff4dd;
+  border-color:#f0d79e;
+  color:#775a22;
+}
+
+.status-banner.overdue{
+  background:#fdebea;
+  border-color:#efc5c2;
+  color:#82433f;
+}
+
+/* CONTENT */
+
+.content{
+  padding:8px 18px;
+}
+
+.section-title{
+  font-size:20px;
+  font-weight:800;
+  margin:20px 0 12px;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+}
+
+.filter{
+  border:1px solid #cbd7ce;
+  background:#fff;
+  color:#4b5e53;
+  padding:9px 14px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.filter.active{
+  background:#365847;
+  color:#fff;
+  border-color:#365847;
+}
+
+.task-card{
+  background:#fff;
+  border:1px solid #dbe2dc;
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:0 6px 20px rgba(46,66,53,.06);
+}
+
+.task-top{
+  display:flex;
+  gap:13px;
+  align-items:flex-start;
+}
+
+.task-icon{
+  width:45px;
+  height:45px;
+  border-radius:14px;
+  background:#edf4ed;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:22px;
+  flex-shrink:0;
+}
+
+.task-name{
+  font-size:17px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.task-meta{
+  color:#708077;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.task-status{
+  margin-top:10px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.task-status.overdue{
+  color:#a34f48;
+}
+
+.task-status.today{
+  color:#987021;
+}
+
+.task-status.ok{
+  color:#4e7657;
+}
+
+.task-actions{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.task-actions button{
+  border:0;
+  padding:9px 12px;
+  border-radius:11px;
+}
+
+.complete-btn{
+  background:#e6f2e7;
+  color:#3e6847;
+}
+
+.edit-btn{
+  background:#edf0f3;
+  color:#46535d;
+}
+
+.delete-btn{
+  background:#fae9e7;
+  color:#9b4c47;
+}
+
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:#748178;
+}
+
+.empty strong{
+  display:block;
+  color:#435449;
+  font-size:18px;
+  margin-bottom:7px;
+}
+
+/* FORMS */
+
+.form-card{
+  background:#fff;
+  border:1px solid #dbe2dc;
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 6px 20px rgba(46,66,53,.06);
+}
+
+.field{
+  margin-bottom:16px;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  color:#53645a;
+  margin-bottom:7px;
+}
+
+.field input,
+.field select{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #ccd7cf;
+  border-radius:13px;
+  background:#fbfcfa;
+  color:#27372e;
+  outline:none;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:#6c9278;
+  box-shadow:0 0 0 3px rgba(108,146,120,.12);
+}
+
+.primary-btn{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px;
+  background:#365847;
   color:white;
+  font-weight:800;
 }
+
+.secondary-btn{
+  border:1px solid #cbd6ce;
+  border-radius:13px;
+  padding:12px 16px;
+  background:white;
+  color:#43564a;
+}
+
+/* SETTINGS */
+
+.setting-card{
+  background:#fff;
+  border:1px solid #dbe2dc;
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:12px;
+}
+
+.setting-title{
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.setting-text{
+  font-size:13px;
+  color:#718078;
+  line-height:1.5;
+}
+
+/* PROFILE */
+
 .profile-popup{
   display:none;
   position:absolute;
-  right:0;
-  top:52px;
-  width:205px;
-  padding:15px;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:16px;
-  box-shadow:var(--shadow);
+  right:18px;
+  top:72px;
+  width:240px;
+  background:#fff;
+  border:1px solid #d8e0da;
+  border-radius:18px;
+  padding:16px;
   z-index:20;
+  box-shadow:0 15px 35px rgba(30,50,38,.16);
 }
-.profile-popup.show{display:block}
+
+.profile-popup.show{
+  display:block;
+}
+
 .profile-popup strong{
   display:block;
+  font-size:18px;
   margin-bottom:5px;
 }
+
 .profile-popup p{
   margin:0;
-  color:var(--muted);
-  font-size:12px;
+  font-size:13px;
+  color:#718078;
   line-height:1.5;
 }
 
-/* Hero text */
-.hero-copy{
-  position:relative;
-  z-index:4;
-  margin-top:42px;
-  max-width:320px;
-}
-.hero-copy h1{
-  margin:0;
-  font-size:34px;
-  line-height:1.08;
-  letter-spacing:-1.2px;
-}
-.hero-copy p{
-  margin:10px 0 0;
-  color:#667068;
-  font-size:14px;
-  line-height:1.5;
-}
-.status-pill{
-  display:inline-flex;
-  margin-top:17px;
-  padding:8px 13px;
-  border-radius:30px;
-  background:rgba(255,255,255,.82);
-  color:var(--green-dark);
-  font-size:12px;
-  font-weight:700;
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(900px,100%);
+  background:rgba(255,255,255,.96);
+  border-top:1px solid #dce3de;
+  display:flex;
+  justify-content:space-around;
+  padding:9px 8px calc(9px + env(safe-area-inset-bottom));
+  z-index:50;
+  backdrop-filter:blur(12px);
 }
 
-/* Main content */
-.content{
-  position:relative;
-  z-index:6;
-  margin-top:-2px;
-  padding:20px 17px 100px;
-  background:#f8f7f1;
-  border-radius:28px 28px 0 0;
-}
-.health-card{
-  padding:18px;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:var(--shadow);
-}
-.health-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.health-title strong{font-size:16px}
-.health-title span{
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:#758279;
   font-size:12px;
-  color:var(--green-dark);
-  font-weight:700;
+  min-width:70px;
+  padding:6px;
 }
-.health-bar{
-  height:8px;
-  margin-top:13px;
-  overflow:hidden;
-  border-radius:10px;
-  background:#e8eee6;
+
+.nav-btn span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
 }
-.health-fill{
-  width:82%;
-  height:100%;
-  background:var(--green);
-  border-radius:10px;
+
+.nav-btn.active{
+  color:#365847;
+  font-weight:800;
 }
-.health-note{
-  margin:10px 0 0;
-  color:var(--muted);
-  font-size:12px;
+
+/* PAGES */
+
+.page{
+  display:none;
 }
-.section-title{
+
+.page.active{
+  display:block;
+}
+
+/* EDIT MODAL */
+
+.edit-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(29,43,35,.42);
+  padding:20px;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.edit-modal.show{
+  display:flex;
+}
+
+.edit-card{
+  width:min(520px,100%);
+  background:#fffdf8;
+  border-radius:25px;
+  padding:20px;
+  box-shadow:0 20px 55px rgba(25,40,31,.25);
+  max-height:90vh;
+  overflow:auto;
+}
+
+.edit-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin:25px 2px 12px;
+  margin-bottom:18px;
 }
-.section-title h2{
+
+.edit-header h2{
   margin:0;
+  font-size:23px;
+}
+
+.close-edit{
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:50%;
+  background:#edf0ec;
+  color:#526258;
   font-size:20px;
 }
-.section-title span{
-  color:var(--muted);
-  font-size:12px;
-}
-.filters{
-  display:flex;
-  gap:7px;
-  overflow:auto;
-  padding-bottom:3px;
-}
-.filter{
-  border:1px solid var(--line);
-  border-radius:30px;
-  padding:8px 13px;
-  background:white;
-  color:#6d766f;
-  white-space:nowrap;
-  font-size:12px;
-}
-.filter.active{
-  background:var(--green);
-  color:white;
-  border-color:var(--green);
-}
 
-/* Banners */
-.banner{
-  display:none;
-  margin-top:14px;
-  padding:14px 15px;
-  border-radius:16px;
+.edit-note{
+  margin:-8px 0 18px;
+  color:#718078;
   font-size:13px;
-  line-height:1.4;
 }
-.banner.show{display:block}
-.banner.overdue{background:#f8e8e5;color:#8e514c}
-.banner.soon{background:#f7efdc;color:#856a3c}
-.banner.good{background:#eaf2e8;color:#4d7357}
 
-/* Task cards */
-.tasks{
-  display:grid;
-  gap:11px;
-  margin-top:13px;
+/* stair-like fields */
+
+.edit-step{
+  background:#f7faf6;
+  border:1px solid #dce5dc;
+  border-radius:17px;
+  padding:14px;
+  margin-bottom:10px;
 }
-.task{
+
+.edit-step.step-two{
+  margin-left:10px;
+}
+
+.edit-step.step-three{
+  margin-left:20px;
+}
+
+.step-label{
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:15px;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  box-shadow:0 5px 18px rgba(60,70,62,.05);
+  gap:8px;
+  font-size:13px;
+  font-weight:800;
+  color:#526259;
+  margin-bottom:7px;
 }
-.task-icon{
+
+.step-number{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#dcebdd;
+  color:#41604b;
   display:flex;
   align-items:center;
   justify-content:center;
-  width:42px;
-  height:42px;
-  flex:none;
-  border-radius:14px;
-  background:var(--soft-green);
-  font-size:20px;
-}
-.task-info{
-  flex:1;
-  min-width:0;
-}
-.task-name{
-  font-size:15px;
-  font-weight:700;
-  overflow-wrap:anywhere;
-}
-.task-meta{
-  margin-top:4px;
-  color:var(--muted);
-  font-size:11px;
-}
-.task-status{
-  margin-top:5px;
-  font-size:11px;
-  font-weight:700;
-}
-.task-status.overdue{color:var(--danger)}
-.task-status.today{color:var(--warning)}
-.task-status.upcoming{color:var(--green-dark)}
-.task-actions{
-  display:flex;
-  gap:4px;
-  flex:none;
-}
-.task-actions button{
-  width:29px;
-  height:31px;
-  padding:0;
-  border:0;
-  border-radius:9px;
-  background:#f1f3ee;
-  color:#667069;
-  font-weight:800;
-}
-.task-actions button.edit{color:#527b5d}
-.task-actions button.complete{color:var(--green-dark)}
-.task-actions button.delete{color:var(--danger)}
-
-.empty{
-  padding:28px 15px;
-  text-align:center;
-  color:var(--muted);
-  background:white;
-  border:1px dashed #d8d9d1;
-  border-radius:18px;
-}
-.empty strong{
-  display:block;
-  margin-bottom:5px;
-  color:var(--ink);
-}
-
-/* Coming up */
-.coming-up{
-  display:grid;
-  gap:9px;
-}
-.coming-item{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px 14px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-}
-.coming-item strong{font-size:13px}
-.coming-item span{
-  color:var(--muted);
-  font-size:11px;
-  text-align:right;
-}
-
-/* Pages and forms */
-.page{display:none}
-.page.active{display:block}
-.form-card{
-  padding:18px;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:var(--shadow);
-}
-.field{margin-bottom:15px}
-.field label{
-  display:block;
-  margin-bottom:6px;
   font-size:12px;
-  font-weight:700;
 }
-.field input,.field select{
+
+.edit-step input,
+.edit-step select{
   width:100%;
-  padding:12px 13px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  outline:none;
-  background:#fbfbf8;
-  color:var(--ink);
-}
-.field input:focus,.field select:focus{border-color:#a9bea9}
-.primary{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:13px;
-  background:var(--green);
-  color:white;
-  font-weight:700;
-}
-.secondary{
-  width:100%;
-  padding:13px;
-  margin-top:9px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:white;
-  color:var(--ink);
-}
-.quick-add{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:12px;
-}
-.quick-add button{
   padding:12px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:white;
-  color:var(--green-dark);
-  font-size:12px;
+  border:1px solid #ccd8ce;
+  border-radius:12px;
+  background:#fff;
+  color:#29392f;
+  outline:none;
 }
-.memory-card{
-  padding:18px;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:20px;
-}
-.memory-stat{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid #eeeeea;
-}
-.memory-stat:last-child{border-bottom:0}
-.memory-stat span{
-  color:var(--muted);
-  font-size:12px;
-}
-.settings-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:15px 0;
-  border-bottom:1px solid #eeeeea;
-}
-.settings-row:last-child{border-bottom:0}
-.settings-row strong{font-size:14px}
-.settings-row small{
-  display:block;
-  margin-top:4px;
-  color:var(--muted);
-  font-size:11px;
-}
-.switch{
-  position:relative;
-  width:48px;
-  height:27px;
-  flex:none;
-  border:0;
-  border-radius:30px;
-  background:#d9ddd8;
-}
-.switch:after{
-  content:"";
-  position:absolute;
-  top:4px;
-  left:4px;
-  width:19px;
-  height:19px;
-  border-radius:50%;
-  background:white;
-  transition:.2s;
-}
-.switch.on{background:var(--green)}
-.switch.on:after{left:25px}
 
-/* Bottom navigation */
-.bottom-nav{
-  position:fixed;
-  z-index:30;
-  left:50%;
-  bottom:10px;
-  transform:translateX(-50%);
-  width:min(566px,calc(100% - 22px));
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:8px;
-  background:rgba(255,255,255,.94);
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:0 12px 35px rgba(40,50,43,.13);
-  backdrop-filter:blur(10px);
+.edit-actions{
+  display:flex;
+  gap:9px;
+  margin-top:17px;
 }
-.nav-btn{
-  padding:8px 3px;
-  border:0;
-  background:transparent;
-  color:#858d86;
-  font-size:10px;
+
+.edit-actions button{
+  flex:1;
 }
-.nav-btn .nav-icon{
-  display:block;
-  margin-bottom:3px;
-  font-size:18px;
-}
-.nav-btn.active{
-  color:var(--green-dark);
-  font-weight:700;
-}
-.fab{
-  position:fixed;
-  z-index:31;
-  right:max(22px,calc((100vw - 600px)/2 + 22px));
-  bottom:83px;
-  width:52px;
-  height:52px;
-  border:0;
-  border-radius:50%;
-  background:var(--green);
-  color:white;
-  font-size:26px;
-  box-shadow:0 9px 22px rgba(75,105,80,.25);
-}
+
+/* TOAST */
+
 .toast{
   position:fixed;
-  z-index:50;
   left:50%;
-  bottom:145px;
+  bottom:82px;
   transform:translateX(-50%) translateY(20px);
-  padding:11px 15px;
-  background:#303832;
-  color:white;
-  border-radius:12px;
-  font-size:12px;
+  background:#2f4738;
+  color:#fff;
+  padding:12px 17px;
+  border-radius:13px;
+  font-size:13px;
   opacity:0;
   pointer-events:none;
   transition:.25s;
+  z-index:200;
 }
+
 .toast.show{
   opacity:1;
   transform:translateX(-50%) translateY(0);
 }
 
-@media(max-width:430px){
-  .house{
-    right:18px;
-    transform:scale(.86);
-    transform-origin:right bottom;
+@media(max-width:500px){
+  .hero-status{
+    font-size:27px;
   }
-  .hero-copy h1{font-size:30px}
-  .hero-copy{max-width:270px}
-  .task{gap:8px;padding:12px}
-  .task-actions{gap:3px}
-  .task-actions button{width:27px}
+
+  .landscape{
+    height:175px;
+  }
+
+  .house{
+    transform:translateX(-50%) scale(.88);
+    transform-origin:bottom center;
+  }
+
+  .edit-card{
+    padding:17px;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
-  <section id="season" class="season">
-    <div class="topbar">
-      <div>
-        <div class="logo">Haven</div>
-        <div class="tagline">Your home remembers.</div>
+<header>
+
+  <div class="header-top">
+    <div>
+      <div class="logo">Haven</div>
+      <div class="tagline">Your home remembers.</div>
+    </div>
+
+    <button
+      class="profile-btn"
+      aria-label="Haven profile"
+      title="Haven profile"
+      onclick="toggleProfile()">
+      H
+    </button>
+  </div>
+
+  <div class="profile-popup" id="profilePopup">
+    <strong>Haven</strong>
+    <p>Your private home-maintenance memory.</p>
+    <p style="margin-top:8px;">Your memories are stored on this device.</p>
+  </div>
+
+  <div class="landscape" id="landscape">
+
+    <div class="sun"></div>
+
+    <div class="mountain one"></div>
+    <div class="mountain two"></div>
+    <div class="ground"></div>
+
+    <div class="house">
+
+      <div class="chimney"></div>
+      <div class="roof"></div>
+
+      <div class="house-body">
+        <div class="window left"></div>
+        <div class="window right"></div>
+
+        <div class="flower left"></div>
+        <div class="flower right"></div>
+
+        <div class="door">
+          <div class="door-knob"></div>
+        </div>
+
+        <div class="porch"></div>
+      </div>
+
+    </div>
+
+    <div class="season" id="seasonDecor">
+      <div class="leaf l1"></div>
+      <div class="leaf l2"></div>
+      <div class="leaf l3"></div>
+      <div class="leaf l4"></div>
+
+      <div class="snow s1"></div>
+      <div class="snow s2"></div>
+      <div class="snow s3"></div>
+      <div class="snow s4"></div>
+      <div class="snow s5"></div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- HOME -->
+
+<section class="page active" id="homePage">
+
+  <div class="hero">
+
+    <div class="hero-status" id="heroStatus">
+      Home is doing well
+    </div>
+
+    <div class="hero-sub">
+      Haven keeps track of the little things your home needs.
+    </div>
+
+    <div class="status-banner" id="statusBanner">
+      Everything looks good.
+    </div>
+
+  </div>
+
+  <div class="content">
+
+    <div class="section-title">Maintenance</div>
+
+    <div class="filters">
+
+      <button class="filter active" onclick="setFilter('all',this)">
+        All
+      </button>
+
+      <button class="filter" onclick="setFilter('today',this)">
+        Today
+      </button>
+
+      <button class="filter" onclick="setFilter('upcoming',this)">
+        Upcoming
+      </button>
+
+      <button class="filter" onclick="setFilter('overdue',this)">
+        Overdue
+      </button>
+
+    </div>
+
+    <div id="taskList" style="margin-top:14px;"></div>
+
+  </div>
+
+</section>
+
+
+<!-- MEMORY -->
+
+<section class="page" id="memoryPage">
+
+  <div class="content">
+
+    <div class="section-title">Home memory</div>
+
+    <div class="form-card">
+
+      <div style="font-size:15px;font-weight:800;margin-bottom:7px;">
+        Your maintenance library
+      </div>
+
+      <div style="font-size:13px;color:#718078;line-height:1.5;">
+        Every memory you add stays here so you don't have to remember
+        everything yourself.
+      </div>
+
+    </div>
+
+    <div id="memoryList" style="margin-top:14px;"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ADD -->
+
+<section class="page" id="addPage">
+
+  <div class="content">
+
+    <div class="section-title">Add maintenance</div>
+
+    <div class="form-card">
+
+      <div class="field">
+
+        <label for="taskName">
+          What needs remembering?
+        </label>
+
+        <input
+          id="taskName"
+          type="text"
+          placeholder="e.g. Clean water filter"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="taskDate">
+          Due date
+        </label>
+
+        <input
+          id="taskDate"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="taskRepeat">
+          Repeat
+        </label>
+
+        <select id="taskRepeat">
+
+          <option value="0">
+            One time
+          </option>
+
+          <option value="7">
+            Every week
+          </option>
+
+          <option value="30">
+            Every month
+          </option>
+
+          <option value="90">
+            Every 3 months
+          </option>
+
+          <option value="180">
+            Every 6 months
+          </option>
+
+          <option value="365">
+            Every year
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="primary-btn"
+        onclick="addTask()">
+        Save memory
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section class="page" id="settingsPage">
+
+  <div class="content">
+
+    <div class="section-title">Settings</div>
+
+
+    <div class="setting-card">
+
+      <div class="setting-title">
+        Reminders
+      </div>
+
+      <div class="setting-text">
+        Haven can use browser notifications when reminders are available.
       </div>
 
       <button
-        id="profileButton"
-        class="profile-btn"
-        aria-label="Haven profile"
-        title="Haven profile"
-        onclick="toggleProfile(event)"
-      >H</button>
+        class="secondary-btn"
+        style="margin-top:12px;"
+        onclick="enableReminders()">
+        Enable reminders
+      </button>
 
-      <div id="profilePopup" class="profile-popup">
-        <strong>Haven</strong>
-        <p>A simple memory for the things your home needs.</p>
-      </div>
     </div>
 
-    <div class="hero-copy">
-      <h1 id="heroTitle">Home is doing well</h1>
-      <p id="heroSubtitle">Keep the little things remembered, so your home stays cared for.</p>
-      <div id="statusPill" class="status-pill">Everything looks good</div>
+
+    <div class="setting-card">
+
+      <div class="setting-title">
+        Your data
+      </div>
+
+      <div class="setting-text">
+        Your Haven memories are stored locally on this device.
+      </div>
+
     </div>
 
-    <div class="mountain back"></div>
-    <div class="mountain"></div>
+  </div>
 
-    <div class="house">
-      <div class="house-roof"></div>
-      <div class="chimney"></div>
-      <div class="window left"></div>
-      <div class="window right"></div>
-      <div class="door"></div>
-      <div class="porch"></div>
-      <div class="flower left"></div>
-      <div class="flower right"></div>
-    </div>
+</section>
 
-    <div class="ground"></div>
-    <div class="season-decoration"></div>
-  </section>
-
-  <main class="content">
-
-    <!-- HOME -->
-    <section id="homePage" class="page active">
-      <div class="health-card">
-        <div class="health-title">
-          <strong>Home health</strong>
-          <span id="healthText">Looking good</span>
-        </div>
-        <div class="health-bar">
-          <div id="healthFill" class="health-fill"></div>
-        </div>
-        <p class="health-note">Haven keeps your maintenance memories in one place.</p>
-      </div>
-
-      <div class="section-title">
-        <h2>Maintenance</h2>
-        <span id="taskCount">0 memories</span>
-      </div>
-
-      <div class="filters">
-        <button class="filter active" onclick="setFilter('all',this)">All</button>
-        <button class="filter" onclick="setFilter('today',this)">Today</button>
-        <button class="filter" onclick="setFilter('upcoming',this)">Upcoming</button>
-        <button class="filter" onclick="setFilter('overdue',this)">Overdue</button>
-      </div>
-
-      <div id="overdueBanner" class="banner overdue"></div>
-      <div id="soonBanner" class="banner soon"></div>
-      <div id="goodBanner" class="banner good"></div>
-
-      <div id="tasks" class="tasks"></div>
-
-      <div class="section-title">
-        <h2>Coming up</h2>
-        <span>Next memories</span>
-      </div>
-      <div id="comingUp" class="coming-up"></div>
-    </section>
-
-    <!-- ADD -->
-    <section id="addPage" class="page">
-      <div class="section-title">
-        <h2>Add memory</h2>
-        <span>Keep it simple</span>
-      </div>
-
-      <div class="form-card">
-        <div class="field">
-          <label for="taskName">What needs remembering?</label>
-          <input id="taskName" type="text" placeholder="e.g. Clean water tank">
-        </div>
-
-        <div class="field">
-          <label for="taskDate">Next due date</label>
-          <input id="taskDate" type="date">
-        </div>
-
-        <div class="field">
-          <label for="taskRepeat">Repeat</label>
-          <select id="taskRepeat">
-            <option value="none">One time</option>
-            <option value="7">Every week</option>
-            <option value="30">Every month</option>
-            <option value="90">Every 3 months</option>
-            <option value="180">Every 6 months</option>
-            <option value="365">Every year</option>
-          </select>
-        </div>
-
-        <button class="primary" onclick="addTask()">Save memory</button>
-      </div>
-
-      <div class="section-title">
-        <h2>Quick add</h2>
-        <span>Common tasks</span>
-      </div>
-
-      <div class="quick-add">
-        <button onclick="quickAdd('Clean water tank',30)">Water tank</button>
-        <button onclick="quickAdd('Clean air conditioner',90)">AC cleaning</button>
-        <button onclick="quickAdd('Check smoke alarm',180)">Smoke alarm</button>
-        <button onclick="quickAdd('Clean refrigerator',30)">Refrigerator</button>
-      </div>
-    </section>
-
-    <!-- MEMORY -->
-    <section id="memoryPage" class="page">
-      <div class="section-title">
-        <h2>Memory</h2>
-        <span>Your home history</span>
-      </div>
-      <div class="memory-card" id="memoryCard"></div>
-    </section>
-
-    <!-- SETTINGS -->
-    <section id="settingsPage" class="page">
-      <div class="section-title">
-        <h2>Settings</h2>
-        <span>Haven controls</span>
-      </div>
-
-      <div class="form-card">
-        <div class="settings-row">
-          <div>
-            <strong>Reminders</strong>
-            <small>Check for tasks that need attention.</small>
-          </div>
-          <button
-            id="reminderButton"
-            class="switch"
-            onclick="toggleReminders()"
-            aria-label="Toggle reminders"
-          ></button>
-        </div>
-
-        <div class="settings-row">
-          <div>
-            <strong>Stored memories</strong>
-            <small>Your maintenance data is saved on this device.</small>
-          </div>
-          <span id="storedCount">0</span>
-        </div>
-
-        <button class="secondary" onclick="clearAllData()">Clear all memories</button>
-      </div>
-    </section>
-
-  </main>
 </div>
 
+
+<!-- BOTTOM NAV -->
+
 <nav class="bottom-nav">
-  <button class="nav-btn active" onclick="showPage('home',this)">
-    <span class="nav-icon">⌂</span>Home
+
+  <button
+    class="nav-btn active"
+    onclick="showPage('homePage',this)">
+    <span>⌂</span>
+    Home
   </button>
-  <button class="nav-btn" onclick="showPage('memory',this)">
-    <span class="nav-icon">◷</span>Memory
+
+  <button
+    class="nav-btn"
+    onclick="showPage('memoryPage',this)">
+    <span>◫</span>
+    Memory
   </button>
-  <button class="nav-btn" onclick="showPage('add',this)">
-    <span class="nav-icon">＋</span>Add
+
+  <button
+    class="nav-btn"
+    onclick="showPage('addPage',this)">
+    <span>＋</span>
+    Add
   </button>
-  <button class="nav-btn" onclick="showPage('settings',this)">
-    <span class="nav-icon">⚙</span>Settings
+
+  <button
+    class="nav-btn"
+    onclick="showPage('settingsPage',this)">
+    <span>⚙</span>
+    Settings
   </button>
+
 </nav>
 
-<button class="fab" onclick="showPage('add')">+</button>
-<div id="toast" class="toast"></div>
+
+<!-- EDIT MEMORY MODAL -->
+
+<div
+  class="edit-modal"
+  id="editModal">
+
+  <div class="edit-card">
+
+    <div class="edit-header">
+
+      <h2>Edit memory</h2>
+
+      <button
+        class="close-edit"
+        onclick="closeEditModal()"
+        aria-label="Close">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="edit-note">
+      Change any field you want. The other fields stay as they are.
+    </div>
+
+
+    <!-- STEP 1 -->
+
+    <div class="edit-step">
+
+      <div class="step-label">
+
+        <div class="step-number">
+          1
+        </div>
+
+        Task name
+
+      </div>
+
+      <input
+        id="editTaskName"
+        type="text"
+        placeholder="Task name"
+      >
+
+    </div>
+
+
+    <!-- STEP 2 -->
+
+    <div class="edit-step step-two">
+
+      <div class="step-label">
+
+        <div class="step-number">
+          2
+        </div>
+
+        Due date
+
+      </div>
+
+      <input
+        id="editTaskDate"
+        type="date"
+      >
+
+    </div>
+
+
+    <!-- STEP 3 -->
+
+    <div class="edit-step step-three">
+
+      <div class="step-label">
+
+        <div class="step-number">
+          3
+        </div>
+
+        Repeat
+
+      </div>
+
+      <select id="editTaskRepeat">
+
+        <option value="0">
+          One time
+        </option>
+
+        <option value="7">
+          Every week
+        </option>
+
+        <option value="30">
+          Every month
+        </option>
+
+        <option value="90">
+          Every 3 months
+        </option>
+
+        <option value="180">
+          Every 6 months
+        </option>
+
+        <option value="365">
+          Every year
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="edit-actions">
+
+      <button
+        class="secondary-btn"
+        onclick="closeEditModal()">
+        Cancel
+      </button>
+
+      <button
+        class="primary-btn"
+        onclick="saveEditedTask()">
+        Save changes
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
 
 <script>
+
+/* =========================
+   HAVEN DATA
+========================= */
+
 const STORAGE_KEY = "havenTasksV3";
 const REMINDER_KEY = "havenRemindersV1";
 
 let tasks = [];
 let currentFilter = "all";
+let editingTaskId = null;
 
-/* Storage */
+
+/* =========================
+   LOAD DATA
+========================= */
+
 function loadTasks(){
+
   try{
-    const saved=localStorage.getItem(STORAGE_KEY);
-    tasks=saved?JSON.parse(saved):[];
-    if(!Array.isArray(tasks)) tasks=[];
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if(saved){
+
+      tasks = JSON.parse(saved);
+
+      if(!Array.isArray(tasks)){
+        tasks = [];
+      }
+
+    }else{
+
+      tasks = [];
+
+    }
+
   }catch(error){
-    console.log("Could not load tasks:",error);
-    tasks=[];
+
+    console.log("Could not load Haven data:",error);
+    tasks = [];
+
   }
+
 }
+
+
+/* =========================
+   SAVE DATA
+========================= */
 
 function saveTasks(){
+
   try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(tasks)
+    );
+
   }catch(error){
-    console.log("Could not save tasks:",error);
-  }
-}
 
-/* Date helpers */
-function todayStart(){
-  const d=new Date();
-  d.setHours(0,0,0,0);
-  return d;
-}
+    console.log("Could not save Haven data:",error);
 
-function dateOnly(value){
-  if(!value) return null;
-
-  if(typeof value==="string" && /^\d{4}-\d{2}-\d{2}$/.test(value)){
-    const parts=value.split("-").map(Number);
-    const d=new Date(parts[0],parts[1]-1,parts[2]);
-    d.setHours(0,0,0,0);
-    return d;
   }
 
-  const d=new Date(value);
-  if(isNaN(d.getTime())) return null;
-  d.setHours(0,0,0,0);
-  return d;
 }
 
-function getDueDate(task){
-  return dateOnly(
-    task.nextDue ||
-    task.dueDate ||
-    task.date ||
-    task.next_due ||
-    task.due
-  );
-}
 
-function daysBetween(task){
-  const due=getDueDate(task);
-  if(!due) return null;
-  return Math.round(
-    (due.getTime()-todayStart().getTime())/(1000*60*60*24)
-  );
-}
+/* =========================
+   SERVICE WORKER
+========================= */
 
-function formatDate(value){
-  const d=dateOnly(value);
-  if(!d) return "Date needs checking";
-  return d.toLocaleDateString(undefined,{
-    day:"numeric",
-    month:"short",
-    year:"numeric"
-  });
-}
+async function registerServiceWorker(){
 
-function localDateString(date){
-  return date.getFullYear()+"-"+
-    String(date.getMonth()+1).padStart(2,"0")+"-"+
-    String(date.getDate()).padStart(2,"0");
-}
+  if(!("serviceWorker" in navigator)) return false;
 
-/* Season */
-function updateSeason(){
-  const month=new Date().getMonth()+1;
-  const season=document.getElementById("season");
-  season.className="season";
+  try{
 
-  if(month>=3 && month<=5) season.classList.add("spring");
-  else if(month>=6 && month<=8) season.classList.add("summer");
-  else if(month>=9 && month<=11) season.classList.add("autumn");
-  else season.classList.add("winter");
-}
+    const swUrl = new URL(
+      "sw.js",
+      window.location.href
+    );
 
-/* Task status */
-function taskStatus(task){
-  const days=daysBetween(task);
-  if(days===null) return "unknown";
-  if(days<0) return "overdue";
-  if(days===0) return "today";
-  return "upcoming";
-}
+    const scope = new URL(
+      "./",
+      window.location.href
+    ).pathname;
 
-function statusText(task){
-  const days=daysBetween(task);
-  if(days===null) return "Date needs checking";
-  if(days<0){
-    const n=Math.abs(days);
-    return n===1?"1 day overdue":n+" days overdue";
-  }
-  if(days===0) return "Due today";
-  return days===1?"Due in 1 day":"Due in "+days+" days";
-}
+    await navigator.serviceWorker.register(
+      swUrl.href,
+      {scope:scope}
+    );
 
-/* Icons and categories */
-function getIcon(name){
-  const n=String(name||"").toLowerCase();
-  if(n.includes("water")) return "💧";
-  if(n.includes("air")||n.includes("ac")) return "❄";
-  if(n.includes("garden")) return "🌿";
-  if(n.includes("alarm")) return "🔔";
-  if(n.includes("clean")||n.includes("wash")) return "🧹";
-  if(n.includes("roof")||n.includes("gutter")) return "🏠";
-  if(n.includes("fridge")||n.includes("refrigerator")) return "◫";
-  return "✓";
-}
+    await navigator.serviceWorker.ready;
 
-function getCategory(name){
-  const n=String(name||"").toLowerCase();
-  if(n.includes("water")) return "Water";
-  if(n.includes("garden")||n.includes("plant")) return "Garden";
-  if(n.includes("air")||n.includes("ac")) return "Climate";
-  if(n.includes("clean")||n.includes("wash")) return "Cleaning";
-  return "Home";
-}
-
-/* Filters */
-function setFilter(filter,button){
-  currentFilter=filter;
-  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-  if(button) button.classList.add("active");
-  render();
-}
-
-function filteredTasks(){
-  return tasks.filter(task=>{
-    const status=taskStatus(task);
-    if(currentFilter==="today") return status==="today";
-    if(currentFilter==="upcoming") return status==="upcoming";
-    if(currentFilter==="overdue") return status==="overdue";
     return true;
-  });
-}
 
-/* Render task list */
-function render(){
-  const container=document.getElementById("tasks");
-  const list=filteredTasks();
+  }catch(error){
 
-  document.getElementById("taskCount").textContent=
-    tasks.length+(tasks.length===1?" memory":" memories");
-  document.getElementById("storedCount").textContent=tasks.length;
+    console.log(
+      "Service worker registration failed:",
+      error
+    );
 
-  if(list.length===0){
-    container.innerHTML=`
-      <div class="empty">
-        <strong>No memories here</strong>
-        <div>Add a maintenance memory and Haven will remember it.</div>
-      </div>`;
-  }else{
-    container.innerHTML=list
-      .sort((a,b)=>{
-        const da=getDueDate(a);
-        const db=getDueDate(b);
-        if(!da) return 1;
-        if(!db) return -1;
-        return da-db;
-      })
-      .map(task=>{
-        const status=taskStatus(task);
-        const id=escapeHtml(String(task.id));
+    return false;
 
-        return `
-          <div class="task">
-            <div class="task-icon">${getIcon(task.name)}</div>
-
-            <div class="task-info">
-              <div class="task-name">${escapeHtml(task.name||"Untitled")}</div>
-              <div class="task-meta">
-                ${getCategory(task.name)} · Next due ${formatDate(getDueDate(task))}
-              </div>
-              <div class="task-status ${status}">${statusText(task)}</div>
-              ${task.lastDone?`
-                <div class="task-meta">Last done ${formatDate(task.lastDone)}</div>
-              `:""}
-            </div>
-
-            <div class="task-actions">
-              <button class="edit" title="Edit" aria-label="Edit task"
-                onclick="editTask('${id}')">✎</button>
-              <button class="complete" title="Complete" aria-label="Complete task"
-                onclick="completeTask('${id}')">✓</button>
-              <button class="delete" title="Delete" aria-label="Delete task"
-                onclick="deleteTask('${id}')">×</button>
-            </div>
-          </div>`;
-      }).join("");
   }
 
-  renderBanners();
-  renderDueSoon();
-  updateHero();
 }
 
-/* Banners */
-function renderBanners(){
-  const overdue=tasks.filter(t=>taskStatus(t)==="overdue").length;
-  const today=tasks.filter(t=>taskStatus(t)==="today").length;
 
-  const overdueBanner=document.getElementById("overdueBanner");
-  const soonBanner=document.getElementById("soonBanner");
-  const goodBanner=document.getElementById("goodBanner");
+/* =========================
+   REMINDERS
+========================= */
 
-  overdueBanner.classList.remove("show");
-  soonBanner.classList.remove("show");
-  goodBanner.classList.remove("show");
+async function enableReminders(){
 
-  if(overdue>0){
-    overdueBanner.textContent=overdue+
-      (overdue===1?" maintenance memory is overdue.":" maintenance memories are overdue.");
-    overdueBanner.classList.add("show");
-  }else if(today>0){
-    soonBanner.textContent=today+
-      (today===1?" memory is due today.":" memories are due today.");
-    soonBanner.classList.add("show");
-  }else{
-    goodBanner.textContent="Nothing needs attention right now.";
-    goodBanner.classList.add("show");
-  }
-}
+  if(!("Notification" in window)){
 
-/* Coming up */
-function renderDueSoon(){
-  const container=document.getElementById("comingUp");
-  const upcoming=tasks
-    .filter(t=>{
-      const d=daysBetween(t);
-      return d!==null && d>=0;
-    })
-    .sort((a,b)=>daysBetween(a)-daysBetween(b))
-    .slice(0,4);
+    showToast(
+      "Notifications are not supported here."
+    );
 
-  if(upcoming.length===0){
-    container.innerHTML=`<div class="empty">No upcoming maintenance yet.</div>`;
     return;
+
   }
 
-  container.innerHTML=upcoming.map(task=>`
-    <div class="coming-item">
-      <strong>${escapeHtml(task.name||"Untitled")}</strong>
-      <span>${statusText(task)}</span>
-    </div>
-  `).join("");
+  try{
+
+    const permission =
+      await Notification.requestPermission();
+
+    if(permission === "granted"){
+
+      localStorage.setItem(
+        REMINDER_KEY,
+        "enabled"
+      );
+
+      showToast(
+        "Reminders enabled."
+      );
+
+    }else{
+
+      showToast(
+        "Notifications were not enabled."
+      );
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Reminder permission error:",
+      error
+    );
+
+  }
+
 }
 
-/* Hero status */
-function updateHero(){
-  const overdue=tasks.some(t=>taskStatus(t)==="overdue");
-  const today=tasks.some(t=>taskStatus(t)==="today");
 
-  const title=document.getElementById("heroTitle");
-  const subtitle=document.getElementById("heroSubtitle");
-  const pill=document.getElementById("statusPill");
-  const health=document.getElementById("healthText");
-  const fill=document.getElementById("healthFill");
+/* =========================
+   PAGE NAVIGATION
+========================= */
 
-  if(overdue){
-    title.textContent="A little attention needed";
-    subtitle.textContent="A few home memories are waiting for you.";
-    pill.textContent="Some things need attention";
-    health.textContent="Needs attention";
-    fill.style.width="58%";
-  }else if(today){
-    title.textContent="Something needs attention";
-    subtitle.textContent="A home memory is due today.";
-    pill.textContent="Due today";
-    health.textContent="Almost there";
-    fill.style.width="72%";
-  }else{
-    title.textContent="Home is doing well";
-    subtitle.textContent="Keep the little things remembered, so your home stays cared for.";
-    pill.textContent="Everything looks good";
-    health.textContent="Looking good";
-    fill.style.width="82%";
-  }
-}
+function showPage(pageId,button){
 
-/* Add a task */
-function addTask(){
-  const name=document.getElementById("taskName").value.trim();
-  const date=document.getElementById("taskDate").value;
-  const repeat=document.getElementById("taskRepeat").value;
+  document.querySelectorAll(".page")
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
 
-  if(!name){
-    showToast("Please enter a task.");
-    return;
-  }
-  if(!date){
-    showToast("Please choose a due date.");
-    return;
+  const page =
+    document.getElementById(pageId);
+
+  if(page){
+    page.classList.add("active");
   }
 
-  tasks.push({
-    id:Date.now().toString(),
-    name:name,
-    nextDue:date,
-    repeat:repeat==="none"?0:Number(repeat),
-    lastDone:null
-  });
-
-  saveTasks();
-  document.getElementById("taskName").value="";
-  document.getElementById("taskDate").value="";
-  document.getElementById("taskRepeat").value="none";
-
-  showToast("Memory saved.");
-  showPage("home");
-  render();
-}
-
-/* Quick add */
-function quickAdd(name,days){
-  const d=new Date();
-  d.setDate(d.getDate()+days);
-
-  tasks.push({
-    id:Date.now().toString(),
-    name:name,
-    nextDue:localDateString(d),
-    repeat:days,
-    lastDone:null
-  });
-
-  saveTasks();
-  showToast("Memory added.");
-  showPage("home");
-  render();
-}
-
-/* EDIT TASK */
-function editTask(id){
-  const task=tasks.find(t=>String(t.id)===String(id));
-  if(!task) return;
-
-  const currentName=task.name||"";
-  const currentDate=getDueDate(task);
-  const currentDateText=currentDate?localDateString(currentDate):"";
-  const currentRepeat=Number(task.repeat||0);
-
-  const newName=prompt("Edit task name:",currentName);
-  if(newName===null) return;
-
-  if(!newName.trim()){
-    showToast("Task name cannot be empty.");
-    return;
-  }
-
-  const newDate=prompt(
-    "Edit due date (YYYY-MM-DD):",
-    currentDateText
-  );
-  if(newDate===null) return;
-
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(newDate)){
-    showToast("Please enter the date as YYYY-MM-DD.");
-    return;
-  }
-
-  const checkedDate=dateOnly(newDate);
-  if(!checkedDate || localDateString(checkedDate)!==newDate){
-    showToast("That date is not valid.");
-    return;
-  }
-
-  const repeatAnswer=prompt(
-    "Repeat interval in days. Enter 0 for one time.",
-    String(currentRepeat)
-  );
-  if(repeatAnswer===null) return;
-
-  const newRepeat=Number(repeatAnswer);
-  if(!Number.isInteger(newRepeat)||newRepeat<0){
-    showToast("Repeat must be 0 or a positive whole number.");
-    return;
-  }
-
-  task.name=newName.trim();
-  task.nextDue=newDate;
-  task.repeat=newRepeat;
-
-  saveTasks();
-  render();
-  renderMemory();
-  showToast("Memory updated.");
-}
-
-/* Complete task */
-function completeTask(id){
-  const task=tasks.find(t=>String(t.id)===String(id));
-  if(!task) return;
-
-  const today=new Date();
-  task.lastDone=today.toISOString();
-
-  const repeat=Number(task.repeat||0);
-
-  if(repeat>0){
-    const due=getDueDate(task)||today;
-    due.setDate(due.getDate()+repeat);
-    task.nextDue=localDateString(due);
-  }else{
-    task.nextDue=null;
-  }
-
-  saveTasks();
-  showToast("Marked complete.");
-  render();
-}
-
-/* Delete task */
-function deleteTask(id){
-  const task=tasks.find(t=>String(t.id)===String(id));
-  if(!task) return;
-
-  if(!confirm("Delete this maintenance memory?")) return;
-
-  tasks=tasks.filter(t=>String(t.id)!==String(id));
-  saveTasks();
-  showToast("Memory deleted.");
-  render();
-}
-
-/* Memory page */
-function renderMemory(){
-  const container=document.getElementById("memoryCard");
-  const completed=tasks.filter(t=>t.lastDone).length;
-  const overdue=tasks.filter(t=>taskStatus(t)==="overdue").length;
-
-  container.innerHTML=`
-    <div class="memory-stat"><strong>Total memories</strong><span>${tasks.length}</span></div>
-    <div class="memory-stat"><strong>Completed memories</strong><span>${completed}</span></div>
-    <div class="memory-stat"><strong>Needs attention</strong><span>${overdue}</span></div>
-    <div class="memory-stat"><strong>Storage</strong><span>On this device</span></div>
-  `;
-}
-
-/* Navigation */
-function showPage(page,button){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
-
-  const target=document.getElementById(page+"Page");
-  if(target) target.classList.add("active");
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
 
   if(button){
     button.classList.add("active");
-  }else{
-    const nav=document.querySelector(`.nav-btn[onclick*="'${page}'"]`);
-    if(nav) nav.classList.add("active");
   }
 
-  if(page==="memory") renderMemory();
+  if(pageId === "memoryPage"){
+    renderMemory();
+  }
 
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-/* Profile popup */
-function toggleProfile(event){
-  if(event) event.stopPropagation();
 
-  const popup=document.getElementById("profilePopup");
-  const button=document.getElementById("profileButton");
+/* =========================
+   PROFILE
+========================= */
+
+function toggleProfile(){
+
+  const popup =
+    document.getElementById("profilePopup");
 
   popup.classList.toggle("show");
-  button.classList.toggle("selected",popup.classList.contains("show"));
+
 }
 
-document.addEventListener("click",function(event){
-  const popup=document.getElementById("profilePopup");
-  const button=document.getElementById("profileButton");
 
-  if(!popup.contains(event.target)&&event.target!==button){
-    popup.classList.remove("show");
-    button.classList.remove("selected");
+/* =========================
+   DATE HELPERS
+========================= */
+
+function formatDate(dateString){
+
+  if(!dateString){
+    return "No date";
   }
-});
 
-/* Toast message */
-let toastTimer;
+  const date =
+    new Date(dateString + "T00:00:00");
 
-function showToast(message){
-  const toast=document.getElementById("toast");
-  toast.textContent=message;
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
-}
-
-/* Reminders */
-function remindersEnabled(){
-  return localStorage.getItem(REMINDER_KEY)==="true";
-}
-
-function toggleReminders(){
-  const enabled=remindersEnabled();
-
-  if(!enabled){
-    if("Notification" in window && Notification.permission!=="granted"){
-      Notification.requestPermission().then(permission=>{
-        if(permission==="granted"){
-          localStorage.setItem(REMINDER_KEY,"true");
-          updateReminderButton();
-          checkReminders();
-          showToast("Reminders enabled.");
-        }else{
-          showToast("Notification permission was not granted.");
-        }
-      });
-    }else{
-      localStorage.setItem(REMINDER_KEY,"true");
-      updateReminderButton();
-      checkReminders();
-      showToast("Reminders enabled.");
-    }
-  }else{
-    localStorage.setItem(REMINDER_KEY,"false");
-    updateReminderButton();
-    showToast("Reminders disabled.");
+  if(Number.isNaN(date.getTime())){
+    return "No date";
   }
-}
 
-function updateReminderButton(){
-  const button=document.getElementById("reminderButton");
-  button.classList.toggle("on",remindersEnabled());
-}
-
-function scheduleReminderCheck(){
-  setInterval(checkReminders,60*60*1000);
-}
-
-function checkReminders(){
-  if(!remindersEnabled()) return;
-  if(!("Notification" in window)||Notification.permission!=="granted") return;
-
-  const today=todayStart().getTime();
-
-  tasks.forEach(task=>{
-    const due=getDueDate(task);
-    if(!due) return;
-
-    if(due.getTime()===today){
-      const key="haven-notified-"+task.id+"-"+today;
-      if(localStorage.getItem(key)) return;
-
-      try{
-        new Notification("Haven reminder",{
-          body:(task.name||"Maintenance")+" is due today."
-        });
-        localStorage.setItem(key,"true");
-      }catch(error){
-        console.log("Notification failed:",error);
-      }
+  return date.toLocaleDateString(
+    undefined,
+    {
+      day:"numeric",
+      month:"short",
+      year:"numeric"
     }
-  });
+  );
+
 }
 
-/* Clear data */
-function clearAllData(){
-  if(!confirm("Clear all Haven memories? This cannot be undone.")) return;
 
-  tasks=[];
-  saveTasks();
-  renderMemory();
-  render();
-  showToast("All memories cleared.");
+function getToday(){
+
+  const now = new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(now.getMonth()+1)
+      .padStart(2,"0");
+
+  const day =
+    String(now.getDate())
+      .padStart(2,"0");
+
+  return `${year}-${month}-${day}`;
+
 }
 
-/* Escape user-entered text */
+
+function daysBetween(dateString){
+
+  if(!dateString){
+    return null;
+  }
+
+  const today =
+    new Date(getToday() + "T00:00:00");
+
+  const date =
+    new Date(dateString + "T00:00:00");
+
+  return Math.round(
+    (date - today) / 86400000
+  );
+
+}
+
+
+/* =========================
+   DUE DATE
+========================= */
+
+function getDueDate(task){
+
+  if(task.nextDue){
+    return task.nextDue;
+  }
+
+  if(task.dueDate){
+    return task.dueDate;
+  }
+
+  return null;
+
+}
+
+
+/* =========================
+   TASK ICON
+========================= */
+
+function getTaskIcon(name){
+
+  const text =
+    name.toLowerCase();
+
+  if(
+    text.includes("garden") ||
+    text.includes("plant") ||
+    text.includes("lawn")
+  ){
+    return "🌿";
+  }
+
+  if(
+    text.includes("filter") ||
+    text.includes("water")
+  ){
+    return "💧";
+  }
+
+  if(
+    text.includes("clean") ||
+    text.includes("wash")
+  ){
+    return "🧽";
+  }
+
+  if(
+    text.includes("electric") ||
+    text.includes("light") ||
+    text.includes("bulb")
+  ){
+    return "💡";
+  }
+
+  if(
+    text.includes("repair") ||
+    text.includes("fix")
+  ){
+    return "🔧";
+  }
+
+  if(
+    text.includes("roof") ||
+    text.includes("gutter")
+  ){
+    return "🏠";
+  }
+
+  return "✓";
+
+}
+
+
+/* =========================
+   REPEAT TEXT
+========================= */
+
+function repeatText(days){
+
+  days = Number(days) || 0;
+
+  if(days === 0){
+    return "One time";
+  }
+
+  if(days === 7){
+    return "Every week";
+  }
+
+  if(days === 30){
+    return "Every month";
+  }
+
+  if(days === 90){
+    return "Every 3 months";
+  }
+
+  if(days === 180){
+    return "Every 6 months";
+  }
+
+  if(days === 365){
+    return "Every year";
+  }
+
+  return `Every ${days} days`;
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
 function escapeHtml(value){
-  return String(value||"")
+
+  return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
-/* Service worker — keep sw.js in your repository */
-async function registerServiceWorker(){
-  if(!("serviceWorker" in navigator)) return false;
 
-  try{
-    const swUrl=new URL("sw.js",window.location.href);
-    const scope=new URL("./",window.location.href).pathname;
+/* =========================
+   TASK STATUS
+========================= */
 
-    await navigator.serviceWorker.register(swUrl.href,{scope:scope});
-    await navigator.serviceWorker.ready;
-    return true;
-  }catch(error){
-    console.log("Service worker registration failed:",error);
-    return false;
+function getTaskStatus(task){
+
+  const due =
+    getDueDate(task);
+
+  if(!due){
+
+    return {
+      type:"ok",
+      text:"Date needs checking"
+    };
+
   }
+
+  const difference =
+    daysBetween(due);
+
+  if(difference < 0){
+
+    return {
+      type:"overdue",
+      text:`Overdue by ${Math.abs(difference)} day${Math.abs(difference) === 1 ? "" : "s"}`
+    };
+
+  }
+
+  if(difference === 0){
+
+    return {
+      type:"today",
+      text:"Due today"
+    };
+
+  }
+
+  if(difference === 1){
+
+    return {
+      type:"ok",
+      text:"Due tomorrow"
+    };
+
+  }
+
+  return {
+    type:"ok",
+    text:`Due in ${difference} days`
+  };
+
 }
 
-/* Start app */
-updateSeason();
+
+/* =========================
+   FILTER
+========================= */
+
+function taskMatchesFilter(task){
+
+  const due =
+    getDueDate(task);
+
+  const difference =
+    daysBetween(due);
+
+  if(currentFilter === "all"){
+    return true;
+  }
+
+  if(currentFilter === "today"){
+    return difference === 0;
+  }
+
+  if(currentFilter === "upcoming"){
+    return difference !== null &&
+           difference > 0;
+  }
+
+  if(currentFilter === "overdue"){
+    return difference !== null &&
+           difference < 0;
+  }
+
+  return true;
+
+}
+
+
+function setFilter(filter,button){
+
+  currentFilter = filter;
+
+  document.querySelectorAll(".filter")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+  render();
+
+}
+
+
+/* =========================
+   RENDER TASKS
+========================= */
+
+function render(){
+
+  const list =
+    document.getElementById("taskList");
+
+  if(!list) return;
+
+  const filtered =
+    tasks.filter(taskMatchesFilter);
+
+  if(filtered.length === 0){
+
+    list.innerHTML = `
+      <div class="empty">
+        <strong>No memories here yet.</strong>
+        Your home will let you know when something needs attention.
+      </div>
+    `;
+
+  }else{
+
+    list.innerHTML =
+      filtered.map(renderTaskCard).join("");
+
+  }
+
+  updateHero();
+
+}
+
+
+/* =========================
+   TASK CARD
+========================= */
+
+function renderTaskCard(task){
+
+  const due =
+    getDueDate(task);
+
+  const status =
+    getTaskStatus(task);
+
+  const repeat =
+    repeatText(task.repeat);
+
+  const id =
+    String(task.id);
+
+  return `
+
+    <div class="task-card">
+
+      <div class="task-top">
+
+        <div class="task-icon">
+          ${getTaskIcon(task.name)}
+        </div>
+
+        <div style="flex:1;">
+
+          <div class="task-name">
+            ${escapeHtml(task.name)}
+          </div>
+
+          <div class="task-meta">
+            Due: ${formatDate(due)}
+            <br>
+            ${repeat}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="task-status ${status.type}">
+        ${status.text}
+      </div>
+
+
+      <div class="task-actions">
+
+        <button
+          class="complete-btn"
+          onclick="completeTask('${id}')">
+          ✓ Complete
+        </button>
+
+        <button
+          class="edit-btn"
+          onclick="editTask('${id}')">
+          ✎ Edit
+        </button>
+
+        <button
+          class="delete-btn"
+          onclick="deleteTask('${id}')">
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   HERO STATUS
+========================= */
+
+function updateHero(){
+
+  const hero =
+    document.getElementById("heroStatus");
+
+  const banner =
+    document.getElementById("statusBanner");
+
+  if(!hero || !banner) return;
+
+  const overdue =
+    tasks.filter(task=>{
+      const d =
+        daysBetween(getDueDate(task));
+
+      return d !== null && d < 0;
+    });
+
+  const today =
+    tasks.filter(task=>{
+      return daysBetween(
+        getDueDate(task)
+      ) === 0;
+    });
+
+  if(overdue.length > 0){
+
+    hero.textContent =
+      "A little attention needed";
+
+    banner.textContent =
+      `${overdue.length} thing${overdue.length === 1 ? "" : "s"} overdue.`;
+
+    banner.className =
+      "status-banner overdue";
+
+  }else if(today.length > 0){
+
+    hero.textContent =
+      "Something needs attention";
+
+    banner.textContent =
+      `${today.length} thing${today.length === 1 ? "" : "s"} due today.`;
+
+    banner.className =
+      "status-banner warning";
+
+  }else{
+
+    hero.textContent =
+      "Home is doing well";
+
+    banner.textContent =
+      "Everything looks good.";
+
+    banner.className =
+      "status-banner";
+
+  }
+
+}
+
+
+/* =========================
+   ADD TASK
+========================= */
+
+function addTask(){
+
+  const nameInput =
+    document.getElementById("taskName");
+
+  const dateInput =
+    document.getElementById("taskDate");
+
+  const repeatInput =
+    document.getElementById("taskRepeat");
+
+  const name =
+    nameInput.value.trim();
+
+  const date =
+    dateInput.value;
+
+  const repeat =
+    Number(repeatInput.value);
+
+  if(!name){
+
+    showToast(
+      "Please enter a task name."
+    );
+
+    return;
+
+  }
+
+  if(!date){
+
+    showToast(
+      "Please choose a due date."
+    );
+
+    return;
+
+  }
+
+  const task = {
+
+    id:String(Date.now()),
+
+    name:name,
+
+    dueDate:date,
+
+    nextDue:date,
+
+    repeat:repeat,
+
+    lastDone:null
+
+  };
+
+  tasks.push(task);
+
+  saveTasks();
+
+  nameInput.value = "";
+  dateInput.value = "";
+  repeatInput.value = "0";
+
+  render();
+  renderMemory();
+
+  showToast(
+    "Memory saved."
+  );
+
+  showPage(
+    "homePage",
+    document.querySelector(".nav-btn")
+  );
+
+}
+
+
+/* =========================
+   COMPLETE TASK
+========================= */
+
+function completeTask(id){
+
+  const task =
+    tasks.find(
+      item => String(item.id) === String(id)
+    );
+
+  if(!task) return;
+
+  const today =
+    getToday();
+
+  task.lastDone =
+    today;
+
+  const repeat =
+    Number(task.repeat) || 0;
+
+  if(repeat > 0){
+
+    const currentDue =
+      getDueDate(task) || today;
+
+    const date =
+      new Date(
+        currentDue + "T00:00:00"
+      );
+
+    date.setDate(
+      date.getDate() + repeat
+    );
+
+    task.nextDue =
+      `${date.getFullYear()}-${
+        String(date.getMonth()+1).padStart(2,"0")
+      }-${
+        String(date.getDate()).padStart(2,"0")
+      }`;
+
+  }else{
+
+    task.nextDue = null;
+
+  }
+
+  saveTasks();
+
+  render();
+  renderMemory();
+
+  showToast(
+    repeat > 0
+      ? "Completed. Next memory scheduled."
+      : "Memory completed."
+  );
+
+}
+
+
+/* =========================
+   DELETE TASK
+========================= */
+
+function deleteTask(id){
+
+  const task =
+    tasks.find(
+      item => String(item.id) === String(id)
+    );
+
+  if(!task) return;
+
+  const confirmed =
+    confirm(
+      `Delete "${task.name}"?`
+    );
+
+  if(!confirmed){
+    return;
+  }
+
+  tasks =
+    tasks.filter(
+      item => String(item.id) !== String(id)
+    );
+
+  saveTasks();
+
+  render();
+  renderMemory();
+
+  showToast(
+    "Memory deleted."
+  );
+
+}
+
+
+/* =========================
+   EDIT TASK
+========================= */
+
+/*
+   This opens ONE panel containing:
+   1. Task name
+   2. Due date
+   3. Repeat
+
+   You can change any one of them
+   without changing the others.
+*/
+
+function editTask(id){
+
+  openEditModal(id);
+
+}
+
+
+function openEditModal(id){
+
+  const task =
+    tasks.find(
+      item => String(item.id) === String(id)
+    );
+
+  if(!task){
+
+    showToast(
+      "Memory not found."
+    );
+
+    return;
+
+  }
+
+  editingTaskId =
+    String(id);
+
+  document.getElementById(
+    "editTaskName"
+  ).value =
+    task.name || "";
+
+  document.getElementById(
+    "editTaskDate"
+  ).value =
+    getDueDate(task) || "";
+
+  const repeatSelect =
+    document.getElementById(
+      "editTaskRepeat"
+    );
+
+  const repeat =
+    Number(task.repeat) || 0;
+
+  /*
+    If an older memory contains a custom
+    repeat value, keep that value visible
+    instead of silently changing it.
+  */
+
+  let existingOption =
+    Array.from(
+      repeatSelect.options
+    ).find(
+      option =>
+        Number(option.value) === repeat
+    );
+
+  if(!existingOption && repeat > 0){
+
+    existingOption =
+      document.createElement("option");
+
+    existingOption.value =
+      String(repeat);
+
+    existingOption.textContent =
+      `Every ${repeat} days`;
+
+    repeatSelect.appendChild(
+      existingOption
+    );
+
+  }
+
+  repeatSelect.value =
+    String(repeat);
+
+  document.getElementById(
+    "editModal"
+  ).classList.add("show");
+
+  setTimeout(()=>{
+
+    document.getElementById(
+      "editTaskName"
+    ).focus();
+
+  },100);
+
+}
+
+
+function closeEditModal(){
+
+  editingTaskId = null;
+
+  document.getElementById(
+    "editModal"
+  ).classList.remove("show");
+
+}
+
+
+function saveEditedTask(){
+
+  if(!editingTaskId){
+
+    closeEditModal();
+    return;
+
+  }
+
+  const task =
+    tasks.find(
+      item =>
+        String(item.id) ===
+        String(editingTaskId)
+    );
+
+  if(!task){
+
+    closeEditModal();
+
+    showToast(
+      "Memory not found."
+    );
+
+    return;
+
+  }
+
+
+  const newName =
+    document.getElementById(
+      "editTaskName"
+    ).value.trim();
+
+  const newDate =
+    document.getElementById(
+      "editTaskDate"
+    ).value;
+
+  const newRepeat =
+    Number(
+      document.getElementById(
+        "editTaskRepeat"
+      ).value
+    ) || 0;
+
+
+  if(!newName){
+
+    showToast(
+      "Task name cannot be empty."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Update only the fields shown in the
+    edit panel. lastDone stays untouched.
+  */
+
+  task.name =
+    newName;
+
+  task.repeat =
+    newRepeat;
+
+  if(newDate){
+
+    task.nextDue =
+      newDate;
+
+    task.dueDate =
+      newDate;
+
+  }else{
+
+    task.nextDue =
+      null;
+
+    task.dueDate =
+      null;
+
+  }
+
+
+  saveTasks();
+
+  closeEditModal();
+
+  render();
+  renderMemory();
+
+  showToast(
+    "Memory updated."
+  );
+
+}
+
+
+/* =========================
+   MEMORY PAGE
+========================= */
+
+function renderMemory(){
+
+  const list =
+    document.getElementById(
+      "memoryList"
+    );
+
+  if(!list) return;
+
+  if(tasks.length === 0){
+
+    list.innerHTML = `
+      <div class="empty">
+        <strong>Your memory is empty.</strong>
+        Add your first maintenance memory.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  list.innerHTML =
+    tasks
+      .map(task=>{
+
+        const due =
+          getDueDate(task);
+
+        return `
+
+          <div class="task-card">
+
+            <div class="task-top">
+
+              <div class="task-icon">
+                ${getTaskIcon(task.name)}
+              </div>
+
+              <div style="flex:1;">
+
+                <div class="task-name">
+                  ${escapeHtml(task.name)}
+                </div>
+
+                <div class="task-meta">
+
+                  Due: ${formatDate(due)}
+
+                  <br>
+
+                  ${repeatText(task.repeat)}
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer = null;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(()=>{
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },2500);
+
+}
+
+
+/* =========================
+   SEASON
+========================= */
+
+function setSeason(){
+
+  const month =
+    new Date().getMonth() + 1;
+
+  let season = "";
+
+  if(month >= 3 && month <= 5){
+
+    season = "spring";
+
+  }else if(month >= 6 && month <= 8){
+
+    season = "summer";
+
+  }else if(month >= 9 && month <= 11){
+
+    season = "autumn";
+
+  }else{
+
+    season = "winter";
+
+  }
+
+  const decor =
+    document.getElementById(
+      "seasonDecor"
+    );
+
+  if(decor){
+
+    decor.classList.add(
+      season
+    );
+
+  }
+
+}
+
+
+/* =========================
+   CLOSE POPUP WHEN CLICKING OUTSIDE
+========================= */
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const popup =
+      document.getElementById(
+        "profilePopup"
+      );
+
+    const profileButton =
+      document.querySelector(
+        ".profile-btn"
+      );
+
+    if(
+      popup &&
+      popup.classList.contains("show") &&
+      !popup.contains(event.target) &&
+      !profileButton.contains(event.target)
+    ){
+
+      popup.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================
+   START HAVEN
+========================= */
+
 loadTasks();
+
+setSeason();
+
 render();
+
 renderMemory();
-updateReminderButton();
+
 registerServiceWorker();
 
-if(remindersEnabled()){
-  checkReminders();
-  scheduleReminderCheck();
-}
 </script>
+
 </body>
-    </html>
+  </html>
