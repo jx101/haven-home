@@ -6,320 +6,333 @@
 <title>Haven — Your home remembers.</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#f5f1e8;
+color:#29352d;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f5f1e8;
-  color: #29352d;
+.app{
+max-width:480px;
+margin:auto;
+min-height:100vh;
+padding-bottom:90px;
 }
 
-.app {
-  max-width: 480px;
-  margin: auto;
-  min-height: 100vh;
-  padding-bottom: 90px;
+header{
+padding:28px 22px 18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-header {
-  padding: 28px 22px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.small{
+font-size:13px;
+color:#7b857d;
+margin-bottom:5px;
 }
 
-.small {
-  font-size: 13px;
-  color: #7b857d;
-  margin-bottom: 5px;
+h1{
+font-size:27px;
+font-weight:700;
 }
 
-h1 {
-  font-size: 27px;
-  font-weight: 700;
+.profile{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#dfe8dc;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+color:#506452;
 }
 
-.profile {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #dfe8dc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #506452;
+.hero{
+margin:0 18px 20px;
+padding:25px 22px;
+border-radius:25px;
+background:#dfe8dc;
+min-height:190px;
 }
 
-.hero {
-  margin: 0 18px 20px;
-  padding: 25px 22px;
-  border-radius: 25px;
-  background: #dfe8dc;
-  min-height: 190px;
+.hero-house{
+font-size:65px;
+margin-bottom:8px;
 }
 
-.hero-house {
-  font-size: 65px;
-  margin-bottom: 8px;
+.hero h2{
+font-size:20px;
+margin-bottom:5px;
 }
 
-.hero h2 {
-  font-size: 20px;
-  margin-bottom: 5px;
+.hero p{
+color:#68736a;
+font-size:14px;
 }
 
-.hero p {
-  color: #68736a;
-  font-size: 14px;
+.section{
+padding:0 18px;
 }
 
-.section {
-  padding: 0 18px;
+.section-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:18px 4px 12px;
 }
 
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 18px 4px 12px;
+.section-title h2{
+font-size:18px;
 }
 
-.section-title h2 {
-  font-size: 18px;
+.add-btn{
+width:100%;
+border:none;
+background:#34483a;
+color:white;
+padding:15px;
+border-radius:16px;
+font-size:16px;
+font-weight:600;
+margin:8px 0 18px;
 }
 
-.add-btn {
-  width: 100%;
-  border: none;
-  background: #34483a;
-  color: white;
-  padding: 15px;
-  border-radius: 16px;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 8px 0 18px;
+.task{
+background:#fffdf8;
+border:1px solid #ebe6dc;
+border-radius:19px;
+padding:16px;
+margin-bottom:11px;
+box-shadow:0 4px 15px rgba(50,60,50,.04);
 }
 
-.task {
-  background: #fffdf8;
-  border: 1px solid #ebe6dc;
-  border-radius: 19px;
-  padding: 15px;
-  margin-bottom: 11px;
-  box-shadow: 0 4px 15px rgba(50,60,50,.04);
+.task-top{
+display:flex;
+align-items:center;
+gap:13px;
 }
 
-.task-top {
-  display: flex;
-  align-items: center;
-  gap: 13px;
+.icon{
+width:44px;
+height:44px;
+border-radius:14px;
+background:#edf1e9;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:23px;
+flex-shrink:0;
 }
 
-.icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: #edf1e9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 23px;
+.task-info{
+flex:1;
+min-width:0;
 }
 
-.task-info {
-  flex: 1;
+.task-name{
+font-weight:650;
+font-size:15px;
 }
 
-.task-name {
-  font-weight: 650;
-  font-size: 15px;
+.task-due{
+color:#667269;
+font-size:13px;
+margin-top:5px;
 }
 
-.task-due {
-  color: #7a837c;
-  font-size: 13px;
-  margin-top: 4px;
+.actions{
+display:flex;
+gap:7px;
 }
 
-.actions {
-  display: flex;
-  gap: 7px;
+.action{
+border:none;
+width:34px;
+height:34px;
+border-radius:11px;
+font-size:17px;
+cursor:pointer;
 }
 
-.action {
-  border: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  font-size: 17px;
-  cursor: pointer;
+.complete{
+background:#e0ebdf;
+color:#426148;
 }
 
-.complete {
-  background: #e0ebdf;
-  color: #426148;
+.remove{
+background:#f1e3df;
+color:#89594d;
 }
 
-.remove {
-  background: #f1e3df;
-  color: #89594d;
+.task-details{
+margin-top:13px;
+padding-top:11px;
+border-top:1px solid #eee9df;
+display:flex;
+flex-direction:column;
+gap:4px;
+font-size:12px;
+color:#7b827b;
 }
 
-.details {
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid #eee9df;
-  font-size: 12px;
-  color: #7b827b;
-  line-height: 1.7;
+.last-done{
+color:#526553;
 }
 
-.hidden {
-  display: none;
+.next-due{
+color:#6e786f;
 }
 
-.form {
-  background: #fffdf8;
-  border: 1px solid #ebe6dc;
-  border-radius: 20px;
-  padding: 18px;
-  margin-bottom: 18px;
+.hidden{
+display:none;
 }
 
-.form h3 {
-  margin-bottom: 15px;
+.form{
+background:#fffdf8;
+border:1px solid #ebe6dc;
+border-radius:20px;
+padding:18px;
+margin-bottom:18px;
 }
 
-label {
-  display: block;
-  font-size: 13px;
-  color: #68736a;
-  margin: 12px 0 6px;
+.form h3{
+margin-bottom:15px;
 }
 
-input, select {
-  width: 100%;
-  border: 1px solid #ddd8ce;
-  background: #faf8f2;
-  padding: 13px;
-  border-radius: 12px;
-  font-size: 15px;
-  outline: none;
+label{
+display:block;
+font-size:13px;
+color:#68736a;
+margin:12px 0 6px;
 }
 
-.save {
-  width: 100%;
-  border: none;
-  background: #34483a;
-  color: white;
-  padding: 14px;
-  border-radius: 13px;
-  margin-top: 16px;
-  font-size: 15px;
-  font-weight: 600;
+input,select{
+width:100%;
+border:1px solid #ddd8ce;
+background:#faf8f2;
+padding:13px;
+border-radius:12px;
+font-size:15px;
+outline:none;
 }
 
-.cancel {
-  width: 100%;
-  border: none;
-  background: transparent;
-  color: #69746b;
-  padding: 12px;
-  margin-top: 4px;
+.save{
+width:100%;
+border:none;
+background:#34483a;
+color:white;
+padding:14px;
+border-radius:13px;
+margin-top:16px;
+font-size:15px;
+font-weight:600;
 }
 
-.library-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #fffdf8;
-  border: 1px solid #ebe6dc;
-  padding: 13px;
-  border-radius: 16px;
-  margin-bottom: 8px;
+.cancel{
+width:100%;
+border:none;
+background:transparent;
+color:#69746b;
+padding:12px;
+margin-top:4px;
 }
 
-.library-item .lib-icon {
-  font-size: 22px;
+.library-item{
+display:flex;
+align-items:center;
+gap:12px;
+background:#fffdf8;
+border:1px solid #ebe6dc;
+padding:13px;
+border-radius:16px;
+margin-bottom:8px;
 }
 
-.library-info {
-  flex: 1;
+.lib-icon{
+font-size:22px;
 }
 
-.library-name {
-  font-size: 14px;
-  font-weight: 600;
+.library-info{
+flex:1;
 }
 
-.library-days {
-  font-size: 12px;
-  color: #818980;
-  margin-top: 3px;
+.library-name{
+font-size:14px;
+font-weight:600;
 }
 
-.add-library {
-  border: none;
-  background: #e1eadf;
-  color: #4d654f;
-  border-radius: 10px;
-  padding: 8px 11px;
-  font-weight: 600;
+.library-days{
+font-size:12px;
+color:#818980;
+margin-top:3px;
 }
 
-.empty {
-  text-align: center;
-  padding: 28px 15px;
-  color: #899087;
-  background: #fffdf8;
-  border-radius: 18px;
-  border: 1px solid #ebe6dc;
+.add-library{
+border:none;
+background:#e1eadf;
+color:#4d654f;
+border-radius:10px;
+padding:8px 11px;
+font-weight:600;
 }
 
-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(480px, 100%);
-  background: rgba(255,253,248,.96);
-  border-top: 1px solid #e8e2d8;
-  display: flex;
-  justify-content: space-around;
-  padding: 11px 8px 13px;
-  z-index: 10;
+.add-library:disabled{
+opacity:.6;
 }
 
-.nav-btn {
-  border: none;
-  background: none;
-  color: #8a938b;
-  font-size: 12px;
-  padding: 5px 18px;
+.empty{
+text-align:center;
+padding:28px 15px;
+color:#899087;
+background:#fffdf8;
+border-radius:18px;
+border:1px solid #ebe6dc;
+line-height:1.6;
 }
 
-.nav-btn span {
-  display: block;
-  font-size: 21px;
-  margin-bottom: 2px;
+.page{
+display:none;
 }
 
-.nav-btn.active {
-  color: #3f5845;
-  font-weight: 600;
+.page.active{
+display:block;
 }
 
-.page {
-  display: none;
+nav{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:min(480px,100%);
+background:rgba(255,253,248,.96);
+border-top:1px solid #e8e2d8;
+display:flex;
+justify-content:space-around;
+padding:11px 8px 13px;
+z-index:10;
 }
 
-.page.active {
-  display: block;
+.nav-btn{
+border:none;
+background:none;
+color:#8a938b;
+font-size:12px;
+padding:5px 18px;
+}
+
+.nav-btn span{
+display:block;
+font-size:21px;
+margin-bottom:2px;
+}
+
+.nav-btn.active{
+color:#3f5845;
+font-weight:600;
 }
 </style>
 </head>
@@ -328,814 +341,767 @@ nav {
 
 <div class="app">
 
-  <!-- HOME -->
-  <div id="homePage" class="page active">
+<!-- HOME -->
+<div id="homePage" class="page active">
 
-    <header>
-      <div>
-        <div class="small">Good morning</div>
-        <h1>Welcome to Haven</h1>
-      </div>
-      <div class="profile">H</div>
-    </header>
+<header>
+<div>
+<div class="small">Good morning</div>
+<h1>Welcome to Haven</h1>
+</div>
+<div class="profile">H</div>
+</header>
 
-    <div class="hero">
-      <div class="hero-house">🏡</div>
-      <h2>Home is doing well</h2>
-      <p>Haven quietly remembers what your home needs.</p>
-    </div>
+<div class="hero">
+<div class="hero-house">🏡</div>
+<h2>Home is doing well</h2>
+<p>Haven quietly remembers what your home needs.</p>
+</div>
 
-    <div class="section">
+<div class="section">
 
-      <div class="section-title">
-        <h2>Upcoming maintenance</h2>
-      </div>
+<div class="section-title">
+<h2>Upcoming maintenance</h2>
+</div>
 
-      <div id="homeTasks"></div>
+<div id="homeTasks"></div>
 
-      <button class="add-btn" onclick="openAdd()">＋ Add maintenance</button>
+<button class="add-btn" onclick="showPage('addPage')">
+＋ Add maintenance
+</button>
 
-    </div>
-  </div>
-
-
-  <!-- MEMORY -->
-  <div id="memoryPage" class="page">
-
-    <header>
-      <div>
-        <div class="small">Your home</div>
-        <h1>Memory</h1>
-      </div>
-      <div class="profile">H</div>
-    </header>
-
-    <div class="section">
-      <div class="section-title">
-        <h2>Maintenance history</h2>
-      </div>
-
-      <div id="memoryTasks"></div>
-    </div>
-
-  </div>
+</div>
+</div>
 
 
-  <!-- ADD -->
-  <div id="addPage" class="page">
+<!-- MEMORY -->
+<div id="memoryPage" class="page">
 
-    <header>
-      <div>
-        <div class="small">Take care of home</div>
-        <h1>Add maintenance</h1>
-      </div>
-    </header>
+<header>
+<div>
+<div class="small">Your home</div>
+<h1>Memory</h1>
+</div>
+<div class="profile">H</div>
+</header>
 
-    <div class="section">
+<div class="section">
 
-      <div class="form">
+<div class="section-title">
+<h2>Maintenance history</h2>
+</div>
 
-        <h3>New maintenance</h3>
+<div id="memoryTasks"></div>
 
-        <label>What needs maintenance?</label>
-        <input id="taskName" placeholder="e.g. Clean balcony">
-
-        <label>Repeat every</label>
-        <select id="taskDays">
-          <option value="7">7 days</option>
-          <option value="30" selected>30 days</option>
-          <option value="60">60 days</option>
-          <option value="90">90 days</option>
-          <option value="180">6 months</option>
-          <option value="365">1 year</option>
-        </select>
-
-        <button class="save" onclick="addCustomTask()">Save maintenance</button>
-        <button class="cancel" onclick="showPage('homePage')">Cancel</button>
-
-      </div>
+</div>
+</div>
 
 
-      <div class="section-title">
-        <h2>Maintenance library</h2>
-      </div>
+<!-- ADD -->
+<div id="addPage" class="page">
 
-      <div id="library"></div>
+<header>
+<div>
+<div class="small">Take care of home</div>
+<h1>Add maintenance</h1>
+</div>
+</header>
 
-    </div>
-  </div>
+<div class="section">
+
+<div class="form">
+
+<h3>New maintenance</h3>
+
+<label>What needs maintenance?</label>
+<input id="taskName" placeholder="e.g. Clean balcony">
+
+<label>Repeat every</label>
+
+<select id="taskDays">
+<option value="7">7 days</option>
+<option value="30" selected>30 days</option>
+<option value="60">60 days</option>
+<option value="90">90 days</option>
+<option value="180">6 months</option>
+<option value="365">1 year</option>
+</select>
+
+<button class="save" onclick="addCustomTask()">
+Save maintenance
+</button>
+
+<button class="cancel" onclick="showPage('homePage')">
+Cancel
+</button>
+
+</div>
+
+<div class="section-title">
+<h2>Maintenance library</h2>
+</div>
+
+<div id="library"></div>
+
+</div>
+</div>
 
 
-  <!-- SETTINGS -->
-  <div id="settingsPage" class="page">
+<!-- SETTINGS -->
+<div id="settingsPage" class="page">
 
-    <header>
-      <div>
-        <div class="small">Haven</div>
-        <h1>Settings</h1>
-      </div>
-    </header>
+<header>
+<div>
+<div class="small">Haven</div>
+<h1>Settings</h1>
+</div>
+</header>
 
-    <div class="section">
+<div class="section">
 
-      <div class="form">
-        <h3>Your home</h3>
-        <p style="color:#788078;font-size:14px;line-height:1.6;">
-          Haven stores your maintenance information on this device.
-        </p>
+<div class="form">
 
-        <button class="save" onclick="clearAll()">
-          Clear all maintenance
-        </button>
-      </div>
+<h3>Your home</h3>
 
-    </div>
-  </div>
+<p style="color:#788078;font-size:14px;line-height:1.6;">
+Haven stores your maintenance information on this device.
+</p>
+
+<button class="save" onclick="clearAll()">
+Clear all maintenance
+</button>
+
+</div>
+
+</div>
+</div>
 
 </div>
 
 
+<!-- NAV -->
 <nav>
-  <button class="nav-btn active" id="navHome" onclick="showPage('homePage')">
-    <span>⌂</span>Home
-  </button>
 
-  <button class="nav-btn" id="navMemory" onclick="showPage('memoryPage')">
-    <span>◷</span>Memory
-  </button>
+<button class="nav-btn active" id="navHome" onclick="showPage('homePage')">
+<span>⌂</span>Home
+</button>
 
-  <button class="nav-btn" id="navAdd" onclick="showPage('addPage')">
-    <span>＋</span>Add
-  </button>
+<button class="nav-btn" id="navMemory" onclick="showPage('memoryPage')">
+<span>◷</span>Memory
+</button>
 
-  <button class="nav-btn" id="navSettings" onclick="showPage('settingsPage')">
-    <span>⚙</span>Settings
-  </button>
+<button class="nav-btn" id="navAdd" onclick="showPage('addPage')">
+<span>＋</span>Add
+</button>
+
+<button class="nav-btn" id="navSettings" onclick="showPage('settingsPage')">
+<span>⚙</span>Settings
+</button>
+
 </nav>
 
 
 <script>
 
-const STORAGE_KEY = "havenTasksV3";
+const STORAGE_KEY="havenTasksV3";
 
 
-/* -----------------------------
-   MAINTENANCE LIBRARY
------------------------------ */
+const library=[
 
-const library = [
-
-  {name:"AC filter", days:30, icon:"❄️"},
-  {name:"AC cleaning", days:90, icon:"❄️"},
-  {name:"Water heater", days:180, icon:"💧"},
-  {name:"Water tank cleaning", days:180, icon:"💧"},
-  {name:"Water purifier filter", days:180, icon:"💧"},
-  {name:"Chimney cleaning", days:30, icon:"🧹"},
-  {name:"Smoke detector", days:365, icon:"💡"},
-  {name:"Light bulbs", days:180, icon:"💡"},
-  {name:"Plumbing check", days:180, icon:"🚿"},
-  {name:"Shower check", days:180, icon:"🚿"},
-  {name:"Garden", days:30, icon:"🌿"},
-  {name:"Lawn care", days:30, icon:"🌿"},
-  {name:"Window cleaning", days:90, icon:"🪟"},
-  {name:"Pest control", days:90, icon:"🐜"},
-  {name:"Roof inspection", days:365, icon:"🏠"},
-  {name:"Check for leaks", days:30, icon:"💧"},
-  {name:"Fridge cleaning", days:30, icon:"🧊"},
-  {name:"Washing machine cleaning", days:30, icon:"🫧"},
-  {name:"Bathroom deep clean", days:30, icon:"🛁"},
-  {name:"Kitchen deep clean", days:30, icon:"🍳"},
-  {name:"Gutter cleaning", days:180, icon:"🏠"},
-  {name:"Door & lock check", days:180, icon:"🚪"},
-  {name:"Smoke alarm batteries", days:365, icon:"🔋"},
-  {name:"Home safety check", days:365, icon:"🛡️"}
+{name:"AC filter",days:30,icon:"❄️"},
+{name:"AC cleaning",days:90,icon:"❄️"},
+{name:"Water heater",days:180,icon:"💧"},
+{name:"Water tank cleaning",days:180,icon:"💧"},
+{name:"Water purifier filter",days:180,icon:"💧"},
+{name:"Chimney cleaning",days:30,icon:"🧹"},
+{name:"Smoke detector",days:365,icon:"💡"},
+{name:"Light bulbs",days:180,icon:"💡"},
+{name:"Plumbing check",days:180,icon:"🚿"},
+{name:"Shower check",days:180,icon:"🚿"},
+{name:"Garden",days:30,icon:"🌿"},
+{name:"Lawn care",days:30,icon:"🌿"},
+{name:"Window cleaning",days:90,icon:"🪟"},
+{name:"Pest control",days:90,icon:"🐜"},
+{name:"Roof inspection",days:365,icon:"🏠"},
+{name:"Check for leaks",days:30,icon:"💧"},
+{name:"Fridge cleaning",days:30,icon:"🧊"},
+{name:"Washing machine cleaning",days:30,icon:"🫧"},
+{name:"Bathroom deep clean",days:30,icon:"🛁"},
+{name:"Kitchen deep clean",days:30,icon:"🍳"},
+{name:"Gutter cleaning",days:180,icon:"🏠"},
+{name:"Door & lock check",days:180,icon:"🚪"},
+{name:"Smoke alarm batteries",days:365,icon:"🔋"},
+{name:"Home safety check",days:365,icon:"🛡️"}
 
 ];
 
 
-/* -----------------------------
-   LOAD / SAVE
------------------------------ */
+function getTasks(){
 
-function getTasks() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
-    return [];
-  }
+try{
+return JSON.parse(localStorage.getItem(STORAGE_KEY))||[];
+}catch{
+return[];
 }
-
-function saveTasks(tasks) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-}
-
-
-/* -----------------------------
-   ICONS
------------------------------ */
-
-function getIcon(name) {
-
-  const n = name.toLowerCase();
-
-  if (
-    n.includes("ac") ||
-    n.includes("air conditioner") ||
-    n.includes("aircon")
-  ) return "❄️";
-
-  if (
-    n.includes("water") ||
-    n.includes("leak") ||
-    n.includes("plumb") ||
-    n.includes("pipe") ||
-    n.includes("tap") ||
-    n.includes("shower")
-  ) return "💧";
-
-  if (
-    n.includes("chimney") ||
-    n.includes("clean")
-  ) return "🧹";
-
-  if (
-    n.includes("smoke") ||
-    n.includes("detector") ||
-    n.includes("bulb") ||
-    n.includes("light")
-  ) return "💡";
-
-  if (
-    n.includes("garden") ||
-    n.includes("plant") ||
-    n.includes("lawn")
-  ) return "🌿";
-
-  if (
-    n.includes("window") ||
-    n.includes("glass")
-  ) return "🪟";
-
-  if (
-    n.includes("pest") ||
-    n.includes("insect")
-  ) return "🐜";
-
-  if (
-    n.includes("roof") ||
-    n.includes("gutter")
-  ) return "🏠";
-
-  if (n.includes("fridge")) return "🧊";
-
-  if (n.includes("washing")) return "🫧";
-
-  if (n.includes("bathroom")) return "🛁";
-
-  if (n.includes("kitchen")) return "🍳";
-
-  if (n.includes("door") || n.includes("lock")) return "🚪";
-
-  if (n.includes("battery")) return "🔋";
-
-  if (n.includes("safety")) return "🛡️";
-
-  return "🔧";
-}
-
-
-/* -----------------------------
-   DATES
------------------------------ */
-
-function formatDate(dateString) {
-
-  if (!dateString) return "Not completed yet";
-
-  const date = new Date(dateString);
-
-  return date.toLocaleDateString("en-GB", {
-    day:"numeric",
-    month:"short",
-    year:"numeric"
-  });
-}
-
-
-function getRemainingText(dueDate) {
-
-  if (!dueDate) return "No date set";
-
-  const now = new Date();
-  const due = new Date(dueDate);
-
-  const diff = due - now;
-  const days = Math.ceil(diff / 86400000);
-
-  if (days < 0) {
-
-    const overdue = Math.abs(days);
-
-    if (overdue === 1) return "Overdue by 1 day";
-
-    return `Overdue by ${overdue} days`;
-  }
-
-  if (days === 0) return "Due today";
-
-  if (days === 1) return "Due tomorrow";
-
-  if (days < 30) return `Due in ${days} days`;
-
-  const months = Math.round(days / 30);
-
-  if (months === 1) return "Due in about 1 month";
-
-  return `Due in about ${months} months`;
-}
-
-
-/* -----------------------------
-   CALCULATE NEXT DATE
------------------------------ */
-
-function calculateDueDate(task) {
-
-  const base = task.lastDone
-    ? new Date(task.lastDone)
-    : new Date(task.added);
-
-  base.setDate(base.getDate() + Number(task.days));
-
-  return base.toISOString();
-}
-
-
-/* -----------------------------
-   DISPLAY HOME
------------------------------ */
-
-function renderHome() {
-
-  const container = document.getElementById("homeTasks");
-
-  const tasks = getTasks();
-
-  if (!tasks.length) {
-
-    container.innerHTML = `
-      <div class="empty">
-        <div style="font-size:35px;margin-bottom:8px;">🏡</div>
-        No maintenance yet.<br>
-        Add something your home needs.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  container.innerHTML = tasks.map(task => {
-
-    const dueDate = task.dueDate || calculateDueDate(task);
-
-    const lastDone = task.lastDone
-      ? `<div class="details">Last done: ${formatDate(task.lastDone)}</div>`
-      : "";
-
-    return `
-
-      <div class="task">
-
-        <div class="task-top">
-
-          <div class="icon">
-            ${getIcon(task.name)}
-          </div>
-
-          <div class="task-info">
-
-            <div class="task-name">
-              ${escapeHTML(task.name)}
-            </div>
-
-            <div class="task-due">
-              ${getRemainingText(dueDate)}
-            </div>
-
-          </div>
-
-          <div class="actions">
-
-            <button
-              class="action complete"
-              onclick="completeTask('${task.id}')">
-              ✓
-            </button>
-
-            <button
-              class="action remove"
-              onclick="deleteTask('${task.id}')">
-              ×
-            </button>
-
-          </div>
-
-        </div>
-
-        ${lastDone}
-
-      </div>
-
-    `;
-
-  }).join("");
-}
-
-
-/* -----------------------------
-   MEMORY
------------------------------ */
-
-function renderMemory() {
-
-  const container = document.getElementById("memoryTasks");
-
-  const tasks = getTasks();
-
-  if (!tasks.length) {
-
-    container.innerHTML = `
-      <div class="empty">
-        Your home's memory is empty.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  container.innerHTML = tasks.map(task => {
-
-    const dueDate = task.dueDate || calculateDueDate(task);
-
-    return `
-
-      <div class="task">
-
-        <div class="task-top">
-
-          <div class="icon">
-            ${getIcon(task.name)}
-          </div>
-
-          <div class="task-info">
-
-            <div class="task-name">
-              ${escapeHTML(task.name)}
-            </div>
-
-            <div class="task-due">
-              Next due: ${formatDate(dueDate)}
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="details">
-
-          Added: ${formatDate(task.added)}<br>
-
-          Last done:
-          ${task.lastDone ? formatDate(task.lastDone) : "Not completed yet"}<br>
-
-          Next due:
-          ${formatDate(dueDate)} · ${getRemainingText(dueDate)}
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
-}
-
-
-/* -----------------------------
-   COMPLETE
------------------------------ */
-
-function completeTask(id) {
-
-  const tasks = getTasks();
-
-  const task = tasks.find(t => t.id === id);
-
-  if (!task) return;
-
-  const now = new Date();
-
-  task.lastDone = now.toISOString();
-
-  const next = new Date(now);
-
-  next.setDate(next.getDate() + Number(task.days));
-
-  task.dueDate = next.toISOString();
-
-  saveTasks(tasks);
-
-  renderHome();
-  renderMemory();
-}
-
-
-/* -----------------------------
-   DELETE
------------------------------ */
-
-function deleteTask(id) {
-
-  if (!confirm("Remove this maintenance?")) return;
-
-  let tasks = getTasks();
-
-  tasks = tasks.filter(task => task.id !== id);
-
-  saveTasks(tasks);
-
-  renderHome();
-  renderMemory();
-}
-
-
-/* -----------------------------
-   ADD CUSTOM
------------------------------ */
-
-function addCustomTask() {
-
-  const nameInput = document.getElementById("taskName");
-
-  const name = nameInput.value.trim();
-
-  const days = Number(
-    document.getElementById("taskDays").value
-  );
-
-  if (!name) {
-
-    alert("Please enter a maintenance name.");
-
-    return;
-  }
-
-
-  const now = new Date();
-
-  const due = new Date(now);
-
-  due.setDate(due.getDate() + days);
-
-
-  const task = {
-
-    id: Date.now().toString(),
-
-    name: name,
-
-    days: days,
-
-    added: now.toISOString(),
-
-    lastDone: null,
-
-    dueDate: due.toISOString()
-
-  };
-
-
-  const tasks = getTasks();
-
-  tasks.push(task);
-
-  saveTasks(tasks);
-
-  nameInput.value = "";
-
-  renderHome();
-
-  renderMemory();
-
-  showPage("homePage");
-}
-
-
-/* -----------------------------
-   ADD FROM LIBRARY
------------------------------ */
-
-function addLibraryTask(index) {
-
-  const item = library[index];
-
-  const tasks = getTasks();
-
-  const exists = tasks.some(
-    task => task.name.toLowerCase() === item.name.toLowerCase()
-  );
-
-  if (exists) {
-
-    alert("This maintenance is already added.");
-
-    return;
-  }
-
-
-  const now = new Date();
-
-  const due = new Date(now);
-
-  due.setDate(due.getDate() + item.days);
-
-
-  tasks.push({
-
-    id: Date.now().toString(),
-
-    name: item.name,
-
-    days: item.days,
-
-    icon: item.icon,
-
-    added: now.toISOString(),
-
-    lastDone: null,
-
-    dueDate: due.toISOString()
-
-  });
-
-
-  saveTasks(tasks);
-
-  renderHome();
-
-  renderMemory();
-
-  showPage("homePage");
-}
-
-
-/* -----------------------------
-   LIBRARY DISPLAY
------------------------------ */
-
-function renderLibrary() {
-
-  const container = document.getElementById("library");
-
-  const tasks = getTasks();
-
-  container.innerHTML = library.map((item, index) => {
-
-    const exists = tasks.some(
-      task => task.name.toLowerCase() === item.name.toLowerCase()
-    );
-
-    return `
-
-      <div class="library-item">
-
-        <div class="lib-icon">
-          ${item.icon}
-        </div>
-
-        <div class="library-info">
-
-          <div class="library-name">
-            ${item.name}
-          </div>
-
-          <div class="library-days">
-            Every ${item.days} days
-          </div>
-
-        </div>
-
-        <button
-          class="add-library"
-          onclick="addLibraryTask(${index})"
-          ${exists ? "disabled" : ""}>
-          ${exists ? "Added" : "Add"}
-        </button>
-
-      </div>
-
-    `;
-
-  }).join("");
-}
-
-
-/* -----------------------------
-   NAVIGATION
------------------------------ */
-
-function showPage(pageId) {
-
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.remove("active");
-  });
-
-  document.getElementById(pageId).classList.add("active");
-
-
-  document.querySelectorAll(".nav-btn").forEach(btn => {
-    btn.classList.remove("active");
-  });
-
-
-  if (pageId === "homePage") {
-
-    document.getElementById("navHome").classList.add("active");
-
-    renderHome();
-
-  }
-
-  if (pageId === "memoryPage") {
-
-    document.getElementById("navMemory").classList.add("active");
-
-    renderMemory();
-
-  }
-
-  if (pageId === "addPage") {
-
-    document.getElementById("navAdd").classList.add("active");
-
-    renderLibrary();
-
-  }
-
-  if (pageId === "settingsPage") {
-
-    document.getElementById("navSettings").classList.add("active");
-
-  }
 
 }
 
 
-function openAdd() {
-  showPage("addPage");
+function saveTasks(tasks){
+localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
 }
 
 
-/* -----------------------------
-   CLEAR EVERYTHING
------------------------------ */
+function getIcon(name){
 
-function clearAll() {
+const n=name.toLowerCase();
 
-  if (!confirm("Delete all maintenance memories?")) return;
+if(n.includes("ac")||n.includes("air conditioner")||n.includes("aircon"))
+return"❄️";
 
-  localStorage.removeItem(STORAGE_KEY);
+if(n.includes("water")||n.includes("leak"))
+return"💧";
 
-  renderHome();
+if(n.includes("plumb")||n.includes("pipe")||n.includes("tap")||n.includes("shower"))
+return"🚿";
 
-  renderMemory();
+if(n.includes("chimney")||n.includes("clean"))
+return"🧹";
 
-  renderLibrary();
+if(n.includes("smoke")||n.includes("detector")||n.includes("bulb")||n.includes("light"))
+return"💡";
 
-  showPage("homePage");
+if(n.includes("garden")||n.includes("plant")||n.includes("lawn"))
+return"🌿";
+
+if(n.includes("window")||n.includes("glass"))
+return"🪟";
+
+if(n.includes("pest")||n.includes("insect"))
+return"🐜";
+
+if(n.includes("roof")||n.includes("gutter"))
+return"🏠";
+
+if(n.includes("fridge"))
+return"🧊";
+
+if(n.includes("washing"))
+return"🫧";
+
+if(n.includes("bathroom"))
+return"🛁";
+
+if(n.includes("kitchen"))
+return"🍳";
+
+if(n.includes("door")||n.includes("lock"))
+return"🚪";
+
+if(n.includes("battery"))
+return"🔋";
+
+if(n.includes("safety"))
+return"🛡️";
+
+return"🔧";
+
 }
 
 
-/* -----------------------------
-   SAFETY FOR TEXT
------------------------------ */
+function formatDate(dateString){
 
-function escapeHTML(text) {
+if(!dateString)return"Not completed yet";
 
-  return String(text)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+const date=new Date(dateString);
+
+return date.toLocaleDateString("en-GB",{
+day:"numeric",
+month:"short",
+year:"numeric"
+});
+
 }
 
 
-/* -----------------------------
-   START HAVEN
------------------------------ */
+function getRemainingText(dueDate){
+
+if(!dueDate)return"No date set";
+
+const now=new Date();
+const due=new Date(dueDate);
+
+const days=Math.ceil((due-now)/86400000);
+
+if(days<0){
+
+const overdue=Math.abs(days);
+
+return overdue===1
+?"Overdue by 1 day"
+:`Overdue by ${overdue} days`;
+
+}
+
+if(days===0)return"Due today";
+
+if(days===1)return"Due tomorrow";
+
+if(days<30)return`Due in ${days} days`;
+
+const months=Math.round(days/30);
+
+return months===1
+?"Due in about 1 month"
+:`Due in about ${months} months`;
+
+}
+
+
+function calculateDueDate(task){
+
+const base=task.lastDone
+?new Date(task.lastDone)
+:new Date(task.added);
+
+base.setDate(base.getDate()+Number(task.days));
+
+return base.toISOString();
+
+}
+
+
+function renderHome(){
+
+const container=document.getElementById("homeTasks");
+
+const tasks=getTasks();
+
+if(!tasks.length){
+
+container.innerHTML=`
+<div class="empty">
+<div style="font-size:35px;margin-bottom:8px;">🏡</div>
+No maintenance yet.<br>
+Add something your home needs.
+</div>
+`;
+
+return;
+}
+
+
+container.innerHTML=tasks.map(task=>{
+
+const dueDate=task.dueDate||calculateDueDate(task);
+
+return`
+
+<div class="task">
+
+<div class="task-top">
+
+<div class="icon">
+${getIcon(task.name)}
+</div>
+
+<div class="task-info">
+
+<div class="task-name">
+${escapeHTML(task.name)}
+</div>
+
+<div class="task-due">
+${getRemainingText(dueDate)}
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="action complete"
+onclick="completeTask('${task.id}')">
+✓
+</button>
+
+<button
+class="action remove"
+onclick="deleteTask('${task.id}')">
+×
+</button>
+
+</div>
+
+</div>
+
+
+<div class="task-details">
+
+<div class="last-done">
+Last done: ${task.lastDone
+?formatDate(task.lastDone)
+:"Not completed yet"}
+</div>
+
+<div class="next-due">
+Next due: ${formatDate(dueDate)}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function renderMemory(){
+
+const container=document.getElementById("memoryTasks");
+
+const tasks=getTasks();
+
+if(!tasks.length){
+
+container.innerHTML=`
+<div class="empty">
+Your home's memory is empty.
+</div>
+`;
+
+return;
+}
+
+
+container.innerHTML=tasks.map(task=>{
+
+const dueDate=task.dueDate||calculateDueDate(task);
+
+return`
+
+<div class="task">
+
+<div class="task-top">
+
+<div class="icon">
+${getIcon(task.name)}
+</div>
+
+<div class="task-info">
+
+<div class="task-name">
+${escapeHTML(task.name)}
+</div>
+
+<div class="task-due">
+${getRemainingText(dueDate)}
+</div>
+
+</div>
+
+</div>
+
+
+<div class="task-details">
+
+<div>
+Added: ${formatDate(task.added)}
+</div>
+
+<div class="last-done">
+Last done: ${task.lastDone
+?formatDate(task.lastDone)
+:"Not completed yet"}
+</div>
+
+<div class="next-due">
+Next due: ${formatDate(dueDate)}
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function completeTask(id){
+
+const tasks=getTasks();
+
+const task=tasks.find(t=>t.id===id);
+
+if(!task)return;
+
+const now=new Date();
+
+task.lastDone=now.toISOString();
+
+const next=new Date(now);
+
+next.setDate(next.getDate()+Number(task.days));
+
+task.dueDate=next.toISOString();
+
+saveTasks(tasks);
+
+renderHome();
+
+renderMemory();
+
+}
+
+
+function deleteTask(id){
+
+if(!confirm("Remove this maintenance?"))return;
+
+const tasks=getTasks().filter(t=>t.id!==id);
+
+saveTasks(tasks);
+
+renderHome();
+
+renderMemory();
+
+renderLibrary();
+
+}
+
+
+function addCustomTask(){
+
+const nameInput=document.getElementById("taskName");
+
+const name=nameInput.value.trim();
+
+const days=Number(document.getElementById("taskDays").value);
+
+if(!name){
+
+alert("Please enter a maintenance name.");
+
+return;
+}
+
+const now=new Date();
+
+const due=new Date(now);
+
+due.setDate(due.getDate()+days);
+
+const tasks=getTasks();
+
+tasks.push({
+
+id:Date.now().toString(),
+
+name:name,
+
+days:days,
+
+added:now.toISOString(),
+
+lastDone:null,
+
+dueDate:due.toISOString()
+
+});
+
+saveTasks(tasks);
+
+nameInput.value="";
+
+renderHome();
+
+renderMemory();
+
+showPage("homePage");
+
+}
+
+
+function addLibraryTask(index){
+
+const item=library[index];
+
+const tasks=getTasks();
+
+if(tasks.some(t=>t.name.toLowerCase()===item.name.toLowerCase())){
+
+alert("This maintenance is already added.");
+
+return;
+
+}
+
+const now=new Date();
+
+const due=new Date(now);
+
+due.setDate(due.getDate()+item.days);
+
+tasks.push({
+
+id:Date.now().toString(),
+
+name:item.name,
+
+days:item.days,
+
+icon:item.icon,
+
+added:now.toISOString(),
+
+lastDone:null,
+
+dueDate:due.toISOString()
+
+});
+
+saveTasks(tasks);
+
+renderHome();
+
+renderMemory();
+
+renderLibrary();
+
+showPage("homePage");
+
+}
+
+
+function renderLibrary(){
+
+const container=document.getElementById("library");
+
+const tasks=getTasks();
+
+container.innerHTML=library.map((item,index)=>{
+
+const exists=tasks.some(
+t=>t.name.toLowerCase()===item.name.toLowerCase()
+);
+
+return`
+
+<div class="library-item">
+
+<div class="lib-icon">
+${item.icon}
+</div>
+
+<div class="library-info">
+
+<div class="library-name">
+${item.name}
+</div>
+
+<div class="library-days">
+Every ${item.days} days
+</div>
+
+</div>
+
+<button
+class="add-library"
+onclick="addLibraryTask(${index})"
+${exists?"disabled":""}>
+${exists?"Added":"Add"}
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+function showPage(pageId){
+
+document.querySelectorAll(".page").forEach(page=>{
+page.classList.remove("active");
+});
+
+document.getElementById(pageId).classList.add("active");
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+
+if(pageId==="homePage"){
+
+document.getElementById("navHome").classList.add("active");
+
+renderHome();
+
+}
+
+if(pageId==="memoryPage"){
+
+document.getElementById("navMemory").classList.add("active");
+
+renderMemory();
+
+}
+
+if(pageId==="addPage"){
+
+document.getElementById("navAdd").classList.add("active");
+
+renderLibrary();
+
+}
+
+if(pageId==="settingsPage"){
+
+document.getElementById("navSettings").classList.add("active");
+
+}
+
+}
+
+
+function clearAll(){
+
+if(!confirm("Delete all maintenance memories?"))return;
+
+localStorage.removeItem(STORAGE_KEY);
+
+renderHome();
+
+renderMemory();
+
+renderLibrary();
+
+showPage("homePage");
+
+}
+
+
+function escapeHTML(text){
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
 
 renderHome();
 renderMemory();
