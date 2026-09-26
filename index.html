@@ -131,6 +131,34 @@ h1 {
   margin-top: 8px;
 }
 
+.form {
+  display: none;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
+.form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.save {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  background: #20231f;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .nav {
   position: fixed;
   bottom: 0;
@@ -172,45 +200,57 @@ h1 {
   </div>
 
   <div class="hero">
-
     <div class="house">🏡</div>
 
     <div class="status">
       <strong>Home is doing well</strong>
       <p>Nothing urgent needs your attention.</p>
     </div>
-
   </div>
 
   <div class="section">
 
     <div class="section-title">Coming up</div>
 
-    <div class="card">
-      <div class="icon">🔧</div>
-      <div>
-        <strong>Water heater</strong>
-        <span>Service in 12 days</span>
+    <div id="maintenanceList">
+
+      <div class="card">
+        <div class="icon">🔧</div>
+        <div>
+          <strong>Water heater</strong>
+          <span>Service in 12 days</span>
+        </div>
       </div>
+
+      <div class="card">
+        <div class="icon">🧹</div>
+        <div>
+          <strong>Chimney</strong>
+          <span>Cleaning in 25 days</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon">💡</div>
+        <div>
+          <strong>Smoke detector</strong>
+          <span>Battery in 2 months</span>
+        </div>
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="icon">🧹</div>
-      <div>
-        <strong>Chimney</strong>
-        <span>Cleaning in 25 days</span>
-      </div>
-    </div>
+    <button class="add" onclick="showForm()">＋ Add maintenance</button>
 
-    <div class="card">
-      <div class="icon">💡</div>
-      <div>
-        <strong>Smoke detector</strong>
-        <span>Battery in 2 months</span>
-      </div>
-    </div>
+    <div class="form" id="form">
 
-    <button class="add">＋ Add maintenance</button>
+      <input id="name" type="text" placeholder="What needs maintenance?">
+
+      <input id="days" type="number" placeholder="Due in how many days?">
+
+      <button class="save" onclick="addMaintenance()">Save memory</button>
+
+    </div>
 
   </div>
 
@@ -222,6 +262,44 @@ h1 {
   <div>＋<br>Add</div>
   <div>⚙<br>Settings</div>
 </div>
+
+<script>
+
+function showForm() {
+  document.getElementById("form").style.display = "block";
+}
+
+function addMaintenance() {
+
+  let name = document.getElementById("name").value;
+  let days = document.getElementById("days").value;
+
+  if (name === "" || days === "") {
+    alert("Please enter both details.");
+    return;
+  }
+
+  let card = document.createElement("div");
+
+  card.className = "card";
+
+  card.innerHTML = `
+    <div class="icon">🔧</div>
+    <div>
+      <strong>${name}</strong>
+      <span>Due in ${days} days</span>
+    </div>
+  `;
+
+  document.getElementById("maintenanceList").appendChild(card);
+
+  document.getElementById("name").value = "";
+  document.getElementById("days").value = "";
+
+  document.getElementById("form").style.display = "none";
+}
+
+</script>
 
 </body>
 </html>
