@@ -12,15 +12,17 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f5f4ef;
-  color: #20231f;
+  background: #f4f2e9;
+  color: #26352d;
 }
 
 .app {
   max-width: 480px;
   margin: auto;
-  padding: 24px 18px 90px;
+  padding: 28px 18px 100px;
 }
+
+/* HEADER */
 
 .header {
   display: flex;
@@ -29,135 +31,188 @@ body {
 }
 
 .small {
-  color: #777;
-  font-size: 14px;
-  margin-bottom: 5px;
+  color: #7d887e;
+  font-size: 13px;
+  margin-bottom: 6px;
+  letter-spacing: .3px;
 }
 
 h1 {
   margin: 0;
   font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .profile {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #20231f;
+  background: #536b5a;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
 }
 
+/* HERO */
+
 .hero {
-  margin-top: 24px;
-  background: white;
-  border-radius: 26px;
-  padding: 24px;
-  box-shadow: 0 8px 25px rgba(0,0,0,.06);
+  margin-top: 25px;
+  background: #e4eadf;
+  border-radius: 30px;
+  padding: 28px 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #d4dfcf;
+  right: -55px;
+  top: -55px;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #edf1e9;
+  left: -45px;
+  bottom: -45px;
 }
 
 .house {
-  font-size: 80px;
+  font-size: 72px;
   text-align: center;
-  margin: 8px 0 15px;
+  margin: 4px 0 14px;
+  position: relative;
+  z-index: 1;
 }
 
 .status {
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .status strong {
   font-size: 20px;
+  font-weight: 600;
 }
 
 .status p {
-  color: #777;
-  margin-top: 7px;
+  color: #6f7d71;
+  margin: 8px 0 0;
+  font-size: 14px;
 }
 
+/* SECTIONS */
+
 .section {
-  margin-top: 28px;
+  margin-top: 30px;
 }
 
 .section-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 12px;
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 13px;
 }
 
+/* MAINTENANCE CARDS */
+
 .card {
-  background: white;
-  padding: 17px;
-  border-radius: 18px;
+  background: #fffdf8;
+  padding: 16px;
+  border-radius: 20px;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 5px 18px rgba(0,0,0,.05);
+  border: 1px solid #ebe8dd;
+  box-shadow: 0 6px 18px rgba(55, 70, 58, .05);
 }
 
 .icon {
-  width: 45px;
-  height: 45px;
-  border-radius: 14px;
-  background: #f0eee6;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #e8eee3;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 23px;
+  flex-shrink: 0;
 }
 
 .card strong {
   display: block;
   margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .card span {
-  color: #777;
-  font-size: 14px;
+  color: #7b847c;
+  font-size: 13px;
 }
+
+/* ADD BUTTON */
 
 .add {
   width: 100%;
   border: none;
   border-radius: 18px;
   padding: 17px;
-  font-size: 16px;
-  font-weight: bold;
-  background: #20231f;
+  font-size: 15px;
+  font-weight: 600;
+  background: #536b5a;
   color: white;
   margin-top: 8px;
+  box-shadow: 0 8px 18px rgba(83, 107, 90, .18);
 }
+
+/* FORM */
 
 .form {
   display: none;
-  background: white;
+  background: #fffdf8;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 22px;
   margin-top: 15px;
+  border: 1px solid #ebe8dd;
 }
 
 .form input {
   width: 100%;
   padding: 14px;
   margin-bottom: 12px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  font-size: 16px;
+  border: 1px solid #dddcd3;
+  border-radius: 14px;
+  font-size: 15px;
+  background: #faf9f4;
+  color: #26352d;
 }
 
 .save {
   width: 100%;
   border: none;
-  border-radius: 14px;
+  border-radius: 15px;
   padding: 14px;
-  background: #20231f;
+  background: #536b5a;
   color: white;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 600;
 }
+
+/* OTHER SCREENS */
 
 .screen {
   display: none;
@@ -165,37 +220,43 @@ h1 {
 
 .back {
   border: none;
-  background: white;
+  background: #fffdf8;
   padding: 10px 15px;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 13px;
+  font-size: 14px;
+  color: #536b5a;
   margin-bottom: 20px;
+  border: 1px solid #ebe8dd;
 }
 
 .empty {
-  background: white;
+  background: #fffdf8;
   padding: 25px;
   border-radius: 20px;
   text-align: center;
-  color: #777;
+  color: #7b847c;
 }
 
 .setting {
-  background: white;
+  background: #fffdf8;
   padding: 18px;
-  border-radius: 18px;
+  border-radius: 20px;
   margin-bottom: 12px;
+  border: 1px solid #ebe8dd;
 }
 
 .setting strong {
   display: block;
   margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .setting span {
-  color: #777;
-  font-size: 14px;
+  color: #7b847c;
+  font-size: 13px;
 }
+
+/* BOTTOM NAV */
 
 .nav {
   position: fixed;
@@ -204,24 +265,25 @@ h1 {
   right: 0;
   max-width: 480px;
   margin: auto;
-  background: white;
+  background: rgba(255, 253, 248, .96);
   display: flex;
   justify-content: space-around;
-  padding: 15px 5px;
-  box-shadow: 0 -5px 20px rgba(0,0,0,.08);
+  padding: 13px 5px 14px;
+  border-top: 1px solid #e6e3d8;
 }
 
 .nav div {
   text-align: center;
-  font-size: 12px;
-  color: #777;
+  font-size: 11px;
+  color: #9a9f99;
   cursor: pointer;
   user-select: none;
+  line-height: 18px;
 }
 
 .nav .active {
-  color: #20231f;
-  font-weight: bold;
+  color: #536b5a;
+  font-weight: 600;
 }
 </style>
 </head>
@@ -282,14 +344,18 @@ h1 {
 
       </div>
 
-      <button class="add" onclick="showAdd()">＋ Add maintenance</button>
+      <button class="add" onclick="showAdd()">
+        ＋ Add maintenance
+      </button>
 
       <div class="form" id="form">
 
-        <input id="name" type="text"
+        <input id="name"
+          type="text"
           placeholder="What needs maintenance?">
 
-        <input id="days" type="number"
+        <input id="days"
+          type="number"
           placeholder="Due in how many days?">
 
         <button class="save" onclick="addMaintenance()">
@@ -403,9 +469,11 @@ function clearActive() {
 
 
 function showHome() {
+
   hideScreens();
 
   document.getElementById("homeScreen").style.display = "block";
+
   document.getElementById("form").style.display = "none";
 
   clearActive();
@@ -417,6 +485,7 @@ function showHome() {
 
 
 function showMemory() {
+
   hideScreens();
 
   document.getElementById("memoryScreen").style.display = "block";
@@ -432,6 +501,7 @@ function showMemory() {
 
 
 function showAdd() {
+
   showHome();
 
   document.getElementById("form").style.display = "block";
@@ -445,6 +515,7 @@ function showAdd() {
 
 
 function showSettings() {
+
   hideScreens();
 
   document.getElementById("settingsScreen").style.display = "block";
@@ -457,7 +528,7 @@ function showSettings() {
 }
 
 
-/* Calculate the real due date */
+/* DATE SYSTEM */
 
 function getDueDate(days) {
 
@@ -472,8 +543,6 @@ function getDueDate(days) {
 }
 
 
-/* Work out how many days remain */
-
 function getRemainingDays(dueDate) {
 
   let today = new Date();
@@ -486,19 +555,17 @@ function getRemainingDays(dueDate) {
 
   let difference = due - today;
 
-  return Math.ceil(difference / (1000 * 60 * 60 * 24));
+  return Math.ceil(
+    difference / (1000 * 60 * 60 * 24)
+  );
 
 }
 
 
-/* Turn remaining days into friendly text */
-
 function getDueText(task) {
 
   if (!task.dueDate) {
-
     return "Due in " + task.days + " days";
-
   }
 
   let days = getRemainingDays(task.dueDate);
@@ -513,7 +580,6 @@ function getDueText(task) {
     }
 
     return "Overdue by " + overdue + " days";
-
   }
 
 
@@ -527,29 +593,100 @@ function getDueText(task) {
   }
 
 
-  if (days < 7) {
-    return "Due in " + days + " days";
-  }
-
-
-  if (days < 30) {
-    return "Due in " + days + " days";
-  }
-
-
   if (days < 60) {
-    return "Due in about 1 month";
+    return "Due in " + days + " days";
   }
 
 
   let months = Math.round(days / 30);
 
   return "Due in about " + months + " months";
-
 }
 
 
-/* Add a new maintenance memory */
+/* ICON SYSTEM */
+
+function getIcon(name) {
+
+  let text = name.toLowerCase();
+
+
+  if (
+    text.includes("ac") ||
+    text.includes("air conditioner") ||
+    text.includes("aircon") ||
+    text.includes("filter")
+  ) {
+    return "❄️";
+  }
+
+
+  if (
+    text.includes("chimney") ||
+    text.includes("clean")
+  ) {
+    return "🧹";
+  }
+
+
+  if (
+    text.includes("smoke") ||
+    text.includes("detector") ||
+    text.includes("light") ||
+    text.includes("bulb")
+  ) {
+    return "💡";
+  }
+
+
+  if (
+    text.includes("water") ||
+    text.includes("heater") ||
+    text.includes("plumb") ||
+    text.includes("pipe")
+  ) {
+    return "🚿";
+  }
+
+
+  if (
+    text.includes("garden") ||
+    text.includes("plant") ||
+    text.includes("lawn")
+  ) {
+    return "🌿";
+  }
+
+
+  if (
+    text.includes("window") ||
+    text.includes("glass")
+  ) {
+    return "🪟";
+  }
+
+
+  if (
+    text.includes("pest") ||
+    text.includes("insect")
+  ) {
+    return "🐜";
+  }
+
+
+  if (
+    text.includes("roof") ||
+    text.includes("leak")
+  ) {
+    return "🏠";
+  }
+
+
+  return "🔧";
+}
+
+
+/* ADD MAINTENANCE */
 
 function addMaintenance() {
 
@@ -565,7 +702,6 @@ function addMaintenance() {
     alert("Please enter both details.");
 
     return;
-
   }
 
 
@@ -583,7 +719,9 @@ function addMaintenance() {
 
 
   let savedTasks =
-    JSON.parse(localStorage.getItem("havenTasks")) || [];
+    JSON.parse(
+      localStorage.getItem("havenTasks")
+    ) || [];
 
 
   savedTasks.push(task);
@@ -603,37 +741,44 @@ function addMaintenance() {
   document.getElementById("days").value = "";
 
   document.getElementById("form").style.display = "none";
-
 }
 
 
-/* Display one task */
+/* DISPLAY TASK */
 
 function displayTask(task) {
 
-  let card = document.createElement("div");
+  let card =
+    document.createElement("div");
 
   card.className = "card";
 
 
-  let icon = document.createElement("div");
+  let icon =
+    document.createElement("div");
 
   icon.className = "icon";
 
-  icon.textContent = "🔧";
+  icon.textContent =
+    getIcon(task.name);
 
 
-  let content = document.createElement("div");
+  let content =
+    document.createElement("div");
 
 
-  let title = document.createElement("strong");
+  let title =
+    document.createElement("strong");
 
-  title.textContent = task.name;
+  title.textContent =
+    task.name;
 
 
-  let details = document.createElement("span");
+  let details =
+    document.createElement("span");
 
-  details.textContent = getDueText(task);
+  details.textContent =
+    getDueText(task);
 
 
   content.appendChild(title);
@@ -649,16 +794,17 @@ function displayTask(task) {
   document
     .getElementById("maintenanceList")
     .appendChild(card);
-
 }
 
 
-/* Load saved tasks */
+/* LOAD TASKS */
 
 function loadTasks() {
 
   let savedTasks =
-    JSON.parse(localStorage.getItem("havenTasks")) || [];
+    JSON.parse(
+      localStorage.getItem("havenTasks")
+    ) || [];
 
 
   savedTasks.forEach(function(task) {
@@ -666,11 +812,10 @@ function loadTasks() {
     displayTask(task);
 
   });
-
 }
 
 
-/* Load Memory screen */
+/* MEMORY */
 
 function loadMemory() {
 
@@ -682,7 +827,9 @@ function loadMemory() {
 
 
   let savedTasks =
-    JSON.parse(localStorage.getItem("havenTasks")) || [];
+    JSON.parse(
+      localStorage.getItem("havenTasks")
+    ) || [];
 
 
   if (savedTasks.length === 0) {
@@ -691,35 +838,42 @@ function loadMemory() {
       '<div class="empty">Haven has no personal memories yet.<br><br>Add your first maintenance task.</div>';
 
     return;
-
   }
 
 
   savedTasks.forEach(function(task) {
 
-    let card = document.createElement("div");
+    let card =
+      document.createElement("div");
 
     card.className = "card";
 
 
-    let icon = document.createElement("div");
+    let icon =
+      document.createElement("div");
 
     icon.className = "icon";
 
-    icon.textContent = "🔧";
+    icon.textContent =
+      getIcon(task.name);
 
 
-    let content = document.createElement("div");
+    let content =
+      document.createElement("div");
 
 
-    let title = document.createElement("strong");
+    let title =
+      document.createElement("strong");
 
-    title.textContent = task.name;
+    title.textContent =
+      task.name;
 
 
-    let details = document.createElement("span");
+    let details =
+      document.createElement("span");
 
-    details.textContent = getDueText(task);
+    details.textContent =
+      getDueText(task);
 
 
     content.appendChild(title);
@@ -735,7 +889,6 @@ function loadMemory() {
     memoryList.appendChild(card);
 
   });
-
 }
 
 
