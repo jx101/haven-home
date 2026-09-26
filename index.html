@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Haven — Your home remembers</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -21,6 +24,9 @@ body {
   margin: auto;
   padding: 28px 18px 100px;
 }
+
+
+/* HEADER */
 
 .header {
   display: flex;
@@ -51,6 +57,9 @@ h1 {
   justify-content: center;
   font-weight: bold;
 }
+
+
+/* HERO */
 
 .hero {
   margin-top: 25px;
@@ -108,6 +117,9 @@ h1 {
   font-size: 14px;
 }
 
+
+/* SECTIONS */
+
 .section {
   margin-top: 30px;
 }
@@ -117,6 +129,9 @@ h1 {
   font-weight: 600;
   margin-bottom: 13px;
 }
+
+
+/* CARDS */
 
 .card {
   background: #fffdf8;
@@ -154,6 +169,9 @@ h1 {
   font-size: 13px;
 }
 
+
+/* ADD BUTTON */
+
 .add {
   width: 100%;
   border: none;
@@ -166,6 +184,9 @@ h1 {
   margin-top: 8px;
   box-shadow: 0 8px 18px rgba(83,107,90,.18);
 }
+
+
+/* FORM */
 
 .form {
   display: none;
@@ -198,6 +219,55 @@ h1 {
   font-weight: 600;
 }
 
+
+/* QUICK MAINTENANCE */
+
+.quick-title {
+  font-size: 14px;
+  color: #7b847c;
+  margin: 18px 0 10px;
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.quick-item {
+  border: 1px solid #ebe8dd;
+  background: #faf9f4;
+  border-radius: 15px;
+  padding: 12px 9px;
+  cursor: pointer;
+  text-align: left;
+  color: #26352d;
+}
+
+.quick-item:active {
+  transform: scale(.98);
+}
+
+.quick-icon {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.quick-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quick-days {
+  display: block;
+  margin-top: 3px;
+  color: #8a928b;
+  font-size: 10px;
+}
+
+
+/* OTHER SCREENS */
+
 .screen {
   display: none;
 }
@@ -221,6 +291,9 @@ h1 {
   color: #7b847c;
 }
 
+
+/* SETTINGS */
+
 .setting {
   background: #fffdf8;
   padding: 18px;
@@ -239,6 +312,9 @@ h1 {
   color: #7b847c;
   font-size: 13px;
 }
+
+
+/* NAVIGATION */
 
 .nav {
   position: fixed;
@@ -267,142 +343,312 @@ h1 {
   color: #536b5a;
   font-weight: 600;
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="app">
 
-  <div id="homeScreen">
 
-    <div class="header">
-      <div>
-        <div class="small">Good morning</div>
-        <h1>Welcome to Haven</h1>
-      </div>
+<!-- HOME -->
 
-      <div class="profile">H</div>
+<div id="homeScreen">
+
+  <div class="header">
+
+    <div>
+      <div class="small">Good morning</div>
+      <h1>Welcome to Haven</h1>
     </div>
 
-    <div class="hero">
-      <div class="house">🏡</div>
+    <div class="profile">H</div>
 
-      <div class="status">
-        <strong>Home is doing well</strong>
-        <p>Nothing urgent needs your attention.</p>
-      </div>
+  </div>
+
+
+  <div class="hero">
+
+    <div class="house">🏡</div>
+
+    <div class="status">
+
+      <strong>Home is doing well</strong>
+
+      <p>
+        Nothing urgent needs your attention.
+      </p>
+
     </div>
 
-    <div class="section">
+  </div>
 
-      <div class="section-title">Coming up</div>
 
-      <div id="maintenanceList">
+  <div class="section">
 
-        <div class="card">
-          <div class="icon">🔧</div>
-          <div>
-            <strong>Water heater</strong>
-            <span>Service in 12 days</span>
-          </div>
-        </div>
+    <div class="section-title">
+      Coming up
+    </div>
 
-        <div class="card">
-          <div class="icon">🧹</div>
-          <div>
-            <strong>Chimney</strong>
-            <span>Cleaning in 25 days</span>
-          </div>
-        </div>
 
-        <div class="card">
-          <div class="icon">💡</div>
-          <div>
-            <strong>Smoke detector</strong>
-            <span>Battery in 2 months</span>
-          </div>
-        </div>
+    <div id="maintenanceList">
 
-      </div>
+    </div>
 
-      <button class="add" onclick="showAdd()">
-        ＋ Add maintenance
+
+    <button class="add" onclick="showAdd()">
+      ＋ Add maintenance
+    </button>
+
+
+    <!-- ADD FORM -->
+
+    <div class="form" id="form">
+
+      <input
+        id="name"
+        type="text"
+        placeholder="What needs maintenance?"
+      >
+
+
+      <input
+        id="days"
+        type="number"
+        placeholder="Due in how many days?"
+      >
+
+
+      <button
+        class="save"
+        onclick="addMaintenance()"
+      >
+        Save memory
       </button>
 
-      <div class="form" id="form">
 
-        <input id="name"
-          type="text"
-          placeholder="What needs maintenance?">
-
-        <input id="days"
-          type="number"
-          placeholder="Due in how many days?">
-
-        <button class="save" onclick="addMaintenance()">
-          Save memory
-        </button>
-
+      <div class="quick-title">
+        Or choose something common
       </div>
 
-    </div>
 
-  </div>
-
-
-  <div class="screen" id="memoryScreen">
-
-    <button class="back" onclick="showHome()">
-      ← Back to Home
-    </button>
-
-    <div class="small">Your home's history</div>
-
-    <h1>Memory</h1>
-
-    <div class="section">
-
-      <div class="section-title">
-        Everything Haven remembers
-      </div>
-
-      <div id="memoryList"></div>
-
-    </div>
-
-  </div>
+      <div class="quick-grid">
 
 
-  <div class="screen" id="settingsScreen">
+        <div
+          class="quick-item"
+          onclick="quickAdd('Water heater',30)"
+        >
+          <div class="quick-icon">💧</div>
+          <div class="quick-name">Water heater</div>
+          <span class="quick-days">30 days</span>
+        </div>
 
-    <button class="back" onclick="showHome()">
-      ← Back to Home
-    </button>
 
-    <div class="small">Make Haven yours</div>
+        <div
+          class="quick-item"
+          onclick="quickAdd('AC filter',30)"
+        >
+          <div class="quick-icon">❄️</div>
+          <div class="quick-name">AC filter</div>
+          <span class="quick-days">30 days</span>
+        </div>
 
-    <h1>Settings</h1>
 
-    <div class="section">
+        <div
+          class="quick-item"
+          onclick="quickAdd('AC service',180)"
+        >
+          <div class="quick-icon">❄️</div>
+          <div class="quick-name">AC service</div>
+          <span class="quick-days">6 months</span>
+        </div>
 
-      <div class="setting">
-        <strong>🏡 Your home</strong>
-        <span>
-          Haven keeps your maintenance memories on this device.
-        </span>
-      </div>
 
-      <div class="setting">
-        <strong>🔔 Reminders</strong>
-        <span>Coming soon.</span>
-      </div>
+        <div
+          class="quick-item"
+          onclick="quickAdd('Chimney cleaning',90)"
+        >
+          <div class="quick-icon">🧹</div>
+          <div class="quick-name">Chimney</div>
+          <span class="quick-days">90 days</span>
+        </div>
 
-      <div class="setting">
-        <strong>🧠 Home memory</strong>
-        <span>
-          Your saved maintenance information stays in your browser.
-        </span>
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Smoke detector battery',180)"
+        >
+          <div class="quick-icon">💡</div>
+          <div class="quick-name">Smoke detector</div>
+          <span class="quick-days">6 months</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Plumbing check',180)"
+        >
+          <div class="quick-icon">🚿</div>
+          <div class="quick-name">Plumbing</div>
+          <span class="quick-days">6 months</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Garden / lawn',14)"
+        >
+          <div class="quick-icon">🌿</div>
+          <div class="quick-name">Garden / lawn</div>
+          <span class="quick-days">14 days</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Window cleaning',90)"
+        >
+          <div class="quick-icon">🪟</div>
+          <div class="quick-name">Windows</div>
+          <span class="quick-days">90 days</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Roof inspection',365)"
+        >
+          <div class="quick-icon">🏠</div>
+          <div class="quick-name">Roof</div>
+          <span class="quick-days">1 year</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Pest control',90)"
+        >
+          <div class="quick-icon">🐜</div>
+          <div class="quick-name">Pest control</div>
+          <span class="quick-days">90 days</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Gas stove check',180)"
+        >
+          <div class="quick-icon">🔥</div>
+          <div class="quick-name">Gas stove</div>
+          <span class="quick-days">6 months</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Toilet maintenance',90)"
+        >
+          <div class="quick-icon">🚽</div>
+          <div class="quick-name">Toilet</div>
+          <span class="quick-days">90 days</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Washing machine service',180)"
+        >
+          <div class="quick-icon">🧺</div>
+          <div class="quick-name">Washing machine</div>
+          <span class="quick-days">6 months</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Refrigerator cleaning',90)"
+        >
+          <div class="quick-icon">🧊</div>
+          <div class="quick-name">Refrigerator</div>
+          <span class="quick-days">90 days</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Exhaust fan cleaning',90)"
+        >
+          <div class="quick-icon">🌀</div>
+          <div class="quick-name">Exhaust fan</div>
+          <span class="quick-days">90 days</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Water tank cleaning',180)"
+        >
+          <div class="quick-icon">💧</div>
+          <div class="quick-name">Water tank</div>
+          <span class="quick-days">6 months</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Electrical check',365)"
+        >
+          <div class="quick-icon">🔌</div>
+          <div class="quick-name">Electrical</div>
+          <span class="quick-days">1 year</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Fire extinguisher check',365)"
+        >
+          <div class="quick-icon">🧯</div>
+          <div class="quick-name">Fire extinguisher</div>
+          <span class="quick-days">1 year</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Geyser cleaning',180)"
+        >
+          <div class="quick-icon">💧</div>
+          <div class="quick-name">Geyser</div>
+          <span class="quick-days">6 months</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Bathroom cleaning',30)"
+        >
+          <div class="quick-icon">🛁</div>
+          <div class="quick-name">Bathroom</div>
+          <span class="quick-days">30 days</span>
+        </div>
+
+
+        <div
+          class="quick-item"
+          onclick="quickAdd('Deep cleaning',90)"
+        >
+          <div class="quick-icon">🧹</div>
+          <div class="quick-name">Deep cleaning</div>
+          <span class="quick-days">90 days</span>
+        </div>
+
+
       </div>
 
     </div>
@@ -411,94 +657,260 @@ h1 {
 
 </div>
 
+
+
+<!-- MEMORY -->
+
+<div class="screen" id="memoryScreen">
+
+  <button
+    class="back"
+    onclick="showHome()"
+  >
+    ← Back to Home
+  </button>
+
+
+  <div class="small">
+    Your home's history
+  </div>
+
+
+  <h1>Memory</h1>
+
+
+  <div class="section">
+
+    <div class="section-title">
+      Everything Haven remembers
+    </div>
+
+
+    <div id="memoryList"></div>
+
+  </div>
+
+</div>
+
+
+
+<!-- SETTINGS -->
+
+<div class="screen" id="settingsScreen">
+
+  <button
+    class="back"
+    onclick="showHome()"
+  >
+    ← Back to Home
+  </button>
+
+
+  <div class="small">
+    Make Haven yours
+  </div>
+
+
+  <h1>Settings</h1>
+
+
+  <div class="section">
+
+
+    <div class="setting">
+
+      <strong>🏡 Your home</strong>
+
+      <span>
+        Haven keeps your maintenance memories
+        on this device.
+      </span>
+
+    </div>
+
+
+    <div class="setting">
+
+      <strong>🔔 Reminders</strong>
+
+      <span>
+        Coming soon.
+      </span>
+
+    </div>
+
+
+    <div class="setting">
+
+      <strong>🧠 Home memory</strong>
+
+      <span>
+        Your saved maintenance information
+        stays in your browser.
+      </span>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- BOTTOM NAV -->
 
 <div class="nav">
 
-  <div id="homeNav" class="active" onclick="showHome()">
-    ⌂<br>Home
+
+  <div
+    id="homeNav"
+    class="active"
+    onclick="showHome()"
+  >
+    ⌂<br>
+    Home
   </div>
 
-  <div id="memoryNav" onclick="showMemory()">
-    ◷<br>Memory
+
+  <div
+    id="memoryNav"
+    onclick="showMemory()"
+  >
+    ◷<br>
+    Memory
   </div>
 
-  <div id="addNav" onclick="showAdd()">
-    ＋<br>Add
+
+  <div
+    id="addNav"
+    onclick="showAdd()"
+  >
+    ＋<br>
+    Add
   </div>
 
-  <div id="settingsNav" onclick="showSettings()">
-    ⚙<br>Settings
+
+  <div
+    id="settingsNav"
+    onclick="showSettings()"
+  >
+    ⚙<br>
+    Settings
   </div>
+
 
 </div>
+
 
 
 <script>
 
+
+/* SCREEN CONTROL */
+
+
 function hideScreens() {
+
   document.getElementById("homeScreen").style.display = "none";
+
   document.getElementById("memoryScreen").style.display = "none";
+
   document.getElementById("settingsScreen").style.display = "none";
+
 }
 
 
 function clearActive() {
+
   document.getElementById("homeNav").classList.remove("active");
+
   document.getElementById("memoryNav").classList.remove("active");
+
   document.getElementById("addNav").classList.remove("active");
+
   document.getElementById("settingsNav").classList.remove("active");
+
 }
 
 
 function showHome() {
+
   hideScreens();
+
   document.getElementById("homeScreen").style.display = "block";
+
   document.getElementById("form").style.display = "none";
 
   clearActive();
+
   document.getElementById("homeNav").classList.add("active");
 
   window.scrollTo(0,0);
+
 }
 
 
 function showMemory() {
+
   hideScreens();
+
   document.getElementById("memoryScreen").style.display = "block";
 
   clearActive();
+
   document.getElementById("memoryNav").classList.add("active");
 
   loadMemory();
 
   window.scrollTo(0,0);
+
 }
 
 
 function showAdd() {
+
   showHome();
 
   document.getElementById("form").style.display = "block";
 
   clearActive();
+
   document.getElementById("addNav").classList.add("active");
 
-  window.scrollTo(0,document.body.scrollHeight);
+  setTimeout(function() {
+
+    window.scrollTo(
+      0,
+      document.body.scrollHeight
+    );
+
+  },100);
+
 }
 
 
 function showSettings() {
+
   hideScreens();
+
   document.getElementById("settingsScreen").style.display = "block";
 
   clearActive();
+
   document.getElementById("settingsNav").classList.add("active");
 
   window.scrollTo(0,0);
+
 }
 
 
+
 /* DATE SYSTEM */
+
 
 function getDueDate(days) {
 
@@ -506,9 +918,12 @@ function getDueDate(days) {
 
   date.setHours(0,0,0,0);
 
-  date.setDate(date.getDate() + Number(days));
+  date.setDate(
+    date.getDate() + Number(days)
+  );
 
   return date.toISOString();
+
 }
 
 
@@ -522,71 +937,103 @@ function getRemainingDays(dueDate) {
 
   due.setHours(0,0,0,0);
 
-  let difference = due - today;
+  let difference =
+    due - today;
 
   return Math.ceil(
-    difference / (1000 * 60 * 60 * 24)
+    difference /
+    (1000 * 60 * 60 * 24)
   );
+
 }
 
 
 function getDueText(task) {
 
   if (!task.dueDate) {
-    return "Due in " + task.days + " days";
+
+    return "Due in " +
+      task.days +
+      " days";
+
   }
 
-  let days = getRemainingDays(task.dueDate);
+
+  let days =
+    getRemainingDays(task.dueDate);
 
 
   if (days < 0) {
 
-    let overdue = Math.abs(days);
+    let overdue =
+      Math.abs(days);
 
     if (overdue === 1) {
+
       return "Overdue by 1 day";
+
     }
 
-    return "Overdue by " + overdue + " days";
+    return "Overdue by " +
+      overdue +
+      " days";
+
   }
 
 
   if (days === 0) {
+
     return "Due today";
+
   }
 
 
   if (days === 1) {
+
     return "Due tomorrow";
+
   }
 
 
   if (days < 60) {
-    return "Due in " + days + " days";
+
+    return "Due in " +
+      days +
+      " days";
+
   }
 
 
-  let months = Math.round(days / 30);
+  let months =
+    Math.round(days / 30);
 
-  return "Due in about " + months + " months";
+  return "Due in about " +
+    months +
+    " months";
+
 }
 
 
-/* SMART ICONS */
+
+/* SMART ICON SYSTEM */
+
 
 function getIcon(name) {
 
-  let text = name.toLowerCase();
+  let text =
+    name.toLowerCase();
 
 
-  /* AIR CONDITIONER */
+  /* AC */
 
   if (
-    text.includes("ac") ||
+    /\bac\b/.test(text) ||
     text.includes("air conditioner") ||
     text.includes("aircon")
   ) {
+
     return "❄️";
+
   }
 
 
@@ -597,19 +1044,25 @@ function getIcon(name) {
     text.includes("water tank") ||
     text.includes("water purifier") ||
     text.includes("water filter") ||
+    text.includes("geyser") ||
     text.includes("water")
   ) {
+
     return "💧";
+
   }
 
 
-  /* CHIMNEY */
+  /* CHIMNEY / CLEANING */
 
   if (
     text.includes("chimney") ||
-    text.includes("clean")
+    text.includes("deep cleaning") ||
+    text.includes("cleaning")
   ) {
+
     return "🧹";
+
   }
 
 
@@ -621,7 +1074,9 @@ function getIcon(name) {
     text.includes("light") ||
     text.includes("bulb")
   ) {
+
     return "💡";
+
   }
 
 
@@ -633,7 +1088,9 @@ function getIcon(name) {
     text.includes("tap") ||
     text.includes("shower")
   ) {
+
     return "🚿";
+
   }
 
 
@@ -644,27 +1101,33 @@ function getIcon(name) {
     text.includes("plant") ||
     text.includes("lawn")
   ) {
+
     return "🌿";
+
   }
 
 
-  /* WINDOWS */
+  /* WINDOW */
 
   if (
     text.includes("window") ||
     text.includes("glass")
   ) {
+
     return "🪟";
+
   }
 
 
-  /* PEST CONTROL */
+  /* PEST */
 
   if (
     text.includes("pest") ||
     text.includes("insect")
   ) {
+
     return "🐜";
+
   }
 
 
@@ -674,34 +1137,123 @@ function getIcon(name) {
     text.includes("roof") ||
     text.includes("leak")
   ) {
+
     return "🏠";
+
   }
 
 
+  /* GAS */
+
+  if (
+    text.includes("gas stove") ||
+    text.includes("stove")
+  ) {
+
+    return "🔥";
+
+  }
+
+
+  /* TOILET */
+
+  if (
+    text.includes("toilet") ||
+    text.includes("wc")
+  ) {
+
+    return "🚽";
+
+  }
+
+
+  /* WASHING MACHINE */
+
+  if (
+    text.includes("washing machine") ||
+    text.includes("washer")
+  ) {
+
+    return "🧺";
+
+  }
+
+
+  /* REFRIGERATOR */
+
+  if (
+    text.includes("refrigerator") ||
+    text.includes("fridge")
+  ) {
+
+    return "🧊";
+
+  }
+
+
+  /* EXHAUST */
+
+  if (
+    text.includes("exhaust") ||
+    text.includes("fan")
+  ) {
+
+    return "🌀";
+
+  }
+
+
+  /* ELECTRICAL */
+
+  if (
+    text.includes("electric") ||
+    text.includes("electrical") ||
+    text.includes("socket") ||
+    text.includes("wiring")
+  ) {
+
+    return "🔌";
+
+  }
+
+
+  /* FIRE */
+
+  if (
+    text.includes("fire extinguisher")
+  ) {
+
+    return "🧯";
+
+  }
+
+
+  /* BATHROOM */
+
+  if (
+    text.includes("bathroom") ||
+    text.includes("bathtub")
+  ) {
+
+    return "🛁";
+
+  }
+
+
+  /* DEFAULT */
+
   return "🔧";
+
 }
 
 
-/* ADD MAINTENANCE */
 
-function addMaintenance() {
-
-  let name =
-    document.getElementById("name").value.trim();
-
-  let days =
-    document.getElementById("days").value;
+/* CREATE TASK */
 
 
-  if (name === "" || days === "") {
+function createTask(name, days) {
 
-    alert("Please enter both details.");
-
-    return;
-  }
-
-
-  let task = {
+  return {
 
     name: name,
 
@@ -712,6 +1264,84 @@ function addMaintenance() {
     dueDate: getDueDate(days)
 
   };
+
+}
+
+
+
+/* QUICK ADD */
+
+
+function quickAdd(name, days) {
+
+  let task =
+    createTask(name, days);
+
+
+  let savedTasks =
+    JSON.parse(
+      localStorage.getItem("havenTasks")
+    ) || [];
+
+
+  savedTasks.push(task);
+
+
+  localStorage.setItem(
+    "havenTasks",
+    JSON.stringify(savedTasks)
+  );
+
+
+  displayTask(task);
+
+
+  document.getElementById("form").style.display = "none";
+
+
+  alert(
+    name +
+    " added to Haven."
+  );
+
+}
+
+
+
+/* NORMAL ADD */
+
+
+function addMaintenance() {
+
+  let name =
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
+
+  let days =
+    document
+      .getElementById("days")
+      .value;
+
+
+  if (
+    name === "" ||
+    days === ""
+  ) {
+
+    alert(
+      "Please enter both details."
+    );
+
+    return;
+
+  }
+
+
+  let task =
+    createTask(name, days);
 
 
   let savedTasks =
@@ -737,23 +1367,28 @@ function addMaintenance() {
   document.getElementById("days").value = "";
 
   document.getElementById("form").style.display = "none";
+
 }
 
 
+
 /* DISPLAY TASK */
+
 
 function displayTask(task) {
 
   let card =
     document.createElement("div");
 
-  card.className = "card";
+  card.className =
+    "card";
 
 
   let icon =
     document.createElement("div");
 
-  icon.className = "icon";
+  icon.className =
+    "icon";
 
   icon.textContent =
     getIcon(task.name);
@@ -790,10 +1425,13 @@ function displayTask(task) {
   document
     .getElementById("maintenanceList")
     .appendChild(card);
+
 }
 
 
-/* LOAD TASKS */
+
+/* LOAD SAVED TASKS */
+
 
 function loadTasks() {
 
@@ -803,20 +1441,27 @@ function loadTasks() {
     ) || [];
 
 
-  savedTasks.forEach(function(task) {
+  savedTasks.forEach(
+    function(task) {
 
-    displayTask(task);
+      displayTask(task);
 
-  });
+    }
+  );
+
 }
+
 
 
 /* MEMORY */
 
+
 function loadMemory() {
 
   let memoryList =
-    document.getElementById("memoryList");
+    document.getElementById(
+      "memoryList"
+    );
 
 
   memoryList.innerHTML = "";
@@ -828,69 +1473,82 @@ function loadMemory() {
     ) || [];
 
 
-  if (savedTasks.length === 0) {
+  if (
+    savedTasks.length === 0
+  ) {
 
     memoryList.innerHTML =
       '<div class="empty">Haven has no personal memories yet.<br><br>Add your first maintenance task.</div>';
 
     return;
+
   }
 
 
-  savedTasks.forEach(function(task) {
+  savedTasks.forEach(
+    function(task) {
 
-    let card =
-      document.createElement("div");
+      let card =
+        document.createElement("div");
 
-    card.className = "card";
-
-
-    let icon =
-      document.createElement("div");
-
-    icon.className = "icon";
-
-    icon.textContent =
-      getIcon(task.name);
+      card.className =
+        "card";
 
 
-    let content =
-      document.createElement("div");
+      let icon =
+        document.createElement("div");
+
+      icon.className =
+        "icon";
+
+      icon.textContent =
+        getIcon(task.name);
 
 
-    let title =
-      document.createElement("strong");
-
-    title.textContent =
-      task.name;
+      let content =
+        document.createElement("div");
 
 
-    let details =
-      document.createElement("span");
+      let title =
+        document.createElement("strong");
 
-    details.textContent =
-      getDueText(task);
-
-
-    content.appendChild(title);
-
-    content.appendChild(details);
+      title.textContent =
+        task.name;
 
 
-    card.appendChild(icon);
+      let details =
+        document.createElement("span");
 
-    card.appendChild(content);
+      details.textContent =
+        getDueText(task);
 
 
-    memoryList.appendChild(card);
+      content.appendChild(title);
 
-  });
+      content.appendChild(details);
+
+
+      card.appendChild(icon);
+
+      card.appendChild(content);
+
+
+      memoryList.appendChild(card);
+
+    }
+  );
+
 }
 
 
+
+/* START */
+
 loadTasks();
+
 
 </script>
 
+
 </body>
-</html>
+  </html>
