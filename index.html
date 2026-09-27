@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f7f4ec">
+<meta name="theme-color" content="#f7fafc">
 <title>Haven — Your home remembers.</title>
 
 <style>
@@ -11,11 +11,36 @@
   box-sizing:border-box;
 }
 
+:root{
+  --navy:#183b56;
+  --blue:#2495d0;
+  --blue-soft:#e8f5fc;
+  --mint:#ddf5ea;
+  --green:#21a875;
+  --orange:#f39a42;
+  --orange-soft:#fff0dd;
+  --lavender:#f0eafe;
+  --purple:#8064c7;
+  --red-soft:#fdebea;
+  --red:#b85b55;
+  --text:#183b56;
+  --muted:#6b7c89;
+  --bg:#f7fafc;
+  --border:#e3ebef;
+}
+
 body{
   margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f7f4ec;
-  color:#26352d;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
 button,
@@ -26,566 +51,142 @@ select{
 
 button{
   cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .app{
-  max-width:900px;
+  width:min(900px,100%);
   margin:auto;
   min-height:100vh;
-  padding-bottom:90px;
+  padding-bottom:105px;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header{
   position:relative;
-  padding:24px 18px 18px;
+  padding:22px 18px 0;
   overflow:hidden;
-  background:linear-gradient(#e9f4ed,#f7f4ec);
+  background:
+    linear-gradient(
+      180deg,
+      #f8fbfd 0%,
+      #f7fafc 75%,
+      #f7fafc 100%
+    );
 }
 
 .header-top{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   position:relative;
-  z-index:5;
+  z-index:10;
 }
 
-.logo{
-  font-size:25px;
-  font-weight:800;
-  letter-spacing:.5px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.tagline{
-  font-size:13px;
-  color:#63756b;
-  margin-top:3px;
-}
-
-.profile-btn{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  border:1px solid #b9c8be;
-  background:#ffffff;
-  color:#31473b;
-  font-weight:800;
-  box-shadow:0 5px 15px rgba(44,65,52,.10);
-}
-
-/* SEASONAL LANDSCAPE */
-
-.landscape{
-  height:190px;
+.brand-logo{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  background:var(--blue-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
   position:relative;
-  margin-top:10px;
   overflow:hidden;
-  border-radius:25px;
-  background:linear-gradient(#cfe6ef 0%,#e9f2e8 65%,#dbe5d7 100%);
 }
 
-.sun{
+.brand-house{
+  width:20px;
+  height:15px;
+  border:2px solid var(--blue);
+  border-top:0;
+  position:relative;
+  margin-top:6px;
+  border-radius:2px;
+}
+
+.brand-house:before{
+  content:"";
   position:absolute;
-  width:52px;
-  height:52px;
-  border-radius:50%;
-  background:#f7d987;
-  right:13%;
-  top:22px;
-  box-shadow:0 0 30px rgba(247,217,135,.55);
+  width:15px;
+  height:15px;
+  border-left:2px solid var(--blue);
+  border-top:2px solid var(--blue);
+  transform:rotate(45deg);
+  left:1px;
+  top:-8px;
 }
 
-.mountain{
-  position:absolute;
-  bottom:45px;
-  width:0;
-  height:0;
-  border-left:140px solid transparent;
-  border-right:140px solid transparent;
-  border-bottom:115px solid #a9c1b0;
-}
-
-.mountain.one{
-  left:-65px;
-}
-
-.mountain.two{
-  right:-85px;
-  border-left-width:175px;
-  border-right-width:175px;
-  border-bottom-width:135px;
-  border-bottom-color:#9fb8aa;
-}
-
-.ground{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:63px;
-  background:#b8cfad;
-}
-
-/* HOUSE */
-
-.house{
-  position:absolute;
-  width:185px;
-  height:105px;
-  left:50%;
-  bottom:25px;
-  transform:translateX(-50%);
-  z-index:3;
-}
-
-.house-body{
-  position:absolute;
-  left:20px;
-  right:20px;
-  bottom:0;
-  height:75px;
-  background:#fffdf7;
-  border:2px solid #c7bca8;
-  border-radius:4px;
-}
-
-.roof{
-  position:absolute;
-  left:3px;
-  top:5px;
-  width:180px;
-  height:55px;
-  background:#8b6652;
-  clip-path:polygon(50% 0,100% 100%,0 100%);
-}
-
-.chimney{
-  position:absolute;
-  width:18px;
-  height:38px;
-  right:34px;
-  top:1px;
-  background:#8d7668;
-  z-index:2;
-}
-
-.window{
-  position:absolute;
-  width:28px;
-  height:28px;
-  top:24px;
-  background:#a9d5dc;
-  border:3px solid #6e8279;
-}
-
-.window.left{
-  left:38px;
-}
-
-.window.right{
-  right:38px;
-}
-
-.door{
-  position:absolute;
-  width:30px;
-  height:52px;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
-  background:#8a6d55;
-  border:2px solid #66513f;
-  border-bottom:0;
-}
-
-.door-knob{
-  position:absolute;
-  right:5px;
-  top:27px;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:#ead48d;
-}
-
-.porch{
-  position:absolute;
-  left:9px;
-  right:9px;
-  bottom:-5px;
-  height:8px;
-  background:#846a52;
-  border-radius:3px;
-}
-
-.flower{
-  position:absolute;
-  bottom:17px;
-  width:38px;
-  height:10px;
-  background:#b77d62;
-  border-radius:3px;
-}
-
-.flower.left{
-  left:31px;
-}
-
-.flower.right{
-  right:31px;
-}
-
-.flower:before{
+.brand-house:after{
   content:"";
   position:absolute;
   width:5px;
-  height:13px;
-  background:#70966e;
-  left:8px;
-  bottom:7px;
-  box-shadow:8px -2px 0 #70966e,16px 1px 0 #70966e;
+  height:8px;
+  background:var(--blue);
+  left:6px;
+  bottom:0;
+  border-radius:2px 2px 0 0;
 }
 
-/* SEASON DECORATIONS */
-
-.season{
+.brand-drop{
   position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:4;
+  right:3px;
+  top:4px;
+  font-size:13px;
 }
 
-.leaf{
-  position:absolute;
-  width:13px;
-  height:20px;
-  border-radius:100% 0;
-  transform:rotate(35deg);
+.brand-name{
+  font-size:19px;
+  line-height:1.05;
+  font-weight:800;
+  letter-spacing:-.35px;
 }
 
-.spring .leaf{
-  background:#82b873;
+.tagline{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:4px;
 }
 
-.summer .leaf{
-  background:#5c9c5e;
-}
-
-.autumn .leaf{
-  background:#c8894c;
-}
-
-.winter .leaf{
-  background:#dce8e8;
-}
-
-.season .l1{left:7%;top:20%}
-.season .l2{left:13%;top:30%;transform:rotate(80deg)}
-.season .l3{right:8%;top:24%;transform:rotate(10deg)}
-.season .l4{right:15%;top:35%;transform:rotate(70deg)}
-
-.snow{
-  position:absolute;
-  width:5px;
-  height:5px;
+.profile-btn{
+  width:40px;
+  height:40px;
   border-radius:50%;
-  background:#fff;
-}
-
-.winter .s1{left:15%;top:25%}
-.winter .s2{left:30%;top:45%}
-.winter .s3{right:22%;top:22%}
-.winter .s4{right:9%;top:47%}
-.winter .s5{left:55%;top:15%}
-
-/* HERO */
-
-.hero{
-  padding:20px 18px 10px;
-}
-
-.hero-status{
-  font-size:31px;
-  line-height:1.1;
-  font-weight:800;
-  max-width:650px;
-}
-
-.hero-sub{
-  color:#6b7b72;
-  margin-top:8px;
-  line-height:1.5;
-}
-
-.status-banner{
-  margin-top:16px;
-  padding:14px 16px;
-  border-radius:16px;
-  background:#edf5ed;
-  border:1px solid #d3e2d3;
-  color:#3d6048;
-  font-weight:700;
-}
-
-.status-banner.warning{
-  background:#fff4dd;
-  border-color:#f0d79e;
-  color:#775a22;
-}
-
-.status-banner.overdue{
-  background:#fdebea;
-  border-color:#efc5c2;
-  color:#82433f;
-}
-
-/* CONTENT */
-
-.content{
-  padding:8px 18px;
-}
-
-.section-title{
-  font-size:20px;
-  font-weight:800;
-  margin:20px 0 12px;
-}
-
-.filters{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:5px;
-}
-
-.filter{
-  border:1px solid #cbd7ce;
-  background:#fff;
-  color:#4b5e53;
-  padding:9px 14px;
-  border-radius:20px;
-  white-space:nowrap;
-}
-
-.filter.active{
-  background:#365847;
-  color:#fff;
-  border-color:#365847;
-}
-
-.task-card{
-  background:#fff;
-  border:1px solid #dbe2dc;
-  border-radius:20px;
-  padding:16px;
-  margin-bottom:12px;
-  box-shadow:0 6px 20px rgba(46,66,53,.06);
-}
-
-.task-top{
-  display:flex;
-  gap:13px;
-  align-items:flex-start;
-}
-
-.task-icon{
-  width:45px;
-  height:45px;
-  border-radius:14px;
-  background:#edf4ed;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:22px;
-  flex-shrink:0;
-}
-
-.task-name{
-  font-size:17px;
-  font-weight:800;
-  margin-bottom:5px;
-}
-
-.task-meta{
-  color:#708077;
-  font-size:13px;
-  line-height:1.5;
-}
-
-.task-status{
-  margin-top:10px;
-  font-size:13px;
-  font-weight:700;
-}
-
-.task-status.overdue{
-  color:#a34f48;
-}
-
-.task-status.today{
-  color:#987021;
-}
-
-.task-status.ok{
-  color:#4e7657;
-}
-
-.task-actions{
-  display:flex;
-  gap:8px;
-  margin-top:14px;
-}
-
-.task-actions button{
-  border:0;
-  padding:9px 12px;
-  border-radius:11px;
-}
-
-.complete-btn{
-  background:#e6f2e7;
-  color:#3e6847;
-}
-
-.edit-btn{
-  background:#edf0f3;
-  color:#46535d;
-}
-
-.delete-btn{
-  background:#fae9e7;
-  color:#9b4c47;
-}
-
-/* EMPTY */
-
-.empty{
-  text-align:center;
-  padding:40px 20px;
-  color:#748178;
-}
-
-.empty strong{
-  display:block;
-  color:#435449;
-  font-size:18px;
-  margin-bottom:7px;
-}
-
-/* FORMS */
-
-.form-card{
-  background:#fff;
-  border:1px solid #dbe2dc;
-  border-radius:20px;
-  padding:18px;
-  box-shadow:0 6px 20px rgba(46,66,53,.06);
-}
-
-.field{
-  margin-bottom:16px;
-}
-
-.field label{
-  display:block;
-  font-size:13px;
-  font-weight:800;
-  color:#53645a;
-  margin-bottom:7px;
-}
-
-.field input,
-.field select{
-  width:100%;
-  padding:13px 14px;
-  border:1px solid #ccd7cf;
-  border-radius:13px;
-  background:#fbfcfa;
-  color:#27372e;
-  outline:none;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:#6c9278;
-  box-shadow:0 0 0 3px rgba(108,146,120,.12);
-}
-
-.primary-btn{
-  width:100%;
-  border:0;
-  border-radius:14px;
-  padding:14px;
-  background:#365847;
-  color:white;
-  font-weight:800;
-}
-
-.secondary-btn{
-  border:1px solid #cbd6ce;
-  border-radius:13px;
-  padding:12px 16px;
+  border:1px solid #dbe6ec;
   background:white;
-  color:#43564a;
-}
-
-/* CUSTOM REPEAT */
-
-.custom-repeat{
-  display:none;
-  gap:8px;
-  margin-top:9px;
-}
-
-.custom-repeat.show{
+  color:var(--navy);
   display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 5px 18px rgba(24,59,86,.08);
+  font-size:17px;
 }
 
-.custom-repeat input{
-  flex:1;
-}
-
-.custom-repeat select{
-  flex:1;
-}
-
-/* SETTINGS */
-
-.setting-card{
-  background:#fff;
-  border:1px solid #dbe2dc;
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:12px;
-}
-
-.setting-title{
-  font-weight:800;
-  margin-bottom:5px;
-}
-
-.setting-text{
-  font-size:13px;
-  color:#718078;
-  line-height:1.5;
-}
-
-/* PROFILE */
+/* =========================
+   PROFILE POPUP
+========================= */
 
 .profile-popup{
   display:none;
   position:absolute;
   right:18px;
   top:72px;
-  width:240px;
-  background:#fff;
-  border:1px solid #d8e0da;
+  width:245px;
+  background:white;
+  border:1px solid var(--border);
   border-radius:18px;
   padding:16px;
-  z-index:20;
-  box-shadow:0 15px 35px rgba(30,50,38,.16);
+  z-index:30;
+  box-shadow:0 18px 40px rgba(24,59,86,.15);
 }
 
 .profile-popup.show{
@@ -594,18 +195,829 @@ header{
 
 .profile-popup strong{
   display:block;
-  font-size:18px;
+  font-size:17px;
   margin-bottom:5px;
 }
 
 .profile-popup p{
   margin:0;
-  font-size:13px;
-  color:#718078;
+  font-size:12px;
   line-height:1.5;
+  color:var(--muted);
 }
 
-/* BOTTOM NAV */
+/* =========================
+   HERO HOUSE
+========================= */
+
+.hero-house{
+  height:205px;
+  margin-top:17px;
+  position:relative;
+  overflow:hidden;
+  border-radius:26px;
+  background:
+    linear-gradient(
+      180deg,
+      #dff1fa 0%,
+      #edf7f7 47%,
+      #e7f0e5 100%
+    );
+}
+
+.hero-house:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(247,250,252,.92) 0%,
+      rgba(247,250,252,.15) 45%,
+      rgba(247,250,252,0) 100%
+    );
+  z-index:5;
+  pointer-events:none;
+}
+
+.sun{
+  position:absolute;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  right:14%;
+  top:23px;
+  background:#f8d982;
+  box-shadow:0 0 32px rgba(248,217,130,.65);
+}
+
+.mountain{
+  position:absolute;
+  bottom:48px;
+  width:0;
+  height:0;
+  border-left:145px solid transparent;
+  border-right:145px solid transparent;
+  border-bottom:120px solid #b8cfc2;
+}
+
+.mountain.one{
+  left:-75px;
+}
+
+.mountain.two{
+  right:-90px;
+  border-left-width:185px;
+  border-right-width:185px;
+  border-bottom-width:145px;
+  border-bottom-color:#abc5b8;
+}
+
+.ground{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:67px;
+  background:#bcd4b5;
+}
+
+/* HOUSE */
+
+.house{
+  position:absolute;
+  width:220px;
+  height:130px;
+  left:64%;
+  bottom:22px;
+  transform:translateX(-50%);
+  z-index:4;
+}
+
+.house-body{
+  position:absolute;
+  left:25px;
+  right:25px;
+  bottom:0;
+  height:86px;
+  background:#fffdf8;
+  border:2px solid #d2c9bb;
+  border-radius:5px;
+  box-shadow:0 7px 14px rgba(52,71,61,.10);
+}
+
+.roof{
+  position:absolute;
+  left:4px;
+  top:4px;
+  width:212px;
+  height:65px;
+  background:#765c4d;
+  clip-path:polygon(50% 0,100% 100%,0 100%);
+}
+
+.roof-highlight{
+  position:absolute;
+  left:12px;
+  right:12px;
+  top:11px;
+  height:3px;
+  background:rgba(255,255,255,.16);
+  transform:rotate(-24deg);
+  z-index:3;
+}
+
+.chimney{
+  position:absolute;
+  width:20px;
+  height:42px;
+  right:40px;
+  top:0;
+  background:#897569;
+  z-index:2;
+  border-radius:2px 2px 0 0;
+}
+
+.chimney-top{
+  position:absolute;
+  left:-2px;
+  top:-3px;
+  width:24px;
+  height:5px;
+  background:#725f55;
+  border-radius:2px;
+}
+
+.window{
+  position:absolute;
+  width:34px;
+  height:34px;
+  top:26px;
+  background:#b7e0e8;
+  border:3px solid #71867e;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.3);
+}
+
+.window:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:#71867e;
+  transform:translateX(-50%);
+}
+
+.window:before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  height:2px;
+  background:#71867e;
+  transform:translateY(-50%);
+}
+
+.window.left{
+  left:35px;
+}
+
+.window.right{
+  right:35px;
+}
+
+.door{
+  position:absolute;
+  width:34px;
+  height:58px;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  background:#876c57;
+  border:2px solid #685443;
+  border-bottom:0;
+  border-radius:3px 3px 0 0;
+}
+
+.door-knob{
+  position:absolute;
+  right:5px;
+  top:30px;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#efd27c;
+}
+
+.porch{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:-6px;
+  height:8px;
+  background:#816750;
+  border-radius:3px;
+}
+
+.tree{
+  position:absolute;
+  z-index:2;
+}
+
+.tree-trunk{
+  position:absolute;
+  width:8px;
+  height:40px;
+  background:#80664f;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  border-radius:4px;
+}
+
+.tree-top{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#80aa78;
+  box-shadow:
+    22px 8px 0 #6f9c6b,
+    -20px 10px 0 #91b686;
+}
+
+.tree-left{
+  left:10%;
+  bottom:37px;
+  transform:scale(.9);
+}
+
+.tree-right{
+  right:7%;
+  bottom:39px;
+  transform:scale(.75);
+}
+
+.flower{
+  position:absolute;
+  bottom:17px;
+  width:42px;
+  height:11px;
+  background:#b98a70;
+  border-radius:4px;
+  z-index:5;
+}
+
+.flower.left{
+  left:32px;
+}
+
+.flower.right{
+  right:32px;
+}
+
+.flower:before{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:14px;
+  background:#70986d;
+  left:8px;
+  bottom:7px;
+  box-shadow:
+    9px -2px 0 #70986d,
+    18px 1px 0 #70986d,
+    27px -3px 0 #70986d;
+}
+
+/* =========================
+   HERO TEXT
+========================= */
+
+.hero{
+  padding:22px 18px 7px;
+}
+
+.hero-greeting{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:2px;
+}
+
+.hero-name{
+  font-size:31px;
+  line-height:1.08;
+  font-weight:800;
+  letter-spacing:-.8px;
+}
+
+.hero-sub{
+  color:var(--muted);
+  margin-top:8px;
+  font-size:13px;
+  line-height:1.55;
+}
+
+/* =========================
+   HOME HEALTH
+========================= */
+
+.health-card{
+  margin:14px 18px 5px;
+  padding:15px;
+  border-radius:20px;
+  background:var(--mint);
+  border:1px solid #d0eddf;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.health-icon{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:var(--green);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  flex-shrink:0;
+}
+
+.health-info{
+  flex:1;
+}
+
+.health-title{
+  font-size:14px;
+  font-weight:800;
+}
+
+.health-text{
+  font-size:11px;
+  color:#5e7a6c;
+  margin-top:4px;
+}
+
+.health-badge{
+  padding:8px 11px;
+  border-radius:13px;
+  background:#c7ebd9;
+  color:#217957;
+  font-size:10px;
+  line-height:1.25;
+  font-weight:800;
+  text-align:center;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+  padding:7px 18px;
+}
+
+.section-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:22px 0 12px;
+}
+
+.section-heading-left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.calendar-small{
+  width:25px;
+  height:25px;
+  border-radius:8px;
+  background:var(--blue-soft);
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+
+.section-title{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-.3px;
+}
+
+.view-all{
+  border:0;
+  background:transparent;
+  color:var(--blue);
+  font-size:11px;
+  font-weight:700;
+  padding:5px;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:4px;
+  scrollbar-width:none;
+}
+
+.filters::-webkit-scrollbar{
+  display:none;
+}
+
+.filter{
+  border:1px solid #d9e4ea;
+  background:white;
+  color:#647784;
+  padding:8px 13px;
+  border-radius:18px;
+  white-space:nowrap;
+  font-size:11px;
+  font-weight:600;
+}
+
+.filter.active{
+  background:var(--navy);
+  color:white;
+  border-color:var(--navy);
+}
+
+/* =========================
+   TASK CARDS
+========================= */
+
+.task-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:19px;
+  padding:14px;
+  margin-bottom:10px;
+  box-shadow:0 7px 22px rgba(24,59,86,.055);
+}
+
+.task-main{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.task-icon{
+  width:47px;
+  height:47px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.task-icon svg{
+  width:23px;
+  height:23px;
+}
+
+.task-content{
+  flex:1;
+  min-width:0;
+}
+
+.task-name{
+  font-size:14px;
+  font-weight:800;
+  color:var(--navy);
+  line-height:1.25;
+}
+
+.task-category{
+  font-size:10px;
+  color:#83919a;
+  margin-top:3px;
+}
+
+.task-arrow{
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:#f4f7f9;
+  color:#81909a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
+  flex-shrink:0;
+}
+
+.task-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:11px;
+  padding-left:59px;
+}
+
+.task-due{
+  color:#758691;
+  font-size:10px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.task-due svg{
+  width:12px;
+  height:12px;
+}
+
+.task-status-pill{
+  border-radius:11px;
+  padding:5px 9px;
+  font-size:9px;
+  font-weight:800;
+}
+
+.task-status-pill.due{
+  background:var(--red-soft);
+  color:var(--red);
+}
+
+.task-status-pill.today{
+  background:#fff3d7;
+  color:#9b7524;
+}
+
+.task-status-pill.upcoming{
+  background:var(--blue-soft);
+  color:#4381a5;
+}
+
+.task-status-pill.completed{
+  background:var(--mint);
+  color:#378061;
+}
+
+.task-actions{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+  padding-left:59px;
+}
+
+.task-actions button{
+  border:0;
+  padding:7px 10px;
+  border-radius:10px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.complete-btn{
+  background:var(--mint);
+  color:#347659;
+}
+
+.edit-btn{
+  background:#f0f4f7;
+  color:#536774;
+}
+
+.delete-btn{
+  background:var(--red-soft);
+  color:var(--red);
+}
+
+/* =========================
+   ICON COLORS
+========================= */
+
+.icon-water{
+  background:var(--blue-soft);
+  color:var(--blue);
+}
+
+.icon-heating{
+  background:var(--orange-soft);
+  color:var(--orange);
+}
+
+.icon-plumbing{
+  background:#e7f6eb;
+  color:#36a265;
+}
+
+.icon-cooling{
+  background:var(--lavender);
+  color:var(--purple);
+}
+
+.icon-electrical{
+  background:#fff5d9;
+  color:#d29a20;
+}
+
+.icon-cleaning{
+  background:#e9f5f5;
+  color:#399b9b;
+}
+
+.icon-repair{
+  background:#edf0f3;
+  color:#657785;
+}
+
+.icon-garden{
+  background:#e5f5e9;
+  color:#55945d;
+}
+
+.icon-roof{
+  background:#f4ece7;
+  color:#9b7058;
+}
+
+.icon-default{
+  background:#eef4f7;
+  color:#5e8195;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  text-align:center;
+  padding:38px 20px;
+  color:#81909a;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.empty strong{
+  display:block;
+  color:var(--navy);
+  font-size:16px;
+  margin-bottom:6px;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:17px;
+  box-shadow:0 7px 22px rgba(24,59,86,.05);
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  color:#566d7b;
+  margin-bottom:7px;
+}
+
+.field input,
+.field select{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid #d6e1e7;
+  border-radius:12px;
+  background:#fbfdfe;
+  color:var(--navy);
+  outline:none;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:#7ab9d7;
+  box-shadow:0 0 0 3px rgba(36,149,208,.10);
+}
+
+.primary-btn{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:13px;
+  background:var(--blue);
+  color:white;
+  font-weight:800;
+  font-size:12px;
+}
+
+.secondary-btn{
+  border:1px solid #d5e0e6;
+  border-radius:12px;
+  padding:11px 15px;
+  background:white;
+  color:#526976;
+  font-size:12px;
+}
+
+/* =========================
+   CUSTOM REPEAT
+========================= */
+
+.custom-repeat{
+  display:none;
+  gap:8px;
+  margin-top:8px;
+}
+
+.custom-repeat.show{
+  display:flex;
+}
+
+.custom-repeat input,
+.custom-repeat select{
+  flex:1;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.setting-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:11px;
+}
+
+.setting-title{
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.setting-text{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-panel{
+  margin:14px 18px 15px;
+  padding:11px 7px;
+  border-radius:20px;
+  background:rgba(235,243,248,.82);
+  border:1px solid #dce7ed;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:3px;
+}
+
+.quick-btn{
+  border:0;
+  background:transparent;
+  color:#657986;
+  padding:7px 3px;
+  font-size:9px;
+  font-weight:700;
+}
+
+.quick-icon{
+  width:34px;
+  height:34px;
+  border-radius:11px;
+  margin:0 auto 5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
+
+.quick-green{background:#ddf5ea;color:#21a875}
+.quick-blue{background:#e8f5fc;color:#2495d0}
+.quick-purple{background:#f0eafe;color:#8064c7}
+.quick-orange{background:#fff0dd;color:#e08b38}
+
+/* =========================
+   BOTTOM NAV
+========================= */
 
 .bottom-nav{
   position:fixed;
@@ -613,36 +1025,46 @@ header{
   left:50%;
   transform:translateX(-50%);
   width:min(900px,100%);
-  background:rgba(255,255,255,.96);
-  border-top:1px solid #dce3de;
+  background:rgba(255,255,255,.97);
+  border-top:1px solid #e0e8ed;
   display:flex;
   justify-content:space-around;
-  padding:9px 8px calc(9px + env(safe-area-inset-bottom));
+  padding:8px 8px calc(8px + env(safe-area-inset-bottom));
   z-index:50;
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(14px);
 }
 
 .nav-btn{
   border:0;
   background:transparent;
-  color:#758279;
-  font-size:12px;
-  min-width:70px;
-  padding:6px;
+  color:#82909a;
+  font-size:9px;
+  min-width:68px;
+  padding:5px 4px;
+  font-weight:600;
 }
 
 .nav-btn span{
   display:block;
-  font-size:20px;
-  margin-bottom:3px;
+  width:30px;
+  height:25px;
+  margin:0 auto 3px;
+  font-size:19px;
+  line-height:25px;
 }
 
 .nav-btn.active{
-  color:#365847;
+  color:var(--blue);
   font-weight:800;
 }
 
-/* PAGES */
+.nav-btn.active span{
+  color:var(--blue);
+}
+
+/* =========================
+   PAGES
+========================= */
 
 .page{
   display:none;
@@ -652,14 +1074,16 @@ header{
   display:block;
 }
 
-/* EDIT MODAL */
+/* =========================
+   EDIT MODAL
+========================= */
 
 .edit-modal{
   display:none;
   position:fixed;
   inset:0;
   z-index:100;
-  background:rgba(29,43,35,.42);
+  background:rgba(24,59,86,.35);
   padding:20px;
   align-items:flex-end;
   justify-content:center;
@@ -671,10 +1095,10 @@ header{
 
 .edit-card{
   width:min(520px,100%);
-  background:#fffdf8;
+  background:#fff;
   border-radius:25px;
   padding:20px;
-  box-shadow:0 20px 55px rgba(25,40,31,.25);
+  box-shadow:0 20px 55px rgba(24,59,86,.25);
   max-height:90vh;
   overflow:auto;
 }
@@ -683,105 +1107,108 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:18px;
+  margin-bottom:17px;
 }
 
 .edit-header h2{
   margin:0;
-  font-size:23px;
+  font-size:21px;
 }
 
 .close-edit{
-  width:36px;
-  height:36px;
+  width:35px;
+  height:35px;
   border:0;
   border-radius:50%;
-  background:#edf0ec;
-  color:#526258;
+  background:#eef3f6;
+  color:#536874;
   font-size:20px;
 }
 
 .edit-note{
-  margin:-8px 0 18px;
-  color:#718078;
-  font-size:13px;
+  margin:-7px 0 17px;
+  color:var(--muted);
+  font-size:11px;
 }
 
 .edit-step{
-  background:#f7faf6;
-  border:1px solid #dce5dc;
-  border-radius:17px;
-  padding:14px;
-  margin-bottom:10px;
+  background:#f7fafc;
+  border:1px solid #dfe8ed;
+  border-radius:16px;
+  padding:13px;
+  margin-bottom:9px;
 }
 
 .edit-step.step-two{
-  margin-left:10px;
+  margin-left:8px;
 }
 
 .edit-step.step-three{
-  margin-left:20px;
+  margin-left:16px;
 }
 
 .step-label{
   display:flex;
   align-items:center;
-  gap:8px;
-  font-size:13px;
+  gap:7px;
+  font-size:11px;
   font-weight:800;
-  color:#526259;
+  color:#526976;
   margin-bottom:7px;
 }
 
 .step-number{
-  width:24px;
-  height:24px;
+  width:23px;
+  height:23px;
   border-radius:50%;
-  background:#dcebdd;
-  color:#41604b;
+  background:var(--blue-soft);
+  color:var(--blue);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:12px;
+  font-size:11px;
 }
 
 .edit-step input,
 .edit-step select{
   width:100%;
-  padding:12px;
-  border:1px solid #ccd8ce;
-  border-radius:12px;
-  background:#fff;
-  color:#29392f;
+  padding:11px;
+  border:1px solid #d3dfe5;
+  border-radius:11px;
+  background:white;
+  color:var(--navy);
   outline:none;
 }
 
 .edit-actions{
   display:flex;
   gap:9px;
-  margin-top:17px;
+  margin-top:16px;
 }
 
 .edit-actions button{
   flex:1;
 }
 
-/* TOAST */
+/* =========================
+   TOAST
+========================= */
 
 .toast{
   position:fixed;
   left:50%;
-  bottom:82px;
+  bottom:88px;
   transform:translateX(-50%) translateY(20px);
-  background:#2f4738;
-  color:#fff;
-  padding:12px 17px;
+  background:var(--navy);
+  color:white;
+  padding:11px 16px;
   border-radius:13px;
-  font-size:13px;
+  font-size:11px;
   opacity:0;
   pointer-events:none;
   transition:.25s;
   z-index:200;
+  white-space:nowrap;
 }
 
 .toast.show{
@@ -789,19 +1216,59 @@ header{
   transform:translateX(-50%) translateY(0);
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:500px){
 
-  .hero-status{
-    font-size:27px;
+  header{
+    padding-left:15px;
+    padding-right:15px;
   }
 
-  .landscape{
-    height:175px;
+  .hero-house{
+    height:190px;
+    border-radius:23px;
   }
 
   .house{
-    transform:translateX(-50%) scale(.88);
+    left:67%;
+    transform:translateX(-50%) scale(.82);
     transform-origin:bottom center;
+  }
+
+  .hero{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .hero-name{
+    font-size:29px;
+  }
+
+  .health-card{
+    margin-left:15px;
+    margin-right:15px;
+  }
+
+  .content{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .quick-panel{
+    margin-left:15px;
+    margin-right:15px;
+  }
+
+  .task-card{
+    padding:13px;
+  }
+
+  .task-bottom,
+  .task-actions{
+    padding-left:59px;
   }
 
   .edit-card{
@@ -810,6 +1277,23 @@ header{
 
   .custom-repeat{
     flex-direction:column;
+  }
+
+}
+
+@media(max-width:360px){
+
+  .brand-name{
+    font-size:17px;
+  }
+
+  .hero-name{
+    font-size:26px;
+  }
+
+  .task-bottom,
+  .task-actions{
+    padding-left:0;
   }
 
 }
@@ -824,9 +1308,18 @@ header{
 
   <div class="header-top">
 
-    <div>
-      <div class="logo">Haven</div>
-      <div class="tagline">Your home remembers.</div>
+    <div class="brand">
+
+      <div class="brand-logo">
+        <div class="brand-house"></div>
+        <div class="brand-drop">💧</div>
+      </div>
+
+      <div>
+        <div class="brand-name">Haven</div>
+        <div class="tagline">Your home remembers.</div>
+      </div>
+
     </div>
 
     <button
@@ -834,7 +1327,7 @@ header{
       aria-label="Haven"
       title="Haven"
       onclick="toggleProfile()">
-      🏡
+      ●
     </button>
 
   </div>
@@ -855,21 +1348,35 @@ header{
   </div>
 
 
-  <div class="landscape" id="landscape">
+  <div class="hero-house">
 
     <div class="sun"></div>
 
     <div class="mountain one"></div>
     <div class="mountain two"></div>
 
+    <div class="tree tree-left">
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+
+    <div class="tree tree-right">
+      <div class="tree-top"></div>
+      <div class="tree-trunk"></div>
+    </div>
+
     <div class="ground"></div>
 
 
     <div class="house">
 
-      <div class="chimney"></div>
+      <div class="chimney">
+        <div class="chimney-top"></div>
+      </div>
 
       <div class="roof"></div>
+
+      <div class="roof-highlight"></div>
 
       <div class="house-body">
 
@@ -889,22 +1396,6 @@ header{
 
     </div>
 
-
-    <div class="season" id="seasonDecor">
-
-      <div class="leaf l1"></div>
-      <div class="leaf l2"></div>
-      <div class="leaf l3"></div>
-      <div class="leaf l4"></div>
-
-      <div class="snow s1"></div>
-      <div class="snow s2"></div>
-      <div class="snow s3"></div>
-      <div class="snow s4"></div>
-      <div class="snow s5"></div>
-
-    </div>
-
   </div>
 
 </header>
@@ -916,16 +1407,43 @@ header{
 
   <div class="hero">
 
-    <div class="hero-status" id="heroStatus">
-      Home is doing well
+    <div class="hero-greeting">
+      Good morning,
+    </div>
+
+    <div class="hero-name">
+      Javaid
     </div>
 
     <div class="hero-sub">
-      Haven keeps track of the little things your home needs.
+      Your home is in good shape.<br>
+      Here are your upcoming maintenance tasks.
     </div>
 
-    <div class="status-banner" id="statusBanner">
-      Everything looks good.
+  </div>
+
+
+  <div class="health-card">
+
+    <div class="health-icon">
+      ⌂
+    </div>
+
+    <div class="health-info">
+
+      <div class="health-title">
+        Home Health
+      </div>
+
+      <div class="health-text">
+        All systems are running well
+      </div>
+
+    </div>
+
+    <div class="health-badge" id="healthBadge">
+      ✓ 0 tasks<br>
+      need attention
     </div>
 
   </div>
@@ -933,8 +1451,26 @@ header{
 
   <div class="content">
 
-    <div class="section-title">
-      Maintenance
+    <div class="section-heading">
+
+      <div class="section-heading-left">
+
+        <div class="calendar-small">
+          ▣
+        </div>
+
+        <div class="section-title">
+          Upcoming Maintenance
+        </div>
+
+      </div>
+
+      <button
+        class="view-all"
+        onclick="setFilter('all',document.querySelector('.filter'))">
+        View all ›
+      </button>
+
     </div>
 
 
@@ -969,8 +1505,64 @@ header{
 
     <div
       id="taskList"
-      style="margin-top:14px;">
+      style="margin-top:12px;">
     </div>
+
+  </div>
+
+
+  <div class="quick-panel">
+
+    <button
+      class="quick-btn"
+      onclick="showPage('addPage',document.querySelectorAll('.nav-btn')[2])">
+
+      <div class="quick-icon quick-green">
+        ＋
+      </div>
+
+      Add Task
+
+    </button>
+
+
+    <button
+      class="quick-btn"
+      onclick="showPage('memoryPage',document.querySelectorAll('.nav-btn')[1])">
+
+      <div class="quick-icon quick-blue">
+        ⌂
+      </div>
+
+      My Home
+
+    </button>
+
+
+    <button
+      class="quick-btn"
+      onclick="showPage('memoryPage',document.querySelectorAll('.nav-btn')[1])">
+
+      <div class="quick-icon quick-purple">
+        ▣
+      </div>
+
+      Calendar
+
+    </button>
+
+
+    <button
+      class="quick-btn"
+      onclick="showPage('memoryPage',document.querySelectorAll('.nav-btn')[1])">
+
+      <div class="quick-icon quick-orange">
+        ▤
+      </div>
+
+      Records
+
+    </button>
 
   </div>
 
@@ -983,18 +1575,30 @@ header{
 
   <div class="content">
 
-    <div class="section-title">
-      Home memory
+    <div class="section-heading">
+
+      <div class="section-heading-left">
+
+        <div class="calendar-small">
+          ▣
+        </div>
+
+        <div class="section-title">
+          Home memory
+        </div>
+
+      </div>
+
     </div>
 
 
     <div class="form-card">
 
-      <div style="font-size:15px;font-weight:800;margin-bottom:7px;">
+      <div style="font-size:14px;font-weight:800;margin-bottom:6px;">
         Your maintenance library
       </div>
 
-      <div style="font-size:13px;color:#718078;line-height:1.5;">
+      <div style="font-size:11px;color:#6b7c89;line-height:1.5;">
         Every memory you add stays here so you don't have to remember
         everything yourself.
       </div>
@@ -1004,7 +1608,7 @@ header{
 
     <div
       id="memoryList"
-      style="margin-top:14px;">
+      style="margin-top:12px;">
     </div>
 
   </div>
@@ -1018,8 +1622,20 @@ header{
 
   <div class="content">
 
-    <div class="section-title">
-      Add maintenance
+    <div class="section-heading">
+
+      <div class="section-heading-left">
+
+        <div class="calendar-small">
+          ＋
+        </div>
+
+        <div class="section-title">
+          Add maintenance
+        </div>
+
+      </div>
+
     </div>
 
 
@@ -1148,8 +1764,20 @@ header{
 
   <div class="content">
 
-    <div class="section-title">
-      Settings
+    <div class="section-heading">
+
+      <div class="section-heading-left">
+
+        <div class="calendar-small">
+          ⚙
+        </div>
+
+        <div class="section-title">
+          Settings
+        </div>
+
+      </div>
+
     </div>
 
 
@@ -1199,29 +1827,40 @@ header{
   <button
     class="nav-btn active"
     onclick="showPage('homePage',this)">
+
     <span>⌂</span>
     Home
+
   </button>
+
 
   <button
     class="nav-btn"
     onclick="showPage('memoryPage',this)">
-    <span>◫</span>
+
+    <span>▣</span>
     Memory
+
   </button>
+
 
   <button
     class="nav-btn"
     onclick="showPage('addPage',this)">
+
     <span>＋</span>
     Add
+
   </button>
+
 
   <button
     class="nav-btn"
     onclick="showPage('settingsPage',this)">
+
     <span>⚙</span>
     Settings
+
   </button>
 
 </nav>
@@ -1256,8 +1895,6 @@ header{
     </div>
 
 
-    <!-- NAME -->
-
     <div class="edit-step">
 
       <div class="step-label">
@@ -1278,8 +1915,6 @@ header{
     </div>
 
 
-    <!-- DATE -->
-
     <div class="edit-step step-two">
 
       <div class="step-label">
@@ -1298,8 +1933,6 @@ header{
 
     </div>
 
-
-    <!-- REPEAT -->
 
     <div class="edit-step step-three">
 
@@ -1616,6 +2249,11 @@ function showPage(pageId,button){
     button.classList.add("active");
   }
 
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
   if(pageId === "memoryPage"){
     renderMemory();
   }
@@ -1734,59 +2372,281 @@ function getDueDate(task){
 
 
 /* =========================
-   TASK ICON
+   TASK CATEGORY
 ========================= */
 
-function getTaskIcon(name){
+function getTaskCategory(name){
 
   const text =
-    name.toLowerCase();
+    String(name || "").toLowerCase();
+
 
   if(
-    text.includes("garden") ||
-    text.includes("plant") ||
-    text.includes("lawn")
+    text.includes("air conditioner") ||
+    text.includes("air conditioning") ||
+    text.includes("ac") ||
+    text.includes("cooling") ||
+    text.includes("aircon")
   ){
-    return "🌿";
+
+    return {
+      type:"cooling",
+      label:"Cooling system"
+    };
+
   }
 
+
   if(
+    text.includes("water") ||
+    text.includes("tank") ||
     text.includes("filter") ||
-    text.includes("water")
+    text.includes("pump") ||
+    text.includes("purifier")
   ){
-    return "💧";
+
+    return {
+      type:"water",
+      label:"Water system"
+    };
+
   }
 
+
   if(
-    text.includes("clean") ||
-    text.includes("wash")
+    text.includes("heater") ||
+    text.includes("heating") ||
+    text.includes("fireplace") ||
+    text.includes("boiler") ||
+    text.includes("radiator") ||
+    text.includes("furnace")
   ){
-    return "🧽";
+
+    return {
+      type:"heating",
+      label:"Heating system"
+    };
+
   }
+
+
+  if(
+    text.includes("tap") ||
+    text.includes("faucet") ||
+    text.includes("pipe") ||
+    text.includes("plumb") ||
+    text.includes("drain") ||
+    text.includes("toilet") ||
+    text.includes("sink")
+  ){
+
+    return {
+      type:"plumbing",
+      label:"Plumbing"
+    };
+
+  }
+
 
   if(
     text.includes("electric") ||
     text.includes("light") ||
-    text.includes("bulb")
+    text.includes("bulb") ||
+    text.includes("switch") ||
+    text.includes("socket") ||
+    text.includes("wiring")
   ){
-    return "💡";
+
+    return {
+      type:"electrical",
+      label:"Electrical"
+    };
+
   }
 
+
   if(
-    text.includes("repair") ||
-    text.includes("fix")
+    text.includes("clean") ||
+    text.includes("wash") ||
+    text.includes("dust") ||
+    text.includes("vacuum")
   ){
-    return "🔧";
+
+    return {
+      type:"cleaning",
+      label:"Cleaning"
+    };
+
   }
+
+
+  if(
+    text.includes("garden") ||
+    text.includes("plant") ||
+    text.includes("lawn") ||
+    text.includes("tree")
+  ){
+
+    return {
+      type:"garden",
+      label:"Garden"
+    };
+
+  }
+
 
   if(
     text.includes("roof") ||
-    text.includes("gutter")
+    text.includes("gutter") ||
+    text.includes("chimney")
   ){
-    return "🏠";
+
+    return {
+      type:"roof",
+      label:"Roof & exterior"
+    };
+
   }
 
-  return "✓";
+
+  if(
+    text.includes("repair") ||
+    text.includes("fix") ||
+    text.includes("service") ||
+    text.includes("replace")
+  ){
+
+    return {
+      type:"repair",
+      label:"Home service"
+    };
+
+  }
+
+
+  return {
+    type:"default",
+    label:"Home maintenance"
+  };
+
+}
+
+
+/* =========================
+   TASK ICON SVG
+========================= */
+
+function getTaskIconSvg(type){
+
+  const icons = {
+
+    water:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3C12 3 6.5 10 6.5 14.2A5.5 5.5 0 0 0 17.5 14.2C17.5 10 12 3 12 3Z"/>
+        <path d="M9.5 15.5c.5 1.2 1.3 1.8 2.5 2"/>
+      </svg>
+    `,
+
+    heating:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21c3.1 0 5.5-2.2 5.5-5.2 0-2.2-1.2-3.9-3.1-5.5.1 2-1 3.2-2.1 3.7.1-3.9-1.8-6.1-3.5-7.8-.3 3.7-3.3 5.7-3.3 9.2C7.5 18.8 9.5 21 12 21Z"/>
+        <path d="M12 21c-1.4-.7-2.1-1.8-2.1-3.2 0-1.1.5-2 1.5-3"/>
+      </svg>
+    `,
+
+    plumbing:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 10h10"/>
+        <path d="M14 10V6h4v4"/>
+        <path d="M18 10v2a3 3 0 0 1-3 3H9a5 5 0 0 1-5-5"/>
+        <path d="M18 6h2"/>
+        <path d="M6 15v3"/>
+        <path d="M4 18h4"/>
+      </svg>
+    `,
+
+    cooling:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.7"
+        stroke-linecap="round">
+        <rect x="3" y="5" width="18" height="9" rx="2"/>
+        <path d="M6 9h12"/>
+        <path d="M7 18c1.3-1.4 2.7-1.4 4 0"/>
+        <path d="M13 18c1.3-1.4 2.7-1.4 4 0"/>
+      </svg>
+    `,
+
+    electrical:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2 5 13h6l-1 9 8-11h-6l1-9Z"/>
+      </svg>
+    `,
+
+    cleaning:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 3h10"/>
+        <path d="M9 3v5"/>
+        <path d="M15 3v5"/>
+        <path d="M6 8h12"/>
+        <path d="M8 8v12"/>
+        <path d="M16 8v12"/>
+        <path d="M8 20h8"/>
+      </svg>
+    `,
+
+    garden:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21V11"/>
+        <path d="M12 13c-4.5 0-7-2.7-7-6 4.5 0 7 2.7 7 6Z"/>
+        <path d="M12 10c0-4 2.4-6 6.5-6 0 4-2.4 6-6.5 6Z"/>
+      </svg>
+    `,
+
+    roof:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="m3 11 9-7 9 7"/>
+        <path d="M5 10v9h14v-9"/>
+        <path d="M10 19v-5h4v5"/>
+      </svg>
+    `,
+
+    repair:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="m14.5 6.5 3-3 3 3-3 3"/>
+        <path d="m4 20 10.5-10.5"/>
+        <path d="m8 16 3 3"/>
+      </svg>
+    `,
+
+    default:`
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 12 12 5l8 7"/>
+        <path d="M6 11v8h12v-8"/>
+        <path d="M10 19v-5h4v5"/>
+      </svg>
+    `
+
+  };
+
+  return icons[type] || icons.default;
 
 }
 
@@ -1868,7 +2728,9 @@ function getTaskStatus(task){
 
     return {
       type:"ok",
-      text:"Date needs checking"
+      text:"Date needs checking",
+      pill:"upcoming",
+      pillText:"Check date"
     };
 
   }
@@ -1881,7 +2743,9 @@ function getTaskStatus(task){
     return {
       type:"overdue",
       text:
-        `Overdue by ${Math.abs(difference)} day${Math.abs(difference) === 1 ? "" : "s"}`
+        `Overdue by ${Math.abs(difference)} day${Math.abs(difference) === 1 ? "" : "s"}`,
+      pill:"due",
+      pillText:"Overdue"
     };
 
   }
@@ -1890,7 +2754,9 @@ function getTaskStatus(task){
 
     return {
       type:"today",
-      text:"Due today"
+      text:"Due today",
+      pill:"due",
+      pillText:"Due"
     };
 
   }
@@ -1899,14 +2765,18 @@ function getTaskStatus(task){
 
     return {
       type:"ok",
-      text:"Due tomorrow"
+      text:"Due tomorrow",
+      pill:"today",
+      pillText:"Tomorrow"
     };
 
   }
 
   return {
     type:"ok",
-    text:`Due in ${difference} days`
+    text:`Due in ${difference} days`,
+    pill:"upcoming",
+    pillText:"Upcoming"
   };
 
 }
@@ -1957,7 +2827,9 @@ function setFilter(filter,button){
       btn.classList.remove("active");
     });
 
-  button.classList.add("active");
+  if(button){
+    button.classList.add("active");
+  }
 
   render();
 
@@ -2001,6 +2873,7 @@ function render(){
   }
 
   updateHero();
+  updateHealth();
 
 }
 
@@ -2017,8 +2890,8 @@ function renderTaskCard(task){
   const status =
     getTaskStatus(task);
 
-  const repeat =
-    repeatText(task);
+  const category =
+    getTaskCategory(task.name);
 
   const id =
     String(task.id);
@@ -2027,35 +2900,50 @@ function renderTaskCard(task){
 
     <div class="task-card">
 
-      <div class="task-top">
+      <div class="task-main">
 
-        <div class="task-icon">
-          ${getTaskIcon(task.name)}
+        <div class="task-icon icon-${category.type}">
+          ${getTaskIconSvg(category.type)}
         </div>
 
-        <div style="flex:1;">
+        <div class="task-content">
 
           <div class="task-name">
             ${escapeHtml(task.name)}
           </div>
 
-          <div class="task-meta">
-
-            Due: ${formatDate(due)}
-
-            <br>
-
-            ${escapeHtml(repeat)}
-
+          <div class="task-category">
+            ${escapeHtml(category.label)}
           </div>
 
+        </div>
+
+        <div class="task-arrow">
+          ›
         </div>
 
       </div>
 
 
-      <div class="task-status ${status.type}">
-        ${status.text}
+      <div class="task-bottom">
+
+        <div class="task-due">
+
+          <svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 9h18"/>
+          </svg>
+
+          ${escapeHtml(status.text)}
+
+        </div>
+
+        <div class="task-status-pill ${status.pill}">
+          ${status.pillText}
+        </div>
+
       </div>
 
 
@@ -2076,7 +2964,7 @@ function renderTaskCard(task){
         <button
           class="delete-btn"
           onclick="deleteTask('${id}')">
-          ×
+          × Delete
         </button>
 
       </div>
@@ -2089,24 +2977,19 @@ function renderTaskCard(task){
 
 
 /* =========================
-   HERO STATUS
+   HEALTH
 ========================= */
 
-function updateHero(){
+function updateHealth(){
 
-  const hero =
+  const badge =
     document.getElementById(
-      "heroStatus"
+      "healthBadge"
     );
 
-  const banner =
-    document.getElementById(
-      "statusBanner"
-    );
+  if(!badge) return;
 
-  if(!hero || !banner) return;
-
-  const overdue =
+  const attention =
     tasks.filter(task=>{
 
       const d =
@@ -2114,55 +2997,25 @@ function updateHero(){
           getDueDate(task)
         );
 
-      return d !== null && d < 0;
+      return d !== null && d <= 0;
 
-    });
+    }).length;
 
+  badge.innerHTML =
+    `✓ ${attention} task${attention === 1 ? "" : "s"}<br>
+     need attention`;
 
-  const today =
-    tasks.filter(task=>{
-
-      return daysBetween(
-        getDueDate(task)
-      ) === 0;
-
-    });
+}
 
 
-  if(overdue.length > 0){
+/* =========================
+   HERO STATUS
+========================= */
 
-    hero.textContent =
-      "A little attention needed";
+function updateHero(){
 
-    banner.textContent =
-      `${overdue.length} thing${overdue.length === 1 ? "" : "s"} overdue.`;
-
-    banner.className =
-      "status-banner overdue";
-
-  }else if(today.length > 0){
-
-    hero.textContent =
-      "Something needs attention";
-
-    banner.textContent =
-      `${today.length} thing${today.length === 1 ? "" : "s"} due today.`;
-
-    banner.className =
-      "status-banner warning";
-
-  }else{
-
-    hero.textContent =
-      "Home is doing well";
-
-    banner.textContent =
-      "Everything looks good.";
-
-    banner.className =
-      "status-banner";
-
-  }
+  /* Kept for compatibility with
+     the existing Haven data logic. */
 
 }
 
@@ -2444,7 +3297,7 @@ function addTask(){
 
 
 /* =========================
-   ADD INTERVAL TO DATE
+   ADD INTERVAL
 ========================= */
 
 function addInterval(dateString,task){
@@ -2454,10 +3307,6 @@ function addInterval(dateString,task){
       dateString + "T00:00:00"
     );
 
-
-  /*
-    Custom repeat
-  */
 
   if(
     task.repeatType === "custom" &&
@@ -2501,10 +3350,6 @@ function addInterval(dateString,task){
     }
 
   }else{
-
-    /*
-      Existing standard Haven repeat system
-    */
 
     const repeat =
       Number(task.repeat) || 0;
@@ -2695,10 +3540,6 @@ function openEditModal(id){
     );
 
 
-  /*
-    Custom repeat
-  */
-
   if(
     task.repeatType === "custom" &&
     task.repeatValue &&
@@ -2727,10 +3568,6 @@ function openEditModal(id){
 
 
   }else{
-
-    /*
-      Standard repeat
-    */
 
     const repeat =
       Number(task.repeat) || 0;
@@ -2875,17 +3712,9 @@ function saveEditedTask(){
   }
 
 
-  /*
-    Update name
-  */
-
   task.name =
     newName;
 
-
-  /*
-    Update date
-  */
 
   if(newDate){
 
@@ -2905,10 +3734,6 @@ function saveEditedTask(){
 
   }
 
-
-  /*
-    Update repeat
-  */
 
   task.repeat =
     repeatData.repeat;
@@ -2973,34 +3798,48 @@ function renderMemory(){
         const due =
           getDueDate(task);
 
+        const category =
+          getTaskCategory(task.name);
+
+        const status =
+          getTaskStatus(task);
+
         return `
 
           <div class="task-card">
 
-            <div class="task-top">
+            <div class="task-main">
 
-              <div class="task-icon">
-                ${getTaskIcon(task.name)}
+              <div class="task-icon icon-${category.type}">
+                ${getTaskIconSvg(category.type)}
               </div>
 
-              <div style="flex:1;">
+              <div class="task-content">
 
                 <div class="task-name">
                   ${escapeHtml(task.name)}
                 </div>
 
-                <div class="task-meta">
-
-                  Due: ${formatDate(due)}
-
-                  <br>
-
-                  ${escapeHtml(
-                    repeatText(task)
-                  )}
-
+                <div class="task-category">
+                  ${escapeHtml(category.label)}
                 </div>
 
+              </div>
+
+              <div class="task-arrow">
+                ›
+              </div>
+
+            </div>
+
+            <div class="task-bottom">
+
+              <div class="task-due">
+                ${escapeHtml(formatDate(due))}
+              </div>
+
+              <div class="task-status-pill ${status.pill}">
+                ${status.pillText}
               </div>
 
             </div>
@@ -3054,58 +3893,6 @@ function showToast(message){
 
 
 /* =========================
-   SEASON
-========================= */
-
-function setSeason(){
-
-  const month =
-    new Date().getMonth() + 1;
-
-  let season = "";
-
-
-  if(month >= 3 && month <= 5){
-
-    season =
-      "spring";
-
-  }else if(month >= 6 && month <= 8){
-
-    season =
-      "summer";
-
-  }else if(month >= 9 && month <= 11){
-
-    season =
-      "autumn";
-
-  }else{
-
-    season =
-      "winter";
-
-  }
-
-
-  const decor =
-    document.getElementById(
-      "seasonDecor"
-    );
-
-
-  if(decor){
-
-    decor.classList.add(
-      season
-    );
-
-  }
-
-}
-
-
-/* =========================
    CLOSE PROFILE OUTSIDE
 ========================= */
 
@@ -3147,8 +3934,6 @@ document.addEventListener(
 
 loadTasks();
 
-setSeason();
-
 render();
 
 renderMemory();
@@ -3158,4 +3943,4 @@ registerServiceWorker();
 </script>
 
 </body>
-  </html>
+      </html>
