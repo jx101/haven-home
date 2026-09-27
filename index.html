@@ -2,48 +2,41 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f7fafc">
 <title>Haven — Your home remembers.</title>
 
 <style>
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
 }
 
 :root{
-  --background:#F7FAFC;
-  --surface:#FFFFFF;
-  --navy:#183B56;
-  --muted:#71808C;
-  --blue:#2495D0;
-  --blue-light:#E8F5FC;
-  --mint:#DDF5EA;
-  --green:#21A875;
-  --orange-light:#FFF0DD;
-  --orange:#F28C28;
-  --purple-light:#F0EAFE;
-  --purple:#8064D8;
-  --red-light:#FFE5E5;
-  --red:#D95C5C;
-  --yellow-light:#FFF7D8;
-  --yellow:#DCA900;
-  --border:#E6EEF2;
-
-  --shadow:0 8px 28px rgba(24,59,86,.07);
-  --shadow-soft:0 4px 18px rgba(24,59,86,.055);
-  --radius:16px;
+  --navy:#183b56;
+  --blue:#2495d0;
+  --blue-soft:#e8f5fb;
+  --mint:#dff3e9;
+  --mint-dark:#4d8d70;
+  --orange:#f7c98b;
+  --lavender:#e9e2f8;
+  --background:#f7fafc;
+  --card:#ffffff;
+  --text:#183b56;
+  --muted:#7890a0;
+  --border:#e6edf2;
+  --danger:#d85b5b;
+  --shadow:0 8px 24px rgba(24,59,86,.08);
 }
 
 html,
 body{
   margin:0;
   padding:0;
+  width:100%;
   min-height:100%;
-  background:#edf2f5;
-  font-family:Inter,Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--navy);
+  background:var(--background);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);
 }
 
 body{
@@ -52,8 +45,8 @@ body{
 
 button,
 input,
-select,
-textarea{
+textarea,
+select{
   font:inherit;
 }
 
@@ -65,74 +58,57 @@ button{
 .app{
   width:100%;
   min-height:100vh;
-  display:flex;
-  justify-content:center;
+  display:block;
 }
 
 .app-shell{
   width:100%;
-  max-width:430px;
+  max-width:none;
   min-height:100vh;
   background:var(--background);
   position:relative;
   overflow:hidden;
-  box-shadow:0 0 45px rgba(24,59,86,.10);
+  box-shadow:none;
+  margin:0;
+  border-radius:0;
 }
 
-@media(min-width:700px){
-  .app-shell{
-    min-height:100vh;
-    margin:18px 0;
-    border-radius:30px;
-    max-height:none;
-  }
-}
+/* =========================
+   TOP BAR
+========================= */
 
-@media(max-width:480px){
-  .app-shell{
-    box-shadow:none;
-  }
-}
-
-.screen{
-  min-height:100vh;
-  padding-bottom:92px;
-}
-
-/* HEADER */
-
-.header{
+.topbar{
+  height:64px;
+  padding:10px 16px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:18px 18px 10px;
+  background:rgba(247,250,252,.96);
   position:relative;
-  z-index:20;
+  z-index:10;
 }
 
 .brand{
   display:flex;
   align-items:center;
   gap:10px;
-  min-width:0;
 }
 
-.logo{
+.brand-mark{
   width:40px;
   height:40px;
   border-radius:13px;
-  background:#fff;
-  border:1px solid var(--border);
+  background:var(--navy);
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:var(--shadow-soft);
-  flex-shrink:0;
+  color:#fff;
+  box-shadow:0 5px 14px rgba(24,59,86,.18);
 }
 
-.logo svg{
-  width:25px;
-  height:25px;
+.brand-mark svg{
+  width:23px;
+  height:23px;
 }
 
 .brand-text{
@@ -151,34 +127,34 @@ button{
   font-size:9px;
   color:var(--muted);
   margin-top:4px;
-  letter-spacing:.1px;
 }
 
-.profile-button{
-  width:40px;
-  height:40px;
-  border-radius:50%;
+.top-action{
+  width:38px;
+  height:38px;
+  border-radius:12px;
   background:#fff;
   border:1px solid var(--border);
-  color:var(--navy);
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:var(--shadow-soft);
+  color:var(--navy);
 }
 
-.profile-button svg{
-  width:20px;
-  height:20px;
+.top-action svg{
+  width:19px;
+  height:19px;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
   position:relative;
-  min-height:245px;
-  margin:5px 14px 15px;
-  border-radius:22px;
+  min-height:205px;
+  margin:4px 12px 12px;
+  border-radius:20px;
   overflow:hidden;
   isolation:isolate;
   background:#b9d0d7;
@@ -202,34 +178,26 @@ button{
   position:absolute;
   inset:0;
   z-index:2;
-
-  /*
-    IMPORTANT:
-    No white overlay.
-    This dark transparent gradient protects the text
-    without washing out the house.
-  */
-  background:
-    linear-gradient(
-      90deg,
-      rgba(11,35,51,.72) 0%,
-      rgba(11,35,51,.56) 22%,
-      rgba(11,35,51,.30) 42%,
-      rgba(11,35,51,.08) 62%,
-      rgba(11,35,51,0) 78%
-    );
+  background:linear-gradient(
+    90deg,
+    rgba(11,35,51,.72) 0%,
+    rgba(11,35,51,.56) 22%,
+    rgba(11,35,51,.30) 42%,
+    rgba(11,35,51,.08) 62%,
+    rgba(11,35,51,0) 78%
+  );
   pointer-events:none;
 }
 
 .hero-copy{
   position:relative;
   z-index:4;
-  width:68%;
-  min-height:245px;
+  width:72%;
+  min-height:205px;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:25px 12px 25px 22px;
+  padding:20px 12px 20px 18px;
 }
 
 .hero-kicker{
@@ -243,7 +211,7 @@ button{
 .hero-title{
   margin:0;
   color:#fff;
-  font-size:32px;
+  font-size:29px;
   line-height:1.05;
   font-weight:850;
   letter-spacing:-1.3px;
@@ -251,441 +219,37 @@ button{
 }
 
 .hero-description{
-  margin:11px 0 0;
+  margin:9px 0 0;
   color:rgba(255,255,255,.94);
   font-size:12px;
-  line-height:1.55;
+  line-height:1.5;
   max-width:230px;
   text-shadow:0 1px 5px rgba(0,0,0,.3);
 }
 
 @media(max-width:360px){
   .hero{
-    min-height:225px;
+    min-height:195px;
   }
 
   .hero-copy{
-    min-height:225px;
-    width:72%;
-    padding-left:18px;
+    min-height:195px;
+    width:76%;
+    padding-left:16px;
   }
 
   .hero-title{
-    font-size:28px;
+    font-size:27px;
   }
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 .content{
-  padding:0 14px;
+  padding:0 12px 105px;
 }
-
-.section{
-  margin-bottom:17px;
-}
-
-.section-heading{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:0 2px 10px;
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:16px;
-  font-weight:800;
-  letter-spacing:-.3px;
-}
-
-.section-title svg{
-  width:19px;
-  height:19px;
-  color:var(--blue);
-}
-
-.view-all{
-  background:none;
-  color:var(--blue);
-  font-size:12px;
-  font-weight:750;
-  display:flex;
-  align-items:center;
-  gap:2px;
-  padding:5px;
-}
-
-.view-all svg{
-  width:15px;
-  height:15px;
-}
-
-/* HEALTH */
-
-.health-card{
-  background:var(--mint);
-  border-radius:17px;
-  padding:14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:var(--shadow-soft);
-}
-
-.health-left{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  min-width:0;
-}
-
-.health-icon{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:var(--green);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
-
-.health-icon svg{
-  width:21px;
-  height:21px;
-}
-
-.health-label{
-  font-size:14px;
-  font-weight:800;
-}
-
-.health-sub{
-  margin-top:3px;
-  font-size:10px;
-  color:#56806f;
-}
-
-.health-right{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:4px;
-}
-
-.health-check{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:rgba(33,168,117,.14);
-  color:var(--green);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.health-check svg{
-  width:16px;
-}
-
-.health-count{
-  font-size:9px;
-  color:#57806e;
-  white-space:nowrap;
-}
-
-/* TASKS */
-
-.task-list{
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.task-card{
-  background:#fff;
-  border:1px solid rgba(230,238,242,.9);
-  border-radius:16px;
-  padding:12px;
-  display:flex;
-  align-items:center;
-  gap:11px;
-  box-shadow:var(--shadow-soft);
-  transition:transform .15s ease,box-shadow .15s ease;
-}
-
-.task-card:active{
-  transform:scale(.985);
-}
-
-.task-icon{
-  width:43px;
-  height:43px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
-
-.task-icon svg{
-  width:22px;
-  height:22px;
-}
-
-.task-main{
-  flex:1;
-  min-width:0;
-}
-
-.task-name{
-  font-size:13px;
-  font-weight:800;
-  color:var(--navy);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.task-category{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
-}
-
-.task-bottom{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-top:7px;
-  flex-wrap:wrap;
-}
-
-.task-date{
-  display:flex;
-  align-items:center;
-  gap:4px;
-  color:var(--muted);
-  font-size:9px;
-}
-
-.task-date svg{
-  width:12px;
-  height:12px;
-}
-
-.status{
-  display:inline-flex;
-  align-items:center;
-  border-radius:20px;
-  padding:4px 8px;
-  font-size:8px;
-  font-weight:800;
-}
-
-.status.due{
-  background:var(--red-light);
-  color:var(--red);
-}
-
-.status.upcoming{
-  background:var(--blue-light);
-  color:var(--blue);
-}
-
-.status.completed{
-  background:var(--mint);
-  color:var(--green);
-}
-
-.status.overdue{
-  background:var(--red-light);
-  color:#b93c3c;
-}
-
-.task-chevron{
-  color:#9aaab4;
-  flex-shrink:0;
-}
-
-.task-chevron svg{
-  width:17px;
-  height:17px;
-}
-
-/* CATEGORY COLORS */
-
-.cat-water{
-  background:var(--blue-light);
-  color:var(--blue);
-}
-
-.cat-heating{
-  background:var(--orange-light);
-  color:var(--orange);
-}
-
-.cat-plumbing{
-  background:var(--mint);
-  color:var(--green);
-}
-
-.cat-cooling{
-  background:var(--purple-light);
-  color:var(--purple);
-}
-
-.cat-electrical{
-  background:var(--yellow-light);
-  color:var(--yellow);
-}
-
-.cat-cleaning{
-  background:#E1F7F4;
-  color:#23A69A;
-}
-
-.cat-repair{
-  background:var(--orange-light);
-  color:var(--orange);
-}
-
-.cat-garden{
-  background:var(--mint);
-  color:var(--green);
-}
-
-.cat-roof{
-  background:var(--blue-light);
-  color:var(--blue);
-}
-
-.empty{
-  background:#fff;
-  border:1px dashed var(--border);
-  border-radius:16px;
-  padding:28px 18px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.empty-icon{
-  width:48px;
-  height:48px;
-  margin:0 auto 10px;
-  border-radius:16px;
-  background:var(--blue-light);
-  color:var(--blue);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.empty-icon svg{
-  width:23px;
-}
-
-.empty strong{
-  display:block;
-  color:var(--navy);
-  font-size:14px;
-  margin-bottom:4px;
-}
-
-.empty span{
-  font-size:11px;
-}
-
-/* QUICK ACTIONS */
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-
-.quick-action{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:15px;
-  min-height:78px;
-  padding:10px 5px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  box-shadow:var(--shadow-soft);
-  color:var(--navy);
-}
-
-.quick-action:active{
-  transform:scale(.97);
-}
-
-.quick-icon{
-  width:32px;
-  height:32px;
-  border-radius:11px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.quick-icon svg{
-  width:17px;
-  height:17px;
-}
-
-.quick-label{
-  font-size:9px;
-  font-weight:750;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-  position:fixed;
-  z-index:50;
-  bottom:0;
-  width:100%;
-  max-width:430px;
-  background:rgba(255,255,255,.97);
-  backdrop-filter:blur(15px);
-  -webkit-backdrop-filter:blur(15px);
-  border-top:1px solid var(--border);
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:8px 10px calc(8px + env(safe-area-inset-bottom));
-}
-
-.nav-item{
-  background:none;
-  color:#91a0aa;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:3px;
-  min-height:48px;
-  font-size:9px;
-  font-weight:700;
-}
-
-.nav-item svg{
-  width:20px;
-  height:20px;
-}
-
-.nav-item.active{
-  color:var(--blue);
-}
-
-/* PAGES */
 
 .page{
   display:none;
@@ -695,156 +259,299 @@ button{
   display:block;
 }
 
-.page-header{
-  padding:12px 18px 14px;
+/* =========================
+   SECTION HEADINGS
+========================= */
+
+.section-heading{
   display:flex;
   align-items:center;
-  gap:10px;
+  justify-content:space-between;
+  margin:18px 2px 10px;
 }
 
-.back-button{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  background:#fff;
-  color:var(--navy);
-  border:1px solid var(--border);
+.section-title{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-.4px;
+}
+
+.section-subtitle{
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* =========================
+   HOME HEALTH
+========================= */
+
+.health-card{
+  background:var(--mint);
+  border-radius:20px;
+  padding:17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+}
+
+.health-left{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.health-icon{
+  width:45px;
+  height:45px;
+  border-radius:15px;
+  background:rgba(255,255,255,.68);
   display:flex;
   align-items:center;
   justify-content:center;
+  color:var(--mint-dark);
 }
 
-.back-button svg{
-  width:18px;
+.health-icon svg{
+  width:24px;
+  height:24px;
 }
 
-.page-title{
-  font-size:21px;
-  font-weight:850;
-  letter-spacing:-.6px;
+.health-title{
+  font-size:15px;
+  font-weight:800;
 }
 
-/* FORMS */
-
-.form{
-  padding:0 14px;
-}
-
-.form-card{
-  background:#fff;
-  border-radius:18px;
-  border:1px solid var(--border);
-  padding:16px;
-  box-shadow:var(--shadow-soft);
-}
-
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-label{
-  display:block;
+.health-text{
   font-size:11px;
-  font-weight:800;
-  color:var(--navy);
-  margin-bottom:7px;
+  color:#668474;
+  margin-top:4px;
 }
 
-.input,
-.select,
-.textarea{
-  width:100%;
+.health-score{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 4px 12px rgba(50,100,75,.08);
+}
+
+.health-number{
+  font-size:17px;
+  font-weight:800;
+}
+
+.health-label{
+  font-size:8px;
+  color:var(--muted);
+}
+
+/* =========================
+   TASK CARDS
+========================= */
+
+.tasks{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.task-card{
+  background:var(--card);
   border:1px solid var(--border);
-  background:#fafdfe;
-  color:var(--navy);
-  border-radius:12px;
-  padding:12px;
-  outline:none;
-  font-size:12px;
+  border-radius:18px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:var(--shadow);
 }
 
-.input:focus,
-.select:focus,
-.textarea:focus{
-  border-color:#9bd4ef;
-  box-shadow:0 0 0 3px rgba(36,149,208,.08);
+.task-icon{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
 }
 
-.textarea{
-  min-height:90px;
-  resize:vertical;
+.task-icon svg{
+  width:21px;
+  height:21px;
 }
 
-.primary-button{
-  width:100%;
-  border-radius:13px;
-  padding:13px;
-  background:var(--blue);
-  color:#fff;
-  font-weight:800;
-  font-size:12px;
-  box-shadow:0 7px 16px rgba(36,149,208,.18);
+.task-info{
+  min-width:0;
+  flex:1;
 }
 
-.secondary-button{
-  width:100%;
-  border-radius:13px;
-  padding:13px;
-  background:var(--blue-light);
+.task-name{
+  font-size:14px;
+  font-weight:750;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.task-date{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.task-status{
+  font-size:9px;
+  font-weight:700;
+  padding:5px 8px;
+  border-radius:20px;
+  flex-shrink:0;
+}
+
+.status-upcoming{
+  background:var(--blue-soft);
   color:var(--blue);
-  font-weight:800;
-  font-size:12px;
 }
 
-/* FILTERS */
+.status-overdue{
+  background:#fdeaea;
+  color:var(--danger);
+}
 
-.filters{
+.status-today{
+  background:#fff0da;
+  color:#b97925;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:4px;
+}
+
+.quick-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:15px;
+  min-height:105px;
+  box-shadow:var(--shadow);
+  text-align:left;
+}
+
+.quick-card:active{
+  transform:scale(.98);
+}
+
+.quick-icon{
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:11px;
+}
+
+.quick-icon svg{
+  width:20px;
+  height:20px;
+}
+
+.quick-title{
+  font-size:13px;
+  font-weight:800;
+}
+
+.quick-text{
+  font-size:9px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+/* =========================
+   MEMORY PAGE
+========================= */
+
+.memory-header{
+  padding:8px 2px 14px;
+}
+
+.memory-header h1{
+  margin:0;
+  font-size:24px;
+  letter-spacing:-.7px;
+}
+
+.memory-header p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.filter-row{
   display:flex;
   gap:7px;
   overflow-x:auto;
-  padding:0 14px 12px;
+  padding-bottom:4px;
   scrollbar-width:none;
 }
 
-.filters::-webkit-scrollbar{
+.filter-row::-webkit-scrollbar{
   display:none;
 }
 
-.filter{
+.filter-btn{
   white-space:nowrap;
+  padding:8px 13px;
   border-radius:20px;
-  padding:8px 12px;
   background:#fff;
   color:var(--muted);
   border:1px solid var(--border);
   font-size:10px;
-  font-weight:750;
+  font-weight:700;
 }
 
-.filter.active{
-  background:var(--blue);
+.filter-btn.active{
+  background:var(--navy);
   color:#fff;
-  border-color:var(--blue);
+  border-color:var(--navy);
 }
 
-/* MEMORY */
+.memory-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:14px;
+}
 
 .memory-card{
   background:#fff;
-  border-radius:17px;
-  padding:14px;
   border:1px solid var(--border);
-  margin-bottom:9px;
-  box-shadow:var(--shadow-soft);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:var(--shadow);
 }
 
 .memory-top{
   display:flex;
   justify-content:space-between;
+  align-items:flex-start;
   gap:10px;
 }
 
-.memory-name{
+.memory-title{
   font-size:14px;
   font-weight:800;
 }
@@ -855,42 +562,120 @@ button{
   margin-top:4px;
 }
 
+.memory-notes{
+  font-size:11px;
+  line-height:1.5;
+  color:#607887;
+  margin-top:9px;
+}
+
 .memory-actions{
   display:flex;
-  gap:5px;
+  gap:7px;
+  margin-top:11px;
 }
 
-.icon-button{
-  width:31px;
-  height:31px;
+.small-btn{
+  padding:7px 10px;
   border-radius:10px;
-  background:#f4f8fa;
+  font-size:9px;
+  font-weight:700;
+  background:#f3f7f9;
   color:var(--navy);
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-.icon-button svg{
-  width:15px;
-  height:15px;
+.small-btn.danger{
+  color:var(--danger);
+  background:#fff1f1;
 }
 
-/* SETTINGS */
+/* =========================
+   ADD MEMORY
+========================= */
 
-.setting-card{
+.form-card{
   background:#fff;
-  border-radius:17px;
   border:1px solid var(--border);
+  border-radius:20px;
+  padding:17px;
+  box-shadow:var(--shadow);
+}
+
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-label{
+  display:block;
+  font-size:11px;
+  font-weight:750;
+  margin-bottom:6px;
+}
+
+.form-input,
+.form-select,
+.form-textarea{
+  width:100%;
+  border:1px solid #dfe8ed;
+  background:#fbfdfe;
+  border-radius:12px;
+  padding:11px 12px;
+  color:var(--text);
+  outline:none;
+  font-size:12px;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(36,149,208,.08);
+}
+
+.form-textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.primary-btn{
+  width:100%;
+  padding:12px 16px;
+  border-radius:13px;
+  background:var(--navy);
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 6px 14px rgba(24,59,86,.16);
+}
+
+.secondary-btn{
+  width:100%;
+  padding:12px 16px;
+  border-radius:13px;
+  background:#eef4f7;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:800;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:var(--shadow-soft);
+  box-shadow:var(--shadow);
 }
 
 .setting-row{
-  padding:14px;
+  min-height:58px;
+  padding:11px 14px;
   display:flex;
   align-items:center;
-  gap:12px;
+  justify-content:space-between;
   border-bottom:1px solid var(--border);
 }
 
@@ -898,88 +683,117 @@ button{
   border-bottom:0;
 }
 
+.setting-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
 .setting-icon{
-  width:38px;
-  height:38px;
-  border-radius:12px;
-  background:var(--blue-light);
-  color:var(--blue);
+  width:35px;
+  height:35px;
+  border-radius:11px;
+  background:#eef5f8;
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-shrink:0;
+  color:var(--navy);
 }
 
 .setting-icon svg{
   width:18px;
-}
-
-.setting-info{
-  flex:1;
+  height:18px;
 }
 
 .setting-name{
   font-size:12px;
-  font-weight:800;
+  font-weight:750;
 }
 
 .setting-description{
   font-size:9px;
   color:var(--muted);
-  margin-top:3px;
+  margin-top:2px;
 }
 
-/* PROFILE POPUP */
-
-.profile-popup{
-  position:absolute;
-  z-index:100;
-  top:67px;
-  right:14px;
-  width:210px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:0 18px 40px rgba(24,59,86,.16);
-  padding:8px;
-  display:none;
+.toggle{
+  width:43px;
+  height:25px;
+  border-radius:20px;
+  background:#d9e3e8;
+  padding:3px;
+  transition:.2s;
 }
 
-.profile-popup.show{
+.toggle span{
   display:block;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  background:#fff;
+  transition:.2s;
+  box-shadow:0 2px 4px rgba(0,0,0,.12);
 }
 
-.profile-option{
-  width:100%;
-  background:#fff;
-  border-radius:10px;
+.toggle.on{
+  background:var(--blue);
+}
+
+.toggle.on span{
+  transform:translateX(18px);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state{
+  text-align:center;
+  padding:35px 20px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:55px;
+  height:55px;
+  border-radius:18px;
+  background:#edf4f7;
   display:flex;
   align-items:center;
-  gap:9px;
-  padding:10px;
+  justify-content:center;
+  margin:0 auto 12px;
+}
+
+.empty-icon svg{
+  width:25px;
+  height:25px;
+}
+
+.empty-title{
+  font-size:14px;
+  font-weight:800;
   color:var(--navy);
-  font-size:11px;
-  text-align:left;
 }
 
-.profile-option:hover{
-  background:var(--background);
+.empty-text{
+  font-size:10px;
+  line-height:1.5;
+  margin-top:5px;
 }
 
-.profile-option svg{
-  width:17px;
-}
-
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal-backdrop{
   position:fixed;
   inset:0;
-  z-index:200;
-  background:rgba(13,34,48,.35);
+  background:rgba(15,31,43,.45);
+  z-index:100;
   display:none;
   align-items:flex-end;
   justify-content:center;
+  padding:0;
 }
 
 .modal-backdrop.show{
@@ -987,84 +801,158 @@ button{
 }
 
 .modal{
-  width:min(430px,100%);
+  width:100%;
+  max-width:560px;
   background:#fff;
-  border-radius:22px 22px 0 0;
+  border-radius:24px 24px 0 0;
   padding:18px;
-  max-height:85vh;
+  max-height:90vh;
   overflow:auto;
+  box-shadow:0 -10px 35px rgba(0,0,0,.14);
 }
 
 .modal-handle{
-  width:40px;
+  width:38px;
   height:4px;
-  border-radius:10px;
-  background:#dbe4e9;
-  margin:0 auto 16px;
+  border-radius:5px;
+  background:#dce4e8;
+  margin:0 auto 17px;
 }
 
 .modal-title{
   font-size:18px;
-  font-weight:850;
-  margin-bottom:14px;
+  font-weight:800;
+  margin-bottom:15px;
 }
 
-.modal-actions{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
-
-.modal-actions button{
-  flex:1;
-}
-
-/* TOAST */
+/* =========================
+   TOAST
+========================= */
 
 .toast{
   position:fixed;
-  z-index:300;
   left:50%;
-  bottom:88px;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  background:#183b56;
+  bottom:84px;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--navy);
   color:#fff;
-  padding:10px 14px;
+  padding:10px 15px;
   border-radius:12px;
   font-size:10px;
-  font-weight:700;
-  transition:.25s ease;
-  box-shadow:0 10px 30px rgba(24,59,86,.2);
-  max-width:calc(100% - 30px);
-  text-align:center;
+  font-weight:650;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:200;
+  white-space:nowrap;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
 }
 
 .toast.show{
   opacity:1;
-  transform:translate(-50%,0);
+  transform:translateX(-50%) translateY(0);
 }
 
-/* SMALL UTILITIES */
+/* =========================
+   BOTTOM NAV
+========================= */
 
-.hidden{
-  display:none!important;
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  max-width:none;
+  height:72px;
+  background:rgba(255,255,255,.97);
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+  z-index:50;
+  padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+  box-shadow:0 -5px 18px rgba(24,59,86,.06);
 }
 
-.muted{
-  color:var(--muted);
+.nav-item{
+  flex:1;
+  height:57px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  background:transparent;
+  color:#9aabb5;
+  font-size:9px;
+  font-weight:700;
 }
 
-.divider{
-  height:1px;
-  background:var(--border);
-  margin:15px 0;
+.nav-item svg{
+  width:21px;
+  height:21px;
 }
 
-@media(min-width:431px){
-  .bottom-nav{
-    position:absolute;
+.nav-item.active{
+  color:var(--navy);
+}
+
+.nav-item.active svg{
+  stroke-width:2.5;
+}
+
+/* =========================
+   FLOATING ADD BUTTON
+========================= */
+
+.fab{
+  position:fixed;
+  right:18px;
+  bottom:86px;
+  width:53px;
+  height:53px;
+  border-radius:18px;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:45;
+  box-shadow:0 9px 22px rgba(24,59,86,.24);
+}
+
+.fab svg{
+  width:23px;
+  height:23px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:360px){
+  .topbar{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .content{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .hero{
+    margin-left:10px;
+    margin-right:10px;
+  }
+
+  .hero-title{
+    font-size:27px;
+  }
+
+  .quick-card{
+    padding:13px;
   }
 }
 </style>
@@ -1075,609 +963,673 @@ button{
 <div class="app">
 <div class="app-shell">
 
-  <!-- HOME -->
-  <div id="homePage" class="page active screen">
+<!-- =========================
+     TOP BAR
+========================= -->
 
-    <header class="header">
+<header class="topbar">
 
-      <div class="brand">
-        <div class="logo">
-          <svg viewBox="0 0 32 32" fill="none">
-            <path d="M5 14.5 16 5l11 9.5V27H5V14.5Z"
-                  stroke="#183B56"
-                  stroke-width="2"
-                  stroke-linejoin="round"/>
-            <path d="M11 27v-7h10v7"
-                  stroke="#2495D0"
-                  stroke-width="2"
-                  stroke-linejoin="round"/>
-            <path d="m16 3 3 3"
-                  stroke="#F2B93B"
-                  stroke-width="2.5"
-                  stroke-linecap="round"/>
-            <path d="M23.5 9.5c1.7-2.4 3.5-2.2 3.5-2.2s-.1 3-2.6 4"
-                  stroke="#2495D0"
-                  stroke-width="1.8"
-                  stroke-linecap="round"/>
-          </svg>
-        </div>
+  <div class="brand">
 
-        <div class="brand-text">
-          <div class="brand-name">Haven</div>
-          <div class="brand-tagline">Your home remembers.</div>
-        </div>
-      </div>
-
-      <button class="profile-button" id="profileButton" aria-label="Profile">
-        <svg viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="8" r="3.2"
-                  stroke="currentColor"
-                  stroke-width="1.8"/>
-          <path d="M5.5 19c.8-3.2 3.1-4.8 6.5-4.8s5.7 1.6 6.5 4.8"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"/>
-        </svg>
-      </button>
-
-    </header>
-
-    <div class="profile-popup" id="profilePopup">
-      <button class="profile-option" onclick="navigate('settings')">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
-                stroke="currentColor" stroke-width="1.7"/>
-          <path d="m19 13.5 1.3 1-.1 1.8-1.7 1-1.4-.5-1.2 1.1.1 1.5-1.6.9-1.4-.8-.4-1.4h-1.2l-1 1.2-1.8-.5-.5-1.7.8-1.2-.7-1.1-1.5-.1-.8-1.6.9-1.5 1.5-.2.6-1.2-.6-1.4 1.2-1.3 1.5.5 1.1-.8.1-1.6 1.7-.5 1.1 1.1 1.4-.1.8-1.3 1.7.5.3 1.7-.9 1.1.6 1.3 1.6.3.7 1.6-1.1 1.3"
-                stroke="currentColor" stroke-width="1.2"/>
-        </svg>
-        Settings
-      </button>
-
-      <button class="profile-option" onclick="navigate('memory')">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v16H7.5A2.5 2.5 0 0 0 5 21V5.5Z"
-                stroke="currentColor" stroke-width="1.7"/>
-          <path d="M5 19.5A2.5 2.5 0 0 1 7.5 17H19"
-                stroke="currentColor" stroke-width="1.7"/>
-        </svg>
-        Memory
-      </button>
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 11.5 12 4l9 7.5"/>
+        <path d="M5.5 10.5V20h13v-9.5"/>
+        <path d="M9.5 20v-5h5v5"/>
+        <path d="M17.5 5.8c0-1.5-1-2.8-2.4-3.3"/>
+      </svg>
     </div>
 
-    <!-- HERO -->
-    <section class="hero">
+    <div class="brand-text">
+      <div class="brand-name">Haven</div>
+      <div class="brand-tagline">Your home remembers.</div>
+    </div>
 
-      <img
-        class="hero-image"
-        id="heroImage"
-        src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1400&q=95"
-        alt="Beautiful modern home"
-        onerror="this.style.display='none';"
-      >
+  </div>
 
-      <div class="hero-copy">
-        <div class="hero-kicker">Good morning,</div>
-        <h1 class="hero-title">Javaid</h1>
+  <button class="top-action" id="settingsTopBtn" aria-label="Settings">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V22h-2.55v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.1 17a1.7 1.7 0 0 0-1.56-1.03H6.45v-2.55h.1A1.7 1.7 0 0 0 8.1 12.4a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.47 7.5v-.1h2.55v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03h.1v2.55h-.1A1.7 1.7 0 0 0 19.4 15z"/>
+    </svg>
+  </button>
 
-        <p class="hero-description">
-          Your home is in good shape.<br>
-          Here are your upcoming maintenance tasks.
-        </p>
-      </div>
+</header>
 
-    </section>
 
-    <main class="content">
+<!-- =========================
+     HOME PAGE
+========================= -->
 
-      <!-- HEALTH -->
-      <section class="section">
+<main class="content">
 
-        <div class="health-card">
+<section id="homePage" class="page active">
 
-          <div class="health-left">
+  <div class="hero">
 
-            <div class="health-icon">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M4 11.5 12 5l8 6.5V20H4v-8.5Z"
-                      stroke="white"
-                      stroke-width="1.8"
-                      stroke-linejoin="round"/>
-                <path d="M9 20v-5h6v5"
-                      stroke="white"
-                      stroke-width="1.8"/>
-              </svg>
-            </div>
+    <!-- Keep your existing hero image URL here if you already have one -->
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
+      alt="Beautiful home"
+    >
 
-            <div>
-              <div class="health-label">Home Health</div>
-              <div class="health-sub" id="healthMessage">
-                All systems are running well
-              </div>
-            </div>
+    <div class="hero-copy">
+      <div class="hero-kicker">Good morning, Javaid</div>
 
-          </div>
+      <h1 class="hero-title">
+        A home worth<br>
+        remembering.
+      </h1>
 
-          <div class="health-right">
-            <div class="health-check">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="m7 12 3 3 7-7"
-                      stroke="currentColor"
-                      stroke-width="2.4"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="health-count" id="healthCount">
-              0 tasks need attention
-            </div>
-          </div>
+      <p class="hero-description">
+        Keep every repair, service and little detail of your home in one place.
+      </p>
+    </div>
 
-        </div>
-
-      </section>
-
-      <!-- UPCOMING -->
-      <section class="section">
-
-        <div class="section-heading">
-
-          <div class="section-title">
-            <svg viewBox="0 0 24 24" fill="none">
-              <rect x="4" y="5" width="16" height="16" rx="2"
-                    stroke="currentColor"
-                    stroke-width="1.8"/>
-              <path d="M8 3v4M16 3v4M4 9h16"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"/>
-            </svg>
-            Upcoming Maintenance
-          </div>
-
-          <button class="view-all" onclick="navigate('memory')">
-            View all
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="m9 18 6-6-6-6"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-        </div>
-
-        <div class="task-list" id="homeTaskList"></div>
-
-      </section>
-
-      <!-- QUICK ACTIONS -->
-      <section class="section">
-
-        <div class="section-heading">
-          <div class="section-title">Quick actions</div>
-        </div>
-
-        <div class="quick-grid">
-
-          <button class="quick-action" onclick="navigate('add')">
-            <div class="quick-icon cat-plumbing">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5v14M5 12h14"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"/>
-              </svg>
-            </div>
-            <span class="quick-label">Add Task</span>
-          </button>
-
-          <button class="quick-action" onclick="showToast('My Home is coming soon')">
-            <div class="quick-icon cat-water">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="m4 11 8-7 8 7"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"/>
-                <path d="M6 10v9h12v-9M10 19v-5h4v5"
-                      stroke="currentColor"
-                      stroke-width="1.8"/>
-              </svg>
-            </div>
-            <span class="quick-label">My Home</span>
-          </button>
-
-          <button class="quick-action" onclick="navigate('memory')">
-            <div class="quick-icon cat-cooling">
-              <svg viewBox="0 0 24 24" fill="none">
-                <rect x="4" y="5" width="16" height="16" rx="2"
-                      stroke="currentColor"
-                      stroke-width="1.8"/>
-                <path d="M8 3v4M16 3v4M4 9h16"
-                      stroke="currentColor"
-                      stroke-width="1.8"/>
-              </svg>
-            </div>
-            <span class="quick-label">Calendar</span>
-          </button>
-
-          <button class="quick-action" onclick="navigate('memory')">
-            <div class="quick-icon cat-repair">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7 4h10v16H7z"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linejoin="round"/>
-                <path d="M9.5 8h5M9.5 12h5M9.5 16h3"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                      stroke-linecap="round"/>
-              </svg>
-            </div>
-            <span class="quick-label">Records</span>
-          </button>
-
-        </div>
-
-      </section>
-
-    </main>
   </div>
 
 
-  <!-- ADD PAGE -->
-  <div id="addPage" class="page screen">
+  <div class="health-card">
 
-    <div class="page-header">
-      <button class="back-button" onclick="navigate('home')">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="m15 18-6-6 6-6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
+    <div class="health-left">
+
+      <div class="health-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21s-7-4.35-9.5-8.7C.4 8.5 2.4 4.5 6.5 4.5c2.1 0 3.6 1.1 5.5 3 1.9-1.9 3.4-3 5.5-3 4.1 0 6.1 4 4 7.8C19 16.65 12 21 12 21z"/>
         </svg>
-      </button>
-      <div class="page-title">Add Memory</div>
+      </div>
+
+      <div>
+        <div class="health-title">Home Health</div>
+        <div class="health-text" id="healthText">Everything looks good.</div>
+      </div>
+
     </div>
 
-    <form class="form" id="taskForm">
+    <div class="health-score">
+      <div class="health-number" id="healthScore">100%</div>
+      <div class="health-label">healthy</div>
+    </div>
 
-      <div class="form-card">
+  </div>
 
-        <div class="form-group">
-          <label class="form-label">What needs to be done?</label>
-          <input
-            class="input"
-            id="taskName"
-            type="text"
-            placeholder="e.g. Clean water tank"
-            required
-          >
+
+  <div class="section-heading">
+    <div class="section-title">Upcoming Maintenance</div>
+    <div class="section-subtitle" id="upcomingCount">0 tasks</div>
+  </div>
+
+  <div class="tasks" id="upcomingTasks"></div>
+
+
+  <div class="section-heading">
+    <div class="section-title">Quick Actions</div>
+  </div>
+
+  <div class="quick-grid">
+
+    <button class="quick-card" id="addMemoryQuick">
+      <div class="quick-icon" style="background:var(--blue-soft);color:var(--blue);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </div>
+      <div class="quick-title">Add Memory</div>
+      <div class="quick-text">Save something about your home</div>
+    </button>
+
+
+    <button class="quick-card" id="myHomeQuick">
+      <div class="quick-icon" style="background:var(--lavender);color:#7866a8;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11.5 12 4l9 7.5"/>
+          <path d="M5.5 10.5V20h13v-9.5"/>
+          <path d="M9.5 20v-5h5v5"/>
+        </svg>
+      </div>
+      <div class="quick-title">My Home</div>
+      <div class="quick-text">View your home details</div>
+    </button>
+
+
+    <button class="quick-card" id="allTasksQuick">
+      <div class="quick-icon" style="background:#fff0da;color:#b97925;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <rect x="4" y="4" width="16" height="16" rx="3"/>
+          <path d="m8 12 2.5 2.5L16 9"/>
+        </svg>
+      </div>
+      <div class="quick-title">All Tasks</div>
+      <div class="quick-text">See everything you've saved</div>
+    </button>
+
+
+    <button class="quick-card" id="settingsQuick">
+      <div class="quick-icon" style="background:var(--mint);color:var(--mint-dark);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V22h-2.55v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.1 17a1.7 1.7 0 0 0-1.56-1.03H6.45v-2.55h.1A1.7 1.7 0 0 0 8.1 12.4a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.47 7.5v-.1h2.55v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03h.1v2.55h-.1A1.7 1.7 0 0 0 19.4 15z"/>
+        </svg>
+      </div>
+      <div class="quick-title">Settings</div>
+      <div class="quick-text">Manage Haven</div>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     TASKS PAGE
+========================= -->
+
+<section id="tasksPage" class="page">
+
+  <div class="memory-header">
+    <h1>Your Memories</h1>
+    <p>Everything your home needs you to remember.</p>
+  </div>
+
+  <div class="filter-row">
+
+    <button class="filter-btn active" data-filter="all">
+      All
+    </button>
+
+    <button class="filter-btn" data-filter="today">
+      Today
+    </button>
+
+    <button class="filter-btn" data-filter="upcoming">
+      Upcoming
+    </button>
+
+    <button class="filter-btn" data-filter="overdue">
+      Overdue
+    </button>
+
+  </div>
+
+  <div class="memory-list" id="memoryList"></div>
+
+</section>
+
+
+<!-- =========================
+     CALENDAR PAGE
+========================= -->
+
+<section id="calendarPage" class="page">
+
+  <div class="memory-header">
+    <h1>Calendar</h1>
+    <p>Keep an eye on the days ahead.</p>
+  </div>
+
+  <div class="form-card">
+
+    <div class="section-title" style="margin-bottom:12px;">
+      Upcoming dates
+    </div>
+
+    <div id="calendarTasks"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SETTINGS PAGE
+========================= -->
+
+<section id="settingsPage" class="page">
+
+  <div class="memory-header">
+    <h1>Settings</h1>
+    <p>Make Haven work the way you want.</p>
+  </div>
+
+  <div class="settings-card">
+
+    <div class="setting-row">
+
+      <div class="setting-left">
+
+        <div class="setting-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 3v18"/>
+            <path d="M5 8h14"/>
+            <path d="M7 16h10"/>
+          </svg>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Due date</label>
-          <input
-            class="input"
-            id="taskDueDate"
-            type="date"
-            required
-          >
+        <div>
+          <div class="setting-name">Reminders</div>
+          <div class="setting-description">
+            Allow Haven to remind you.
+          </div>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">Repeat</label>
-          <select class="select" id="taskRepeat">
-            <option value="none">One time</option>
-            <option value="weekly">Every week</option>
-            <option value="monthly">Every month</option>
-            <option value="3-month">Every 3 months</option>
-            <option value="6-month">Every 6 months</option>
-            <option value="yearly">Every year</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Notes</label>
-          <textarea
-            class="textarea"
-            id="taskNotes"
-            placeholder="Add any useful details..."
-          ></textarea>
-        </div>
-
-        <button class="primary-button" type="submit">
-          Save Memory
-        </button>
 
       </div>
+
+      <button class="toggle" id="reminderToggle">
+        <span></span>
+      </button>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <div class="setting-left">
+
+        <div class="setting-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 3v18"/>
+            <path d="M3 12h18"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="setting-name">Add a Memory</div>
+          <div class="setting-description">
+            Save a maintenance task.
+          </div>
+        </div>
+
+      </div>
+
+      <button class="small-btn" id="settingsAddBtn">
+        Add
+      </button>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <div class="setting-left">
+
+        <div class="setting-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 7h16"/>
+            <path d="M10 11v6"/>
+            <path d="M14 11v6"/>
+            <path d="M6 7l1 14h10l1-14"/>
+            <path d="M9 7V4h6v3"/>
+          </svg>
+        </div>
+
+        <div>
+          <div class="setting-name">Clear Memories</div>
+          <div class="setting-description">
+            Remove all saved memories.
+          </div>
+        </div>
+
+      </div>
+
+      <button class="small-btn danger" id="clearTasksBtn">
+        Clear
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FAB
+========================= -->
+
+<button class="fab" id="fabAdd" aria-label="Add memory">
+
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M12 5v14M5 12h14"/>
+  </svg>
+
+</button>
+
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
+
+<nav class="bottom-nav">
+
+  <button class="nav-item active" data-page="homePage">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11.5 12 4l9 7.5"/>
+      <path d="M5.5 10.5V20h13v-9.5"/>
+      <path d="M9.5 20v-5h5v5"/>
+    </svg>
+
+    <span>Home</span>
+
+  </button>
+
+
+  <button class="nav-item" data-page="calendarPage">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <rect x="3.5" y="5" width="17" height="16" rx="2"/>
+      <path d="M7 3v4M17 3v4M3.5 9h17"/>
+    </svg>
+
+    <span>Calendar</span>
+
+  </button>
+
+
+  <button class="nav-item" data-page="tasksPage">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <rect x="4" y="4" width="16" height="16" rx="3"/>
+      <path d="m8 12 2.5 2.5L16 9"/>
+    </svg>
+
+    <span>Tasks</span>
+
+  </button>
+
+
+  <button class="nav-item" data-page="settingsPage">
+
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V22h-2.55v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.1 17a1.7 1.7 0 0 0-1.56-1.03H6.45v-2.55h.1A1.7 1.7 0 0 0 8.1 12.4a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.47 7.5v-.1h2.55v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03h.1v2.55h-.1A1.7 1.7 0 0 0 19.4 15z"/>
+    </svg>
+
+    <span>More</span>
+
+  </button>
+
+</nav>
+
+
+<!-- =========================
+     ADD MEMORY MODAL
+========================= -->
+
+<div class="modal-backdrop" id="addModal">
+
+  <div class="modal">
+
+    <div class="modal-handle"></div>
+
+    <div class="modal-title">Add a Memory</div>
+
+    <form id="addForm">
+
+      <div class="form-group">
+
+        <label class="form-label">
+          What should Haven remember?
+        </label>
+
+        <input
+          class="form-input"
+          id="taskTitle"
+          type="text"
+          placeholder="e.g. Clean water filter"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Date
+        </label>
+
+        <input
+          class="form-input"
+          id="taskDate"
+          type="date"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Repeat
+        </label>
+
+        <select class="form-select" id="taskRepeat">
+
+          <option value="none">
+            Does not repeat
+          </option>
+
+          <option value="weekly">
+            Every week
+          </option>
+
+          <option value="monthly">
+            Every month
+          </option>
+
+          <option value="3month">
+            Every 3 months
+          </option>
+
+          <option value="6month">
+            Every 6 months
+          </option>
+
+          <option value="yearly">
+            Every year
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Notes
+        </label>
+
+        <textarea
+          class="form-textarea"
+          id="taskNotes"
+          placeholder="Anything else you want to remember..."
+        ></textarea>
+
+      </div>
+
+
+      <button class="primary-btn" type="submit">
+        Save Memory
+      </button>
+
+      <div style="height:8px"></div>
+
+      <button class="secondary-btn" type="button" id="closeModal">
+        Cancel
+      </button>
 
     </form>
 
   </div>
 
-
-  <!-- MEMORY PAGE -->
-  <div id="memoryPage" class="page screen">
-
-    <div class="page-header">
-
-      <button class="back-button" onclick="navigate('home')">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="m15 18-6-6 6-6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-        </svg>
-      </button>
-
-      <div class="page-title">Memory</div>
-
-    </div>
-
-    <div class="filters" id="taskFilters">
-
-      <button class="filter active" data-filter="all">
-        All
-      </button>
-
-      <button class="filter" data-filter="today">
-        Today
-      </button>
-
-      <button class="filter" data-filter="upcoming">
-        Upcoming
-      </button>
-
-      <button class="filter" data-filter="overdue">
-        Overdue
-      </button>
-
-    </div>
-
-    <main class="content">
-      <div class="task-list" id="memoryTaskList"></div>
-    </main>
-
-  </div>
+</div>
 
 
-  <!-- SETTINGS PAGE -->
-  <div id="settingsPage" class="page screen">
+<!-- =========================
+     EDIT MODAL
+========================= -->
 
-    <div class="page-header">
+<div class="modal-backdrop" id="editModal">
 
-      <button class="back-button" onclick="navigate('home')">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="m15 18-6-6 6-6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-        </svg>
-      </button>
+  <div class="modal">
 
-      <div class="page-title">Settings</div>
+    <div class="modal-handle"></div>
 
-    </div>
+    <div class="modal-title">Edit Memory</div>
 
-    <main class="content">
+    <form id="editForm">
 
-      <div class="setting-card">
+      <input type="hidden" id="editId">
 
-        <div class="setting-row">
+      <div class="form-group">
 
-          <div class="setting-icon">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
-                    stroke="currentColor"
-                    stroke-width="1.7"/>
-              <path d="M19 13.5 20 15l-1 1.7-1.7-.1-1.2 1.1.1 1.7-1.8.7-1.3-1.1-1.7.1-1 1.2-1.8-.7.1-1.7-1.2-1.1-1.7.1L4 15l1-1.5-.1-1.7L3.8 11l.7-1.8 1.7.1 1.1-1.2-.1-1.7 1.8-.7 1.3 1.1 1.7-.1 1-1.2 1.8.7-.1 1.7 1.2 1.1 1.7-.1.9 1.7-1 1.5Z"
-                    stroke="currentColor"
-                    stroke-width="1.1"/>
-            </svg>
-          </div>
+        <label class="form-label">
+          Memory
+        </label>
 
-          <div class="setting-info">
-            <div class="setting-name">Reminders</div>
-            <div class="setting-description">
-              Get notified when maintenance is due.
-            </div>
-          </div>
-
-          <button class="icon-button" onclick="showToast('Reminder settings saved')">
-            ✓
-          </button>
-
-        </div>
-
-        <div class="setting-row">
-
-          <div class="setting-icon">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M12 3v18M3 12h18"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"/>
-              <circle cx="12" cy="12" r="8.5"
-                      stroke="currentColor"
-                      stroke-width="1.4"/>
-            </svg>
-          </div>
-
-          <div class="setting-info">
-            <div class="setting-name">Local storage</div>
-            <div class="setting-description">
-              Your Haven memories stay on this device.
-            </div>
-          </div>
-
-        </div>
-
-        <div class="setting-row">
-
-          <div class="setting-icon">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 5h16v14H4z"
-                    stroke="currentColor"
-                    stroke-width="1.7"/>
-              <path d="M8 9h8M8 13h8M8 17h5"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"/>
-            </svg>
-          </div>
-
-          <div class="setting-info">
-            <div class="setting-name">About Haven</div>
-            <div class="setting-description">
-              Your home remembers.
-            </div>
-          </div>
-
-        </div>
+        <input
+          class="form-input"
+          id="editTitle"
+          type="text"
+          required
+        >
 
       </div>
 
-    </main>
-
-  </div>
-
-
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav">
-
-    <button class="nav-item active" data-page="home" onclick="navigate('home')">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="m3.5 10 8.5-7 8.5 7v10.5H3.5V10Z"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linejoin="round"/>
-        <path d="M9 20.5v-6h6v6"
-              stroke="currentColor"
-              stroke-width="1.8"/>
-      </svg>
-      Home
-    </button>
-
-    <button class="nav-item" data-page="calendar" onclick="navigate('memory')">
-      <svg viewBox="0 0 24 24" fill="none">
-        <rect x="4" y="5" width="16" height="16" rx="2"
-              stroke="currentColor"
-              stroke-width="1.8"/>
-        <path d="M8 3v4M16 3v4M4 9h16"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"/>
-      </svg>
-      Calendar
-    </button>
-
-    <button class="nav-item" data-page="tasks" onclick="navigate('memory')">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M6 4h12v16H6z"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linejoin="round"/>
-        <path d="m9 9 1.5 1.5L14 7.5M9 14h6M9 17h4"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"/>
-      </svg>
-      Tasks
-    </button>
-
-    <button class="nav-item" data-page="more" onclick="navigate('settings')">
-      <svg viewBox="0 0 24 24" fill="none">
-        <circle cx="5" cy="12" r="1.5" fill="currentColor"/>
-        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
-        <circle cx="19" cy="12" r="1.5" fill="currentColor"/>
-      </svg>
-      More
-    </button>
-
-  </nav>
-
-
-  <!-- EDIT MODAL -->
-  <div class="modal-backdrop" id="editModal">
-
-    <div class="modal">
-
-      <div class="modal-handle"></div>
-
-      <div class="modal-title">Edit Memory</div>
 
       <div class="form-group">
-        <label class="form-label">Task</label>
-        <input class="input" id="editTaskName">
+
+        <label class="form-label">
+          Date
+        </label>
+
+        <input
+          class="form-input"
+          id="editDate"
+          type="date"
+          required
+        >
+
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Due date</label>
-        <input class="input" id="editTaskDueDate" type="date">
-      </div>
 
       <div class="form-group">
-        <label class="form-label">Repeat</label>
-        <select class="select" id="editTaskRepeat">
-          <option value="none">One time</option>
+
+        <label class="form-label">
+          Repeat
+        </label>
+
+        <select class="form-select" id="editRepeat">
+
+          <option value="none">Does not repeat</option>
           <option value="weekly">Every week</option>
           <option value="monthly">Every month</option>
-          <option value="3-month">Every 3 months</option>
-          <option value="6-month">Every 6 months</option>
+          <option value="3month">Every 3 months</option>
+          <option value="6month">Every 6 months</option>
           <option value="yearly">Every year</option>
+
         </select>
-      </div>
-
-      <div class="modal-actions">
-
-        <button class="secondary-button" onclick="closeEditModal()">
-          Cancel
-        </button>
-
-        <button class="primary-button" onclick="saveEdit()">
-          Save
-        </button>
 
       </div>
 
-    </div>
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Notes
+        </label>
+
+        <textarea
+          class="form-textarea"
+          id="editNotes"
+        ></textarea>
+
+      </div>
+
+
+      <button class="primary-btn" type="submit">
+        Save Changes
+      </button>
+
+      <div style="height:8px"></div>
+
+      <button class="secondary-btn" type="button" id="closeEditModal">
+        Cancel
+      </button>
+
+    </form>
 
   </div>
 
-
-  <div class="toast" id="toast"></div>
-
 </div>
-</div>
+
+
+<div class="toast" id="toast"></div>
 
 
 <script>
-
-/* =========================================================
+/* =========================
    HAVEN DATA
-========================================================= */
+========================= */
 
 const STORAGE_KEY = "havenTasksV4";
 const REMINDER_KEY = "havenRemindersV1";
 
 let tasks = [];
 let currentFilter = "all";
-let editingTaskId = null;
 
 
-/* =========================================================
-   DATE HELPERS
-========================================================= */
+/* =========================
+   STARTER DATA
+========================= */
 
-function todayISO(){
-  const d = new Date();
+const starterTasks = [
+  {
+    id: Date.now() + 1,
+    title: "Check water filter",
+    date: addDays(new Date(), 3),
+    repeat: "3month",
+    notes: "Check the filter and replace if needed.",
+    completed: false
+  },
+  {
+    id: Date.now() + 2,
+    title: "Clean kitchen exhaust",
+    date: addDays(new Date(), 8),
+    repeat: "monthly",
+    notes: "Clean grease and dust from the exhaust.",
+    completed: false
+  },
+  {
+    id: Date.now() + 3,
+    title: "Check electrical switches",
+    date: addDays(new Date(), 14),
+    repeat: "6month",
+    notes: "Check for loose or damaged switches.",
+    completed: false
+  }
+];
 
+
+/* =========================
+   HELPERS
+========================= */
+
+function addDays(date, days){
+  const d = new Date(date);
+  d.setDate(d.getDate() + days);
+  return formatDateInput(d);
+}
+
+
+function formatDateInput(date){
+  const d = new Date(date);
   const year = d.getFullYear();
   const month = String(d.getMonth()+1).padStart(2,"0");
   const day = String(d.getDate()).padStart(2,"0");
@@ -1685,645 +1637,235 @@ function todayISO(){
   return `${year}-${month}-${day}`;
 }
 
-function parseDate(dateString){
-  if(!dateString) return null;
 
-  const parts = dateString.split("-");
-
-  if(parts.length !== 3) return null;
-
-  return new Date(
-    Number(parts[0]),
-    Number(parts[1])-1,
-    Number(parts[2])
-  );
+function parseDate(value){
+  return new Date(value + "T00:00:00");
 }
 
-function formatDate(dateString){
 
-  const d = parseDate(dateString);
+function todayString(){
+  return formatDateInput(new Date());
+}
 
-  if(!d) return "No date";
 
-  return d.toLocaleDateString(undefined,{
+function formatPrettyDate(value){
+
+  if(!value) return "";
+
+  const date = parseDate(value);
+
+  return date.toLocaleDateString(undefined,{
     day:"numeric",
     month:"short",
     year:"numeric"
   });
 }
 
-function dateDifference(dateString){
 
-  const target = parseDate(dateString);
+function daysFromToday(value){
 
-  if(!target) return 999999;
-
-  const now = parseDate(todayISO());
+  const today = parseDate(todayString());
+  const date = parseDate(value);
 
   return Math.round(
-    (target-now)/(1000*60*60*24)
+    (date - today) / 86400000
   );
 }
 
-function dateLabel(dateString){
-
-  const diff = dateDifference(dateString);
-
-  if(diff < 0){
-    const days = Math.abs(diff);
-
-    return days === 1
-      ? "1 day overdue"
-      : `${days} days overdue`;
-  }
-
-  if(diff === 0){
-    return "Due today";
-  }
-
-  if(diff === 1){
-    return "Due tomorrow";
-  }
-
-  return `Due in ${diff} days`;
-}
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-function loadTasks(){
-
-  try{
-
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if(saved){
-
-      const parsed = JSON.parse(saved);
-
-      if(Array.isArray(parsed)){
-        tasks = parsed;
-      }
-
-    }
-
-  }catch(error){
-
-    console.error("Could not load Haven memories",error);
-
-    tasks = [];
-
-  }
-
-}
 
 function saveTasks(){
-
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(tasks)
   );
+}
+
+
+function loadTasks(){
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+
+  if(saved){
+
+    try{
+      tasks = JSON.parse(saved);
+    }catch{
+      tasks = starterTasks;
+      saveTasks();
+    }
+
+  }else{
+
+    tasks = starterTasks;
+    saveTasks();
+
+  }
 
 }
 
 
-/* =========================================================
-   CATEGORY
-========================================================= */
+function showToast(message){
 
-function detectCategory(name){
+  const toast = document.getElementById("toast");
 
-  const text = String(name || "").toLowerCase();
+  toast.textContent = message;
+  toast.classList.add("show");
 
-  if(
-    text.includes("water") ||
-    text.includes("tank") ||
-    text.includes("filter") ||
-    text.includes("pump")
-  ){
-    return "Water";
-  }
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
 
-  if(
-    text.includes("heater") ||
-    text.includes("heating") ||
-    text.includes("boiler") ||
-    text.includes("radiator")
-  ){
-    return "Heating";
-  }
-
-  if(
-    text.includes("tap") ||
-    text.includes("pipe") ||
-    text.includes("plumb") ||
-    text.includes("sink") ||
-    text.includes("drain")
-  ){
-    return "Plumbing";
-  }
-
-  if(
-    text.includes("air conditioner") ||
-    text.includes("ac ") ||
-    text.includes(" ac") ||
-    text.includes("cooling") ||
-    text.includes("aircon")
-  ){
-    return "Cooling";
-  }
-
-  if(
-    text.includes("electric") ||
-    text.includes("wire") ||
-    text.includes("socket") ||
-    text.includes("bulb") ||
-    text.includes("switch")
-  ){
-    return "Electrical";
-  }
-
-  if(
-    text.includes("clean") ||
-    text.includes("wash") ||
-    text.includes("dust") ||
-    text.includes("vacuum")
-  ){
-    return "Cleaning";
-  }
-
-  if(
-    text.includes("repair") ||
-    text.includes("fix") ||
-    text.includes("wrench")
-  ){
-    return "Repair";
-  }
-
-  if(
-    text.includes("garden") ||
-    text.includes("plant") ||
-    text.includes("lawn") ||
-    text.includes("tree")
-  ){
-    return "Garden";
-  }
-
-  if(
-    text.includes("roof") ||
-    text.includes("gutter") ||
-    text.includes("chimney")
-  ){
-    return "Roof";
-  }
-
-  return "Home";
 }
 
 
-/* =========================================================
-   SVG ICONS
-========================================================= */
-
-function categoryIcon(category){
-
-  const c = String(category || "").toLowerCase();
-
-  if(c === "water"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"
-              stroke="currentColor"
-              stroke-width="1.8"/>
-        <path d="M9.5 16.5c.5.8 1.3 1.2 2.5 1.3"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"/>
-      </svg>`;
-  }
-
-  if(c === "heating"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M13.5 3.5c.7 3.5-2.5 4.3-1.5 7.1.5 1.3 2 1.8 2.1 3.5.1 1.8-1.2 3.1-3 3.1-2.5 0-4.1-2.1-3.7-4.5.3-1.8 1.5-3 2.2-4.4"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"/>
-        <path d="M15.5 10.5c2.2 1.6 3.5 3.5 3.5 5.5a7 7 0 0 1-14 0"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"/>
-      </svg>`;
-  }
-
-  if(c === "plumbing"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M5 7h8v5h3a3 3 0 0 1 3 3v4"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"/>
-        <path d="M5 7V4M3.5 4h3M19 19h-3"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"/>
-      </svg>`;
-  }
-
-  if(c === "cooling"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"/>
-        <path d="m12 3-1.5 2.2M12 3l1.5 2.2M12 21l-1.5-2.2M12 21l1.5-2.2"
-              stroke="currentColor"
-              stroke-width="1.4"
-              stroke-linecap="round"/>
-      </svg>`;
-  }
-
-  if(c === "electrical"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M13.5 3 6 13h5l-.5 8L18 10h-5l.5-7.5Z"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linejoin="round"/>
-      </svg>`;
-  }
-
-  if(c === "cleaning"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M6 17.5h12M8 14h8M9 10.5h6M12 3v2"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"/>
-        <path d="M10 7h4l1 3.5H9L10 7Z"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linejoin="round"/>
-      </svg>`;
-  }
-
-  if(c === "repair"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="m14.5 6.5 3-3 3 3-3 3"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linejoin="round"/>
-        <path d="m13 8-8 8 3 3 8-8"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"/>
-        <path d="m16 11 3 3"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"/>
-      </svg>`;
-  }
-
-  if(c === "garden"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 20V10"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"/>
-        <path d="M12 13c-4.5.2-7-2.1-7-6 4.4-.2 7 1.8 7 6Z"
-              stroke="currentColor"
-              stroke-width="1.7"/>
-        <path d="M12 10c.4-4 3-6 7-6 .2 3.9-2.3 6.2-7 6Z"
-              stroke="currentColor"
-              stroke-width="1.7"/>
-      </svg>`;
-  }
-
-  if(c === "roof"){
-    return `
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="m3 11 9-7 9 7"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"/>
-        <path d="M5 10.5V20h14v-9.5"
-              stroke="currentColor"
-              stroke-width="1.8"/>
-      </svg>`;
-  }
-
-  return `
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="m4 11 8-7 8 7v9H4v-9Z"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linejoin="round"/>
-      <path d="M9 20v-5h6v5"
-            stroke="currentColor"
-            stroke-width="1.8"/>
-    </svg>`;
-}
-
-
-function categoryClass(category){
-
-  const c = String(category || "").toLowerCase();
-
-  if(c === "water") return "cat-water";
-  if(c === "heating") return "cat-heating";
-  if(c === "plumbing") return "cat-plumbing";
-  if(c === "cooling") return "cat-cooling";
-  if(c === "electrical") return "cat-electrical";
-  if(c === "cleaning") return "cat-cleaning";
-  if(c === "repair") return "cat-repair";
-  if(c === "garden") return "cat-garden";
-  if(c === "roof") return "cat-roof";
-
-  return "cat-water";
-}
-
-
-/* =========================================================
-   TASK STATUS
-========================================================= */
+/* =========================
+   STATUS
+========================= */
 
 function getStatus(task){
 
-  if(task.completed === true){
+  if(task.completed){
     return {
-      className:"completed",
-      label:"Completed"
+      label:"Completed",
+      className:"status-upcoming"
     };
   }
 
-  const diff = dateDifference(task.nextDue || task.dueDate);
+  const diff = daysFromToday(task.date);
 
   if(diff < 0){
+
     return {
-      className:"overdue",
-      label:"Overdue"
+      label:"Overdue",
+      className:"status-overdue"
     };
+
   }
 
   if(diff === 0){
+
     return {
-      className:"due",
-      label:"Due"
+      label:"Today",
+      className:"status-today"
     };
+
   }
 
   return {
-    className:"upcoming",
-    label:"Upcoming"
+    label:"Upcoming",
+    className:"status-upcoming"
   };
 
 }
 
 
-/* =========================================================
-   TASK HTML
-========================================================= */
+/* =========================
+   TASK ICON
+========================= */
 
-function taskHTML(task){
-
-  const category =
-    task.category ||
-    detectCategory(task.name);
-
-  const date =
-    task.nextDue ||
-    task.dueDate;
-
-  const status =
-    getStatus(task);
+function taskIcon(){
 
   return `
-
-    <div class="task-card">
-
-      <div class="task-icon ${categoryClass(category)}">
-        ${categoryIcon(category)}
-      </div>
-
-      <div class="task-main">
-
-        <div class="task-name">
-          ${escapeHTML(task.name || "Untitled memory")}
-        </div>
-
-        <div class="task-category">
-          ${escapeHTML(category)}
-        </div>
-
-        <div class="task-bottom">
-
-          <div class="task-date">
-
-            <svg viewBox="0 0 24 24" fill="none">
-              <rect x="4" y="5" width="16" height="16" rx="2"
-                    stroke="currentColor"
-                    stroke-width="1.7"/>
-              <path d="M8 3v4M16 3v4M4 9h16"
-                    stroke="currentColor"
-                    stroke-width="1.7"/>
-            </svg>
-
-            ${escapeHTML(dateLabel(date))}
-
-          </div>
-
-          <span class="status ${status.className}">
-            ${status.label}
-          </span>
-
-        </div>
-
-      </div>
-
-      <div class="task-chevron">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="m9 18 6-6-6-6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-    </div>
-
+    <svg viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.8"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+      <path d="M4 12h16"/>
+      <path d="M6 8h12"/>
+      <path d="M8 4h8"/>
+      <path d="M7 12v7"/>
+      <path d="M17 12v7"/>
+      <path d="M9 19h6"/>
+    </svg>
   `;
 
 }
 
 
-/* =========================================================
-   MEMORY HTML
-========================================================= */
+/* =========================
+   RENDER UPCOMING
+========================= */
 
-function memoryHTML(task){
-
-  const category =
-    task.category ||
-    detectCategory(task.name);
-
-  const date =
-    task.nextDue ||
-    task.dueDate;
-
-  const status =
-    getStatus(task);
-
-  return `
-
-    <div class="memory-card">
-
-      <div class="memory-top">
-
-        <div>
-
-          <div class="memory-name">
-            ${escapeHTML(task.name || "Untitled memory")}
-          </div>
-
-          <div class="memory-meta">
-            ${escapeHTML(category)}
-            ·
-            ${escapeHTML(formatDate(date))}
-          </div>
-
-          <div class="task-bottom">
-
-            <span class="status ${status.className}">
-              ${status.label}
-            </span>
-
-            ${
-              task.repeat && task.repeat !== "none"
-              ? `<span class="status upcoming">
-                   Repeats
-                 </span>`
-              : ""
-            }
-
-          </div>
-
-        </div>
-
-        <div class="memory-actions">
-
-          ${
-            !task.completed
-            ? `
-              <button
-                class="icon-button"
-                onclick="completeTask('${task.id}')"
-                title="Complete"
-              >✓</button>
-            `
-            : ""
-          }
-
-          <button
-            class="icon-button"
-            onclick="openEditModal('${task.id}')"
-            title="Edit"
-          >
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="m14 6 4 4M5 19l3.5-.7L19 7.8a2 2 0 0 0-2.8-2.8L5.7 15.5 5 19Z"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-          <button
-            class="icon-button"
-            onclick="deleteTask('${task.id}')"
-            title="Delete"
-          >
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   RENDER
-========================================================= */
-
-function renderHome(){
+function renderUpcoming(){
 
   const container =
-    document.getElementById("homeTaskList");
+    document.getElementById("upcomingTasks");
 
-  if(!container) return;
-
-  const active =
+  const activeTasks =
     tasks
       .filter(t => !t.completed)
-      .sort((a,b) =>
-        dateDifference(a.nextDue || a.dueDate) -
-        dateDifference(b.nextDue || b.dueDate)
-      )
-      .slice(0,4);
+      .sort((a,b)=>parseDate(a.date)-parseDate(b.date));
 
-  if(active.length === 0){
+  document.getElementById("upcomingCount").textContent =
+    `${activeTasks.length} ${activeTasks.length === 1 ? "task" : "tasks"}`;
+
+  if(!activeTasks.length){
 
     container.innerHTML = `
-      <div class="empty">
-
+      <div class="empty-state">
         <div class="empty-icon">
-          ${categoryIcon("home")}
+          ${taskIcon()}
         </div>
-
-        <strong>Your home is all caught up</strong>
-
-        <span>
-          Add a maintenance memory to get started.
-        </span>
-
+        <div class="empty-title">
+          Your home is all caught up
+        </div>
+        <div class="empty-text">
+          Add a memory whenever there's something worth remembering.
+        </div>
       </div>
     `;
 
-  }else{
-
-    container.innerHTML =
-      active.map(taskHTML).join("");
-
+    return;
   }
 
-  updateHealth();
+
+  container.innerHTML =
+    activeTasks.slice(0,4).map(task => {
+
+      const status = getStatus(task);
+
+      return `
+        <div class="task-card">
+
+          <div class="task-icon"
+               style="background:var(--blue-soft);color:var(--blue);">
+            ${taskIcon()}
+          </div>
+
+          <div class="task-info">
+
+            <div class="task-name">
+              ${escapeHtml(task.title)}
+            </div>
+
+            <div class="task-date">
+              ${formatPrettyDate(task.date)}
+            </div>
+
+          </div>
+
+          <div class="task-status ${status.className}">
+            ${status.label}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 
 }
 
 
-function renderMemory(){
+/* =========================
+   RENDER MEMORY LIST
+========================= */
+
+function renderMemoryList(){
 
   const container =
-    document.getElementById("memoryTaskList");
-
-  if(!container) return;
+    document.getElementById("memoryList");
 
   let filtered = [...tasks];
 
@@ -2331,8 +1873,7 @@ function renderMemory(){
 
     filtered =
       filtered.filter(t =>
-        !t.completed &&
-        dateDifference(t.nextDue || t.dueDate) === 0
+        t.date === todayString()
       );
 
   }
@@ -2342,7 +1883,7 @@ function renderMemory(){
     filtered =
       filtered.filter(t =>
         !t.completed &&
-        dateDifference(t.nextDue || t.dueDate) > 0
+        daysFromToday(t.date) > 0
       );
 
   }
@@ -2352,352 +1893,254 @@ function renderMemory(){
     filtered =
       filtered.filter(t =>
         !t.completed &&
-        dateDifference(t.nextDue || t.dueDate) < 0
+        daysFromToday(t.date) < 0
       );
 
   }
 
-  filtered.sort((a,b) =>
-    dateDifference(a.nextDue || a.dueDate) -
-    dateDifference(b.nextDue || b.dueDate)
+  filtered.sort(
+    (a,b)=>parseDate(a.date)-parseDate(b.date)
   );
 
-  if(filtered.length === 0){
+
+  if(!filtered.length){
 
     container.innerHTML = `
-      <div class="empty">
-
+      <div class="empty-state">
         <div class="empty-icon">
-          ${categoryIcon("home")}
+          ${taskIcon()}
         </div>
-
-        <strong>No memories here</strong>
-
-        <span>
-          Try another filter or add a new task.
-        </span>
-
+        <div class="empty-title">
+          Nothing here yet
+        </div>
+        <div class="empty-text">
+          Your saved home memories will appear here.
+        </div>
       </div>
     `;
 
-  }else{
-
-    container.innerHTML =
-      filtered.map(memoryHTML).join("");
-
+    return;
   }
+
+
+  container.innerHTML =
+    filtered.map(task => {
+
+      const status = getStatus(task);
+
+      return `
+        <div class="memory-card">
+
+          <div class="memory-top">
+
+            <div>
+
+              <div class="memory-title">
+                ${escapeHtml(task.title)}
+              </div>
+
+              <div class="memory-meta">
+                ${formatPrettyDate(task.date)}
+                ${task.repeat !== "none"
+                  ? " • " + repeatLabel(task.repeat)
+                  : ""}
+              </div>
+
+            </div>
+
+            <div class="task-status ${status.className}">
+              ${status.label}
+            </div>
+
+          </div>
+
+
+          ${
+            task.notes
+            ? `
+              <div class="memory-notes">
+                ${escapeHtml(task.notes)}
+              </div>
+            `
+            : ""
+          }
+
+
+          <div class="memory-actions">
+
+            ${
+              !task.completed
+              ? `
+                <button
+                  class="small-btn"
+                  onclick="completeTask(${task.id})">
+                  Complete
+                </button>
+              `
+              : ""
+            }
+
+            <button
+              class="small-btn"
+              onclick="editTask(${task.id})">
+              Edit
+            </button>
+
+            <button
+              class="small-btn danger"
+              onclick="deleteTask(${task.id})">
+              Delete
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 
 }
 
 
-function updateHealth(){
+function repeatLabel(value){
 
-  const count =
-    tasks.filter(t =>
-      !t.completed &&
-      dateDifference(t.nextDue || t.dueDate) <= 0
-    ).length;
-
-  const countElement =
-    document.getElementById("healthCount");
-
-  const message =
-    document.getElementById("healthMessage");
-
-  if(countElement){
-
-    countElement.textContent =
-      `${count} task${count === 1 ? "" : "s"} need attention`;
-
-  }
-
-  if(message){
-
-    message.textContent =
-      count === 0
-        ? "All systems are running well"
-        : "A few things need your attention";
-
-  }
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function navigate(page){
-
-  const pages = {
-    home:"homePage",
-    add:"addPage",
-    memory:"memoryPage",
-    settings:"settingsPage"
+  const labels = {
+    weekly:"weekly",
+    monthly:"monthly",
+    "3month":"every 3 months",
+    "6month":"every 6 months",
+    yearly:"yearly"
   };
 
-  Object.values(pages).forEach(id => {
-
-    const element =
-      document.getElementById(id);
-
-    if(element){
-      element.classList.remove("active");
-    }
-
-  });
-
-  const target =
-    document.getElementById(pages[page] || pages.home);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(item => {
-
-      item.classList.remove("active");
-
-      const targetPage =
-        item.dataset.page;
-
-      if(
-        (page === "home" && targetPage === "home") ||
-        (page === "memory" &&
-          (targetPage === "calendar" ||
-           targetPage === "tasks"))
-      ){
-        item.classList.add("active");
-      }
-
-    });
-
-  document
-    .getElementById("profilePopup")
-    ?.classList.remove("show");
-
-  window.scrollTo({
-    top:0,
-    behavior:"instant"
-  });
-
-  renderHome();
-  renderMemory();
+  return labels[value] || "";
 
 }
 
 
-/* =========================================================
-   ADD TASK
-========================================================= */
+/* =========================
+   ESCAPE HTML
+========================= */
 
-document
-  .getElementById("taskForm")
-  ?.addEventListener("submit",function(event){
+function escapeHtml(value){
 
-    event.preventDefault();
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
-    const name =
-      document.getElementById("taskName").value.trim();
-
-    const dueDate =
-      document.getElementById("taskDueDate").value;
-
-    const repeat =
-      document.getElementById("taskRepeat").value;
-
-    const notes =
-      document.getElementById("taskNotes").value.trim();
-
-    if(!name || !dueDate){
-
-      showToast("Please enter a task and due date.");
-
-      return;
-
-    }
-
-    const task = {
-
-      id:
-        Date.now().toString() +
-        Math.random().toString(36).slice(2),
-
-      name:name,
-
-      dueDate:dueDate,
-
-      nextDue:dueDate,
-
-      repeat:repeat,
-
-      repeatType:repeat,
-
-      repeatValue:1,
-
-      repeatUnit:repeat,
-
-      notes:notes,
-
-      category:detectCategory(name),
-
-      completed:false,
-
-      lastDone:null,
-
-      createdAt:new Date().toISOString()
-
-    };
-
-    tasks.push(task);
-
-    saveTasks();
-
-    this.reset();
-
-    showToast("Memory saved.");
-
-    navigate("home");
-
-  });
+}
 
 
-/* =========================================================
+/* =========================
    COMPLETE TASK
-========================================================= */
+========================= */
 
 function completeTask(id){
 
   const task =
-    tasks.find(t => String(t.id) === String(id));
+    tasks.find(t => t.id === id);
 
   if(!task) return;
 
-  if(task.repeat && task.repeat !== "none"){
+  if(task.repeat !== "none"){
 
-    const current =
-      parseDate(task.nextDue || task.dueDate);
+    const nextDate =
+      getNextDate(task.date,task.repeat);
 
-    if(current){
+    task.date = nextDate;
 
-      let next =
-        new Date(current);
+    showToast("Next reminder scheduled");
 
-      if(task.repeat === "weekly"){
-        next.setDate(next.getDate()+7);
-      }
+  }else{
 
-      else if(task.repeat === "monthly"){
-        next.setMonth(next.getMonth()+1);
-      }
+    task.completed = true;
 
-      else if(task.repeat === "3-month"){
-        next.setMonth(next.getMonth()+3);
-      }
-
-      else if(task.repeat === "6-month"){
-        next.setMonth(next.getMonth()+6);
-      }
-
-      else if(task.repeat === "yearly"){
-        next.setFullYear(next.getFullYear()+1);
-      }
-
-      task.nextDue =
-        next.toISOString().slice(0,10);
-
-      task.lastDone =
-        todayISO();
-
-      task.completed =
-        false;
-
-      saveTasks();
-
-      renderHome();
-      renderMemory();
-
-      showToast("Completed — next memory scheduled.");
-
-      return;
-
-    }
+    showToast("Memory completed");
 
   }
 
-  task.completed = true;
-
-  task.lastDone = todayISO();
-
   saveTasks();
-
-  renderHome();
-  renderMemory();
-
-  showToast("Memory completed.");
+  renderAll();
 
 }
 
 
-/* =========================================================
-   DELETE
-========================================================= */
+/* =========================
+   DELETE TASK
+========================= */
 
 function deleteTask(id){
 
   const task =
-    tasks.find(t => String(t.id) === String(id));
+    tasks.find(t => t.id === id);
 
   if(!task) return;
 
-  const confirmed =
-    confirm(
-      `Delete "${task.name}"?`
-    );
-
-  if(!confirmed) return;
+  if(!confirm("Delete this memory?")) return;
 
   tasks =
-    tasks.filter(t =>
-      String(t.id) !== String(id)
-    );
+    tasks.filter(t => t.id !== id);
 
   saveTasks();
+  renderAll();
 
-  renderHome();
-  renderMemory();
-
-  showToast("Memory deleted.");
+  showToast("Memory deleted");
 
 }
 
 
-/* =========================================================
-   EDIT
-========================================================= */
+/* =========================
+   NEXT DATE
+========================= */
 
-function openEditModal(id){
+function getNextDate(dateValue,repeat){
+
+  const date =
+    parseDate(dateValue);
+
+  if(repeat === "weekly"){
+    date.setDate(date.getDate()+7);
+  }
+
+  if(repeat === "monthly"){
+    date.setMonth(date.getMonth()+1);
+  }
+
+  if(repeat === "3month"){
+    date.setMonth(date.getMonth()+3);
+  }
+
+  if(repeat === "6month"){
+    date.setMonth(date.getMonth()+6);
+  }
+
+  if(repeat === "yearly"){
+    date.setFullYear(date.getFullYear()+1);
+  }
+
+  return formatDateInput(date);
+
+}
+
+
+/* =========================
+   EDIT TASK
+========================= */
+
+function editTask(id){
 
   const task =
-    tasks.find(t => String(t.id) === String(id));
+    tasks.find(t => t.id === id);
 
   if(!task) return;
 
-  editingTaskId = id;
-
-  document
-    .getElementById("editTaskName")
-    .value = task.name || "";
-
-  document
-    .getElementById("editTaskDueDate")
-    .value = task.nextDue || task.dueDate || "";
-
-  document
-    .getElementById("editTaskRepeat")
-    .value = task.repeat || "none";
+  document.getElementById("editId").value = task.id;
+  document.getElementById("editTitle").value = task.title;
+  document.getElementById("editDate").value = task.date;
+  document.getElementById("editRepeat").value = task.repeat;
+  document.getElementById("editNotes").value = task.notes || "";
 
   document
     .getElementById("editModal")
@@ -2706,9 +2149,88 @@ function openEditModal(id){
 }
 
 
-function closeEditModal(){
+/* =========================
+   NAVIGATION
+========================= */
 
-  editingTaskId = null;
+function showPage(pageId){
+
+  document.querySelectorAll(".page")
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
+
+  const page =
+    document.getElementById(pageId);
+
+  if(page){
+    page.classList.add("active");
+  }
+
+
+  document.querySelectorAll(".nav-item")
+    .forEach(item=>{
+      item.classList.toggle(
+        "active",
+        item.dataset.page === pageId
+      );
+    });
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+document.querySelectorAll(".nav-item")
+.forEach(item=>{
+
+  item.addEventListener("click",()=>{
+
+    showPage(item.dataset.page);
+
+    if(item.dataset.page === "tasksPage"){
+      renderMemoryList();
+    }
+
+    if(item.dataset.page === "calendarPage"){
+      renderCalendar();
+    }
+
+  });
+
+});
+
+
+/* =========================
+   MODALS
+========================= */
+
+function openAddModal(){
+
+  document
+    .getElementById("addModal")
+    .classList.add("show");
+
+  document.getElementById("taskDate").value =
+    todayString();
+
+}
+
+
+function closeAddModal(){
+
+  document
+    .getElementById("addModal")
+    .classList.remove("show");
+
+}
+
+
+function closeEditModal(){
 
   document
     .getElementById("editModal")
@@ -2717,394 +2239,479 @@ function closeEditModal(){
 }
 
 
-function saveEdit(){
-
-  if(!editingTaskId) return;
-
-  const task =
-    tasks.find(t =>
-      String(t.id) === String(editingTaskId)
-    );
-
-  if(!task) return;
-
-  const name =
-    document
-      .getElementById("editTaskName")
-      .value.trim();
-
-  const due =
-    document
-      .getElementById("editTaskDueDate")
-      .value;
-
-  const repeat =
-    document
-      .getElementById("editTaskRepeat")
-      .value;
-
-  if(!name || !due){
-
-    showToast("Please fill in the task and date.");
-
-    return;
-
-  }
-
-  task.name = name;
-
-  task.dueDate = due;
-
-  task.nextDue = due;
-
-  task.repeat = repeat;
-
-  task.repeatType = repeat;
-
-  task.category =
-    detectCategory(name);
-
-  saveTasks();
-
-  closeEditModal();
-
-  renderHome();
-  renderMemory();
-
-  showToast("Memory updated.");
-
-}
-
-
-/* =========================================================
-   FILTERS
-========================================================= */
+document
+  .getElementById("fabAdd")
+  .addEventListener("click",openAddModal);
 
 document
-  .querySelectorAll(".filter")
-  .forEach(button => {
+  .getElementById("addMemoryQuick")
+  .addEventListener("click",openAddModal);
 
-    button.addEventListener("click",function(){
+document
+  .getElementById("settingsAddBtn")
+  .addEventListener("click",openAddModal);
 
-      document
-        .querySelectorAll(".filter")
-        .forEach(b =>
-          b.classList.remove("active")
-        );
+document
+  .getElementById("closeModal")
+  .addEventListener("click",closeAddModal);
 
-      this.classList.add("active");
+document
+  .getElementById("closeEditModal")
+  .addEventListener("click",closeEditModal);
 
-      currentFilter =
-        this.dataset.filter;
 
-      renderMemory();
+/* =========================
+   ADD FORM
+========================= */
+
+document
+  .getElementById("addForm")
+  .addEventListener("submit",e=>{
+
+    e.preventDefault();
+
+    const title =
+      document.getElementById("taskTitle").value.trim();
+
+    const date =
+      document.getElementById("taskDate").value;
+
+    const repeat =
+      document.getElementById("taskRepeat").value;
+
+    const notes =
+      document.getElementById("taskNotes").value.trim();
+
+
+    if(!title || !date){
+      return;
+    }
+
+
+    tasks.push({
+
+      id:Date.now(),
+
+      title,
+
+      date,
+
+      repeat,
+
+      notes,
+
+      completed:false
 
     });
 
+
+    saveTasks();
+
+    e.target.reset();
+
+    closeAddModal();
+
+    renderAll();
+
+    showToast("Memory saved");
+
   });
 
 
-/* =========================================================
-   PROFILE
-========================================================= */
+/* =========================
+   EDIT FORM
+========================= */
 
 document
-  .getElementById("profileButton")
-  ?.addEventListener("click",function(event){
+  .getElementById("editForm")
+  .addEventListener("submit",e=>{
 
-    event.stopPropagation();
+    e.preventDefault();
 
-    document
-      .getElementById("profilePopup")
-      ?.classList.toggle("show");
+    const id =
+      Number(document.getElementById("editId").value);
+
+    const task =
+      tasks.find(t => t.id === id);
+
+    if(!task) return;
+
+
+    task.title =
+      document.getElementById("editTitle").value.trim();
+
+    task.date =
+      document.getElementById("editDate").value;
+
+    task.repeat =
+      document.getElementById("editRepeat").value;
+
+    task.notes =
+      document.getElementById("editNotes").value.trim();
+
+
+    saveTasks();
+
+    closeEditModal();
+
+    renderAll();
+
+    showToast("Memory updated");
 
   });
 
-document.addEventListener("click",function(event){
 
-  const popup =
-    document.getElementById("profilePopup");
+/* =========================
+   FILTERS
+========================= */
 
-  const button =
-    document.getElementById("profileButton");
+document.querySelectorAll(".filter-btn")
+.forEach(button=>{
 
-  if(
-    popup &&
-    !popup.contains(event.target) &&
-    !button.contains(event.target)
-  ){
+  button.addEventListener("click",()=>{
 
-    popup.classList.remove("show");
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach(btn=>{
+        btn.classList.remove("active");
+      });
 
-  }
+    button.classList.add("active");
+
+    currentFilter =
+      button.dataset.filter;
+
+    renderMemoryList();
+
+  });
 
 });
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+/* =========================
+   QUICK ACTIONS
+========================= */
 
-let toastTimer = null;
+document
+  .getElementById("allTasksQuick")
+  .addEventListener("click",()=>{
 
-function showToast(message){
+    showPage("tasksPage");
+    renderMemoryList();
 
-  const toast =
-    document.getElementById("toast");
+  });
 
-  if(!toast) return;
 
-  toast.textContent = message;
+document
+  .getElementById("settingsQuick")
+  .addEventListener("click",()=>{
 
-  toast.classList.add("show");
+    showPage("settingsPage");
 
-  clearTimeout(toastTimer);
+  });
 
-  toastTimer =
-    setTimeout(() => {
 
-      toast.classList.remove("show");
+document
+  .getElementById("settingsTopBtn")
+  .addEventListener("click",()=>{
 
-    },2500);
+    showPage("settingsPage");
+
+  });
+
+
+document
+  .getElementById("myHomeQuick")
+  .addEventListener("click",()=>{
+
+    showToast("My Home is coming soon");
+
+  });
+
+
+/* =========================
+   CALENDAR
+========================= */
+
+function renderCalendar(){
+
+  const container =
+    document.getElementById("calendarTasks");
+
+  const upcoming =
+    [...tasks]
+      .filter(t => !t.completed)
+      .sort(
+        (a,b)=>parseDate(a.date)-parseDate(b.date)
+      );
+
+
+  if(!upcoming.length){
+
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-title">
+          No upcoming memories
+        </div>
+        <div class="empty-text">
+          Your calendar will appear here as you add tasks.
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML =
+    upcoming.map(task=>{
+
+      const diff =
+        daysFromToday(task.date);
+
+      let when = "";
+
+      if(diff < 0){
+        when = `${Math.abs(diff)} days overdue`;
+      }else if(diff === 0){
+        when = "Today";
+      }else if(diff === 1){
+        when = "Tomorrow";
+      }else{
+        when = `In ${diff} days`;
+      }
+
+
+      return `
+        <div class="task-card"
+             style="box-shadow:none;border:0;border-bottom:1px solid var(--border);border-radius:0;padding-left:0;padding-right:0;">
+
+          <div class="task-icon"
+               style="background:var(--lavender);color:#7866a8;">
+            ${taskIcon()}
+          </div>
+
+          <div class="task-info">
+
+            <div class="task-name">
+              ${escapeHtml(task.title)}
+            </div>
+
+            <div class="task-date">
+              ${formatPrettyDate(task.date)} • ${when}
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+/* =========================
+   HEALTH SCORE
+========================= */
 
-function escapeHTML(value){
+function renderHealth(){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const active =
+    tasks.filter(t=>!t.completed);
 
-}
+  const overdue =
+    active.filter(t=>daysFromToday(t.date)<0);
+
+  let score = 100;
+
+  if(active.length){
+    score =
+      Math.max(
+        0,
+        Math.round(
+          100 - (overdue.length / active.length * 100)
+        )
+      );
+  }
 
 
-/* =========================================================
-   REMINDERS
-========================================================= */
+  document.getElementById("healthScore")
+    .textContent = `${score}%`;
 
-function loadReminderSettings(){
 
-  try{
+  if(overdue.length === 0){
 
-    const saved =
-      localStorage.getItem(REMINDER_KEY);
+    document.getElementById("healthText")
+      .textContent =
+      "Everything looks good.";
 
-    if(saved){
-      return JSON.parse(saved);
-    }
+  }else if(overdue.length === 1){
 
-  }catch(error){
+    document.getElementById("healthText")
+      .textContent =
+      "One memory needs attention.";
 
-    console.error(error);
+  }else{
+
+    document.getElementById("healthText")
+      .textContent =
+      `${overdue.length} memories need attention.`;
 
   }
 
-  return {
-    enabled:false
-  };
+}
+
+
+/* =========================
+   REMINDERS
+========================= */
+
+function loadReminderSetting(){
+
+  const value =
+    localStorage.getItem(REMINDER_KEY);
+
+  const enabled =
+    value === "true";
+
+  const toggle =
+    document.getElementById("reminderToggle");
+
+  toggle.classList.toggle("on",enabled);
 
 }
 
 
-function saveReminderSettings(settings){
+document
+  .getElementById("reminderToggle")
+  .addEventListener("click",async()=>{
 
-  localStorage.setItem(
-    REMINDER_KEY,
-    JSON.stringify(settings)
-  );
+    const toggle =
+      document.getElementById("reminderToggle");
+
+    const enabled =
+      !toggle.classList.contains("on");
+
+
+    if(enabled && "Notification" in window){
+
+      try{
+
+        const permission =
+          await Notification.requestPermission();
+
+        if(permission !== "granted"){
+
+          showToast("Notifications are not enabled");
+
+          return;
+
+        }
+
+      }catch{
+
+        showToast("Notifications unavailable");
+
+        return;
+
+      }
+
+    }
+
+
+    localStorage.setItem(
+      REMINDER_KEY,
+      String(enabled)
+    );
+
+    toggle.classList.toggle("on",enabled);
+
+    showToast(
+      enabled
+      ? "Reminders enabled"
+      : "Reminders disabled"
+    );
+
+  });
+
+
+/* =========================
+   CLEAR TASKS
+========================= */
+
+document
+  .getElementById("clearTasksBtn")
+  .addEventListener("click",()=>{
+
+    if(!tasks.length){
+      showToast("There are no memories");
+      return;
+    }
+
+    if(!confirm("Delete all memories?")){
+      return;
+    }
+
+    tasks = [];
+
+    saveTasks();
+
+    renderAll();
+
+    showToast("All memories cleared");
+
+  });
+
+
+/* =========================
+   RENDER EVERYTHING
+========================= */
+
+function renderAll(){
+
+  renderUpcoming();
+
+  renderMemoryList();
+
+  renderCalendar();
+
+  renderHealth();
 
 }
 
 
-/* =========================================================
+/* =========================
    SERVICE WORKER
-========================================================= */
+========================= */
 
 if("serviceWorker" in navigator){
 
-  window.addEventListener("load",function(){
+  window.addEventListener("load",()=>{
 
     navigator.serviceWorker
       .register("./sw.js")
-      .then(() => {
-
-        console.log("Haven service worker registered.");
-
-      })
-      .catch(error => {
-
-        console.log(
-          "Service worker registration failed:",
-          error
-        );
-
-      });
+      .catch(()=>{});
 
   });
 
 }
 
 
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
-
-async function requestNotifications(){
-
-  if(!("Notification" in window)){
-
-    showToast("Notifications are not supported here.");
-
-    return;
-
-  }
-
-  try{
-
-    const permission =
-      await Notification.requestPermission();
-
-    if(permission === "granted"){
-
-      saveReminderSettings({
-        enabled:true
-      });
-
-      showToast("Reminders enabled.");
-
-    }else{
-
-      showToast("Notifications were not enabled.");
-
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-/* =========================================================
-   DEFAULT SAMPLE DATA
-   Only created when there are NO existing memories.
-========================================================= */
-
-function createStarterData(){
-
-  if(tasks.length > 0) return;
-
-  /*
-    These examples give the fresh app the visual
-    experience shown in the Haven design.
-    They can be deleted normally.
-  */
-
-  const today =
-    new Date();
-
-  const dateAfter =
-    days => {
-
-      const d =
-        new Date(today);
-
-      d.setDate(
-        d.getDate()+days
-      );
-
-      return d.toISOString().slice(0,10);
-
-    };
-
-  tasks = [
-
-    {
-      id:"starter-water",
-      name:"Clean water tank",
-      dueDate:dateAfter(0),
-      nextDue:dateAfter(0),
-      repeat:"none",
-      repeatType:"none",
-      repeatValue:1,
-      repeatUnit:"none",
-      category:"Water",
-      completed:false,
-      lastDone:null
-    },
-
-    {
-      id:"starter-heating",
-      name:"Inspect room heater",
-      dueDate:dateAfter(5),
-      nextDue:dateAfter(5),
-      repeat:"none",
-      repeatType:"none",
-      repeatValue:1,
-      repeatUnit:"none",
-      category:"Heating",
-      completed:false,
-      lastDone:null
-    },
-
-    {
-      id:"starter-plumbing",
-      name:"Check kitchen tap",
-      dueDate:dateAfter(7),
-      nextDue:dateAfter(7),
-      repeat:"none",
-      repeatType:"none",
-      repeatValue:1,
-      repeatUnit:"none",
-      category:"Plumbing",
-      completed:false,
-      lastDone:null
-    },
-
-    {
-      id:"starter-cooling",
-      name:"Service air conditioner",
-      dueDate:dateAfter(20),
-      nextDue:dateAfter(20),
-      repeat:"none",
-      repeatType:"none",
-      repeatValue:1,
-      repeatUnit:"none",
-      category:"Cooling",
-      completed:false,
-      lastDone:null
-    }
-
-  ];
-
-  saveTasks();
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
+/* =========================
+   START
+========================= */
 
 loadTasks();
 
-createStarterData();
+loadReminderSetting();
 
-renderHome();
-
-renderMemory();
+renderAll();
 
 </script>
 
+</div>
+</div>
+
 </body>
-                </html>
+  </html>
