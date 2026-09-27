@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f6f9fb">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F7FAFC">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-
+<meta name="apple-mobile-web-app-status-bar-style" content="light-content">
 <title>Haven — Your home remembers.</title>
 
 <style>
@@ -16,58 +15,44 @@
 }
 
 :root{
-  --navy:#183b56;
-  --navy-2:#234b68;
-  --blue:#2997d3;
-  --blue-dark:#197eb8;
-  --blue-soft:#e9f6fc;
+  --background:#F7FAFC;
+  --surface:#FFFFFF;
+  --navy:#183B56;
+  --muted:#71808C;
+  --blue:#2495D0;
+  --blue-light:#E8F5FC;
+  --mint:#DDF5EA;
+  --green:#21A875;
+  --orange-light:#FFF0DD;
+  --orange:#F28C28;
+  --purple-light:#F0EAFE;
+  --purple:#8064D8;
+  --red-light:#FFE5E5;
+  --red:#D95C5C;
+  --yellow-light:#FFF8DC;
+  --yellow:#D9A91E;
+  --border:#E6EEF2;
 
-  --mint:#dff5eb;
-  --green:#25a979;
-  --green-dark:#16875e;
-
-  --orange:#f2a14b;
-  --orange-soft:#fff0dc;
-
-  --purple:#8068c9;
-  --purple-soft:#f0ebfc;
-
-  --red:#b75d58;
-  --red-soft:#fdebea;
-
-  --yellow:#f6c84c;
-  --yellow-soft:#fff8dc;
-
-  --text:#183b56;
-  --muted:#728391;
-  --muted-2:#9aa8b2;
-
-  --bg:#f6f9fb;
-  --card:#ffffff;
-  --border:#e5edf1;
-
-  --shadow:0 10px 28px rgba(24,59,86,.07);
-  --shadow-soft:0 5px 18px rgba(24,59,86,.055);
-
-  --radius:22px;
+  --shadow:0 8px 25px rgba(24,59,86,.06);
+  --shadow-soft:0 4px 16px rgba(24,59,86,.05);
+  --radius:16px;
 }
 
-html{
-  scroll-behavior:smooth;
+html,body{
+  margin:0;
+  min-height:100%;
+  background:#edf2f5;
+  font-family:Inter,Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--navy);
 }
 
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;
-  font-size:15px;
-  line-height:1.45;
+  display:flex;
+  justify-content:center;
+  overflow-x:hidden;
 }
 
-button,
-input,
-select{
+button,input,select,textarea{
   font:inherit;
 }
 
@@ -77,16 +62,104 @@ button{
 }
 
 .app{
-  width:min(900px,100%);
-  margin:auto;
+  width:390px;
   min-height:100vh;
-  padding:0 18px 105px;
+  background:var(--background);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 45px rgba(24,59,86,.12);
 }
 
-/* ---------------- HEADER ---------------- */
+/* ---------- STATUS BAR ---------- */
 
-.topbar{
-  height:78px;
+.status-bar{
+  height:30px;
+  padding:7px 17px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  font-size:10px;
+  font-weight:700;
+  color:var(--navy);
+}
+
+.status-right{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.status-signal{
+  display:flex;
+  align-items:flex-end;
+  gap:1px;
+  height:10px;
+}
+
+.status-signal span{
+  width:2px;
+  background:var(--navy);
+  border-radius:2px;
+}
+
+.status-signal span:nth-child(1){height:4px}
+.status-signal span:nth-child(2){height:6px}
+.status-signal span:nth-child(3){height:8px}
+.status-signal span:nth-child(4){height:10px}
+
+.wifi{
+  width:12px;
+  height:9px;
+  border:1.5px solid var(--navy);
+  border-bottom:0;
+  border-radius:12px 12px 0 0;
+  position:relative;
+  transform:scale(.7);
+}
+
+.wifi:after{
+  content:"";
+  width:3px;
+  height:3px;
+  background:var(--navy);
+  border-radius:50%;
+  position:absolute;
+  bottom:-2px;
+  left:3px;
+}
+
+.battery{
+  width:18px;
+  height:9px;
+  border:1.3px solid var(--navy);
+  border-radius:3px;
+  padding:1px;
+  position:relative;
+}
+
+.battery:after{
+  content:"";
+  position:absolute;
+  right:-3px;
+  top:2px;
+  width:2px;
+  height:4px;
+  background:var(--navy);
+  border-radius:0 2px 2px 0;
+}
+
+.battery i{
+  display:block;
+  width:80%;
+  height:100%;
+  border-radius:1px;
+  background:var(--navy);
+}
+
+/* ---------- HEADER ---------- */
+
+.header{
+  padding:8px 18px 12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -95,151 +168,115 @@ button{
 .brand{
   display:flex;
   align-items:center;
-  gap:11px;
-  cursor:pointer;
+  gap:9px;
 }
 
-.brand-mark{
-  width:42px;
-  height:42px;
+.brand-logo{
+  width:30px;
+  height:30px;
   position:relative;
   flex:none;
 }
 
-.brand-house-outline{
+.house-logo{
   position:absolute;
-  left:5px;
-  top:11px;
-  width:29px;
-  height:25px;
-  border:2.3px solid var(--navy);
-  border-radius:4px 4px 7px 7px;
-  background:#fff;
+  left:4px;
+  bottom:2px;
+  width:21px;
+  height:17px;
+  border:2px solid var(--navy);
+  border-top:0;
+  border-radius:3px;
 }
 
-.brand-house-outline:before{
+.house-logo:before{
   content:"";
   position:absolute;
-  width:21px;
-  height:21px;
-  left:2px;
-  top:-11px;
-  border-left:2.3px solid var(--navy);
-  border-top:2.3px solid var(--navy);
+  width:15px;
+  height:15px;
+  left:1px;
+  top:-8px;
+  border-left:2px solid var(--navy);
+  border-top:2px solid var(--navy);
   transform:rotate(45deg);
-  background:#fff;
-  border-radius:4px 0 0 0;
+  background:var(--background);
+  border-radius:2px;
 }
 
-.brand-roof{
-  position:absolute;
-  left:5px;
-  top:4px;
-  width:9px;
-  height:4px;
-  background:var(--yellow);
-  border-radius:4px;
-  transform:rotate(-18deg);
-}
-
-.brand-drop{
-  position:absolute;
-  right:0;
-  bottom:1px;
-  width:13px;
-  height:17px;
-  background:var(--blue);
-  border-radius:60% 60% 65% 65%;
-  transform:rotate(2deg);
-}
-
-.brand-drop:after{
+.house-logo:after{
   content:"";
   position:absolute;
   width:4px;
-  height:4px;
-  background:rgba(255,255,255,.65);
-  border-radius:50%;
-  top:4px;
-  left:4px;
+  height:7px;
+  bottom:0;
+  left:7px;
+  border-radius:2px 2px 0 0;
+  background:var(--blue);
+}
+
+.drop{
+  position:absolute;
+  right:0;
+  top:1px;
+  width:8px;
+  height:11px;
+  background:var(--blue);
+  border-radius:8px 8px 8px 1px;
+  transform:rotate(45deg);
+}
+
+.roof-accent{
+  position:absolute;
+  width:6px;
+  height:3px;
+  background:#F6C84C;
+  right:5px;
+  top:3px;
+  border-radius:3px;
+}
+
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1;
 }
 
 .brand-name{
-  font-size:19px;
+  font-size:18px;
   font-weight:800;
-  letter-spacing:-.45px;
+  letter-spacing:-.5px;
 }
 
-.brand-tagline{
-  font-size:10px;
+.brand-tag{
+  margin-top:4px;
+  font-size:8px;
   color:var(--muted);
-  margin-top:-2px;
+  letter-spacing:.15px;
 }
 
 .profile-btn{
-  width:42px;
-  height:42px;
+  width:38px;
+  height:38px;
   border-radius:50%;
-  background:#e8f0f4;
-  color:var(--navy);
-  display:grid;
-  place-items:center;
-  font-weight:800;
-  border:3px solid #fff;
-  box-shadow:0 4px 14px rgba(24,59,86,.09);
-}
-
-/* ---------------- PROFILE POPUP ---------------- */
-
-.profile-popup{
-  position:fixed;
-  right:18px;
-  top:70px;
-  width:235px;
-  background:white;
+  background:#fff;
   border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:0 18px 45px rgba(24,59,86,.16);
-  padding:15px;
-  z-index:100;
-  display:none;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:var(--navy);
+  box-shadow:var(--shadow-soft);
 }
 
-.profile-popup.show{
-  display:block;
+.profile-btn svg{
+  width:19px;
+  height:19px;
 }
 
-.profile-popup-name{
-  font-weight:800;
-  font-size:16px;
-}
+/* ---------- MAIN ---------- */
 
-.profile-popup-sub{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:2px;
+.main{
+  padding:0 14px 108px;
 }
-
-.popup-divider{
-  height:1px;
-  background:var(--border);
-  margin:13px 0;
-}
-
-.popup-item{
-  width:100%;
-  text-align:left;
-  background:white;
-  padding:10px 7px;
-  border-radius:10px;
-  color:var(--text);
-}
-
-.popup-item:hover{
-  background:var(--bg);
-}
-
-/* ---------------- PAGES ---------------- */
 
 .page{
   display:none;
@@ -249,431 +286,312 @@ button{
   display:block;
 }
 
-/* ---------------- HERO ---------------- */
+/* ---------- HOME HERO ---------- */
 
 .hero{
-  min-height:270px;
   position:relative;
+  min-height:205px;
+  padding:13px 13px 0;
   overflow:hidden;
-  border-radius:28px;
+  border-radius:20px;
+  margin-bottom:12px;
   background:
-    radial-gradient(circle at 85% 18%,rgba(255,255,255,.95) 0 5%,transparent 6%),
-    linear-gradient(135deg,#edf8fc 0%,#f6fbfc 52%,#eef8f3 100%);
-  padding:31px 28px;
-  box-shadow:var(--shadow);
-  border:1px solid rgba(255,255,255,.9);
+    linear-gradient(110deg,
+      rgba(255,255,255,.98) 0%,
+      rgba(255,255,255,.88) 35%,
+      rgba(255,255,255,.28) 68%,
+      rgba(220,237,246,.08) 100%);
 }
 
 .hero-copy{
   position:relative;
-  z-index:5;
-  width:54%;
+  z-index:4;
+  width:58%;
+  padding-top:5px;
 }
 
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  color:var(--green-dark);
-  background:rgba(255,255,255,.7);
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.45px;
-  margin-bottom:14px;
-}
-
-.eyebrow-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--green);
-}
-
-.hero h1{
-  margin:0;
-  font-size:30px;
-  line-height:1.08;
-  letter-spacing:-1.2px;
-}
-
-.hero h1 span{
-  display:block;
-  color:var(--blue);
-  margin-top:3px;
-}
-
-.hero-description{
-  margin:13px 0 0;
-  color:var(--muted);
-  max-width:330px;
+.hello{
   font-size:13px;
+  color:var(--muted);
+  margin-bottom:2px;
 }
 
-.hero-scene{
+.hero-name{
+  font-size:27px;
+  line-height:1.1;
+  font-weight:800;
+  letter-spacing:-1px;
+  margin-bottom:8px;
+}
+
+.hero-copy p{
+  margin:0;
+  font-size:10.5px;
+  line-height:1.5;
+  color:var(--muted);
+  max-width:185px;
+}
+
+.house-scene{
   position:absolute;
-  right:-4px;
+  z-index:1;
+  right:-14px;
   bottom:0;
-  width:52%;
+  width:68%;
   height:100%;
-  pointer-events:none;
+  overflow:hidden;
+  border-radius:0 20px 20px 0;
+  background:
+    linear-gradient(180deg,#9fd3ed 0%,#d9ecf4 54%,#b8d9b1 55%,#8fbd86 100%);
 }
 
-/* house scene */
-
-.sun{
+.house-photo{
   position:absolute;
-  right:55px;
-  top:35px;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:#f9ca57;
-  box-shadow:0 0 0 9px rgba(249,202,87,.12);
-}
-
-.mountain{
-  position:absolute;
-  bottom:55px;
-  right:-30px;
-  width:310px;
-  height:120px;
-  background:#d6e8df;
-  clip-path:polygon(0 100%,35% 26%,52% 56%,68% 10%,100% 100%);
-  opacity:.9;
-}
-
-.mountain.back{
-  right:60px;
-  bottom:58px;
-  width:250px;
-  height:100px;
-  background:#e2f0eb;
-  opacity:.8;
-}
-
-.ground{
-  position:absolute;
-  bottom:0;
-  right:-10%;
-  width:125%;
-  height:82px;
-  background:#d8eee1;
-  border-radius:50% 50% 0 0;
-}
-
-.house{
-  position:absolute;
-  bottom:39px;
-  right:68px;
-  width:165px;
-  height:105px;
-  background:#fffdf8;
-  border-radius:4px 4px 2px 2px;
-  box-shadow:0 8px 16px rgba(24,59,86,.08);
-}
-
-.roof{
-  position:absolute;
-  left:-18px;
-  top:-55px;
-  width:202px;
-  height:88px;
-  background:#315c73;
-  clip-path:polygon(50% 0,100% 70%,95% 77%,5% 77%,0 70%);
-}
-
-.roof-light{
-  position:absolute;
-  left:48px;
-  top:7px;
-  width:70px;
-  height:11px;
-  background:#466e82;
-  border-radius:50%;
-  transform:rotate(-17deg);
-  opacity:.8;
-}
-
-.chimney{
-  position:absolute;
-  right:22px;
-  top:-36px;
-  width:19px;
-  height:42px;
-  background:#d6a980;
-  z-index:-1;
-}
-
-.window{
-  position:absolute;
-  top:26px;
-  width:32px;
-  height:33px;
-  border:5px solid #bfe3ef;
-  background:#eaf8fb;
-  box-shadow:inset 0 0 0 1px #fff;
-}
-
-.window:after{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:0;
-  width:2px;
-  height:100%;
-  background:#fff;
-}
-
-.window:before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:50%;
+  inset:0;
   width:100%;
-  height:2px;
-  background:#fff;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  opacity:.96;
+  mix-blend-mode:normal;
 }
 
-.window.one{
-  left:22px;
-}
-
-.window.two{
-  right:22px;
-}
-
-.door{
+.house-overlay{
   position:absolute;
-  left:67px;
-  bottom:0;
-  width:39px;
-  height:64px;
-  background:#c88d5f;
-  border-radius:5px 5px 0 0;
+  inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.98) 0%,
+      rgba(255,255,255,.75) 14%,
+      rgba(255,255,255,.12) 53%,
+      rgba(255,255,255,0) 100%),
+    linear-gradient(0deg,
+      rgba(24,59,86,.08),
+      transparent 45%);
+  z-index:2;
 }
 
-.door:after{
-  content:"";
+.photo-fallback{
   position:absolute;
-  right:7px;
-  top:33px;
-  width:4px;
-  height:4px;
-  background:#f7d56c;
-  border-radius:50%;
+  inset:0;
+  display:none;
+  background:
+    radial-gradient(circle at 76% 19%,#fff7c8 0 5%,transparent 5.5%),
+    linear-gradient(180deg,#a7d9ee 0 55%,#b8d8ad 56% 100%);
 }
 
-.tree{
+.photo-fallback .fb-house{
   position:absolute;
-  bottom:37px;
+  right:20px;
+  bottom:32px;
+  width:145px;
+  height:82px;
+  background:#eee4d3;
+  border-radius:2px;
+  box-shadow:0 9px 18px rgba(24,59,86,.16);
+}
+
+.photo-fallback .fb-roof{
+  position:absolute;
   right:8px;
-  width:48px;
-  height:92px;
+  bottom:106px;
+  width:170px;
+  height:55px;
+  background:#39454c;
+  clip-path:polygon(5% 100%,50% 0,95% 100%);
 }
 
-.tree:before,
-.tree:after{
-  content:"";
+.photo-fallback .fb-window{
   position:absolute;
-  background:#65a77e;
-  border-radius:50%;
+  width:29px;
+  height:25px;
+  background:#8fc9df;
+  border:3px solid #f8f5ee;
+  top:20px;
 }
 
-.tree:before{
-  width:48px;
-  height:48px;
-  top:0;
-  box-shadow:-17px 19px 0 -4px #79b78e,17px 18px 0 -3px #57986f;
-}
-
-.tree:after{
-  width:9px;
-  height:51px;
-  left:20px;
-  top:41px;
-  border-radius:3px;
-  background:#a97850;
-}
-
-.flower{
+.photo-fallback .w1{left:18px}
+.photo-fallback .w2{left:58px}
+.photo-fallback .fb-door{
   position:absolute;
-  bottom:34px;
-  right:235px;
-  width:9px;
-  height:9px;
-  background:#e99c9a;
-  border-radius:50%;
-  box-shadow:
-    15px 7px 0 #f3b46e,
-    30px -4px 0 #dca7dc,
-    -10px 14px 0 #e6a6a2;
+  width:21px;
+  height:42px;
+  right:20px;
+  bottom:0;
+  background:#7c5e48;
 }
 
-.hero-wave{
-  position:absolute;
-  left:-5%;
-  bottom:-25px;
-  width:110%;
-  height:70px;
-  border-radius:50%;
-  background:rgba(255,255,255,.35);
-}
-
-/* ---------------- HEALTH ---------------- */
+/* ---------- HEALTH ---------- */
 
 .health-card{
-  margin-top:18px;
+  min-height:72px;
   background:var(--mint);
-  border-radius:22px;
-  padding:19px;
+  border-radius:16px;
+  padding:12px 13px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  border:1px solid rgba(37,169,121,.08);
-}
-
-.health-left{
-  display:flex;
-  align-items:center;
-  gap:13px;
+  gap:10px;
+  box-shadow:var(--shadow-soft);
+  margin-bottom:17px;
 }
 
 .health-icon{
-  width:44px;
-  height:44px;
-  background:white;
-  border-radius:15px;
-  display:grid;
-  place-items:center;
-  color:var(--green);
-  font-size:20px;
-  box-shadow:0 4px 12px rgba(37,169,121,.08);
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  background:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  flex:none;
+}
+
+.health-icon svg{
+  width:21px;
+  height:21px;
+}
+
+.health-text{
+  min-width:0;
+  flex:1;
 }
 
 .health-title{
-  font-size:14px;
+  font-size:12px;
   font-weight:800;
 }
 
 .health-sub{
-  color:#5d8173;
-  font-size:11px;
-  margin-top:2px;
+  margin-top:3px;
+  color:#5e7a6e;
+  font-size:9px;
 }
 
-.health-score{
+.health-right{
   text-align:right;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:4px;
 }
 
-.health-score strong{
-  font-size:23px;
-  letter-spacing:-1px;
+.health-check{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:rgba(33,168,117,.13);
+  color:var(--green);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:900;
 }
 
-.health-score small{
-  display:block;
-  color:#5d8173;
-  font-size:10px;
+.health-count{
+  color:#5d786c;
+  font-size:8px;
 }
 
-/* ---------------- SECTION ---------------- */
-
-.section{
-  margin-top:29px;
-}
+/* ---------- SECTION HEADER ---------- */
 
 .section-head{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:13px;
+  margin:0 2px 9px;
 }
 
 .section-title{
-  font-size:18px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:13px;
   font-weight:800;
-  letter-spacing:-.4px;
 }
 
-.section-link{
+.section-title svg{
+  width:16px;
+  height:16px;
   color:var(--blue);
-  background:transparent;
-  font-size:12px;
-  font-weight:800;
-  padding:7px 3px;
 }
 
-/* ---------------- FILTERS ---------------- */
+.view-all{
+  background:none;
+  color:var(--blue);
+  font-size:9px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  padding:5px;
+}
+
+/* ---------- FILTERS ---------- */
 
 .filters{
   display:flex;
-  gap:7px;
+  gap:6px;
   overflow-x:auto;
-  padding-bottom:3px;
   scrollbar-width:none;
-  margin-bottom:13px;
+  margin-bottom:9px;
+  padding-bottom:1px;
 }
 
 .filters::-webkit-scrollbar{
   display:none;
 }
 
-.filter{
+.filter-btn{
   flex:none;
-  padding:8px 13px;
+  padding:7px 10px;
   border-radius:999px;
+  border:1px solid var(--border);
   background:#fff;
   color:var(--muted);
-  border:1px solid var(--border);
-  font-size:11px;
+  font-size:9px;
   font-weight:700;
 }
 
-.filter.active{
-  background:var(--navy);
+.filter-btn.active{
+  background:var(--blue);
   color:#fff;
-  border-color:var(--navy);
+  border-color:var(--blue);
 }
 
-/* ---------------- TASK CARD ---------------- */
+/* ---------- TASK CARDS ---------- */
 
-.tasks{
-  display:grid;
-  gap:10px;
+.task-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
 
 .task-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  min-height:88px;
-  padding:13px 12px;
+  background:#fff;
+  border:1px solid rgba(230,238,242,.85);
+  border-radius:16px;
+  padding:11px;
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
+  min-height:76px;
   box-shadow:var(--shadow-soft);
-  transition:.2s ease;
-}
-
-.task-card:active{
-  transform:scale(.99);
 }
 
 .task-icon{
-  width:48px;
-  height:48px;
-  border-radius:16px;
-  display:grid;
-  place-items:center;
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   flex:none;
 }
 
 .task-icon svg{
-  width:25px;
-  height:25px;
+  width:21px;
+  height:21px;
 }
 
 .task-info{
@@ -682,483 +600,535 @@ button{
 }
 
 .task-name{
+  font-size:11.5px;
   font-weight:800;
-  font-size:14px;
+  color:var(--navy);
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
 .task-category{
+  font-size:8.5px;
   color:var(--muted);
-  font-size:10px;
-  margin-top:1px;
+  margin-top:3px;
 }
 
 .task-date{
   display:flex;
   align-items:center;
-  gap:5px;
+  gap:4px;
+  margin-top:5px;
+  font-size:8.5px;
   color:var(--muted);
-  font-size:10px;
-  margin-top:6px;
 }
 
 .task-date svg{
-  width:12px;
-  height:12px;
+  width:11px;
+  height:11px;
 }
 
-.task-right{
+.task-side{
   display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:8px;
+  align-items:center;
+  gap:6px;
+  flex:none;
 }
 
-.status{
-  padding:5px 8px;
+.status-pill{
+  padding:5px 7px;
   border-radius:999px;
-  font-size:9px;
+  font-size:7.5px;
   font-weight:800;
   white-space:nowrap;
 }
 
-.status.today{
-  color:#9a661d;
-  background:var(--orange-soft);
+.status-due{
+  background:var(--red-light);
+  color:var(--red);
 }
 
-.status.upcoming{
-  color:var(--blue-dark);
-  background:var(--blue-soft);
+.status-upcoming{
+  background:var(--blue-light);
+  color:var(--blue);
 }
 
-.status.overdue{
-  color:#a94f4a;
-  background:var(--red-soft);
-}
-
-.status.done{
-  color:var(--green-dark);
+.status-completed{
   background:var(--mint);
+  color:var(--green);
+}
+
+.status-overdue{
+  background:var(--red-light);
+  color:#a43e3e;
 }
 
 .chevron{
-  color:#a4b1b9;
-  font-size:18px;
-  line-height:1;
+  color:#a8b5bd;
+  width:13px;
+  height:13px;
 }
 
-/* categories */
+/* category colors */
 
 .cat-water{
-  background:#e4f5fc;
-  color:#2997d3;
+  background:var(--blue-light);
+  color:var(--blue);
 }
 
 .cat-heating{
-  background:#fff0dd;
-  color:#e68b32;
+  background:var(--orange-light);
+  color:var(--orange);
 }
 
 .cat-plumbing{
-  background:#e8f1fc;
-  color:#4d82bd;
+  background:#E6F6EA;
+  color:#29A36A;
 }
 
 .cat-cooling{
-  background:#e8f6f7;
-  color:#32a5a4;
+  background:var(--purple-light);
+  color:var(--purple);
 }
 
 .cat-electrical{
-  background:#fff7d9;
-  color:#bd941e;
+  background:var(--yellow-light);
+  color:var(--yellow);
 }
 
 .cat-cleaning{
-  background:#f0ebfc;
-  color:#8068c9;
-}
-
-.cat-garden{
-  background:#e2f5e9;
-  color:#3b9c67;
-}
-
-.cat-roof{
-  background:#f0edf0;
-  color:#756c74;
+  background:#E4F7F5;
+  color:#20A59C;
 }
 
 .cat-repair{
-  background:#fdebea;
-  color:#b75d58;
+  background:var(--orange-light);
+  color:var(--orange);
+}
+
+.cat-garden{
+  background:#E6F6E9;
+  color:#36A85C;
+}
+
+.cat-roof{
+  background:#E8F0F5;
+  color:#55788D;
 }
 
 .cat-default{
-  background:#edf3f6;
-  color:#5d7889;
+  background:var(--blue-light);
+  color:var(--blue);
 }
 
-/* ---------------- EMPTY ---------------- */
+/* ---------- QUICK ACTIONS ---------- */
+
+.quick-title{
+  font-size:13px;
+  font-weight:800;
+  margin:19px 2px 9px;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.quick-action{
+  min-width:0;
+  min-height:72px;
+  border-radius:15px;
+  background:#fff;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  color:var(--navy);
+}
+
+.quick-icon{
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.quick-icon svg{
+  width:17px;
+  height:17px;
+}
+
+.quick-label{
+  font-size:8px;
+  font-weight:800;
+}
+
+/* ---------- OTHER PAGES ---------- */
+
+.page-title{
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-.6px;
+  margin:10px 3px 4px;
+}
+
+.page-subtitle{
+  color:var(--muted);
+  font-size:10px;
+  margin:0 3px 17px;
+  line-height:1.5;
+}
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:var(--shadow-soft);
+  margin-bottom:10px;
+}
+
+.panel-title{
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.form-group{
+  margin-bottom:12px;
+}
+
+.form-group label{
+  display:block;
+  font-size:9px;
+  font-weight:800;
+  color:var(--navy);
+  margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid var(--border);
+  background:#f9fbfc;
+  color:var(--navy);
+  border-radius:12px;
+  padding:11px 12px;
+  outline:none;
+  font-size:11px;
+}
+
+.form-group textarea{
+  min-height:75px;
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#9ed6ee;
+  background:#fff;
+}
+
+.primary-btn{
+  width:100%;
+  min-height:44px;
+  border-radius:13px;
+  background:var(--blue);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  box-shadow:0 7px 16px rgba(36,149,208,.18);
+}
+
+.secondary-btn{
+  width:100%;
+  min-height:42px;
+  border-radius:13px;
+  background:var(--blue-light);
+  color:var(--blue);
+  font-size:10px;
+  font-weight:800;
+}
+
+.danger-btn{
+  width:100%;
+  min-height:42px;
+  border-radius:13px;
+  background:var(--red-light);
+  color:var(--red);
+  font-size:10px;
+  font-weight:800;
+}
+
+.memory-item{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:13px;
+  margin-bottom:8px;
+  box-shadow:var(--shadow-soft);
+}
+
+.memory-item-title{
+  font-size:11px;
+  font-weight:800;
+}
+
+.memory-item-text{
+  font-size:9px;
+  line-height:1.5;
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.settings-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.settings-row:last-child{
+  border-bottom:0;
+}
+
+.settings-label{
+  font-size:10px;
+  font-weight:700;
+}
+
+.settings-description{
+  font-size:8px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.switch{
+  width:38px;
+  height:22px;
+  border-radius:20px;
+  background:#dce5ea;
+  position:relative;
+  flex:none;
+}
+
+.switch.on{
+  background:var(--green);
+}
+
+.switch:after{
+  content:"";
+  position:absolute;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:#fff;
+  top:2.5px;
+  left:3px;
+  box-shadow:0 2px 5px rgba(0,0,0,.12);
+  transition:.2s;
+}
+
+.switch.on:after{
+  left:18px;
+}
+
+/* ---------- EMPTY ---------- */
 
 .empty{
-  background:white;
-  border:1px dashed #d7e2e7;
-  border-radius:20px;
-  padding:28px 20px;
+  background:#fff;
+  border:1px dashed var(--border);
+  border-radius:17px;
+  padding:25px 15px;
   text-align:center;
   color:var(--muted);
 }
 
 .empty-icon{
-  font-size:30px;
-  margin-bottom:7px;
+  width:44px;
+  height:44px;
+  margin:0 auto 9px;
+  border-radius:14px;
+  background:var(--blue-light);
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.empty strong{
-  display:block;
-  color:var(--text);
-  font-size:14px;
-  margin-bottom:3px;
+.empty-icon svg{
+  width:21px;
+  height:21px;
 }
 
-.empty span{
+.empty-title{
+  color:var(--navy);
   font-size:11px;
+  font-weight:800;
 }
 
-/* ---------------- QUICK ACTIONS ---------------- */
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
+.empty-text{
+  font-size:9px;
+  margin-top:4px;
 }
 
-.quick{
+/* ---------- MODAL ---------- */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(24,59,86,.28);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  z-index:100;
+  backdrop-filter:blur(3px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(390px,100%);
+  max-height:88vh;
+  overflow:auto;
   background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:14px 7px;
-  text-align:center;
-  color:var(--text);
-  box-shadow:var(--shadow-soft);
+  border-radius:24px 24px 0 0;
+  padding:18px;
+  box-shadow:0 -12px 35px rgba(24,59,86,.15);
 }
 
-.quick-icon{
-  width:36px;
-  height:36px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  margin:0 auto 7px;
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:13px;
+}
+
+.modal-title{
+  font-size:15px;
+  font-weight:800;
+}
+
+.close-btn{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:#f3f7f9;
+  color:var(--muted);
   font-size:17px;
 }
 
-.quick:nth-child(1) .quick-icon{
-  background:var(--blue-soft);
-  color:var(--blue);
-}
+/* ---------- PROFILE ---------- */
 
-.quick:nth-child(2) .quick-icon{
-  background:var(--mint);
-  color:var(--green);
-}
-
-.quick:nth-child(3) .quick-icon{
-  background:var(--orange-soft);
-  color:var(--orange);
-}
-
-.quick:nth-child(4) .quick-icon{
-  background:var(--purple-soft);
-  color:var(--purple);
-}
-
-.quick-label{
-  font-size:10px;
-  font-weight:800;
-}
-
-/* ---------------- ADD PAGE ---------------- */
-
-.page-title{
-  font-size:27px;
-  font-weight:850;
-  letter-spacing:-1px;
-  margin:17px 0 5px;
-}
-
-.page-subtitle{
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:23px;
-}
-
-.form-card{
-  background:white;
+.profile-popup{
+  position:absolute;
+  right:15px;
+  top:73px;
+  width:180px;
+  background:#fff;
   border:1px solid var(--border);
-  border-radius:23px;
-  padding:18px;
-  box-shadow:var(--shadow-soft);
-}
-
-.form-group{
-  margin-bottom:17px;
-}
-
-.form-label{
-  display:block;
-  font-size:11px;
-  font-weight:800;
-  margin-bottom:7px;
-}
-
-.form-input,
-.form-select{
-  width:100%;
-  border:1px solid var(--border);
-  background:#f9fbfc;
-  color:var(--text);
-  border-radius:13px;
-  padding:12px 13px;
-  outline:none;
-}
-
-.form-input:focus,
-.form-select:focus{
-  border-color:#a9d9ed;
-  background:white;
-  box-shadow:0 0 0 3px rgba(41,151,211,.08);
-}
-
-.repeat-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-}
-
-.custom-repeat{
+  border-radius:15px;
+  padding:8px;
+  box-shadow:0 12px 30px rgba(24,59,86,.14);
+  z-index:30;
   display:none;
-  margin-top:9px;
-  padding:12px;
-  background:#f7fafc;
-  border-radius:14px;
 }
 
-.custom-repeat.show{
+.profile-popup.show{
   display:block;
 }
 
-.repeat-custom-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.primary-btn{
+.profile-popup button{
   width:100%;
-  background:var(--navy);
-  color:white;
-  border-radius:15px;
-  padding:13px;
-  font-weight:800;
-  box-shadow:0 7px 18px rgba(24,59,86,.15);
-}
-
-.primary-btn:active{
-  transform:translateY(1px);
-}
-
-.secondary-btn{
-  width:100%;
-  margin-top:9px;
-  background:#edf4f7;
+  text-align:left;
+  padding:10px;
+  border-radius:10px;
+  background:#fff;
   color:var(--navy);
-  border-radius:15px;
-  padding:13px;
-  font-weight:800;
-}
-
-/* ---------------- MEMORY ---------------- */
-
-.memory-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:23px;
-  padding:19px;
-  box-shadow:var(--shadow-soft);
-}
-
-.memory-item{
-  padding:14px 0;
-  border-bottom:1px solid var(--border);
-}
-
-.memory-item:last-child{
-  border-bottom:0;
-  padding-bottom:0;
-}
-
-.memory-label{
-  color:var(--muted);
   font-size:10px;
   font-weight:700;
 }
 
-.memory-value{
-  font-size:14px;
-  font-weight:800;
-  margin-top:3px;
+.profile-popup button:hover{
+  background:var(--background);
 }
 
-.edit-memory{
-  margin-top:15px;
-  background:var(--blue-soft);
-  color:var(--blue-dark);
-  padding:10px 14px;
-  border-radius:12px;
-  font-size:11px;
-  font-weight:800;
-}
+/* ---------- BOTTOM NAV ---------- */
 
-/* ---------------- SETTINGS ---------------- */
-
-.settings-list{
-  display:grid;
-  gap:10px;
-}
-
-.setting{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.setting-title{
-  font-weight:800;
-  font-size:13px;
-}
-
-.setting-sub{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
-}
-
-.toggle{
-  width:45px;
-  height:25px;
-  border-radius:999px;
-  background:#dce6eb;
-  position:relative;
-  flex:none;
-  cursor:pointer;
-}
-
-.toggle:after{
-  content:"";
-  position:absolute;
-  top:3px;
-  left:3px;
-  width:19px;
-  height:19px;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:0 2px 5px rgba(0,0,0,.12);
-  transition:.2s;
-}
-
-.toggle.on{
-  background:var(--green);
-}
-
-.toggle.on:after{
-  left:23px;
-}
-
-/* ---------------- MODAL ---------------- */
-
-.modal-backdrop{
+.bottom-nav{
   position:fixed;
-  inset:0;
-  background:rgba(13,35,49,.38);
-  backdrop-filter:blur(5px);
-  z-index:200;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-}
-
-.modal-backdrop.show{
-  display:flex;
-}
-
-.modal{
-  width:min(600px,100%);
-  background:white;
-  border-radius:26px 26px 0 0;
-  padding:20px;
-  box-shadow:0 -12px 45px rgba(0,0,0,.15);
-  max-height:88vh;
-  overflow:auto;
-}
-
-.modal-handle{
-  width:38px;
-  height:4px;
-  border-radius:99px;
-  background:#dce5e9;
-  margin:0 auto 18px;
-}
-
-.modal-title{
-  font-size:19px;
-  font-weight:850;
-  margin-bottom:16px;
-}
-
-.modal-actions{
+  z-index:20;
+  bottom:0;
+  width:390px;
+  height:72px;
+  background:rgba(255,255,255,.96);
+  border-top:1px solid var(--border);
+  box-shadow:0 -7px 22px rgba(24,59,86,.07);
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:15px;
+  grid-template-columns:repeat(4,1fr);
+  padding:6px 8px max(6px,env(safe-area-inset-bottom));
+  backdrop-filter:blur(12px);
 }
 
-.danger-btn{
-  background:var(--red-soft);
-  color:var(--red);
-  border-radius:14px;
-  padding:12px;
-  font-weight:800;
+.nav-btn{
+  background:none;
+  color:#8a98a1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:3px;
+  border-radius:12px;
 }
 
-/* ---------------- TOAST ---------------- */
+.nav-btn svg{
+  width:18px;
+  height:18px;
+}
+
+.nav-btn span{
+  font-size:7.5px;
+  font-weight:700;
+}
+
+.nav-btn.active{
+  color:var(--blue);
+}
+
+.nav-btn.active svg{
+  stroke-width:2.5;
+}
+
+/* ---------- TOAST ---------- */
 
 .toast{
   position:fixed;
   left:50%;
-  bottom:82px;
+  bottom:87px;
   transform:translate(-50%,20px);
   background:var(--navy);
   color:#fff;
-  padding:11px 16px;
-  border-radius:999px;
-  font-size:11px;
+  padding:10px 14px;
+  border-radius:12px;
+  font-size:9px;
   font-weight:700;
-  box-shadow:0 10px 30px rgba(24,59,86,.22);
   opacity:0;
   pointer-events:none;
   transition:.25s;
-  z-index:500;
+  z-index:200;
   white-space:nowrap;
+  max-width:90%;
 }
 
 .toast.show{
@@ -1166,172 +1136,67 @@ button{
   transform:translate(-50%,0);
 }
 
-/* ---------------- BOTTOM NAV ---------------- */
+/* ---------- RESPONSIVE ---------- */
 
-.bottom-nav{
-  position:fixed;
-  left:50%;
-  bottom:12px;
-  transform:translateX(-50%);
-  width:min(520px,calc(100% - 24px));
-  height:67px;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(16px);
-  border:1px solid rgba(220,231,236,.9);
-  border-radius:23px;
-  box-shadow:0 13px 38px rgba(24,59,86,.14);
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  z-index:150;
-}
-
-.nav-btn{
-  background:transparent;
-  color:#8b9aa4;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  position:relative;
-}
-
-.nav-icon{
-  width:25px;
-  height:25px;
-  display:grid;
-  place-items:center;
-  font-size:18px;
-}
-
-.nav-label{
-  font-size:9px;
-  font-weight:800;
-}
-
-.nav-btn.active{
-  color:var(--blue);
-}
-
-.nav-btn.active:before{
-  content:"";
-  position:absolute;
-  top:-1px;
-  width:24px;
-  height:3px;
-  border-radius:0 0 5px 5px;
-  background:var(--blue);
-}
-
-/* ---------------- RESPONSIVE ---------------- */
-
-@media(max-width:650px){
+@media(max-width:430px){
+  body{
+    background:var(--background);
+  }
 
   .app{
-    padding-left:15px;
-    padding-right:15px;
+    width:100%;
+    box-shadow:none;
   }
 
-  .hero{
-    min-height:315px;
-    padding:25px 21px;
-  }
-
-  .hero-copy{
-    width:72%;
-  }
-
-  .hero h1{
-    font-size:27px;
-  }
-
-  .hero-description{
-    max-width:245px;
-  }
-
-  .hero-scene{
-    width:88%;
-    height:58%;
-    bottom:-2px;
-    right:-35px;
-  }
-
-  .house{
-    right:80px;
-    transform:scale(.9);
-    transform-origin:bottom right;
-  }
-
-  .tree{
-    right:13px;
-    transform:scale(.85);
-    transform-origin:bottom;
-  }
-
-  .mountain{
-    right:-30px;
-    width:290px;
-  }
-
-  .sun{
-    right:70px;
-    top:14px;
-  }
-
-  .flower{
-    right:220px;
+  .bottom-nav{
+    width:100%;
   }
 }
 
-@media(max-width:390px){
+@media(min-width:431px){
+  .app{
+    margin:18px 0;
+    min-height:calc(100vh - 36px);
+    border-radius:30px;
+  }
+
+  .bottom-nav{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:0;
+    border-radius:0 0 30px 30px;
+  }
+}
+
+@media(max-width:330px){
+  .main{
+    padding-left:11px;
+    padding-right:11px;
+  }
 
   .hero{
-    min-height:300px;
+    min-height:195px;
   }
 
   .hero-copy{
-    width:78%;
+    width:61%;
   }
 
-  .hero h1{
-    font-size:25px;
-  }
-
-  .hero-scene{
-    height:55%;
-  }
-
-  .house{
-    transform:scale(.78);
-  }
-
-  .quick-grid{
-    gap:6px;
-  }
-
-  .quick{
-    padding-left:3px;
-    padding-right:3px;
+  .hero-name{
+    font-size:24px;
   }
 
   .task-card{
-    padding:11px 9px;
-  }
-}
-
-/* desktop */
-@media(min-width:800px){
-  .app{
-    padding-left:30px;
-    padding-right:30px;
+    padding:9px;
   }
 
-  .hero{
-    min-height:300px;
+  .status-pill{
+    display:none;
   }
 
-  .tasks{
-    grid-template-columns:1fr 1fr;
+  .quick-grid{
+    gap:5px;
   }
 }
 </style>
@@ -1341,545 +1206,391 @@ button{
 
 <div class="app">
 
+  <!-- STATUS -->
+  <div class="status-bar">
+    <span id="statusTime">9:41</span>
+    <div class="status-right">
+      <div class="status-signal">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="wifi"></div>
+      <div class="battery"><i></i></div>
+    </div>
+  </div>
+
   <!-- HEADER -->
-  <header class="topbar">
-    <div class="brand" onclick="showPage('home')">
-
-      <div class="brand-mark">
-        <div class="brand-roof"></div>
-        <div class="brand-house-outline"></div>
-        <div class="brand-drop"></div>
+  <header class="header">
+    <div class="brand">
+      <div class="brand-logo">
+        <div class="house-logo"></div>
+        <div class="drop"></div>
+        <div class="roof-accent"></div>
       </div>
-
-      <div>
+      <div class="brand-text">
         <div class="brand-name">Haven</div>
-        <div class="brand-tagline">Your home remembers.</div>
+        <div class="brand-tag">Your home remembers.</div>
       </div>
-
     </div>
 
-    <button class="profile-btn" onclick="toggleProfile()" aria-label="Profile">
-      J
+    <button class="profile-btn" id="profileButton" aria-label="Profile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="8" r="3.2"></circle>
+        <path d="M5.5 20c.8-4 3-6 6.5-6s5.7 2 6.5 6"></path>
+      </svg>
     </button>
   </header>
 
-  <!-- PROFILE POPUP -->
   <div class="profile-popup" id="profilePopup">
-
-    <div class="profile-popup-name">Javaid</div>
-    <div class="profile-popup-sub">Your Haven home</div>
-
-    <div class="popup-divider"></div>
-
-    <button class="popup-item" onclick="showPage('memory');closeProfile()">
-      🏠 My Home
-    </button>
-
-    <button class="popup-item" onclick="showPage('settings');closeProfile()">
-      ⚙️ Settings
-    </button>
-
+    <button onclick="showPage('home');closeProfile()">Home</button>
+    <button onclick="showPage('memory');closeProfile()">Memory</button>
+    <button onclick="showPage('settings');closeProfile()">Settings</button>
   </div>
 
-  <!-- ================= HOME ================= -->
+  <main class="main">
 
-  <main id="homePage" class="page active">
+    <!-- ================= HOME ================= -->
+    <section class="page active" id="page-home">
 
-    <section class="hero">
-
-      <div class="hero-copy">
-
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          HOME CARE
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="hello">Good morning,</div>
+          <div class="hero-name">Javaid</div>
+          <p>Your home is in good shape.</p>
+          <p>Here are your upcoming maintenance tasks.</p>
         </div>
 
-        <h1>
-          Good morning,
-          <span>Javaid</span>
-        </h1>
+        <div class="house-scene">
+          <img
+            class="house-photo"
+            id="housePhoto"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85"
+            alt="Modern home"
+            onerror="this.style.display='none';document.getElementById('photoFallback').style.display='block';"
+          >
 
-        <p class="hero-description">
-          Your home is in good shape.<br>
-          Here are your upcoming maintenance tasks.
-        </p>
-
-      </div>
-
-      <div class="hero-scene">
-
-        <div class="sun"></div>
-
-        <div class="mountain back"></div>
-        <div class="mountain"></div>
-
-        <div class="house">
-
-          <div class="chimney"></div>
-          <div class="roof">
-            <div class="roof-light"></div>
+          <div class="photo-fallback" id="photoFallback">
+            <div class="fb-roof"></div>
+            <div class="fb-house">
+              <div class="fb-window w1"></div>
+              <div class="fb-window w2"></div>
+              <div class="fb-door"></div>
+            </div>
           </div>
 
-          <div class="window one"></div>
-          <div class="window two"></div>
-
-          <div class="door"></div>
-
+          <div class="house-overlay"></div>
         </div>
-
-        <div class="tree"></div>
-
-        <div class="flower"></div>
-
-        <div class="ground"></div>
-
       </div>
 
-      <div class="hero-wave"></div>
+      <!-- HEALTH -->
+      <div class="health-card">
+        <div class="health-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+            <path d="M3.5 11.2 12 4l8.5 7.2"></path>
+            <path d="M5.5 10v9.5h13V10"></path>
+            <path d="M9.5 19.5v-5h5v5"></path>
+          </svg>
+        </div>
 
-    </section>
-
-
-    <!-- HEALTH -->
-
-    <section class="health-card">
-
-      <div class="health-left">
-
-        <div class="health-icon">♥</div>
-
-        <div>
+        <div class="health-text">
           <div class="health-title">Home Health</div>
-          <div class="health-sub" id="healthMessage">
-            Everything looks good.
+          <div class="health-sub" id="healthMessage">All systems are running well</div>
+        </div>
+
+        <div class="health-right">
+          <div class="health-check">✓</div>
+          <div class="health-count">
+            <span id="healthCount">3</span> tasks need attention
           </div>
         </div>
-
       </div>
 
-      <div class="health-score">
-        <strong id="healthScore">100%</strong>
-        <small>maintained</small>
-      </div>
-
-    </section>
-
-
-    <!-- UPCOMING -->
-
-    <section class="section">
-
+      <!-- UPCOMING -->
       <div class="section-head">
-
         <div class="section-title">
-          Upcoming Maintenance
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+            <path d="M8 3v4M16 3v4M4 10h16"></path>
+          </svg>
+          <span>Upcoming Maintenance</span>
         </div>
 
-        <button class="section-link" onclick="setFilter('all')">
+        <button class="view-all" id="viewAllBtn">
           View all
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
         </button>
-
       </div>
-
 
       <div class="filters">
-
-        <button class="filter active" data-filter="all" onclick="setFilter('all')">
-          All
-        </button>
-
-        <button class="filter" data-filter="today" onclick="setFilter('today')">
-          Today
-        </button>
-
-        <button class="filter" data-filter="upcoming" onclick="setFilter('upcoming')">
-          Upcoming
-        </button>
-
-        <button class="filter" data-filter="overdue" onclick="setFilter('overdue')">
-          Overdue
-        </button>
-
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="today">Today</button>
+        <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+        <button class="filter-btn" data-filter="overdue">Overdue</button>
       </div>
 
+      <div class="task-list" id="taskList"></div>
 
-      <div id="taskList" class="tasks"></div>
-
-    </section>
-
-
-    <!-- QUICK ACTIONS -->
-
-    <section class="section">
-
-      <div class="section-head">
-        <div class="section-title">Quick Actions</div>
-      </div>
+      <!-- QUICK ACTIONS -->
+      <div class="quick-title">Quick actions</div>
 
       <div class="quick-grid">
 
-        <button class="quick" onclick="showPage('add')">
-          <div class="quick-icon">＋</div>
-          <div class="quick-label">Add Task</div>
+        <button class="quick-action" id="quickAdd">
+          <div class="quick-icon" style="background:var(--mint);color:var(--green)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M5 12h14"></path>
+            </svg>
+          </div>
+          <span class="quick-label">Add Task</span>
         </button>
 
-        <button class="quick" onclick="showPage('memory')">
-          <div class="quick-icon">⌂</div>
-          <div class="quick-label">My Home</div>
+        <button class="quick-action" id="quickHome">
+          <div class="quick-icon" style="background:var(--blue-light);color:var(--blue)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+              <path d="m3 10 9-7 9 7"></path>
+              <path d="M5 9v11h14V9"></path>
+              <path d="M9 20v-6h6v6"></path>
+            </svg>
+          </div>
+          <span class="quick-label">My Home</span>
         </button>
 
-        <button class="quick" onclick="setFilter('upcoming');showPage('home')">
-          <div class="quick-icon">▣</div>
-          <div class="quick-label">Calendar</div>
+        <button class="quick-action" id="quickCalendar">
+          <div class="quick-icon" style="background:var(--purple-light);color:var(--purple)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+              <path d="M8 3v4M16 3v4M4 10h16"></path>
+              <path d="M8 14h2M14 14h2M8 17h2"></path>
+            </svg>
+          </div>
+          <span class="quick-label">Calendar</span>
         </button>
 
-        <button class="quick" onclick="showPage('memory')">
-          <div class="quick-icon">▤</div>
-          <div class="quick-label">Records</div>
+        <button class="quick-action" id="quickRecords">
+          <div class="quick-icon" style="background:var(--orange-light);color:var(--orange)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M7 3h8l3 3v15H7z"></path>
+              <path d="M15 3v4h4M10 11h5M10 15h5M10 19h3"></path>
+            </svg>
+          </div>
+          <span class="quick-label">Records</span>
         </button>
 
       </div>
+    </section>
 
+    <!-- ================= ADD ================= -->
+    <section class="page" id="page-add">
+      <div class="page-title">Add a memory</div>
+      <p class="page-subtitle">Keep a simple record of what your home needs.</p>
+
+      <div class="panel">
+        <div class="panel-title">Maintenance task</div>
+
+        <form id="taskForm">
+
+          <div class="form-group">
+            <label for="taskName">What needs to be done?</label>
+            <input id="taskName" type="text" placeholder="e.g. Clean water tank" required>
+          </div>
+
+          <div class="form-group">
+            <label for="taskDate">Due date</label>
+            <input id="taskDate" type="date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="taskRepeat">Repeat</label>
+            <select id="taskRepeat">
+              <option value="none">One time</option>
+              <option value="weekly">Every week</option>
+              <option value="monthly">Every month</option>
+              <option value="3months">Every 3 months</option>
+              <option value="6months">Every 6 months</option>
+              <option value="yearly">Every year</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+
+          <div id="customRepeatBox" style="display:none">
+            <div class="form-group">
+              <label for="repeatValue">Repeat every</label>
+              <input id="repeatValue" type="number" min="1" value="1">
+            </div>
+
+            <div class="form-group">
+              <label for="repeatUnit">Unit</label>
+              <select id="repeatUnit">
+                <option value="days">Days</option>
+                <option value="weeks">Weeks</option>
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="primary-btn" type="submit">Save memory</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= MEMORY ================= -->
+    <section class="page" id="page-memory">
+      <div class="page-title">Memory</div>
+      <p class="page-subtitle">A record of your home and its maintenance history.</p>
+
+      <div id="memoryContent"></div>
+
+      <div class="panel">
+        <div class="panel-title">Your maintenance memories</div>
+        <div id="memoryTasks"></div>
+      </div>
+    </section>
+
+    <!-- ================= SETTINGS ================= -->
+    <section class="page" id="page-settings">
+      <div class="page-title">Settings</div>
+      <p class="page-subtitle">Keep Haven simple and useful for your home.</p>
+
+      <div class="panel">
+        <div class="panel-title">Reminders</div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Maintenance reminders</div>
+            <div class="settings-description">Show reminders for upcoming tasks.</div>
+          </div>
+          <button class="switch" id="reminderSwitch" aria-label="Toggle reminders"></button>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Reminder timing</div>
+            <div class="settings-description">Receive reminders before due dates.</div>
+          </div>
+          <select id="reminderDays" style="width:90px;border:1px solid var(--border);border-radius:9px;padding:7px;font-size:9px;">
+            <option value="0">Same day</option>
+            <option value="1">1 day before</option>
+            <option value="3">3 days before</option>
+            <option value="7">7 days before</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Home</div>
+
+        <div class="form-group">
+          <label for="homeName">Home name</label>
+          <input id="homeName" type="text" placeholder="My Home">
+        </div>
+
+        <button class="secondary-btn" id="saveHomeName">Save home details</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Data</div>
+
+        <button class="danger-btn" id="clearData">Clear Haven task data</button>
+      </div>
+    </section>
+
+    <!-- ================= CALENDAR / TASKS ================= -->
+    <section class="page" id="page-calendar">
+      <div class="page-title">Calendar</div>
+      <p class="page-subtitle">See the maintenance memories you've saved.</p>
+
+      <div class="panel">
+        <div class="panel-title">All scheduled tasks</div>
+        <div id="calendarTasks"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-more">
+      <div class="page-title">More</div>
+      <p class="page-subtitle">Your Haven tools and settings.</p>
+
+      <div class="panel">
+        <button class="settings-row" style="width:100%;background:none;text-align:left;" onclick="showPage('memory')">
+          <div>
+            <div class="settings-label">Memory</div>
+            <div class="settings-description">View your home history.</div>
+          </div>
+          <span>›</span>
+        </button>
+
+        <button class="settings-row" style="width:100%;background:none;text-align:left;" onclick="showPage('settings')">
+          <div>
+            <div class="settings-label">Settings</div>
+            <div class="settings-description">Manage reminders and home details.</div>
+          </div>
+          <span>›</span>
+        </button>
+      </div>
     </section>
 
   </main>
 
-
-  <!-- ================= ADD PAGE ================= -->
-
-  <main id="addPage" class="page">
-
-    <h2 class="page-title">Add a task</h2>
-
-    <div class="page-subtitle">
-      Tell Haven what your home needs.
-    </div>
-
-    <div class="form-card">
-
-      <div class="form-group">
-
-        <label class="form-label">
-          What needs to be done?
-        </label>
-
-        <input
-          id="taskName"
-          class="form-input"
-          type="text"
-          placeholder="e.g. Clean water tank"
-          autocomplete="off"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label class="form-label">
-          Due date
-        </label>
-
-        <input
-          id="taskDate"
-          class="form-input"
-          type="date"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label class="form-label">
-          Repeat
-        </label>
-
-        <select id="repeatType" class="form-select" onchange="handleRepeatChange()">
-
-          <option value="none">
-            One time
-          </option>
-
-          <option value="weekly">
-            Every week
-          </option>
-
-          <option value="monthly">
-            Every month
-          </option>
-
-          <option value="3months">
-            Every 3 months
-          </option>
-
-          <option value="6months">
-            Every 6 months
-          </option>
-
-          <option value="yearly">
-            Every year
-          </option>
-
-          <option value="custom">
-            Custom
-          </option>
-
-        </select>
-
-
-        <div id="customRepeat" class="custom-repeat">
-
-          <div class="repeat-custom-grid">
-
-            <input
-              id="repeatValue"
-              class="form-input"
-              type="number"
-              min="1"
-              value="1"
-              placeholder="Every"
-            >
-
-            <select id="repeatUnit" class="form-select">
-
-              <option value="days">days</option>
-              <option value="weeks">weeks</option>
-              <option value="months">months</option>
-              <option value="years">years</option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <button class="primary-btn" onclick="addTask()">
-        Add to Haven
-      </button>
-
-      <button class="secondary-btn" onclick="showPage('home')">
-        Cancel
-      </button>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= MEMORY PAGE ================= -->
-
-  <main id="memoryPage" class="page">
-
-    <h2 class="page-title">My Home</h2>
-
-    <div class="page-subtitle">
-      The details Haven remembers for you.
-    </div>
-
-    <div class="memory-card" id="memoryContent"></div>
-
-  </main>
-
-
-  <!-- ================= SETTINGS PAGE ================= -->
-
-  <main id="settingsPage" class="page">
-
-    <h2 class="page-title">Settings</h2>
-
-    <div class="page-subtitle">
-      Keep Haven working the way you want.
-    </div>
-
-    <div class="settings-list">
-
-      <div class="setting">
-
-        <div>
-          <div class="setting-title">
-            Maintenance reminders
-          </div>
-
-          <div class="setting-sub">
-            Allow Haven to remind you about tasks.
-          </div>
-        </div>
-
-        <div
-          id="reminderToggle"
-          class="toggle"
-          onclick="toggleReminders()"
-        ></div>
-
-      </div>
-
-
-      <div class="setting">
-
-        <div>
-          <div class="setting-title">
-            Local storage
-          </div>
-
-          <div class="setting-sub">
-            Your Haven tasks stay on this device.
-          </div>
-        </div>
-
-        <div style="font-size:18px;">🔒</div>
-
-      </div>
-
-
-      <div class="setting">
-
-        <div>
-          <div class="setting-title">
-            About Haven
-          </div>
-
-          <div class="setting-sub">
-            Your home remembers.
-          </div>
-        </div>
-
-        <div style="font-weight:800;color:#2997d3;">
-          v2
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
   <!-- BOTTOM NAV -->
-
   <nav class="bottom-nav">
 
-    <button class="nav-btn active" data-page="home" onclick="showPage('home')">
-
-      <div class="nav-icon">⌂</div>
-      <div class="nav-label">Home</div>
-
+    <button class="nav-btn active" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="m3 10 9-7 9 7"></path>
+        <path d="M5 9v11h14V9"></path>
+        <path d="M9 20v-6h6v6"></path>
+      </svg>
+      <span>Home</span>
     </button>
 
-
-    <button class="nav-btn" data-page="add" onclick="showPage('add')">
-
-      <div class="nav-icon">＋</div>
-      <div class="nav-label">Add</div>
-
+    <button class="nav-btn" data-page="calendar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+        <path d="M8 3v4M16 3v4M4 10h16"></path>
+      </svg>
+      <span>Calendar</span>
     </button>
 
-
-    <button class="nav-btn" data-page="memory" onclick="showPage('memory')">
-
-      <div class="nav-icon">▤</div>
-      <div class="nav-label">Memory</div>
-
+    <button class="nav-btn" data-page="add">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M12 5v14M5 12h14"></path>
+        <circle cx="12" cy="12" r="9"></circle>
+      </svg>
+      <span>Tasks</span>
     </button>
 
-
-    <button class="nav-btn" data-page="settings" onclick="showPage('settings')">
-
-      <div class="nav-icon">⚙</div>
-      <div class="nav-label">Settings</div>
-
+    <button class="nav-btn" data-page="more">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="5" cy="12" r="1"></circle>
+        <circle cx="12" cy="12" r="1"></circle>
+        <circle cx="19" cy="12" r="1"></circle>
+      </svg>
+      <span>More</span>
     </button>
 
   </nav>
 
-</div>
-
-
-<!-- ================= EDIT MEMORY MODAL ================= -->
-
-<div id="memoryModal" class="modal-backdrop">
-
-  <div class="modal">
-
-    <div class="modal-handle"></div>
-
-    <div class="modal-title">
-      Edit home details
+  <!-- MODAL -->
+  <div class="modal" id="taskModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div class="modal-title" id="modalTitle">Task</div>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <div id="modalContent"></div>
     </div>
-
-    <div class="form-group">
-
-      <label class="form-label">
-        Home name
-      </label>
-
-      <input
-        id="memoryHomeName"
-        class="form-input"
-        placeholder="My Home"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label class="form-label">
-        Location
-      </label>
-
-      <input
-        id="memoryLocation"
-        class="form-input"
-        placeholder="e.g. Kashmir"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label class="form-label">
-        Notes
-      </label>
-
-      <input
-        id="memoryNotes"
-        class="form-input"
-        placeholder="Anything Haven should remember"
-      >
-
-    </div>
-
-
-    <div class="modal-actions">
-
-      <button class="primary-btn" onclick="saveMemory()">
-        Save
-      </button>
-
-      <button class="danger-btn" onclick="closeMemoryModal()">
-        Cancel
-      </button>
-
-    </div>
-
   </div>
 
+  <div class="toast" id="toast"></div>
+
 </div>
 
-
-<div id="toast" class="toast"></div>
-
-
 <script>
-
 /* =========================================================
-   HAVEN DATA
-========================================================= */
+   HAVEN — DATA
+   Existing storage names preserved
+   ========================================================= */
 
 const STORAGE_KEY = "havenTasksV4";
 const OLD_STORAGE_KEY = "havenTasksV3";
@@ -1887,14 +1598,51 @@ const MEMORY_KEY = "havenMemoryV1";
 const REMINDER_KEY = "havenRemindersV1";
 
 let tasks = [];
+let memory = {};
 let currentFilter = "all";
+let editingTaskId = null;
 
+/* ---------- HELPERS ---------- */
 
-/* =========================================================
-   BASIC HELPERS
-========================================================= */
+function $(id){
+  return document.getElementById(id);
+}
 
-function escapeHtml(value){
+function todayString(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${day}`;
+}
+
+function parseDate(value){
+  if(!value) return null;
+  const d = new Date(value + "T00:00:00");
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+function formatDate(value){
+  const d = parseDate(value);
+  if(!d) return "No date";
+
+  return d.toLocaleDateString("en-IN",{
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+function daysDifference(value){
+  const d = parseDate(value);
+  const t = parseDate(todayString());
+
+  if(!d || !t) return 99999;
+
+  return Math.round((d-t)/86400000);
+}
+
+function escapeHTML(value){
   return String(value ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
@@ -1903,1483 +1651,941 @@ function escapeHtml(value){
     .replace(/'/g,"&#039;");
 }
 
+/* ---------- ICONS ---------- */
 
-function getToday(){
+function iconSVG(category){
+  const c = String(category || "").toLowerCase();
 
-  const d = new Date();
+  if(c.includes("water")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 3s6 6.2 6 11a6 6 0 0 1-12 0c0-4.8 6-11 6-11Z"></path>
+      </svg>`;
+  }
 
-  const year = d.getFullYear();
-  const month = String(d.getMonth()+1).padStart(2,"0");
-  const day = String(d.getDate()).padStart(2,"0");
+  if(c.includes("heat")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 3c2 3 5 4.4 5 8.3A5 5 0 1 1 7 11c0-2.4 1.5-4.4 3-6"></path>
+        <path d="M12 12c1 1.2 2 2.2 2 3.5a2 2 0 0 1-4 0c0-.9.7-2 2-3.5Z"></path>
+      </svg>`;
+  }
 
-  return `${year}-${month}-${day}`;
+  if(c.includes("plumb")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M7 4v7a5 5 0 0 0 5 5h5"></path>
+        <path d="M4 4h6M14 13h6v5h-6"></path>
+      </svg>`;
+  }
+
+  if(c.includes("cool") || c.includes("air")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+        <path d="M12 3v18M3 12h18"></path>
+        <path d="m5.6 5.6 12.8 12.8M18.4 5.6 5.6 18.4"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>`;
+  }
+
+  if(c.includes("electric")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M13 2 5 13h6l-1 9 8-12h-6l1-8Z"></path>
+      </svg>`;
+  }
+
+  if(c.includes("clean")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="m9 3 2 5"></path>
+        <path d="M7 8h8"></path>
+        <path d="M9 8h5l2 13H7L9 8Z"></path>
+        <path d="m17 4 1 2M20 5l-2 1"></path>
+      </svg>`;
+  }
+
+  if(c.includes("garden")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 21V11"></path>
+        <path d="M12 13C7 13 5 10 5 6c4 0 7 2 7 7Z"></path>
+        <path d="M12 16c5 0 7-3 7-7-4 0-7 2-7 7Z"></path>
+      </svg>`;
+  }
+
+  if(c.includes("roof")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="m3 11 9-7 9 7"></path>
+        <path d="M5 10v9h14v-9"></path>
+        <path d="M9 19v-5h6v5"></path>
+      </svg>`;
+  }
+
+  if(c.includes("repair") || c.includes("fix")){
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-5.8 5.8a2 2 0 0 0 2.8 2.8l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.1 2.1-2.8-2.8 2.1-2.1Z"></path>
+      </svg>`;
+  }
+
+  return `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+      <path d="M8 9h8M8 13h8M8 17h5"></path>
+    </svg>`;
 }
 
+function categoryInfo(name){
+  const text = String(name || "").toLowerCase();
 
-function parseLocalDate(dateString){
+  if(text.includes("water") || text.includes("tank"))
+    return ["Water system","cat-water"];
 
-  if(!dateString) return null;
+  if(text.includes("heat") || text.includes("heater") || text.includes("boiler"))
+    return ["Heating system","cat-heating"];
 
-  const parts = dateString.split("-");
+  if(text.includes("tap") || text.includes("pipe") || text.includes("plumb") || text.includes("leak"))
+    return ["Plumbing","cat-plumbing"];
 
-  return new Date(
-    Number(parts[0]),
-    Number(parts[1])-1,
-    Number(parts[2])
-  );
+  if(text.includes("air conditioner") || text.includes("ac") || text.includes("cool"))
+    return ["Cooling system","cat-cooling"];
+
+  if(text.includes("electric") || text.includes("switch") || text.includes("light") || text.includes("wiring"))
+    return ["Electrical","cat-electrical"];
+
+  if(text.includes("clean") || text.includes("wash") || text.includes("dust"))
+    return ["Cleaning","cat-cleaning"];
+
+  if(text.includes("garden") || text.includes("plant") || text.includes("lawn"))
+    return ["Garden","cat-garden"];
+
+  if(text.includes("roof") || text.includes("gutter"))
+    return ["Roof","cat-roof"];
+
+  if(text.includes("repair") || text.includes("fix"))
+    return ["Repair","cat-repair"];
+
+  return ["Home maintenance","cat-default"];
 }
 
+/* ---------- STORAGE ---------- */
 
-function formatDate(dateString){
-
-  const date = parseLocalDate(dateString);
-
-  if(!date) return "No date";
-
-  return date.toLocaleDateString(undefined,{
-    day:"numeric",
-    month:"short",
-    year:"numeric"
-  });
-}
-
-
-function daysBetween(dateA,dateB){
-
-  const a = parseLocalDate(dateA);
-  const b = parseLocalDate(dateB);
-
-  if(!a || !b) return 0;
-
-  a.setHours(0,0,0,0);
-  b.setHours(0,0,0,0);
-
-  return Math.round(
-    (b-a)/(1000*60*60*24)
-  );
-}
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-function loadTasks(){
-
+function loadData(){
   try{
-
     const current = localStorage.getItem(STORAGE_KEY);
 
     if(current){
-
       tasks = JSON.parse(current) || [];
-
     }else{
-
       const old = localStorage.getItem(OLD_STORAGE_KEY);
 
       if(old){
-
         tasks = JSON.parse(old) || [];
-
-        saveTasks();
-
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
       }else{
-
         tasks = [];
-
       }
-
     }
-
-  }catch(error){
-
-    console.error(error);
+  }catch(e){
     tasks = [];
-
   }
-
-}
-
-
-function saveTasks(){
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(tasks)
-  );
-
-}
-
-
-/* =========================================================
-   MEMORY
-========================================================= */
-
-function getMemory(){
 
   try{
-
-    return JSON.parse(
-      localStorage.getItem(MEMORY_KEY)
-    ) || {
-      homeName:"My Home",
-      location:"Not set",
-      notes:"Haven is ready to remember your home."
-    };
-
-  }catch{
-
-    return {
-      homeName:"My Home",
-      location:"Not set",
-      notes:"Haven is ready to remember your home."
-    };
-
+    memory = JSON.parse(localStorage.getItem(MEMORY_KEY) || "{}");
+  }catch(e){
+    memory = {};
   }
 
+  if(!memory.homeName){
+    memory.homeName = "My Home";
+  }
+
+  saveMemory();
 }
 
-
-function saveMemoryData(data){
-
-  localStorage.setItem(
-    MEMORY_KEY,
-    JSON.stringify(data)
-  );
-
+function saveTasks(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
 }
-
-
-function renderMemory(){
-
-  const memory = getMemory();
-
-  const container =
-    document.getElementById("memoryContent");
-
-  if(!container) return;
-
-  container.innerHTML = `
-
-    <div class="memory-item">
-      <div class="memory-label">HOME</div>
-      <div class="memory-value">
-        ${escapeHtml(memory.homeName)}
-      </div>
-    </div>
-
-    <div class="memory-item">
-      <div class="memory-label">LOCATION</div>
-      <div class="memory-value">
-        ${escapeHtml(memory.location)}
-      </div>
-    </div>
-
-    <div class="memory-item">
-      <div class="memory-label">NOTES</div>
-      <div class="memory-value">
-        ${escapeHtml(memory.notes)}
-      </div>
-    </div>
-
-    <button
-      class="edit-memory"
-      onclick="openMemoryModal()"
-    >
-      Edit home details
-    </button>
-
-  `;
-
-}
-
-
-function openMemoryModal(){
-
-  const memory = getMemory();
-
-  document.getElementById("memoryHomeName").value =
-    memory.homeName || "";
-
-  document.getElementById("memoryLocation").value =
-    memory.location || "";
-
-  document.getElementById("memoryNotes").value =
-    memory.notes || "";
-
-  document
-    .getElementById("memoryModal")
-    .classList.add("show");
-
-}
-
-
-function closeMemoryModal(){
-
-  document
-    .getElementById("memoryModal")
-    .classList.remove("show");
-
-}
-
 
 function saveMemory(){
-
-  const data = {
-
-    homeName:
-      document.getElementById("memoryHomeName").value.trim()
-      || "My Home",
-
-    location:
-      document.getElementById("memoryLocation").value.trim()
-      || "Not set",
-
-    notes:
-      document.getElementById("memoryNotes").value.trim()
-      || "Haven is ready to remember your home."
-
-  };
-
-  saveMemoryData(data);
-
-  renderMemory();
-
-  closeMemoryModal();
-
-  showToast("Home details saved");
-
+  localStorage.setItem(MEMORY_KEY,JSON.stringify(memory));
 }
 
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* ---------- NAVIGATION ---------- */
 
 function showPage(page){
-
   document.querySelectorAll(".page").forEach(p=>{
     p.classList.remove("active");
   });
 
-  const target =
-    document.getElementById(page+"Page");
+  const target = $("page-" + page);
 
   if(target){
     target.classList.add("active");
   }
 
   document.querySelectorAll(".nav-btn").forEach(btn=>{
-
-    btn.classList.toggle(
-      "active",
-      btn.dataset.page === page
-    );
-
+    btn.classList.toggle("active",btn.dataset.page === page);
   });
+
+  if(page === "home") renderTasks();
+  if(page === "memory") renderMemory();
+  if(page === "calendar") renderCalendar();
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
-
-  if(page === "memory"){
-    renderMemory();
-  }
-
-  if(page === "home"){
-    render();
-  }
-
 }
-
-
-function toggleProfile(){
-
-  document
-    .getElementById("profilePopup")
-    .classList.toggle("show");
-
-}
-
 
 function closeProfile(){
-
-  document
-    .getElementById("profilePopup")
-    .classList.remove("show");
-
+  $("profilePopup").classList.remove("show");
 }
 
+/* ---------- REPEAT ---------- */
 
-document.addEventListener("click",function(event){
+function calculateNextDate(dateString,repeat,repeatValue,repeatUnit){
+  const d = parseDate(dateString);
 
-  const popup =
-    document.getElementById("profilePopup");
+  if(!d) return dateString;
 
-  const profile =
-    document.querySelector(".profile-btn");
+  if(repeat === "weekly"){
+    d.setDate(d.getDate()+7);
+  }else if(repeat === "monthly"){
+    d.setMonth(d.getMonth()+1);
+  }else if(repeat === "3months"){
+    d.setMonth(d.getMonth()+3);
+  }else if(repeat === "6months"){
+    d.setMonth(d.getMonth()+6);
+  }else if(repeat === "yearly"){
+    d.setFullYear(d.getFullYear()+1);
+  }else if(repeat === "custom"){
+    const value = Math.max(1,Number(repeatValue) || 1);
 
-  if(
-    popup.classList.contains("show") &&
-    !popup.contains(event.target) &&
-    !profile.contains(event.target)
-  ){
-
-    closeProfile();
-
+    if(repeatUnit === "days"){
+      d.setDate(d.getDate()+value);
+    }else if(repeatUnit === "weeks"){
+      d.setDate(d.getDate()+(value*7));
+    }else if(repeatUnit === "months"){
+      d.setMonth(d.getMonth()+value);
+    }else if(repeatUnit === "years"){
+      d.setFullYear(d.getFullYear()+value);
+    }
   }
 
-});
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,"0");
+  const day=String(d.getDate()).padStart(2,"0");
 
-
-/* =========================================================
-   CATEGORY DETECTION
-========================================================= */
-
-function getTaskCategory(name){
-
-  const n = String(name).toLowerCase();
-
-  if(
-    n.includes("ac") ||
-    n.includes("air condition") ||
-    n.includes("cooler") ||
-    n.includes("cooling") ||
-    n.includes("air conditioner")
-  ){
-    return {
-      key:"cooling",
-      label:"Cooling",
-      className:"cat-cooling"
-    };
-  }
-
-  if(
-    n.includes("water") ||
-    n.includes("tank") ||
-    n.includes("filter") ||
-    n.includes("pump")
-  ){
-    return {
-      key:"water",
-      label:"Water",
-      className:"cat-water"
-    };
-  }
-
-  if(
-    n.includes("heater") ||
-    n.includes("heating") ||
-    n.includes("boiler") ||
-    n.includes("radiator")
-  ){
-    return {
-      key:"heating",
-      label:"Heating",
-      className:"cat-heating"
-    };
-  }
-
-  if(
-    n.includes("pipe") ||
-    n.includes("plumb") ||
-    n.includes("tap") ||
-    n.includes("faucet") ||
-    n.includes("drain")
-  ){
-    return {
-      key:"plumbing",
-      label:"Plumbing",
-      className:"cat-plumbing"
-    };
-  }
-
-  if(
-    n.includes("electric") ||
-    n.includes("switch") ||
-    n.includes("socket") ||
-    n.includes("wiring") ||
-    n.includes("bulb") ||
-    n.includes("light")
-  ){
-    return {
-      key:"electrical",
-      label:"Electrical",
-      className:"cat-electrical"
-    };
-  }
-
-  if(
-    n.includes("clean") ||
-    n.includes("wash") ||
-    n.includes("dust") ||
-    n.includes("chimney")
-  ){
-    return {
-      key:"cleaning",
-      label:"Cleaning",
-      className:"cat-cleaning"
-    };
-  }
-
-  if(
-    n.includes("garden") ||
-    n.includes("plant") ||
-    n.includes("lawn") ||
-    n.includes("tree")
-  ){
-    return {
-      key:"garden",
-      label:"Garden",
-      className:"cat-garden"
-    };
-  }
-
-  if(
-    n.includes("roof") ||
-    n.includes("gutter") ||
-    n.includes("ceiling")
-  ){
-    return {
-      key:"roof",
-      label:"Roof",
-      className:"cat-roof"
-    };
-  }
-
-  if(
-    n.includes("repair") ||
-    n.includes("fix") ||
-    n.includes("broken") ||
-    n.includes("door") ||
-    n.includes("window")
-  ){
-    return {
-      key:"repair",
-      label:"Repair",
-      className:"cat-repair"
-    };
-  }
-
-  return {
-    key:"default",
-    label:"Home",
-    className:"cat-default"
-  };
-
+  return `${y}-${m}-${day}`;
 }
 
+/* ---------- STATUS ---------- */
 
-/* =========================================================
-   SVG ICONS
-========================================================= */
+function taskStatus(task){
+  if(task.completed) return "completed";
 
-function getTaskIconSvg(type){
+  const diff = daysDifference(task.nextDue || task.dueDate);
 
-  const common =
-    `fill="none" stroke="currentColor" stroke-width="1.8"
-     stroke-linecap="round" stroke-linejoin="round"`;
+  if(diff < 0) return "overdue";
+  if(diff === 0) return "due";
 
-  if(type === "water"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="M16 4s-7 8-7 14a7 7 0 0 0 14 0c0-6-7-14-7-14z"/>
-        <path ${common}
-          d="M12 19c.4 2 1.8 3.2 4 3.4"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "heating"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="M17 4c2 5-3 6-1 10 1 2 4 2 4 6a4 4 0 0 1-8 0c0-3 2-4 2-7"/>
-        <path ${common}
-          d="M10 25h12"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "plumbing"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="M7 10h13a4 4 0 0 1 4 4v1"/>
-        <path ${common}
-          d="M11 10V7h7v3"/>
-        <path ${common}
-          d="M24 15v5"/>
-        <path ${common}
-          d="M21 20h6"/>
-        <path ${common}
-          d="M24 23c0 2-2 3-2 4"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "cooling"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <circle ${common} cx="16" cy="16" r="4"/>
-        <path ${common} d="M16 5v7M16 20v7M5 16h7M20 16h7"/>
-        <path ${common} d="M8 8l5 5M19 19l5 5M24 8l-5 5M13 19l-5 5"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "electrical"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="M18 4 9 17h6l-1 11 9-14h-6z"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "cleaning"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="M10 13h12l-2 14H12z"/>
-        <path ${common}
-          d="M12 9h8v4h-8z"/>
-        <path ${common}
-          d="M15 5h2M15 3v2M20 6h2"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "garden"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="M16 27V13"/>
-        <path ${common}
-          d="M16 17c-7 0-9-5-9-9 6 0 9 3 9 9z"/>
-        <path ${common}
-          d="M16 13c1-6 5-8 10-8 0 6-4 9-10 8z"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "roof"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="M4 15 16 5l12 10"/>
-        <path ${common}
-          d="M7 14v13h18V14"/>
-        <path ${common}
-          d="M13 27v-7h6v7"/>
-      </svg>
-    `;
-
-  }
-
-  if(type === "repair"){
-
-    return `
-      <svg viewBox="0 0 32 32">
-        <path ${common}
-          d="m19 7 6 6"/>
-        <path ${common}
-          d="m21 5 3-2 5 5-2 3"/>
-        <path ${common}
-          d="m17 9-10 10 6 6 10-10"/>
-        <path ${common}
-          d="M5 27h9"/>
-      </svg>
-    `;
-
-  }
-
-  return `
-    <svg viewBox="0 0 32 32">
-      <path ${common}
-        d="M5 15 16 6l11 9"/>
-      <path ${common}
-        d="M8 14v12h16V14"/>
-      <path ${common}
-        d="M13 26v-7h6v7"/>
-    </svg>
-  `;
-
+  return "upcoming";
 }
 
-
-/* =========================================================
-   REPEAT
-========================================================= */
-
-function handleRepeatChange(){
-
-  const value =
-    document.getElementById("repeatType").value;
-
-  document
-    .getElementById("customRepeat")
-    .classList.toggle(
-      "show",
-      value === "custom"
-    );
-
+function statusLabel(status){
+  if(status === "completed") return "Completed";
+  if(status === "overdue") return "Overdue";
+  if(status === "due") return "Due";
+  return "Upcoming";
 }
 
+function dueText(task){
+  if(task.completed) return "Completed";
 
-function getRepeatText(task){
-
-  if(!task) return "";
-
-  if(task.repeatType === "none"){
-    return "One time";
-  }
-
-  if(task.repeatType === "weekly"){
-    return "Every week";
-  }
-
-  if(task.repeatType === "monthly"){
-    return "Every month";
-  }
-
-  if(task.repeatType === "3months"){
-    return "Every 3 months";
-  }
-
-  if(task.repeatType === "6months"){
-    return "Every 6 months";
-  }
-
-  if(task.repeatType === "yearly"){
-    return "Every year";
-  }
-
-  if(task.repeatType === "custom"){
-
-    return `Every ${task.repeatValue || 1} ${task.repeatUnit || "days"}`;
-
-  }
-
-  return "";
-
-}
-
-
-function getDueDate(task){
-
-  return task.nextDue || task.dueDate || null;
-
-}
-
-
-function addMonths(date,months){
-
-  const result = new Date(date);
-
-  result.setMonth(
-    result.getMonth()+months
-  );
-
-  return result;
-
-}
-
-
-function addYears(date,years){
-
-  const result = new Date(date);
-
-  result.setFullYear(
-    result.getFullYear()+years
-  );
-
-  return result;
-
-}
-
-
-function calculateNextDate(task,fromDate){
-
-  const date = parseLocalDate(fromDate);
-
-  if(!date) return null;
-
-  switch(task.repeatType){
-
-    case "weekly":
-      date.setDate(date.getDate()+7);
-      break;
-
-    case "monthly":
-      return toDateInput(addMonths(date,1));
-
-    case "3months":
-      return toDateInput(addMonths(date,3));
-
-    case "6months":
-      return toDateInput(addMonths(date,6));
-
-    case "yearly":
-      return toDateInput(addYears(date,1));
-
-    case "custom":
-
-      if(task.repeatUnit === "days"){
-        date.setDate(
-          date.getDate()+(Number(task.repeatValue)||1)
-        );
-      }
-
-      if(task.repeatUnit === "weeks"){
-        date.setDate(
-          date.getDate()+7*(Number(task.repeatValue)||1)
-        );
-      }
-
-      if(task.repeatUnit === "months"){
-        return toDateInput(
-          addMonths(
-            date,
-            Number(task.repeatValue)||1
-          )
-        );
-      }
-
-      if(task.repeatUnit === "years"){
-        return toDateInput(
-          addYears(
-            date,
-            Number(task.repeatValue)||1
-          )
-        );
-      }
-
-      break;
-
-    default:
-      return null;
-
-  }
-
-  return toDateInput(date);
-
-}
-
-
-function toDateInput(date){
-
-  return [
-    date.getFullYear(),
-    String(date.getMonth()+1).padStart(2,"0"),
-    String(date.getDate()).padStart(2,"0")
-  ].join("-");
-
-}
-
-
-/* =========================================================
-   TASK STATUS
-========================================================= */
-
-function getTaskStatus(task){
-
-  if(task.completed){
-    return {
-      key:"done",
-      label:"Completed"
-    };
-  }
-
-  const due = getDueDate(task);
-
-  if(!due){
-    return {
-      key:"upcoming",
-      label:"Scheduled"
-    };
-  }
-
-  const diff =
-    daysBetween(getToday(),due);
+  const diff = daysDifference(task.nextDue || task.dueDate);
 
   if(diff < 0){
-
-    return {
-      key:"overdue",
-      label:"Overdue"
-    };
-
+    const n=Math.abs(diff);
+    return n===1 ? "1 day overdue" : `${n} days overdue`;
   }
 
-  if(diff === 0){
+  if(diff === 0) return "Due today";
+  if(diff === 1) return "Due tomorrow";
 
-    return {
-      key:"today",
-      label:"Today"
-    };
-
-  }
-
-  return {
-    key:"upcoming",
-    label:
-      diff === 1
-      ? "Tomorrow"
-      : `In ${diff} days`
-  };
-
+  return `Due in ${diff} days`;
 }
 
+/* ---------- FILTER ---------- */
 
-/* =========================================================
-   TASK FILTER
-========================================================= */
+function filteredTasks(){
+  return tasks.filter(task=>{
+    const status = taskStatus(task);
 
-function taskMatchesFilter(task){
+    if(currentFilter === "all") return true;
+    if(currentFilter === "today") return status === "due";
+    if(currentFilter === "upcoming") return status === "upcoming";
+    if(currentFilter === "overdue") return status === "overdue";
 
-  const status =
-    getTaskStatus(task).key;
-
-  if(currentFilter === "all"){
     return true;
-  }
-
-  return status === currentFilter;
-
+  });
 }
 
+/* ---------- RENDER TASKS ---------- */
 
-/* =========================================================
-   RENDER TASKS
-========================================================= */
-
-function render(){
-
-  const list =
-    document.getElementById("taskList");
+function renderTasks(){
+  const list=$("taskList");
 
   if(!list) return;
 
-  const visible =
-    tasks
-      .filter(taskMatchesFilter)
-      .sort((a,b)=>{
+  const data=filteredTasks();
 
-        const da = getDueDate(a) || "9999-12-31";
-        const db = getDueDate(b) || "9999-12-31";
-
-        return da.localeCompare(db);
-
-      });
-
-
-  if(!visible.length){
-
-    list.innerHTML = `
-
+  if(!data.length){
+    list.innerHTML=`
       <div class="empty">
-
-        <div class="empty-icon">⌂</div>
-
-        <strong>
-          ${currentFilter === "all"
-            ? "Your home is quiet."
-            : "Nothing here."
-          }
-        </strong>
-
-        <span>
-          ${
-            currentFilter === "all"
-            ? "Add your first maintenance task and let Haven remember it."
-            : "There are no tasks matching this filter."
-          }
-        </span>
-
-      </div>
-
-    `;
-
+        <div class="empty-icon">
+          ${iconSVG("home")}
+        </div>
+        <div class="empty-title">Nothing here yet</div>
+        <div class="empty-text">Add a maintenance memory and Haven will remember it.</div>
+      </div>`;
     updateHealth();
-
     return;
-
   }
 
-
-  list.innerHTML =
-    visible.map(renderTask).join("");
-
-  updateHealth();
-
-}
-
-
-function renderTask(task){
-
-  const category =
-    getTaskCategory(task.name);
-
-  const status =
-    getTaskStatus(task);
-
-  const due =
-    getDueDate(task);
-
-  const repeat =
-    getRepeatText(task);
-
-
-  return `
-
-    <article
-      class="task-card"
-      data-id="${escapeHtml(task.id)}"
-    >
-
-      <div class="task-icon ${category.className}">
-        ${getTaskIconSvg(category.key)}
-      </div>
-
-
-      <div class="task-info">
-
-        <div class="task-name">
-          ${escapeHtml(task.name)}
-        </div>
-
-        <div class="task-category">
-          ${category.label}
-          ${repeat && repeat !== "One time"
-            ? ` · ${escapeHtml(repeat)}`
-            : ""
-          }
-        </div>
-
-        <div class="task-date">
-
-          <svg viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-
-            <rect x="3" y="4" width="18" height="17" rx="3"/>
-            <path d="M8 2v4M16 2v4M3 9h18"/>
-
-          </svg>
-
-          ${due ? formatDate(due) : "No due date"}
-
-        </div>
-
-      </div>
-
-
-      <div class="task-right">
-
-        <div class="status ${status.key}">
-          ${status.label}
-        </div>
-
-        <div class="chevron">
-          ›
-        </div>
-
-      </div>
-
-    </article>
-
-  `;
-
-}
-
-
-/* =========================================================
-   HEALTH
-========================================================= */
-
-function updateHealth(){
-
-  const total = tasks.length;
-
-  if(total === 0){
-
-    document.getElementById("healthScore").textContent =
-      "100%";
-
-    document.getElementById("healthMessage").textContent =
-      "Ready for your first task.";
-
-    return;
-
-  }
-
-  const overdue =
-    tasks.filter(
-      task => getTaskStatus(task).key === "overdue"
-    ).length;
-
-  const today =
-    tasks.filter(
-      task => getTaskStatus(task).key === "today"
-    ).length;
-
-
-  let score = 100;
-
-  score -= overdue * 15;
-  score -= today * 3;
-
-  score =
-    Math.max(
-      0,
-      Math.min(100,score)
-    );
-
-
-  document.getElementById("healthScore").textContent =
-    score+"%";
-
-
-  if(overdue > 0){
-
-    document.getElementById("healthMessage").textContent =
-      `${overdue} task${overdue===1?"":"s"} need attention.`;
-
-  }else if(today > 0){
-
-    document.getElementById("healthMessage").textContent =
-      `${today} task${today===1?"":"s"} due today.`;
-
-  }else{
-
-    document.getElementById("healthMessage").textContent =
-      "Everything looks good.";
-
-  }
-
-}
-
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-function setFilter(filter){
-
-  currentFilter = filter;
-
-  document.querySelectorAll(".filter").forEach(button=>{
-
-    button.classList.toggle(
-      "active",
-      button.dataset.filter === filter
-    );
-
+  data.sort((a,b)=>{
+    const da=parseDate(a.nextDue || a.dueDate);
+    const db=parseDate(b.nextDue || b.dueDate);
+
+    if(!da && !db) return 0;
+    if(!da) return 1;
+    if(!db) return -1;
+
+    return da-db;
   });
 
-  render();
+  list.innerHTML=data.map(task=>{
+    const [category,catClass]=categoryInfo(task.name);
+    const status=taskStatus(task);
+    const date=task.nextDue || task.dueDate;
 
+    return `
+      <div class="task-card" data-id="${escapeHTML(task.id)}">
+
+        <div class="task-icon ${catClass}">
+          ${iconSVG(category)}
+        </div>
+
+        <div class="task-info">
+          <div class="task-name">${escapeHTML(task.name)}</div>
+          <div class="task-category">${escapeHTML(category)}</div>
+
+          <div class="task-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+              <path d="M8 3v4M16 3v4M4 10h16"></path>
+            </svg>
+            ${escapeHTML(dueText(task))}
+          </div>
+        </div>
+
+        <div class="task-side">
+          <span class="status-pill status-${status}">
+            ${statusLabel(status)}
+          </span>
+
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
+        </div>
+
+      </div>`;
+  }).join("");
+
+  list.querySelectorAll(".task-card").forEach(card=>{
+    card.addEventListener("click",()=>{
+      openTask(card.dataset.id);
+    });
+  });
+
+  updateHealth();
 }
 
+/* ---------- HEALTH ---------- */
 
-/* =========================================================
-   ADD TASK
-========================================================= */
+function updateHealth(){
+  const attention=tasks.filter(t=>{
+    const s=taskStatus(t);
+    return s==="due" || s==="overdue";
+  }).length;
 
-function addTask(){
+  $("healthCount").textContent=attention;
 
-  const name =
-    document.getElementById("taskName")
-      .value
-      .trim();
-
-  const dueDate =
-    document.getElementById("taskDate")
-      .value;
-
-  const repeatType =
-    document.getElementById("repeatType")
-      .value;
-
-
-  if(!name){
-
-    showToast("Please enter a task");
-
-    return;
-
+  if(attention===0){
+    $("healthMessage").textContent="All systems are running well";
+  }else if(attention===1){
+    $("healthMessage").textContent="One task needs attention";
+  }else{
+    $("healthMessage").textContent=`${attention} tasks need attention`;
   }
-
-
-  if(!dueDate){
-
-    showToast("Please choose a due date");
-
-    return;
-
-  }
-
-
-  const task = {
-
-    id:
-      Date.now().toString()+
-      Math.random().toString(36).slice(2),
-
-    name:name,
-
-    dueDate:dueDate,
-
-    nextDue:dueDate,
-
-    repeatType:repeatType,
-
-    repeatValue:null,
-
-    repeatUnit:null,
-
-    lastDone:null,
-
-    completed:false
-
-  };
-
-
-  if(repeatType === "custom"){
-
-    const value =
-      Number(
-        document.getElementById("repeatValue").value
-      );
-
-    const unit =
-      document.getElementById("repeatUnit").value;
-
-
-    if(!value || value < 1){
-
-      showToast("Enter a valid repeat number");
-
-      return;
-
-    }
-
-    task.repeatValue = value;
-    task.repeatUnit = unit;
-
-  }
-
-
-  tasks.push(task);
-
-  saveTasks();
-
-  document.getElementById("taskName").value = "";
-
-  document.getElementById("taskDate").value =
-    getToday();
-
-  document.getElementById("repeatType").value =
-    "none";
-
-  document.getElementById("customRepeat")
-    .classList.remove("show");
-
-  render();
-
-  showPage("home");
-
-  showToast("Task added to Haven");
-
 }
 
+/* ---------- OPEN TASK ---------- */
 
-/* =========================================================
-   COMPLETE TASK
-========================================================= */
-
-function completeTask(id){
-
-  const task =
-    tasks.find(t=>t.id === id);
+function openTask(id){
+  const task=tasks.find(t=>String(t.id)===String(id));
 
   if(!task) return;
 
+  const status=taskStatus(task);
 
-  if(
-    task.repeatType &&
-    task.repeatType !== "none"
-  ){
+  $("modalTitle").textContent=task.name;
 
-    const current =
-      getDueDate(task) || getToday();
+  $("modalContent").innerHTML=`
+    <div class="panel" style="box-shadow:none;margin-bottom:10px;background:var(--background)">
+      <div class="task-category">${escapeHTML(categoryInfo(task.name)[0])}</div>
 
-    const next =
-      calculateNextDate(
-        task,
-        current
-      );
+      <div style="font-size:11px;font-weight:800;margin-top:7px">
+        ${escapeHTML(dueText(task))}
+      </div>
 
-    task.lastDone = current;
-    task.nextDue = next;
-    task.completed = false;
+      <div style="font-size:9px;color:var(--muted);margin-top:5px">
+        ${escapeHTML(formatDate(task.nextDue || task.dueDate))}
+      </div>
 
-    showToast("Task completed and rescheduled");
+      ${task.repeat && task.repeat!=="none" ? `
+        <div style="font-size:9px;color:var(--blue);margin-top:8px;font-weight:700">
+          Repeats: ${escapeHTML(task.repeat)}
+        </div>` : ""}
+    </div>
 
-  }else{
+    <button class="primary-btn" style="margin-bottom:8px" onclick="completeTask('${escapeHTML(task.id)}')">
+      ${status==="completed" ? "Completed" : "Mark as complete"}
+    </button>
 
-    task.completed = true;
-    task.lastDone = getToday();
-    task.nextDue = null;
+    <button class="secondary-btn" style="margin-bottom:8px" onclick="editTask('${escapeHTML(task.id)}')">
+      Edit memory
+    </button>
 
-    showToast("Task completed");
+    <button class="danger-btn" onclick="deleteTask('${escapeHTML(task.id)}')">
+      Delete memory
+    </button>
+  `;
 
+  $("taskModal").classList.add("show");
+}
+
+function closeModal(){
+  $("taskModal").classList.remove("show");
+}
+
+/* ---------- ADD ---------- */
+
+function addTask(e){
+  e.preventDefault();
+
+  const name=$("taskName").value.trim();
+  const dueDate=$("taskDate").value;
+  const repeat=$("taskRepeat").value;
+
+  if(!name || !dueDate){
+    showToast("Please enter the task and due date.");
+    return;
   }
 
+  const task={
+    id:Date.now().toString(),
+    name,
+    dueDate,
+    nextDue:dueDate,
+    repeat,
+    repeatType:repeat,
+    repeatValue:repeat==="custom" ? Number($("repeatValue").value || 1) : null,
+    repeatUnit:repeat==="custom" ? $("repeatUnit").value : null,
+    lastDone:null,
+    completed:false,
+    createdAt:new Date().toISOString()
+  };
+
+  tasks.push(task);
+  saveTasks();
+
+  $("taskForm").reset();
+  $("customRepeatBox").style.display="none";
+
+  currentFilter="all";
+  document.querySelectorAll(".filter-btn").forEach(b=>{
+    b.classList.toggle("active",b.dataset.filter==="all");
+  });
+
+  showToast("Memory saved.");
+
+  setTimeout(()=>{
+    showPage("home");
+    renderTasks();
+  },250);
+}
+
+/* ---------- COMPLETE ---------- */
+
+function completeTask(id){
+  const task=tasks.find(t=>String(t.id)===String(id));
+
+  if(!task) return;
+
+  const repeat=task.repeat || "none";
+
+  if(repeat !== "none"){
+    const currentDate=task.nextDue || task.dueDate;
+
+    task.lastDone=currentDate;
+    task.nextDue=calculateNextDate(
+      currentDate,
+      repeat,
+      task.repeatValue,
+      task.repeatUnit
+    );
+
+    task.completed=false;
+
+    saveTasks();
+    closeModal();
+
+    showToast("Completed. Next reminder scheduled.");
+  }else{
+    task.completed=true;
+    task.lastDone=todayString();
+
+    saveTasks();
+    closeModal();
+
+    showToast("Task completed.");
+  }
+
+  renderTasks();
+}
+
+/* ---------- EDIT ---------- */
+
+function editTask(id){
+  const task=tasks.find(t=>String(t.id)===String(id));
+
+  if(!task) return;
+
+  editingTaskId=id;
+
+  closeModal();
+
+  $("taskName").value=task.name;
+  $("taskDate").value=task.dueDate || task.nextDue || "";
+  $("taskRepeat").value=task.repeat || "none";
+
+  if(task.repeat==="custom"){
+    $("customRepeatBox").style.display="block";
+    $("repeatValue").value=task.repeatValue || 1;
+    $("repeatUnit").value=task.repeatUnit || "days";
+  }else{
+    $("customRepeatBox").style.display="none";
+  }
+
+  showPage("add");
+
+  const button=document.querySelector("#taskForm .primary-btn");
+  button.textContent="Update memory";
+}
+
+function updateTask(){
+  const task=tasks.find(t=>String(t.id)===String(editingTaskId));
+
+  if(!task) return;
+
+  const name=$("taskName").value.trim();
+  const dueDate=$("taskDate").value;
+  const repeat=$("taskRepeat").value;
+
+  if(!name || !dueDate){
+    showToast("Please enter the task and due date.");
+    return;
+  }
+
+  task.name=name;
+  task.dueDate=dueDate;
+  task.nextDue=dueDate;
+  task.repeat=repeat;
+  task.repeatType=repeat;
+  task.repeatValue=repeat==="custom" ? Number($("repeatValue").value || 1) : null;
+  task.repeatUnit=repeat==="custom" ? $("repeatUnit").value : null;
+  task.completed=false;
 
   saveTasks();
 
-  render();
+  editingTaskId=null;
 
+  $("taskForm").reset();
+  $("customRepeatBox").style.display="none";
+
+  const button=document.querySelector("#taskForm .primary-btn");
+  button.textContent="Save memory";
+
+  showToast("Memory updated.");
+
+  setTimeout(()=>{
+    showPage("home");
+    renderTasks();
+  },250);
 }
 
+/* ---------- DELETE ---------- */
 
-/* =========================================================
-   TASK ACTIONS
-========================================================= */
+function deleteTask(id){
+  const task=tasks.find(t=>String(t.id)===String(id));
 
-document
-  .getElementById("taskList")
-  .addEventListener("click",function(event){
+  if(!task) return;
 
-    const card =
-      event.target.closest(".task-card");
+  const ok=confirm(`Delete "${task.name}"?`);
 
-    if(!card) return;
+  if(!ok) return;
 
-    const id =
-      card.dataset.id;
+  tasks=tasks.filter(t=>String(t.id)!==String(id));
 
-    const task =
-      tasks.find(t=>t.id===id);
+  saveTasks();
+  closeModal();
+  renderTasks();
 
-    if(!task) return;
+  showToast("Memory deleted.");
+}
 
+/* ---------- MEMORY ---------- */
 
-    const actions =
-      confirm(
-        `${task.name}\n\nPress OK to mark it complete.\nPress Cancel to leave it unchanged.`
-      );
+function renderMemory(){
+  const content=$("memoryContent");
+  const taskBox=$("memoryTasks");
 
+  const completed=tasks.filter(t=>t.completed || t.lastDone);
 
-    if(actions){
+  content.innerHTML=`
+    <div class="panel">
+      <div class="panel-title">${escapeHTML(memory.homeName || "My Home")}</div>
+      <div style="font-size:9px;color:var(--muted);line-height:1.6">
+        Haven keeps your maintenance memories on this device.
+      </div>
+    </div>`;
 
-      completeTask(id);
+  if(!completed.length){
+    taskBox.innerHTML=`
+      <div class="empty">
+        <div class="empty-icon">
+          ${iconSVG("home")}
+        </div>
+        <div class="empty-title">Your history will appear here</div>
+        <div class="empty-text">Completed maintenance memories will stay here.</div>
+      </div>`;
+    return;
+  }
 
-    }
+  taskBox.innerHTML=completed.map(task=>`
+    <div class="memory-item">
+      <div class="memory-item-title">${escapeHTML(task.name)}</div>
+      <div class="memory-item-text">
+        ${task.lastDone ? `Last completed ${escapeHTML(formatDate(task.lastDone))}` : "Maintenance memory"}
+      </div>
+    </div>
+  `).join("");
+}
 
+/* ---------- CALENDAR ---------- */
+
+function renderCalendar(){
+  const box=$("calendarTasks");
+
+  if(!tasks.length){
+    box.innerHTML=`
+      <div class="empty">
+        <div class="empty-icon">
+          ${iconSVG("home")}
+        </div>
+        <div class="empty-title">No scheduled tasks</div>
+        <div class="empty-text">Add your first maintenance memory.</div>
+      </div>`;
+    return;
+  }
+
+  const sorted=[...tasks].sort((a,b)=>{
+    return daysDifference(a.nextDue || a.dueDate) -
+           daysDifference(b.nextDue || b.dueDate);
   });
 
+  box.innerHTML=sorted.map(task=>{
+    const [category,catClass]=categoryInfo(task.name);
+    const status=taskStatus(task);
 
-/* =========================================================
-   REMINDERS
-========================================================= */
+    return `
+      <div class="task-card" data-id="${escapeHTML(task.id)}">
+        <div class="task-icon ${catClass}">
+          ${iconSVG(category)}
+        </div>
 
-async function toggleReminders(){
+        <div class="task-info">
+          <div class="task-name">${escapeHTML(task.name)}</div>
+          <div class="task-category">${escapeHTML(category)}</div>
+          <div class="task-date">
+            ${escapeHTML(formatDate(task.nextDue || task.dueDate))}
+          </div>
+        </div>
 
-  const enabled =
-    localStorage.getItem(REMINDER_KEY) === "true";
+        <span class="status-pill status-${status}">
+          ${statusLabel(status)}
+        </span>
+      </div>`;
+  }).join("");
 
+  box.querySelectorAll(".task-card").forEach(card=>{
+    card.addEventListener("click",()=>{
+      openTask(card.dataset.id);
+    });
+  });
+}
 
-  if(enabled){
+/* ---------- REMINDERS ---------- */
 
-    localStorage.setItem(
-      REMINDER_KEY,
-      "false"
-    );
-
-    updateReminderToggle();
-
-    showToast("Reminders turned off");
-
-    return;
-
-  }
-
-
-  if(!("Notification" in window)){
-
-    showToast("Notifications aren't supported here");
-
-    return;
-
-  }
-
+function loadReminderSettings(){
+  let data;
 
   try{
-
-    const permission =
-      await Notification.requestPermission();
-
-    if(permission === "granted"){
-
-      localStorage.setItem(
-        REMINDER_KEY,
-        "true"
-      );
-
-      updateReminderToggle();
-
-      showToast("Reminders enabled");
-
-    }else{
-
-      showToast("Notification permission was not granted");
-
-    }
-
-  }catch(error){
-
-    showToast("Could not enable reminders");
-
+    data=JSON.parse(localStorage.getItem(REMINDER_KEY) || "null");
+  }catch(e){
+    data=null;
   }
 
+  if(!data){
+    data={
+      enabled:false,
+      days:0
+    };
+  }
+
+  return data;
 }
 
-
-function updateReminderToggle(){
-
-  const toggle =
-    document.getElementById("reminderToggle");
-
-  if(!toggle) return;
-
-  const enabled =
-    localStorage.getItem(REMINDER_KEY) === "true";
-
-  toggle.classList.toggle(
-    "on",
-    enabled
-  );
-
+function saveReminderSettings(data){
+  localStorage.setItem(REMINDER_KEY,JSON.stringify(data));
 }
 
+function updateReminderUI(){
+  const data=loadReminderSettings();
 
-/* =========================================================
-   SERVICE WORKER
-========================================================= */
+  $("reminderSwitch").classList.toggle("on",!!data.enabled);
+  $("reminderDays").value=String(data.days ?? 0);
+}
+
+async function requestNotificationPermission(){
+  if(!("Notification" in window)){
+    showToast("Notifications are not supported here.");
+    return;
+  }
+
+  try{
+    const permission=await Notification.requestPermission();
+
+    if(permission==="granted"){
+      showToast("Notifications enabled.");
+    }else{
+      showToast("Notification permission was not granted.");
+    }
+  }catch(e){
+    showToast("Could not enable notifications.");
+  }
+}
+
+/* ---------- SERVICE WORKER ---------- */
 
 function registerServiceWorker(){
-
-  if(
-    "serviceWorker" in navigator
-  ){
-
-    navigator.serviceWorker
-      .register("sw.js")
-      .catch(error=>{
-        console.log(
-          "Service worker:",
-          error
-        );
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("sw.js")
+      .catch(()=>{
+        /* Service worker unavailable; app still works normally. */
       });
-
   }
-
 }
 
-
-/* =========================================================
-   TOAST
-========================================================= */
+/* ---------- TOAST ---------- */
 
 let toastTimer;
 
 function showToast(message){
+  const toast=$("toast");
 
-  const toast =
-    document.getElementById("toast");
-
-  toast.textContent = message;
-
+  toast.textContent=message;
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
 
-  toastTimer =
-    setTimeout(()=>{
-      toast.classList.remove("show");
-    },2300);
-
+  toastTimer=setTimeout(()=>{
+    toast.classList.remove("show");
+  },2300);
 }
 
+/* ---------- EVENTS ---------- */
 
-/* =========================================================
-   STARTUP
-========================================================= */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-  loadTasks();
-
-  render();
-
-  renderMemory();
-
-  updateReminderToggle();
-
-  const dateInput =
-    document.getElementById("taskDate");
-
-  if(dateInput){
-
-    dateInput.value =
-      getToday();
-
-  }
-
-  registerServiceWorker();
-
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    showPage(btn.dataset.page);
+  });
 });
 
+document.querySelectorAll(".filter-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    currentFilter=btn.dataset.filter;
 
-/* close modal when tapping outside */
+    document.querySelectorAll(".filter-btn").forEach(b=>{
+      b.classList.toggle("active",b===btn);
+    });
 
-document
-  .getElementById("memoryModal")
-  .addEventListener("click",function(event){
+    renderTasks();
+  });
+});
 
-    if(event.target === this){
+$("profileButton").addEventListener("click",e=>{
+  e.stopPropagation();
+  $("profilePopup").classList.toggle("show");
+});
 
-      closeMemoryModal();
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".profile-popup") &&
+     !e.target.closest("#profileButton")){
+    closeProfile();
+  }
+});
 
-    }
+$("taskForm").addEventListener("submit",e=>{
+  e.preventDefault();
 
+  if(editingTaskId){
+    updateTask();
+  }else{
+    addTask(e);
+  }
+});
+
+$("taskRepeat").addEventListener("change",()=>{
+  $("customRepeatBox").style.display =
+    $("taskRepeat").value==="custom" ? "block" : "none";
+});
+
+$("viewAllBtn").addEventListener("click",()=>{
+  currentFilter="all";
+
+  document.querySelectorAll(".filter-btn").forEach(b=>{
+    b.classList.toggle("active",b.dataset.filter==="all");
   });
 
+  renderTasks();
+  window.scrollTo({top:150,behavior:"smooth"});
+});
+
+$("quickAdd").addEventListener("click",()=>{
+  editingTaskId=null;
+  $("taskForm").reset();
+  $("customRepeatBox").style.display="none";
+  $("taskDate").value=todayString();
+
+  const button=document.querySelector("#taskForm .primary-btn");
+  button.textContent="Save memory";
+
+  showPage("add");
+});
+
+$("quickHome").addEventListener("click",()=>{
+  showPage("home");
+});
+
+$("quickCalendar").addEventListener("click",()=>{
+  showPage("calendar");
+});
+
+$("quickRecords").addEventListener("click",()=>{
+  showPage("memory");
+});
+
+$("reminderSwitch").addEventListener("click",async()=>{
+  const data=loadReminderSettings();
+
+  data.enabled=!data.enabled;
+
+  saveReminderSettings(data);
+  updateReminderUI();
+
+  if(data.enabled){
+    await requestNotificationPermission();
+  }
+});
+
+$("reminderDays").addEventListener("change",()=>{
+  const data=loadReminderSettings();
+
+  data.days=Number($("reminderDays").value);
+
+  saveReminderSettings(data);
+});
+
+$("saveHomeName").addEventListener("click",()=>{
+  const name=$("homeName").value.trim();
+
+  if(name){
+    memory.homeName=name;
+    saveMemory();
+    showToast("Home details saved.");
+    renderMemory();
+  }
+});
+
+$("clearData").addEventListener("click",()=>{
+  const ok=confirm("Clear all Haven task data from this device?");
+
+  if(!ok) return;
+
+  tasks=[];
+  saveTasks();
+
+  renderTasks();
+  renderMemory();
+  renderCalendar();
+
+  showToast("Haven task data cleared.");
+});
+
+/* ---------- STARTUP ---------- */
+
+function startup(){
+  loadData();
+
+  $("taskDate").value=todayString();
+  $("homeName").value=memory.homeName || "My Home";
+
+  updateReminderUI();
+  renderTasks();
+  renderMemory();
+  renderCalendar();
+  registerServiceWorker();
+
+  /* Keep the visual status bar subtle and current. */
+  function updateTime(){
+    const d=new Date();
+
+    $("statusTime").textContent=d.toLocaleTimeString([],{
+      hour:"numeric",
+      minute:"2-digit"
+    });
+  }
+
+  updateTime();
+  setInterval(updateTime,60000);
+}
+
+startup();
 </script>
 
 </body>
-          </html>
+  </html>
