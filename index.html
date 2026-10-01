@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="theme-color" content="#f7fafc">
 <title>Haven — Your home remembers.</title>
 
 <style>
-*{box-sizing:border-box}
-
 :root{
   --navy:#183b56;
   --blue:#2495d0;
@@ -18,617 +16,564 @@
   --orange:#f7c98b;
   --lavender:#e9e2f8;
   --background:#f7fafc;
-  --card:#fff;
+  --card:#ffffff;
   --text:#183b56;
   --muted:#7890a0;
   --border:#e6edf2;
   --danger:#d85b5b;
   --shadow:0 8px 24px rgba(24,59,86,.08);
+  --radius:22px;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
   margin:0;
   padding:0;
-  width:100%;
-  min-height:100%;
   background:var(--background);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
-body{overflow-x:hidden}
+body{
+  min-height:100vh;
+  padding-bottom:92px;
+}
 
-button,input,textarea,select{font:inherit}
-button{border:0;cursor:pointer}
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
 
 .app{
   width:100%;
-  min-height:100vh;
-  display:block;
-}
-
-.app-shell{
-  width:100%;
-  max-width:none;
-  min-height:100vh;
-  background:var(--background);
-  position:relative;
-  overflow:hidden;
-  box-shadow:none;
-  margin:0;
-  border-radius:0;
+  max-width:760px;
+  margin:auto;
 }
 
 /* TOP BAR */
 .topbar{
-  height:64px;
-  padding:10px 16px;
+  height:70px;
+  padding:14px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background:rgba(247,250,252,.96);
-  position:relative;
-  z-index:10;
+  background:rgba(247,250,252,.94);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(14px);
 }
 
-.brand{display:flex;align-items:center;gap:10px}
-
-.brand-mark{
-  width:40px;height:40px;border-radius:13px;
-  background:var(--navy);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;
-  box-shadow:0 5px 14px rgba(24,59,86,.18);
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.brand-mark svg{width:23px;height:23px}
+.brand-icon{
+  width:40px;
+  height:40px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:var(--blue-soft);
+  color:var(--blue);
+}
 
-.brand-text{display:flex;flex-direction:column;line-height:1.05}
+.brand-icon svg{
+  width:23px;
+  height:23px;
+}
 
-.brand-name{
-  font-size:18px;
+.brand-text{
   font-weight:800;
-  letter-spacing:-.4px;
+  font-size:18px;
+  letter-spacing:-.3px;
 }
 
-.brand-tagline{
-  font-size:9px;
+.brand-sub{
+  display:block;
+  font-size:11px;
   color:var(--muted);
-  margin-top:4px;
+  font-weight:500;
+  margin-top:2px;
 }
 
-.top-action{
-  width:38px;height:38px;border-radius:12px;
-  background:#fff;
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:14px;
+  background:white;
   color:var(--navy);
+  box-shadow:var(--shadow);
+  display:grid;
+  place-items:center;
 }
 
-.top-action svg{width:19px;height:19px}
+.icon-btn svg{
+  width:20px;
+  height:20px;
+}
+
+/* PAGES */
+.page{
+  display:none;
+  padding:0 16px 24px;
+}
+
+.page.active{
+  display:block;
+}
+
+.page-title{
+  font-size:28px;
+  margin:18px 2px 4px;
+  letter-spacing:-.8px;
+}
+
+.page-subtitle{
+  color:var(--muted);
+  margin:0 2px 20px;
+  font-size:14px;
+}
 
 /* HERO */
 .hero{
-  position:relative;
-  min-height:205px;
-  margin:4px 12px 12px;
-  border-radius:20px;
+  min-height:255px;
+  border-radius:28px;
   overflow:hidden;
-  isolation:isolate;
-  background:#b9d0d7;
+  position:relative;
+  background-image:
+    linear-gradient(90deg,rgba(14,39,54,.76),rgba(14,39,54,.12)),
+    url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:flex-end;
+  padding:25px;
   box-shadow:var(--shadow);
 }
 
-.hero-image{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  z-index:1;
-  filter:saturate(1.10) contrast(1.02) brightness(1.03);
+.hero-content{
+  color:white;
+  max-width:430px;
 }
 
-.hero:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:2;
-  background:linear-gradient(
-    90deg,
-    rgba(11,35,51,.72) 0%,
-    rgba(11,35,51,.56) 22%,
-    rgba(11,35,51,.30) 42%,
-    rgba(11,35,51,.08) 62%,
-    rgba(11,35,51,0) 78%
-  );
-  pointer-events:none;
+.hero-greeting{
+  font-size:15px;
+  opacity:.9;
+  margin-bottom:6px;
 }
 
-.hero-copy{
-  position:relative;
-  z-index:4;
-  width:72%;
-  min-height:205px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:20px 12px 20px 18px;
-}
-
-.hero-kicker{
-  color:rgba(255,255,255,.92);
-  font-size:14px;
-  font-weight:600;
-  margin-bottom:3px;
-  text-shadow:0 1px 4px rgba(0,0,0,.28);
-}
-
-.hero-title{
+.hero h1{
   margin:0;
-  color:#fff;
-  font-size:29px;
-  line-height:1.05;
-  font-weight:850;
-  letter-spacing:-1.3px;
-  text-shadow:0 2px 7px rgba(0,0,0,.28);
+  font-size:32px;
+  line-height:1.08;
+  letter-spacing:-1px;
 }
 
-.hero-description{
-  margin:9px 0 0;
-  color:rgba(255,255,255,.94);
-  font-size:12px;
-  line-height:1.5;
-  max-width:230px;
-  text-shadow:0 1px 5px rgba(0,0,0,.3);
+.hero p{
+  margin:10px 0 0;
+  font-size:14px;
+  opacity:.9;
 }
 
-/* MAIN */
-.content{padding:0 12px 105px}
+/* SECTION */
+.section{
+  margin-top:22px;
+}
 
-.page{display:none}
-.page.active{display:block}
-
-/* HEADINGS */
-.section-heading{
+.section-head{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  margin:18px 2px 10px;
+  align-items:center;
+  margin:0 2px 11px;
 }
 
 .section-title{
   font-size:18px;
   font-weight:800;
-  letter-spacing:-.4px;
 }
 
-.section-subtitle{
-  font-size:11px;
-  color:var(--muted);
+.section-link{
+  border:0;
+  background:none;
+  color:var(--blue);
+  font-size:13px;
+  font-weight:700;
 }
 
 /* HEALTH */
 .health-card{
-  background:var(--mint);
-  border-radius:20px;
-  padding:17px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.health-row{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  box-shadow:var(--shadow);
-  margin-bottom:18px;
+  gap:17px;
 }
 
-.health-left{display:flex;align-items:center;gap:13px}
-
-.health-icon{
-  width:45px;height:45px;border-radius:15px;
-  background:rgba(255,255,255,.68);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--mint-dark);
+.health-ring{
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  background:
+    conic-gradient(var(--mint-dark) var(--health,57%),#edf2f4 0);
+  display:grid;
+  place-items:center;
+  flex:none;
 }
 
-.health-icon svg{width:24px;height:24px}
-
-.health-title{font-size:15px;font-weight:800}
-
-.health-text{
-  font-size:11px;
-  color:#668474;
-  margin-top:4px;
+.health-ring::after{
+  content:"";
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:white;
+  position:absolute;
 }
 
 .health-score{
-  width:52px;height:52px;border-radius:50%;
-  background:#fff;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  box-shadow:0 4px 12px rgba(50,100,75,.08);
+  position:relative;
+  z-index:1;
+  font-weight:800;
+  font-size:17px;
 }
 
-.health-number{font-size:17px;font-weight:800}
-.health-label{font-size:8px;color:var(--muted)}
+.health-info{
+  flex:1;
+}
+
+.health-info strong{
+  display:block;
+  font-size:16px;
+}
+
+.health-info span{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:4px;
+  line-height:1.4;
+}
 
 /* TASK CARDS */
-.tasks{
+.task-list{
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:11px;
 }
 
 .task-card{
-  background:var(--card);
+  background:white;
   border:1px solid var(--border);
-  border-radius:18px;
+  border-radius:19px;
   padding:14px;
   display:flex;
   align-items:center;
   gap:12px;
-  box-shadow:var(--shadow);
+  box-shadow:0 5px 18px rgba(24,59,86,.055);
 }
 
 .task-icon{
-  width:44px;height:44px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
+  width:46px;
+  height:46px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  flex:none;
 }
 
-.task-icon svg{width:21px;height:21px}
+.task-icon svg{
+  width:23px;
+  height:23px;
+}
 
-.task-info{min-width:0;flex:1}
+.task-main{
+  min-width:0;
+  flex:1;
+}
 
-.task-name{
-  font-size:14px;
+.task-title{
   font-weight:750;
+  font-size:15px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
 .task-date{
-  font-size:10px;
+  font-size:12px;
   color:var(--muted);
   margin-top:4px;
 }
 
 .task-status{
-  font-size:9px;
-  font-weight:700;
+  font-size:11px;
+  font-weight:750;
   padding:5px 8px;
-  border-radius:20px;
-  flex-shrink:0;
+  border-radius:999px;
+  white-space:nowrap;
 }
 
-.status-upcoming{background:var(--blue-soft);color:var(--blue)}
-.status-overdue{background:#fdeaea;color:var(--danger)}
-.status-today{background:#fff0da;color:#b97925}
+.status-overdue{
+  color:#b84747;
+  background:#fde9e9;
+}
 
-/* QUICK */
+.status-today{
+  color:#a86d16;
+  background:#fff2d9;
+}
+
+.status-upcoming{
+  color:#39749a;
+  background:#e8f5fb;
+}
+
+.status-completed{
+  color:#4d8d70;
+  background:#e5f4ec;
+}
+
+/* QUICK ACTIONS */
 .quick-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-top:4px;
+  gap:12px;
 }
 
 .quick-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
+  border:0;
+  min-height:92px;
   padding:15px;
-  min-height:105px;
-  box-shadow:var(--shadow);
   text-align:left;
+  border-radius:20px;
+  background:white;
+  box-shadow:var(--shadow);
+  color:var(--text);
 }
 
-.quick-card:active{transform:scale(.98)}
+.quick-card:nth-child(1){
+  background:var(--blue-soft);
+}
+
+.quick-card:nth-child(2){
+  background:var(--mint);
+}
+
+.quick-card:nth-child(3){
+  background:var(--orange);
+}
+
+.quick-card:nth-child(4){
+  background:var(--lavender);
+}
 
 .quick-icon{
-  width:38px;height:38px;
-  border-radius:13px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:11px;
-}
-
-.quick-icon svg{width:20px;height:20px}
-.quick-title{font-size:13px;font-weight:800}
-.quick-text{font-size:9px;color:var(--muted);margin-top:3px}
-
-/* MEMORY */
-.memory-header{padding:8px 2px 14px}
-
-.memory-header h1{
-  margin:0;
   font-size:24px;
-  letter-spacing:-.7px;
 }
 
-.memory-header p{
-  margin:6px 0 0;
-  color:var(--muted);
+.quick-title{
+  display:block;
+  font-weight:800;
+  margin-top:7px;
+  font-size:14px;
+}
+
+.quick-sub{
+  display:block;
+  color:#66808f;
   font-size:11px;
+  margin-top:2px;
 }
 
-.filter-row{
+/* FILTERS */
+.filters{
   display:flex;
-  gap:7px;
+  gap:8px;
   overflow-x:auto;
-  padding-bottom:4px;
+  padding:2px 0 6px;
   scrollbar-width:none;
 }
 
-.filter-row::-webkit-scrollbar{display:none}
+.filters::-webkit-scrollbar{
+  display:none;
+}
 
 .filter-btn{
-  white-space:nowrap;
-  padding:8px 13px;
-  border-radius:20px;
-  background:#fff;
-  color:var(--muted);
   border:1px solid var(--border);
-  font-size:10px;
+  background:white;
+  color:var(--muted);
+  padding:9px 14px;
+  border-radius:999px;
+  white-space:nowrap;
+  font-size:12px;
   font-weight:700;
 }
 
 .filter-btn.active{
+  color:white;
   background:var(--navy);
-  color:#fff;
   border-color:var(--navy);
 }
 
-.memory-list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:14px;
-}
-
-.memory-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:14px;
-  box-shadow:var(--shadow);
-}
-
-.memory-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
-}
-
-.memory-title{font-size:14px;font-weight:800}
-.memory-meta{font-size:10px;color:var(--muted);margin-top:4px}
-
-.memory-notes{
-  font-size:11px;
-  line-height:1.5;
-  color:#607887;
-  margin-top:9px;
-}
-
-.memory-actions{
-  display:flex;
-  gap:7px;
-  margin-top:11px;
-}
-
-.small-btn{
-  padding:7px 10px;
-  border-radius:10px;
-  font-size:9px;
-  font-weight:700;
-  background:#f3f7f9;
-  color:var(--navy);
-}
-
-.small-btn.danger{
-  color:var(--danger);
-  background:#fff1f1;
-}
-
-/* FORM */
-.form-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:17px;
-  box-shadow:var(--shadow);
-}
-
-.form-group{margin-bottom:14px}
-
-.form-label{
-  display:block;
-  font-size:11px;
-  font-weight:750;
-  margin-bottom:6px;
-}
-
-.form-input,.form-select,.form-textarea{
-  width:100%;
-  border:1px solid #dfe8ed;
-  background:#fbfdfe;
-  border-radius:12px;
-  padding:11px 12px;
-  color:var(--text);
-  outline:none;
-  font-size:12px;
-}
-
-.form-input:focus,.form-select:focus,.form-textarea:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(36,149,208,.08);
-}
-
-.form-textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-.primary-btn{
-  width:100%;
-  padding:12px 16px;
-  border-radius:13px;
-  background:var(--navy);
-  color:#fff;
-  font-size:12px;
-  font-weight:800;
-  box-shadow:0 6px 14px rgba(24,59,86,.16);
-}
-
-.secondary-btn{
-  width:100%;
-  padding:12px 16px;
-  border-radius:13px;
-  background:#eef4f7;
-  color:var(--navy);
-  font-size:12px;
-  font-weight:800;
-}
-
-/* SETTINGS */
-.settings-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-
-.setting-row{
-  min-height:58px;
-  padding:11px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-}
-
-.setting-row:last-child{border-bottom:0}
-
-.setting-left{display:flex;align-items:center;gap:11px}
-
-.setting-icon{
-  width:35px;height:35px;border-radius:11px;
-  background:#eef5f8;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--navy);
-}
-
-.setting-icon svg{width:18px;height:18px}
-
-.setting-name{font-size:12px;font-weight:750}
-
-.setting-description{
-  font-size:9px;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-.toggle{
-  width:43px;height:25px;border-radius:20px;
-  background:#d9e3e8;
-  padding:3px;
-  transition:.2s;
-}
-
-.toggle span{
-  display:block;
-  width:19px;height:19px;border-radius:50%;
-  background:#fff;
-  transition:.2s;
-  box-shadow:0 2px 4px rgba(0,0,0,.12);
-}
-
-.toggle.on{background:var(--blue)}
-.toggle.on span{transform:translateX(18px)}
-
 /* EMPTY */
-.empty-state{
+.empty{
+  background:white;
+  border:1px dashed var(--border);
+  border-radius:20px;
+  padding:28px 18px;
   text-align:center;
-  padding:35px 20px;
   color:var(--muted);
 }
 
 .empty-icon{
-  width:55px;height:55px;border-radius:18px;
-  background:#edf4f7;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 12px;
+  font-size:34px;
+  margin-bottom:8px;
 }
 
-.empty-icon svg{width:25px;height:25px}
-.empty-title{font-size:14px;font-weight:800;color:var(--navy)}
-.empty-text{font-size:10px;line-height:1.5;margin-top:5px}
-
-/* MODAL */
-.modal-backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(15,31,43,.45);
-  z-index:100;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
+.empty strong{
+  color:var(--text);
+  display:block;
+  margin-bottom:4px;
 }
 
-.modal-backdrop.show{display:flex}
-
-.modal{
-  width:100%;
-  max-width:560px;
-  background:#fff;
-  border-radius:24px 24px 0 0;
-  padding:18px;
-  max-height:90vh;
-  overflow:auto;
-  box-shadow:0 -10px 35px rgba(0,0,0,.14);
+/* CALENDAR */
+.calendar-day{
+  margin-top:16px;
 }
 
-.modal-handle{
-  width:38px;height:4px;border-radius:5px;
-  background:#dce4e8;
-  margin:0 auto 17px;
+.calendar-date{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:750;
+  margin:0 2px 8px;
 }
 
-.modal-title{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:15px;
+.calendar-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
-/* TOAST */
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:84px;
-  transform:translateX(-50%) translateY(20px);
-  background:var(--navy);
-  color:#fff;
-  padding:10px 15px;
+/* SETTINGS */
+.settings-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:21px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.setting-row{
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--border);
+}
+
+.setting-row:last-child{
+  border-bottom:0;
+}
+
+.setting-left strong{
+  display:block;
+  font-size:14px;
+}
+
+.setting-left span{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.setting-btn{
+  border:0;
+  background:var(--blue-soft);
+  color:var(--blue);
+  padding:9px 12px;
   border-radius:12px;
-  font-size:10px;
-  font-weight:650;
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-  z-index:200;
-  white-space:nowrap;
-  box-shadow:0 8px 20px rgba(0,0,0,.18);
+  font-weight:750;
+  font-size:12px;
 }
 
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
+.danger-btn{
+  background:#fdeaea;
+  color:var(--danger);
+}
+
+/* TOGGLE */
+.toggle{
+  width:48px;
+  height:28px;
+  border:0;
+  border-radius:20px;
+  background:#d9e3e8;
+  padding:3px;
+}
+
+.toggle span{
+  display:block;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:white;
+  transition:.2s;
+}
+
+.toggle.on{
+  background:var(--blue);
+}
+
+.toggle.on span{
+  transform:translateX(20px);
+}
+
+/* FAB */
+.fab{
+  position:fixed;
+  right:20px;
+  bottom:82px;
+  width:58px;
+  height:58px;
+  border:0;
+  border-radius:20px;
+  background:var(--navy);
+  color:white;
+  box-shadow:0 12px 28px rgba(24,59,86,.25);
+  display:grid;
+  place-items:center;
+  z-index:30;
+}
+
+.fab svg{
+  width:25px;
+  height:25px;
 }
 
 /* BOTTOM NAV */
@@ -637,61 +582,189 @@ button{border:0;cursor:pointer}
   left:0;
   right:0;
   bottom:0;
-  width:100%;
-  max-width:none;
   height:72px;
-  background:rgba(255,255,255,.97);
+  background:rgba(255,255,255,.96);
   border-top:1px solid var(--border);
   display:flex;
-  align-items:center;
-  justify-content:space-around;
-  z-index:50;
-  padding:7px 8px calc(7px + env(safe-area-inset-bottom));
-  box-shadow:0 -5px 18px rgba(24,59,86,.06);
+  justify-content:center;
+  z-index:25;
+  backdrop-filter:blur(16px);
 }
 
-.nav-item{
-  flex:1;
-  height:57px;
+.nav-inner{
+  width:100%;
+  max-width:760px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+
+.nav-btn{
+  border:0;
+  background:none;
+  color:#8a9aa4;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:4px;
-  background:transparent;
-  color:#9aabb5;
-  font-size:9px;
+  font-size:10px;
   font-weight:700;
 }
 
-.nav-item svg{width:21px;height:21px}
-.nav-item.active{color:var(--navy)}
-.nav-item.active svg{stroke-width:2.5}
-
-/* FAB */
-.fab{
-  position:fixed;
-  right:18px;
-  bottom:86px;
-  width:53px;height:53px;
-  border-radius:18px;
-  background:var(--navy);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:45;
-  box-shadow:0 9px 22px rgba(24,59,86,.24);
+.nav-btn svg{
+  width:20px;
+  height:20px;
 }
 
-.fab svg{width:23px;height:23px}
+.nav-btn.active{
+  color:var(--blue);
+}
 
-@media(max-width:360px){
-  .topbar{padding-left:12px;padding-right:12px}
-  .content{padding-left:10px;padding-right:10px}
-  .hero{margin-left:10px;margin-right:10px}
-  .hero-title{font-size:27px}
-  .quick-card{padding:13px}
+/* MODAL */
+.modal-backdrop{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(14,31,42,.45);
+  z-index:100;
+  padding:18px;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:620px;
+  background:white;
+  border-radius:28px 28px 20px 20px;
+  padding:20px;
+  max-height:90vh;
+  overflow:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.18);
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.modal-title{
+  font-size:21px;
+  font-weight:850;
+}
+
+.close-btn{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:13px;
+  background:#f1f5f7;
+  color:var(--muted);
+}
+
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-label{
+  display:block;
+  font-size:12px;
+  font-weight:750;
+  margin-bottom:6px;
+  color:#587181;
+}
+
+.form-input,
+.form-select,
+.form-textarea{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fbfcfd;
+  border-radius:14px;
+  padding:12px 13px;
+  outline:none;
+  color:var(--text);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus{
+  border-color:#9ed4ed;
+  box-shadow:0 0 0 3px var(--blue-soft);
+}
+
+.form-textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.form-actions{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+
+.primary-btn,
+.secondary-btn{
+  flex:1;
+  border:0;
+  border-radius:15px;
+  padding:13px;
+  font-weight:800;
+}
+
+.primary-btn{
+  background:var(--navy);
+  color:white;
+}
+
+.secondary-btn{
+  background:#eef3f5;
+  color:var(--text);
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:88px;
+  transform:translate(-50%,20px);
+  background:var(--navy);
+  color:white;
+  padding:11px 15px;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:700;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:200;
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+@media(max-width:390px){
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero{
+    min-height:235px;
+  }
+
+  .task-status{
+    display:none;
+  }
 }
 </style>
 </head>
@@ -699,317 +772,270 @@ button{border:0;cursor:pointer}
 <body>
 
 <div class="app">
-<div class="app-shell">
 
 <header class="topbar">
-
   <div class="brand">
-    <div class="brand-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 11.5 12 4l9 7.5"/>
-        <path d="M5.5 10.5V20h13v-9.5"/>
-        <path d="M9.5 20v-5h5v5"/>
-        <path d="M17.5 5.8c0-1.5-1-2.8-2.4-3.3"/>
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 10.5 12 3l9 7.5"/>
+        <path d="M5.5 9.5V21h13V9.5"/>
+        <path d="M9.5 21v-6h5v6"/>
       </svg>
     </div>
-
-    <div class="brand-text">
-      <div class="brand-name">Haven</div>
-      <div class="brand-tagline">Your home remembers.</div>
+    <div>
+      <div class="brand-text">Haven</div>
+      <span class="brand-sub">Your home remembers.</span>
     </div>
   </div>
 
-  <button class="top-action" id="settingsTopBtn" aria-label="Settings">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="3"/>
-      <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V22h-2.55v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.1 17a1.7 1.7 0 0 0-1.56-1.03H6.45v-2.55h.1A1.7 1.7 0 0 0 8.1 12.4a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.47 7.5v-.1h2.55v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03h.1v2.55h-.1A1.7 1.7 0 0 0 19.4 15z"/>
+  <button class="icon-btn" onclick="showPage('settings')" aria-label="Settings">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"/>
+      <path d="m19.4 15 .1.1a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 0 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 0 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 0 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3V1.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 0 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/>
     </svg>
   </button>
-
 </header>
 
-<main class="content">
+<!-- HOME -->
+<main id="homePage" class="page active">
 
-<section id="homePage" class="page active">
-
-  <div class="hero">
-    <img class="hero-image"
-      src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
-      alt="Beautiful home">
-
-    <div class="hero-copy">
-      <div class="hero-kicker">Good morning, Javaid</div>
-      <h1 class="hero-title">A home worth<br>remembering.</h1>
-      <p class="hero-description">
-        Keep every repair, service and little detail of your home in one place.
-      </p>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-greeting">Good morning, Javaid</div>
+      <h1>A home worth remembering.</h1>
+      <p>Keep the little things cared for, before they become big things.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="health-card">
-    <div class="health-left">
-      <div class="health-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 21s-7-4.35-9.5-8.7C.4 8.5 2.4 4.5 6.5 4.5c2.1 0 3.6 1.1 5.5 3 1.9-1.9 3.4-3 5.5-3 4.1 0 6.1 4 4 7.8C19 16.65 12 21 12 21z"/>
-        </svg>
-      </div>
-
-      <div>
-        <div class="health-title">Home Health</div>
-        <div class="health-text" id="healthText">Everything looks good.</div>
-      </div>
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Home Health</div>
     </div>
 
-    <div class="health-score">
-      <div class="health-number" id="healthScore">100%</div>
-      <div class="health-label">healthy</div>
+    <div class="health-card">
+      <div class="health-row">
+        <div class="health-ring" id="healthRing">
+          <span class="health-score" id="healthScore">100%</span>
+        </div>
+
+        <div class="health-info">
+          <strong id="healthTitle">Your home is cared for.</strong>
+          <span id="healthText">Everything looks good.</span>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Upcoming Maintenance</div>
+      <button class="section-link" onclick="showPage('tasks')">View all</button>
+    </div>
+
+    <div class="task-list" id="upcomingList"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">Quick Actions</div>
+    </div>
+
+    <div class="quick-grid">
+      <button class="quick-card" onclick="openAddModal()">
+        <div class="quick-icon">＋</div>
+        <span class="quick-title">Add Memory</span>
+        <span class="quick-sub">Record maintenance</span>
+      </button>
+
+      <button class="quick-card" onclick="showPage('calendar')">
+        <div class="quick-icon">📅</div>
+        <span class="quick-title">Calendar</span>
+        <span class="quick-sub">See what's coming</span>
+      </button>
+
+      <button class="quick-card" onclick="setFilter('overdue');showPage('tasks')">
+        <div class="quick-icon">⏰</div>
+        <span class="quick-title">Needs Attention</span>
+        <span class="quick-sub">Check overdue items</span>
+      </button>
+
+      <button class="quick-card" onclick="showPage('settings')">
+        <div class="quick-icon">⚙️</div>
+        <span class="quick-title">Settings</span>
+        <span class="quick-sub">Manage Haven</span>
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<!-- TASKS -->
+<main id="tasksPage" class="page">
+
+  <h1 class="page-title">Your Memories</h1>
+  <p class="page-subtitle">A simple record of the care your home receives.</p>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+    <button class="filter-btn" data-filter="today" onclick="setFilter('today')">Today</button>
+    <button class="filter-btn" data-filter="upcoming" onclick="setFilter('upcoming')">Upcoming</button>
+    <button class="filter-btn" data-filter="overdue" onclick="setFilter('overdue')">Overdue</button>
   </div>
 
-  <div class="section-heading">
-    <div class="section-title">Upcoming Maintenance</div>
-    <div class="section-subtitle" id="upcomingCount">0 tasks</div>
-  </div>
+  <section class="section">
+    <div class="task-list" id="memoryList"></div>
+  </section>
 
-  <div class="tasks" id="upcomingTasks"></div>
+</main>
 
-  <div class="section-heading">
-    <div class="section-title">Quick Actions</div>
-  </div>
+<!-- CALENDAR -->
+<main id="calendarPage" class="page">
 
-  <div class="quick-grid">
+  <h1 class="page-title">Calendar</h1>
+  <p class="page-subtitle">What's coming up for your home.</p>
 
-    <button class="quick-card" id="addMemoryQuick">
-      <div class="quick-icon" style="background:var(--blue-soft);color:var(--blue);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M12 5v14M5 12h14"/>
-        </svg>
-      </div>
-      <div class="quick-title">Add Memory</div>
-      <div class="quick-text">Save something about your home</div>
-    </button>
+  <div id="calendarList"></div>
 
-    <button class="quick-card" id="myHomeQuick">
-      <div class="quick-icon" style="background:var(--lavender);color:#7866a8;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 11.5 12 4l9 7.5"/>
-          <path d="M5.5 10.5V20h13v-9.5"/>
-          <path d="M9.5 20v-5h5v5"/>
-        </svg>
-      </div>
-      <div class="quick-title">My Home</div>
-      <div class="quick-text">View your home details</div>
-    </button>
+</main>
 
-    <button class="quick-card" id="allTasksQuick">
-      <div class="quick-icon" style="background:#fff0da;color:#b97925;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-          <rect x="4" y="4" width="16" height="16" rx="3"/>
-          <path d="m8 12 2.5 2.5L16 9"/>
-        </svg>
-      </div>
-      <div class="quick-title">All Tasks</div>
-      <div class="quick-text">See everything you've saved</div>
-    </button>
+<!-- SETTINGS -->
+<main id="settingsPage" class="page">
 
-    <button class="quick-card" id="settingsQuick">
-      <div class="quick-icon" style="background:var(--mint);color:var(--mint-dark);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V22h-2.55v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.1 17a1.7 1.7 0 0 0-1.56-1.03H6.45v-2.55h.1A1.7 1.7 0 0 0 8.1 12.4a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.47 7.5v-.1h2.55v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03h.1v2.55h-.1A1.7 1.7 0 0 0 19.4 15z"/>
-        </svg>
-      </div>
-      <div class="quick-title">Settings</div>
-      <div class="quick-text">Manage Haven</div>
-    </button>
-
-  </div>
-</section>
-
-<section id="tasksPage" class="page">
-
-  <div class="memory-header">
-    <h1>Your Memories</h1>
-    <p>Everything your home needs you to remember.</p>
-  </div>
-
-  <div class="filter-row">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="today">Today</button>
-    <button class="filter-btn" data-filter="upcoming">Upcoming</button>
-    <button class="filter-btn" data-filter="overdue">Overdue</button>
-  </div>
-
-  <div class="memory-list" id="memoryList"></div>
-
-</section>
-
-<section id="calendarPage" class="page">
-
-  <div class="memory-header">
-    <h1>Calendar</h1>
-    <p>Keep an eye on the days ahead.</p>
-  </div>
-
-  <div class="form-card">
-    <div class="section-title" style="margin-bottom:12px;">Upcoming dates</div>
-    <div id="calendarTasks"></div>
-  </div>
-
-</section>
-
-<section id="settingsPage" class="page">
-
-  <div class="memory-header">
-    <h1>Settings</h1>
-    <p>Make Haven work the way you want.</p>
-  </div>
+  <h1 class="page-title">Settings</h1>
+  <p class="page-subtitle">Keep Haven simple and private.</p>
 
   <div class="settings-card">
 
     <div class="setting-row">
       <div class="setting-left">
-        <div class="setting-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M12 3v18"/>
-            <path d="M5 8h14"/>
-            <path d="M7 16h10"/>
-          </svg>
-        </div>
-        <div>
-          <div class="setting-name">Reminders</div>
-          <div class="setting-description">Allow Haven to remind you.</div>
-        </div>
+        <strong>Reminders</strong>
+        <span>Allow Haven to send maintenance reminders.</span>
       </div>
 
-      <button class="toggle" id="reminderToggle"><span></span></button>
+      <button class="toggle" id="reminderToggle" onclick="toggleReminders()">
+        <span></span>
+      </button>
     </div>
 
     <div class="setting-row">
       <div class="setting-left">
-        <div class="setting-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M12 3v18"/>
-            <path d="M3 12h18"/>
-          </svg>
-        </div>
-        <div>
-          <div class="setting-name">Add a Memory</div>
-          <div class="setting-description">Save a maintenance task.</div>
-        </div>
+        <strong>Add a Memory</strong>
+        <span>Record a new maintenance task.</span>
       </div>
 
-      <button class="small-btn" id="settingsAddBtn">Add</button>
+      <button class="setting-btn" onclick="openAddModal()">Add</button>
     </div>
 
     <div class="setting-row">
       <div class="setting-left">
-        <div class="setting-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M4 7h16"/>
-            <path d="M10 11v6"/>
-            <path d="M14 11v6"/>
-            <path d="M6 7l1 14h10l1-14"/>
-            <path d="M9 7V4h6v3"/>
-          </svg>
-        </div>
-        <div>
-          <div class="setting-name">Clear Memories</div>
-          <div class="setting-description">Remove all saved memories.</div>
-        </div>
+        <strong>Storage</strong>
+        <span>Your memories are stored only on this device.</span>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-left">
+        <strong>Clear Memories</strong>
+        <span>Remove all saved maintenance memories.</span>
       </div>
 
-      <button class="small-btn danger" id="clearTasksBtn">Clear</button>
+      <button class="setting-btn danger-btn" onclick="clearMemories()">Clear</button>
     </div>
 
   </div>
-</section>
 
 </main>
 
-<button class="fab" id="fabAdd" aria-label="Add memory">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+</div>
+
+<!-- FAB -->
+<button class="fab" onclick="openAddModal()" aria-label="Add memory">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <path d="M12 5v14M5 12h14"/>
   </svg>
 </button>
 
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
+  <div class="nav-inner">
 
-  <button class="nav-item active" data-page="homePage">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 11.5 12 4l9 7.5"/>
-      <path d="M5.5 10.5V20h13v-9.5"/>
-      <path d="M9.5 20v-5h5v5"/>
-    </svg>
-    <span>Home</span>
-  </button>
+    <button class="nav-btn active" data-page="home" onclick="showPage('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 10.5 12 3l9 7.5"/>
+        <path d="M5.5 9.5V21h13V9.5"/>
+        <path d="M9.5 21v-6h5v6"/>
+      </svg>
+      Home
+    </button>
 
-  <button class="nav-item" data-page="calendarPage">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-      <rect x="3.5" y="5" width="17" height="16" rx="2"/>
-      <path d="M7 3v4M17 3v4M3.5 9h17"/>
-    </svg>
-    <span>Calendar</span>
-  </button>
+    <button class="nav-btn" data-page="calendar" onclick="showPage('calendar')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M16 3v4M8 3v4M3 10h18"/>
+      </svg>
+      Calendar
+    </button>
 
-  <button class="nav-item" data-page="tasksPage">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-      <rect x="4" y="4" width="16" height="16" rx="3"/>
-      <path d="m8 12 2.5 2.5L16 9"/>
-    </svg>
-    <span>Tasks</span>
-  </button>
+    <button class="nav-btn" data-page="tasks" onclick="showPage('tasks')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M5 5h14M5 12h14M5 19h14"/>
+        <circle cx="3.5" cy="5" r=".7" fill="currentColor"/>
+        <circle cx="3.5" cy="12" r=".7" fill="currentColor"/>
+        <circle cx="3.5" cy="19" r=".7" fill="currentColor"/>
+      </svg>
+      Tasks
+    </button>
 
-  <button class="nav-item" data-page="settingsPage">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-      <circle cx="12" cy="12" r="3"/>
-      <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V22h-2.55v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.1 17a1.7 1.7 0 0 0-1.56-1.03H6.45v-2.55h.1A1.7 1.7 0 0 0 8.1 12.4a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.47 7.5v-.1h2.55v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06a1.7 1.7 0 0 0 .34 1.88 1.7 1.7 0 0 0 1.56 1.03h.1v2.55h-.1A1.7 1.7 0 0 0 19.4 15z"/>
-    </svg>
-    <span>More</span>
-  </button>
+    <button class="nav-btn" data-page="settings" onclick="showPage('settings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2A1.8 1.8 0 0 0 7 17.4l-.1.1A1.8 1.8 0 0 1 4.4 15l.1-.1A1.8 1.8 0 0 0 3.2 12h-.2a1.8 1.8 0 0 1 0-3.6h.2A1.8 1.8 0 0 0 4.5 5.3l-.1-.1A1.8 1.8 0 0 1 7 2.7l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 0 1 2.5 2.5l-.1.1A1.8 1.8 0 0 0 20.8 8h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.4 3.4Z"/>
+      </svg>
+      More
+    </button>
 
+  </div>
 </nav>
 
-<!-- ADD MODAL -->
-<div class="modal-backdrop" id="addModal">
+<!-- ADD / EDIT MODAL -->
+<div class="modal-backdrop" id="taskModal">
   <div class="modal">
 
-    <div class="modal-handle"></div>
-    <div class="modal-title">Add a Memory</div>
+    <div class="modal-head">
+      <div class="modal-title" id="modalTitle">Add a Memory</div>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
 
-    <form id="addForm">
+    <form id="taskForm">
 
       <div class="form-group">
-        <label class="form-label">What should Haven remember?</label>
-        <input class="form-input" id="taskTitle" type="text"
-               placeholder="e.g. Clean water filter" required>
+        <label class="form-label">What needs care?</label>
+        <input class="form-input" id="taskTitle" placeholder="e.g. AC Cleaning" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label">Maintenance Type</label>
-
+        <label class="form-label">Category</label>
         <select class="form-select" id="taskCategory">
-          <option value="general">🏠 General home</option>
-          <option value="plumbing">🚰 Plumbing & water</option>
-          <option value="electrical">💡 Electrical</option>
-          <option value="cleaning">🧹 Cleaning</option>
-          <option value="appliance">⚙️ Appliances</option>
-          <option value="heating">🔥 Heating</option>
-          <option value="garden">🌿 Garden & outdoor</option>
-          <option value="repair">🔧 Repairs</option>
-          <option value="security">🔒 Security</option>
-          <option value="inspection">🔍 Inspection</option>
+          <option value="general">General</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="electrical">Electrical</option>
+          <option value="cleaning">Cleaning</option>
+          <option value="appliance">Appliance</option>
+          <option value="heating">Heating</option>
+          <option value="garden">Garden</option>
+          <option value="repair">Repair</option>
+          <option value="security">Security</option>
+          <option value="inspection">Inspection</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label class="form-label">Date</label>
+        <label class="form-label">Next date</label>
         <input class="form-input" id="taskDate" type="date" required>
       </div>
 
       <div class="form-group">
         <label class="form-label">Repeat</label>
-
         <select class="form-select" id="taskRepeat">
           <option value="none">Does not repeat</option>
           <option value="weekly">Every week</option>
@@ -1022,85 +1048,13 @@ button{border:0;cursor:pointer}
 
       <div class="form-group">
         <label class="form-label">Notes</label>
-        <textarea class="form-textarea" id="taskNotes"
-          placeholder="Anything else you want to remember..."></textarea>
+        <textarea class="form-textarea" id="taskNotes" placeholder="Optional notes..."></textarea>
       </div>
 
-      <button class="primary-btn" type="submit">Save Memory</button>
-
-      <div style="height:8px"></div>
-
-      <button class="secondary-btn" type="button" id="closeModal">
-        Cancel
-      </button>
-
-    </form>
-  </div>
-</div>
-
-<!-- EDIT MODAL -->
-<div class="modal-backdrop" id="editModal">
-  <div class="modal">
-
-    <div class="modal-handle"></div>
-    <div class="modal-title">Edit Memory</div>
-
-    <form id="editForm">
-
-      <input type="hidden" id="editId">
-
-      <div class="form-group">
-        <label class="form-label">Memory</label>
-        <input class="form-input" id="editTitle" type="text" required>
+      <div class="form-actions">
+        <button type="button" class="secondary-btn" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="primary-btn">Save Memory</button>
       </div>
-
-      <div class="form-group">
-        <label class="form-label">Maintenance Type</label>
-
-        <select class="form-select" id="editCategory">
-          <option value="general">🏠 General home</option>
-          <option value="plumbing">🚰 Plumbing & water</option>
-          <option value="electrical">💡 Electrical</option>
-          <option value="cleaning">🧹 Cleaning</option>
-          <option value="appliance">⚙️ Appliances</option>
-          <option value="heating">🔥 Heating</option>
-          <option value="garden">🌿 Garden & outdoor</option>
-          <option value="repair">🔧 Repairs</option>
-          <option value="security">🔒 Security</option>
-          <option value="inspection">🔍 Inspection</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Date</label>
-        <input class="form-input" id="editDate" type="date" required>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Repeat</label>
-
-        <select class="form-select" id="editRepeat">
-          <option value="none">Does not repeat</option>
-          <option value="weekly">Every week</option>
-          <option value="monthly">Every month</option>
-          <option value="3month">Every 3 months</option>
-          <option value="6month">Every 6 months</option>
-          <option value="yearly">Every year</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Notes</label>
-        <textarea class="form-textarea" id="editNotes"></textarea>
-      </div>
-
-      <button class="primary-btn" type="submit">Save Changes</button>
-
-      <div style="height:8px"></div>
-
-      <button class="secondary-btn" type="button" id="closeEditModal">
-        Cancel
-      </button>
 
     </form>
   </div>
@@ -1109,99 +1063,37 @@ button{border:0;cursor:pointer}
 <div class="toast" id="toast"></div>
 
 <script>
-/* =========================
-   HAVEN DATA
-========================= */
+const STORAGE_KEY="havenTasksV4";
+const REMINDER_KEY="havenRemindersV1";
 
-const STORAGE_KEY = "havenTasksV4";
-const REMINDER_KEY = "havenRemindersV1";
+let tasks=[];
+let currentFilter="all";
+let editingId=null;
 
-let tasks = [];
-let currentFilter = "all";
-
-
-/* =========================
-   STARTER DATA
-========================= */
-
-const starterTasks = [
+const starterTasks=[
   {
-    id: Date.now()+1,
-    title:"Check water filter",
-    date:addDays(new Date(),3),
+    id:1,
+    title:"AC Cleaning",
+    category:"appliance",
+    date:"2026-09-30",
     repeat:"3month",
-    notes:"Check the filter and replace if needed.",
-    category:"plumbing",
+    notes:"",
     completed:false
   },
   {
-    id:Date.now()+2,
-    title:"Clean kitchen exhaust",
-    date:addDays(new Date(),8),
+    id:2,
+    title:"Heater Check",
+    category:"heating",
+    date:"2026-09-30",
     repeat:"monthly",
-    notes:"Clean grease and dust from the exhaust.",
-    category:"cleaning",
-    completed:false
-  },
-  {
-    id:Date.now()+3,
-    title:"Check electrical switches",
-    date:addDays(new Date(),14),
-    repeat:"6month",
-    notes:"Check for loose or damaged switches.",
-    category:"electrical",
+    notes:"",
     completed:false
   }
 ];
 
-
-/* =========================
-   HELPERS
-========================= */
-
-function addDays(date,days){
-  const d=new Date(date);
-  d.setDate(d.getDate()+days);
-  return formatDateInput(d);
-}
-
-function formatDateInput(date){
-  const d=new Date(date);
-  const year=d.getFullYear();
-  const month=String(d.getMonth()+1).padStart(2,"0");
-  const day=String(d.getDate()).padStart(2,"0");
-  return `${year}-${month}-${day}`;
-}
-
-function parseDate(value){
-  return new Date(value+"T00:00:00");
-}
-
-function todayString(){
-  return formatDateInput(new Date());
-}
-
-function formatPrettyDate(value){
-  if(!value)return "";
-  const date=parseDate(value);
-
-  return date.toLocaleDateString(undefined,{
-    day:"numeric",
-    month:"short",
-    year:"numeric"
-  });
-}
-
-function daysFromToday(value){
-  const today=parseDate(todayString());
-  const date=parseDate(value);
-
-  return Math.round((date-today)/86400000);
-}
-
-function saveTasks(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
-}
+/* -------------------------
+   SAFE DATA LOADING
+------------------------- */
 
 function loadTasks(){
 
@@ -1210,19 +1102,42 @@ function loadTasks(){
   if(saved){
 
     try{
-      tasks=JSON.parse(saved);
 
-      /* Give old tasks a category if they don't have one */
-      tasks=tasks.map(task=>({
-        ...task,
-        category:task.category || guessCategory(task.title)
-      }));
+      const parsed=JSON.parse(saved);
 
-      saveTasks();
+      if(!Array.isArray(parsed)){
+        tasks=[];
+      }else{
+
+        /*
+          Keep only genuine maintenance memories.
+          Empty / broken records are ignored safely.
+          Existing localStorage is NOT cleared.
+        */
+
+        tasks=parsed
+          .filter(task=>{
+            return task &&
+                   typeof task==="object" &&
+                   String(task.title||"").trim() &&
+                   String(task.date||"").trim();
+          })
+          .map(task=>({
+            ...task,
+            title:String(task.title).trim(),
+            date:String(task.date).trim(),
+            repeat:task.repeat || "none",
+            notes:String(task.notes||""),
+            category:task.category || guessCategory(task.title),
+            completed:Boolean(task.completed)
+          }));
+
+      }
 
     }catch{
-      tasks=starterTasks;
-      saveTasks();
+
+      tasks=[];
+
     }
 
   }else{
@@ -1233,419 +1148,186 @@ function loadTasks(){
   }
 }
 
-function showToast(message){
-
-  const toast=document.getElementById("toast");
-
-  toast.textContent=message;
-  toast.classList.add("show");
-
-  setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
+function saveTasks(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
 }
 
+/*
+  Extra protection.
+  Every screen uses this helper instead of trusting
+  raw localStorage data.
+*/
+function validTasks(){
+  return tasks.filter(task=>{
+    return task &&
+           typeof task==="object" &&
+           String(task.title||"").trim() &&
+           String(task.date||"").trim();
+  });
+}
 
-/* =========================
-   SMART CATEGORY
-========================= */
+/* -------------------------
+   DATE HELPERS
+------------------------- */
+
+function localDateString(date=new Date()){
+
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,"0");
+  const d=String(date.getDate()).padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+}
+
+function parseDate(value){
+
+  if(!value)return null;
+
+  const parts=String(value).split("-").map(Number);
+
+  if(parts.length!==3 || parts.some(Number.isNaN)){
+    return null;
+  }
+
+  return new Date(parts[0],parts[1]-1,parts[2]);
+}
+
+function daysFromToday(value){
+
+  const target=parseDate(value);
+
+  if(!target)return 999999;
+
+  const today=parseDate(localDateString());
+
+  return Math.round((target-today)/86400000);
+}
+
+function formatDate(value){
+
+  const d=parseDate(value);
+
+  if(!d)return "Date not set";
+
+  return d.toLocaleDateString(undefined,{
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+/* -------------------------
+   CATEGORY
+------------------------- */
 
 function guessCategory(title){
 
-  const text=String(title||"").toLowerCase();
+  const t=String(title||"").toLowerCase();
 
-  if(/water|filter|tap|pipe|plumb|leak|drain|toilet|sink|faucet/.test(text))
-    return "plumbing";
+  if(/water|tap|pipe|leak|drain|plumb/.test(t))return"plumbing";
+  if(/wire|electric|switch|socket|light|fan/.test(t))return"electrical";
+  if(/clean|wash|dust|deep/.test(t))return"cleaning";
+  if(/ac|air conditioner|fridge|refrigerator|washing machine|appliance/.test(t))return"appliance";
+  if(/heater|heating|boiler|radiator/.test(t))return"heating";
+  if(/garden|plant|lawn|tree/.test(t))return"garden";
+  if(/repair|fix|broken/.test(t))return"repair";
+  if(/lock|security|alarm|camera/.test(t))return"security";
+  if(/inspect|check|inspection/.test(t))return"inspection";
 
-  if(/electric|switch|socket|wire|light|bulb|fan|power/.test(text))
-    return "electrical";
-
-  if(/clean|wash|dust|exhaust|carpet|window|floor|bathroom/.test(text))
-    return "cleaning";
-
-  if(/fridge|refrigerator|washing|washer|oven|microwave|appliance|ac\b|air conditioner/.test(text))
-    return "appliance";
-
-  if(/heat|heater|boiler|radiator|fireplace/.test(text))
-    return "heating";
-
-  if(/garden|plant|lawn|tree|outdoor|yard/.test(text))
-    return "garden";
-
-  if(/lock|alarm|security|camera|door/.test(text))
-    return "security";
-
-  if(/inspect|inspection|check|test/.test(text))
-    return "inspection";
-
-  if(/repair|fix|broken|replace|maintenance/.test(text))
-    return "repair";
-
-  return "general";
+  return"general";
 }
 
-
-/* =========================
-   TASK ICONS
-========================= */
+/* -------------------------
+   ICONS
+------------------------- */
 
 function taskIcon(category){
 
-  category=category || "general";
-
   const icons={
-
-    general:{
-      bg:"#e8f5fb",
-      color:"#2495d0",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 11.5 12 4l9 7.5"/>
-          <path d="M5.5 10.5V20h13v-9.5"/>
-          <path d="M9.5 20v-5h5v5"/>
-        </svg>`
-    },
-
     plumbing:{
-      bg:"#e6f5fb",
-      color:"#1689bd",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 3s-5 5.8-5 10a5 5 0 0 0 10 0c0-4.2-5-10-5-10z"/>
-          <path d="M9.5 15a2.7 2.7 0 0 0 5 1"/>
-        </svg>`
+      emoji:"💧",
+      bg:"#e8f5fb"
     },
-
     electrical:{
-      bg:"#fff0da",
-      color:"#b97925",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M13 2 4 13h7l-1 9 9-12h-7z"/>
-        </svg>`
+      emoji:"⚡",
+      bg:"#fff2d9"
     },
-
     cleaning:{
-      bg:"#e6f4ed",
-      color:"#4d8d70",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M8 3h8"/>
-          <path d="M10 3v5l-5 10a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18L14 8V3"/>
-          <path d="M8 15h8"/>
-        </svg>`
+      emoji:"✨",
+      bg:"#e9e2f8"
     },
-
     appliance:{
-      bg:"#eee9fa",
-      color:"#7866a8",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="3" width="16" height="18" rx="3"/>
-          <path d="M8 7h8"/>
-          <circle cx="12" cy="14" r="3"/>
-          <path d="M17 7h.01"/>
-        </svg>`
+      emoji:"❄️",
+      bg:"#e8f5fb"
     },
-
     heating:{
-      bg:"#fff0da",
-      color:"#d87932",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 21c4 0 7-2.8 7-6.6 0-3.2-2.2-5.2-4.2-7.4-.3 2-1.3 3.1-2.5 4.1.1-3.5-1.5-5.8-3.7-8.1.2 4-3.6 6.3-3.6 11.2C5 18.2 8 21 12 21z"/>
-        </svg>`
+      emoji:"🔥",
+      bg:"#fdebdc"
     },
-
     garden:{
-      bg:"#e4f3e8",
-      color:"#4d8d70",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 21V10"/>
-          <path d="M12 13c-4 0-7-2.3-7-6 4.8-.2 7 1.8 7 6z"/>
-          <path d="M12 11c0-4 2.7-6.5 7-6.5.2 3.8-2 6.5-7 6.5z"/>
-          <path d="M8 21h8"/>
-        </svg>`
+      emoji:"🌿",
+      bg:"#e5f4ec"
     },
-
     repair:{
-      bg:"#e8f5fb",
-      color:"#2495d0",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L4 17a2.1 2.1 0 0 0 3 3l5.2-5.2a4 4 0 0 0 5.3-5.3l-2.8 2.8-2.5-2.5z"/>
-        </svg>`
+      emoji:"🔧",
+      bg:"#eef1f4"
     },
-
     security:{
-      bg:"#eee9fa",
-      color:"#7866a8",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <rect x="5" y="10" width="14" height="10" rx="2"/>
-          <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-          <circle cx="12" cy="15" r="1"/>
-        </svg>`
+      emoji:"🔒",
+      bg:"#e9e2f8"
     },
-
     inspection:{
-      bg:"#e8f5fb",
-      color:"#2495d0",
-      svg:`
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.8"
-          stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="10.5" cy="10.5" r="6"/>
-          <path d="m15 15 5 5"/>
-          <path d="M8 10.5h5"/>
-          <path d="M10.5 8v5"/>
-        </svg>`
+      emoji:"🔎",
+      bg:"#e8f5fb"
+    },
+    general:{
+      emoji:"🏠",
+      bg:"#eef3f5"
     }
   };
 
-  return icons[category] || icons.general;
+  return icons[category]||icons.general;
 }
 
-
-/* =========================
+/* -------------------------
    STATUS
-========================= */
+------------------------- */
 
 function getStatus(task){
 
   if(task.completed){
-    return {label:"Completed",className:"status-upcoming"};
+    return{
+      label:"Completed",
+      className:"status-completed"
+    };
   }
 
-  const diff=daysFromToday(task.date);
+  const days=daysFromToday(task.date);
 
-  if(diff<0)
-    return {label:"Overdue",className:"status-overdue"};
+  if(days<0){
+    return{
+      label:"Overdue",
+      className:"status-overdue"
+    };
+  }
 
-  if(diff===0)
-    return {label:"Today",className:"status-today"};
+  if(days===0){
+    return{
+      label:"Today",
+      className:"status-today"
+    };
+  }
 
-  return {label:"Upcoming",className:"status-upcoming"};
+  return{
+    label:"Upcoming",
+    className:"status-upcoming"
+  };
 }
-
-
-/* =========================
-   RENDER UPCOMING
-========================= */
-
-function renderUpcoming(){
-
-  const container=document.getElementById("upcomingTasks");
-
-  const activeTasks=tasks
-    .filter(t=>!t.completed)
-    .sort((a,b)=>parseDate(a.date)-parseDate(b.date));
-
-  document.getElementById("upcomingCount").textContent=
-    `${activeTasks.length} ${activeTasks.length===1?"task":"tasks"}`;
-
-  if(!activeTasks.length){
-
-    container.innerHTML=`
-      <div class="empty-state">
-        <div class="empty-icon">${taskIcon("general").svg}</div>
-        <div class="empty-title">Your home is all caught up</div>
-        <div class="empty-text">
-          Add a memory whenever there's something worth remembering.
-        </div>
-      </div>`;
-
-    return;
-  }
-
-  /*
-    IMPORTANT:
-    Previously this was .slice(0,4).
-    That meant Haven could say "13 tasks"
-    while only four were visible.
-    
-    Now all active tasks are displayed.
-  */
-
-  container.innerHTML=activeTasks.map(task=>{
-
-    const status=getStatus(task);
-    const icon=taskIcon(task.category);
-
-    return `
-      <div class="task-card">
-
-        <div class="task-icon"
-             style="background:${icon.bg};color:${icon.color};">
-          ${icon.svg}
-        </div>
-
-        <div class="task-info">
-          <div class="task-name">
-            ${escapeHtml(task.title)}
-          </div>
-
-          <div class="task-date">
-            ${formatPrettyDate(task.date)}
-            ${task.repeat!=="none"
-              ? " • "+repeatLabel(task.repeat)
-              : ""}
-          </div>
-        </div>
-
-        <div class="task-status ${status.className}">
-          ${status.label}
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
-}
-
-
-/* =========================
-   MEMORY LIST
-========================= */
-
-function renderMemoryList(){
-
-  const container=document.getElementById("memoryList");
-
-  let filtered=[...tasks];
-
-  if(currentFilter==="today"){
-    filtered=filtered.filter(t=>t.date===todayString());
-  }
-
-  if(currentFilter==="upcoming"){
-    filtered=filtered.filter(t=>
-      !t.completed && daysFromToday(t.date)>0
-    );
-  }
-
-  if(currentFilter==="overdue"){
-    filtered=filtered.filter(t=>
-      !t.completed && daysFromToday(t.date)<0
-    );
-  }
-
-  filtered.sort((a,b)=>parseDate(a.date)-parseDate(b.date));
-
-  if(!filtered.length){
-
-    const icon=taskIcon("general");
-
-    container.innerHTML=`
-      <div class="empty-state">
-        <div class="empty-icon">${icon.svg}</div>
-        <div class="empty-title">Nothing here yet</div>
-        <div class="empty-text">
-          Your saved home memories will appear here.
-        </div>
-      </div>`;
-
-    return;
-  }
-
-  container.innerHTML=filtered.map(task=>{
-
-    const status=getStatus(task);
-    const icon=taskIcon(task.category);
-
-    return `
-      <div class="memory-card">
-
-        <div class="memory-top">
-
-          <div style="display:flex;gap:10px;min-width:0;">
-
-            <div class="task-icon"
-                 style="background:${icon.bg};color:${icon.color};width:42px;height:42px;">
-              ${icon.svg}
-            </div>
-
-            <div style="min-width:0;">
-
-              <div class="memory-title">
-                ${escapeHtml(task.title)}
-              </div>
-
-              <div class="memory-meta">
-                ${formatPrettyDate(task.date)}
-                ${task.repeat!=="none"
-                  ? " • "+repeatLabel(task.repeat)
-                  : ""}
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="task-status ${status.className}">
-            ${status.label}
-          </div>
-
-        </div>
-
-        ${
-          task.notes
-          ? `<div class="memory-notes">${escapeHtml(task.notes)}</div>`
-          : ""
-        }
-
-        <div class="memory-actions">
-
-          ${
-            !task.completed
-            ? `<button class="small-btn"
-                 onclick="completeTask(${task.id})">
-                 Complete
-               </button>`
-            : ""
-          }
-
-          <button class="small-btn"
-                  onclick="editTask(${task.id})">
-            Edit
-          </button>
-
-          <button class="small-btn danger"
-                  onclick="deleteTask(${task.id})">
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
-}
-
 
 function repeatLabel(value){
 
   const labels={
+    none:"",
     weekly:"weekly",
     monthly:"monthly",
     "3month":"every 3 months",
@@ -1656,551 +1338,284 @@ function repeatLabel(value){
   return labels[value]||"";
 }
 
-
-/* =========================
-   ESCAPE
-========================= */
+/* -------------------------
+   SAFE HTML
+------------------------- */
 
 function escapeHtml(value){
 
-  return String(value||"")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  return String(value??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
+/* -------------------------
+   TASK CARD
+------------------------- */
 
-/* =========================
-   COMPLETE
-========================= */
+function taskCard(task,showActions=true){
 
-function completeTask(id){
+  const icon=taskIcon(task.category);
+  const status=getStatus(task);
+  const repeat=repeatLabel(task.repeat);
 
-  const task=tasks.find(t=>t.id===id);
+  return `
+    <div class="task-card">
 
-  if(!task)return;
+      <div class="task-icon" style="background:${icon.bg}">
+        <span style="font-size:22px">${icon.emoji}</span>
+      </div>
 
-  if(task.repeat!=="none"){
+      <div class="task-main">
 
-    task.date=getNextDate(task.date,task.repeat);
-
-    showToast("Next reminder scheduled");
-
-  }else{
-
-    task.completed=true;
-
-    showToast("Memory completed");
-
-  }
-
-  saveTasks();
-  renderAll();
-}
-
-
-/* =========================
-   DELETE
-========================= */
-
-function deleteTask(id){
-
-  const task=tasks.find(t=>t.id===id);
-
-  if(!task)return;
-
-  if(!confirm("Delete this memory?"))return;
-
-  tasks=tasks.filter(t=>t.id!==id);
-
-  saveTasks();
-  renderAll();
-
-  showToast("Memory deleted");
-}
-
-
-/* =========================
-   NEXT DATE
-========================= */
-
-function getNextDate(dateValue,repeat){
-
-  const date=parseDate(dateValue);
-
-  if(repeat==="weekly")
-    date.setDate(date.getDate()+7);
-
-  if(repeat==="monthly")
-    date.setMonth(date.getMonth()+1);
-
-  if(repeat==="3month")
-    date.setMonth(date.getMonth()+3);
-
-  if(repeat==="6month")
-    date.setMonth(date.getMonth()+6);
-
-  if(repeat==="yearly")
-    date.setFullYear(date.getFullYear()+1);
-
-  return formatDateInput(date);
-}
-
-
-/* =========================
-   EDIT
-========================= */
-
-function editTask(id){
-
-  const task=tasks.find(t=>t.id===id);
-
-  if(!task)return;
-
-  document.getElementById("editId").value=task.id;
-  document.getElementById("editTitle").value=task.title;
-  document.getElementById("editDate").value=task.date;
-  document.getElementById("editRepeat").value=task.repeat;
-  document.getElementById("editNotes").value=task.notes||"";
-  document.getElementById("editCategory").value=
-    task.category || guessCategory(task.title);
-
-  document.getElementById("editModal").classList.add("show");
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function showPage(pageId){
-
-  document.querySelectorAll(".page").forEach(page=>{
-    page.classList.remove("active");
-  });
-
-  const page=document.getElementById(pageId);
-
-  if(page)page.classList.add("active");
-
-  document.querySelectorAll(".nav-item").forEach(item=>{
-    item.classList.toggle(
-      "active",
-      item.dataset.page===pageId
-    );
-  });
-
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-document.querySelectorAll(".nav-item").forEach(item=>{
-
-  item.addEventListener("click",()=>{
-
-    showPage(item.dataset.page);
-
-    if(item.dataset.page==="tasksPage")
-      renderMemoryList();
-
-    if(item.dataset.page==="calendarPage")
-      renderCalendar();
-
-  });
-
-});
-
-
-/* =========================
-   MODALS
-========================= */
-
-function openAddModal(){
-
-  document.getElementById("addModal").classList.add("show");
-
-  document.getElementById("taskDate").value=todayString();
-
-  document.getElementById("taskCategory").value="general";
-}
-
-function closeAddModal(){
-  document.getElementById("addModal").classList.remove("show");
-}
-
-function closeEditModal(){
-  document.getElementById("editModal").classList.remove("show");
-}
-
-document.getElementById("fabAdd")
-  .addEventListener("click",openAddModal);
-
-document.getElementById("addMemoryQuick")
-  .addEventListener("click",openAddModal);
-
-document.getElementById("settingsAddBtn")
-  .addEventListener("click",openAddModal);
-
-document.getElementById("closeModal")
-  .addEventListener("click",closeAddModal);
-
-document.getElementById("closeEditModal")
-  .addEventListener("click",closeEditModal);
-
-
-/* =========================
-   ADD FORM
-========================= */
-
-document.getElementById("addForm")
-.addEventListener("submit",e=>{
-
-  e.preventDefault();
-
-  const title=document.getElementById("taskTitle").value.trim();
-  const date=document.getElementById("taskDate").value;
-  const repeat=document.getElementById("taskRepeat").value;
-  const notes=document.getElementById("taskNotes").value.trim();
-
-  let category=document.getElementById("taskCategory").value;
-
-  if(!title||!date)return;
-
-  /*
-    If the user leaves the category as General,
-    Haven can still intelligently identify the type
-    from the task title.
-  */
-  if(category==="general"){
-    const guessed=guessCategory(title);
-
-    if(guessed!=="general")
-      category=guessed;
-  }
-
-  tasks.push({
-    id:Date.now(),
-    title,
-    date,
-    repeat,
-    notes,
-    category,
-    completed:false
-  });
-
-  saveTasks();
-
-  e.target.reset();
-
-  closeAddModal();
-
-  /*
-    Refresh EVERYTHING immediately.
-    This makes the new task appear on Home,
-    Tasks and Calendar without reopening the app.
-  */
-  renderAll();
-
-  showPage("homePage");
-
-  showToast("Memory saved");
-
-});
-
-
-/* =========================
-   EDIT FORM
-========================= */
-
-document.getElementById("editForm")
-.addEventListener("submit",e=>{
-
-  e.preventDefault();
-
-  const id=Number(document.getElementById("editId").value);
-
-  const task=tasks.find(t=>t.id===id);
-
-  if(!task)return;
-
-  task.title=document.getElementById("editTitle").value.trim();
-  task.date=document.getElementById("editDate").value;
-  task.repeat=document.getElementById("editRepeat").value;
-  task.notes=document.getElementById("editNotes").value.trim();
-  task.category=document.getElementById("editCategory").value;
-
-  if(task.category==="general"){
-    const guessed=guessCategory(task.title);
-
-    if(guessed!=="general")
-      task.category=guessed;
-  }
-
-  saveTasks();
-
-  closeEditModal();
-
-  renderAll();
-
-  showToast("Memory updated");
-
-});
-
-
-/* =========================
-   FILTERS
-========================= */
-
-document.querySelectorAll(".filter-btn")
-.forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    document.querySelectorAll(".filter-btn")
-      .forEach(btn=>btn.classList.remove("active"));
-
-    button.classList.add("active");
-
-    currentFilter=button.dataset.filter;
-
-    renderMemoryList();
-
-  });
-
-});
-
-
-/* =========================
-   QUICK ACTIONS
-========================= */
-
-document.getElementById("allTasksQuick")
-.addEventListener("click",()=>{
-
-  showPage("tasksPage");
-  renderMemoryList();
-
-});
-
-document.getElementById("settingsQuick")
-.addEventListener("click",()=>{
-  showPage("settingsPage");
-});
-
-document.getElementById("settingsTopBtn")
-.addEventListener("click",()=>{
-  showPage("settingsPage");
-});
-
-document.getElementById("myHomeQuick")
-.addEventListener("click",()=>{
-  showToast("My Home is coming soon");
-});
-
-
-/* =========================
-   CALENDAR
-========================= */
-
-function renderCalendar(){
-
-  const container=document.getElementById("calendarTasks");
-
-  const upcoming=[...tasks]
-    .filter(t=>!t.completed)
-    .sort((a,b)=>parseDate(a.date)-parseDate(b.date));
-
-  if(!upcoming.length){
-
-    container.innerHTML=`
-      <div class="empty-state">
-        <div class="empty-title">No upcoming memories</div>
-        <div class="empty-text">
-          Your calendar will appear here as you add tasks.
+        <div class="task-title">
+          ${escapeHtml(task.title)}
         </div>
-      </div>`;
+
+        <div class="task-date">
+          ${formatDate(task.date)}
+          ${repeat ? ` · ${escapeHtml(repeat)}` : ""}
+        </div>
+
+      </div>
+
+      <span class="task-status ${status.className}">
+        ${status.label}
+      </span>
+
+      ${
+        showActions
+        ?
+        `
+        <button
+          class="icon-btn"
+          style="width:36px;height:36px;box-shadow:none;background:#f3f6f7"
+          onclick="completeTask(${task.id})"
+          aria-label="Complete"
+        >
+          ✓
+        </button>
+
+        <button
+          class="icon-btn"
+          style="width:36px;height:36px;box-shadow:none;background:#f3f6f7"
+          onclick="editTask(${task.id})"
+          aria-label="Edit"
+        >
+          ✎
+        </button>
+        `
+        :""
+      }
+
+    </div>
+  `;
+}
+
+/* -------------------------
+   HOME UPCOMING
+------------------------- */
+
+function renderUpcoming(){
+
+  const list=document.getElementById("upcomingList");
+
+  const active=validTasks()
+    .filter(t=>!t.completed)
+    .sort((a,b)=>{
+
+      const da=parseDate(a.date);
+      const db=parseDate(b.date);
+
+      return da-db;
+    });
+
+  if(!active.length){
+
+    list.innerHTML=`
+      <div class="empty">
+        <div class="empty-icon">🏡</div>
+        <strong>Nothing needs attention.</strong>
+        Your home is caught up.
+      </div>
+    `;
 
     return;
   }
 
-  container.innerHTML=upcoming.map(task=>{
+  list.innerHTML=active.map(task=>taskCard(task)).join("");
+}
 
-    const diff=daysFromToday(task.date);
+/* -------------------------
+   MEMORY LIST
+------------------------- */
 
-    let when="";
+function renderMemoryList(){
 
-    if(diff<0)
-      when=`${Math.abs(diff)} days overdue`;
-    else if(diff===0)
-      when="Today";
-    else if(diff===1)
-      when="Tomorrow";
-    else
-      when=`In ${diff} days`;
+  const list=document.getElementById("memoryList");
 
-    const icon=taskIcon(task.category);
+  let filtered=validTasks();
 
-    return `
-      <div class="task-card"
-           style="box-shadow:none;border:0;border-bottom:1px solid var(--border);border-radius:0;padding-left:0;padding-right:0;">
+  if(currentFilter==="today"){
 
-        <div class="task-icon"
-             style="background:${icon.bg};color:${icon.color};">
-          ${icon.svg}
-        </div>
+    filtered=filtered.filter(t=>{
+      return !t.completed && daysFromToday(t.date)===0;
+    });
 
-        <div class="task-info">
+  }else if(currentFilter==="upcoming"){
 
-          <div class="task-name">
-            ${escapeHtml(task.title)}
-          </div>
+    filtered=filtered.filter(t=>{
+      return !t.completed && daysFromToday(t.date)>0;
+    });
 
-          <div class="task-date">
-            ${formatPrettyDate(task.date)} • ${when}
-          </div>
+  }else if(currentFilter==="overdue"){
 
-        </div>
+    filtered=filtered.filter(t=>{
+      return !t.completed && daysFromToday(t.date)<0;
+    });
 
+  }
+
+  filtered.sort((a,b)=>{
+
+    const da=parseDate(a.date);
+    const db=parseDate(b.date);
+
+    return da-db;
+  });
+
+  if(!filtered.length){
+
+    list.innerHTML=`
+      <div class="empty">
+        <div class="empty-icon">🌿</div>
+        <strong>No memories here.</strong>
+        Try another filter or add a new memory.
       </div>
     `;
 
-  }).join("");
+    return;
+  }
+
+  list.innerHTML=filtered.map(task=>taskCard(task)).join("");
 }
 
+/* -------------------------
+   CALENDAR
+------------------------- */
 
-/* =========================
+function renderCalendar(){
+
+  const container=document.getElementById("calendarList");
+
+  const active=validTasks()
+    .filter(t=>!t.completed)
+    .sort((a,b)=>parseDate(a.date)-parseDate(b.date));
+
+  if(!active.length){
+
+    container.innerHTML=`
+      <div class="empty">
+        <div class="empty-icon">📅</div>
+        <strong>Nothing scheduled.</strong>
+        Add a maintenance memory to start your calendar.
+      </div>
+    `;
+
+    return;
+  }
+
+  const groups={};
+
+  active.forEach(task=>{
+
+    if(!groups[task.date]){
+      groups[task.date]=[];
+    }
+
+    groups[task.date].push(task);
+
+  });
+
+  container.innerHTML=Object.keys(groups)
+    .sort()
+    .map(date=>{
+
+      return `
+        <div class="calendar-day">
+
+          <div class="calendar-date">
+            ${formatDate(date)}
+          </div>
+
+          <div class="task-list">
+            ${groups[date].map(task=>taskCard(task)).join("")}
+          </div>
+
+        </div>
+      `;
+
+    })
+    .join("");
+}
+
+/* -------------------------
    HEALTH
-========================= */
+------------------------- */
 
 function renderHealth(){
 
-  const active=tasks.filter(t=>!t.completed);
+  const active=validTasks().filter(t=>!t.completed);
 
-  const overdue=active.filter(
-    t=>daysFromToday(t.date)<0
-  );
+  const overdue=active.filter(t=>daysFromToday(t.date)<0);
 
   let score=100;
 
   if(active.length){
     score=Math.max(
       0,
-      Math.round(
-        100-(overdue.length/active.length*100)
-      )
+      Math.round(100-(overdue.length/active.length*100))
     );
   }
 
-  document.getElementById("healthScore")
-    .textContent=`${score}%`;
+  document.getElementById("healthScore").textContent=`${score}%`;
 
-  if(overdue.length===0){
+  document
+    .getElementById("healthRing")
+    .style.setProperty("--health",`${score}%`);
 
-    document.getElementById("healthText")
-      .textContent="Everything looks good.";
+  const title=document.getElementById("healthTitle");
+  const text=document.getElementById("healthText");
+
+  if(!active.length){
+
+    title.textContent="Your home is cared for.";
+    text.textContent="No active maintenance memories.";
+
+  }else if(overdue.length===0){
+
+    title.textContent="Your home is on track.";
+    text.textContent="Everything looks good.";
 
   }else if(overdue.length===1){
 
-    document.getElementById("healthText")
-      .textContent="One memory needs attention.";
+    title.textContent="One memory needs attention.";
+    text.textContent="You have 1 overdue maintenance task.";
 
   }else{
 
-    document.getElementById("healthText")
-      .textContent=`${overdue.length} memories need attention.`;
+    title.textContent="A few memories need attention.";
+    text.textContent=`You have ${overdue.length} overdue maintenance tasks.`;
 
   }
 }
 
-
-/* =========================
-   REMINDERS
-========================= */
-
-function loadReminderSetting(){
-
-  const value=localStorage.getItem(REMINDER_KEY);
-
-  const enabled=value==="true";
-
-  document.getElementById("reminderToggle")
-    .classList.toggle("on",enabled);
-}
-
-document.getElementById("reminderToggle")
-.addEventListener("click",async()=>{
-
-  const toggle=document.getElementById("reminderToggle");
-
-  const enabled=!toggle.classList.contains("on");
-
-  if(enabled&&"Notification" in window){
-
-    try{
-
-      const permission=
-        await Notification.requestPermission();
-
-      if(permission!=="granted"){
-
-        showToast("Notifications are not enabled");
-        return;
-
-      }
-
-    }catch{
-
-      showToast("Notifications unavailable");
-      return;
-
-    }
-  }
-
-  localStorage.setItem(
-    REMINDER_KEY,
-    String(enabled)
-  );
-
-  toggle.classList.toggle("on",enabled);
-
-  showToast(
-    enabled
-    ?"Reminders enabled"
-    :"Reminders disabled"
-  );
-
-});
-
-
-/* =========================
-   CLEAR TASKS
-========================= */
-
-document.getElementById("clearTasksBtn")
-.addEventListener("click",()=>{
-
-  if(!tasks.length){
-    showToast("There are no memories");
-    return;
-  }
-
-  if(!confirm("Delete all memories?"))
-    return;
-
-  tasks=[];
-
-  saveTasks();
-  renderAll();
-
-  showToast("All memories cleared");
-
-});
-
-
-/* =========================
-   RENDER EVERYTHING
-========================= */
+/* -------------------------
+   RENDER ALL
+------------------------- */
 
 function renderAll(){
 
@@ -2211,27 +1626,422 @@ function renderAll(){
 
 }
 
+/* -------------------------
+   NAVIGATION
+------------------------- */
 
-/* =========================
-   SERVICE WORKER
-========================= */
+function showPage(page){
 
-if("serviceWorker" in navigator){
-
-  window.addEventListener("load",()=>{
-
-    navigator.serviceWorker
-      .register("./sw.js")
-      .catch(()=>{});
-
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
   });
+
+  document.getElementById(page+"Page").classList.add("active");
+
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.page===page
+    );
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  if(page==="home"){
+    renderHealth();
+    renderUpcoming();
+  }
+
+  if(page==="tasks"){
+    renderMemoryList();
+  }
+
+  if(page==="calendar"){
+    renderCalendar();
+  }
+}
+
+/* -------------------------
+   FILTER
+------------------------- */
+
+function setFilter(filter){
+
+  currentFilter=filter;
+
+  document.querySelectorAll(".filter-btn").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.filter===filter
+    );
+  });
+
+  renderMemoryList();
 
 }
 
+/* -------------------------
+   MODAL
+------------------------- */
 
-/* =========================
-   START
-========================= */
+function openAddModal(){
+
+  editingId=null;
+
+  document.getElementById("modalTitle").textContent="Add a Memory";
+
+  document.getElementById("taskForm").reset();
+
+  document.getElementById("taskDate").value=localDateString();
+
+  document.getElementById("taskCategory").value="general";
+  document.getElementById("taskRepeat").value="none";
+
+  document.getElementById("taskModal").classList.add("show");
+
+}
+
+function closeModal(){
+
+  document.getElementById("taskModal").classList.remove("show");
+
+  editingId=null;
+
+}
+
+function editTask(id){
+
+  const task=validTasks().find(t=>String(t.id)===String(id));
+
+  if(!task)return;
+
+  editingId=id;
+
+  document.getElementById("modalTitle").textContent="Edit Memory";
+
+  document.getElementById("taskTitle").value=task.title;
+  document.getElementById("taskCategory").value=task.category||"general";
+  document.getElementById("taskDate").value=task.date;
+  document.getElementById("taskRepeat").value=task.repeat||"none";
+  document.getElementById("taskNotes").value=task.notes||"";
+
+  document.getElementById("taskModal").classList.add("show");
+
+}
+
+/* -------------------------
+   ADD / EDIT SUBMIT
+------------------------- */
+
+document
+  .getElementById("taskForm")
+  .addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const title=document.getElementById("taskTitle").value.trim();
+    const date=document.getElementById("taskDate").value;
+    let category=document.getElementById("taskCategory").value;
+    const repeat=document.getElementById("taskRepeat").value;
+    const notes=document.getElementById("taskNotes").value.trim();
+
+    if(!title || !date){
+
+      showToast("Please enter a title and date.");
+      return;
+
+    }
+
+    if(category==="general"){
+
+      const guessed=guessCategory(title);
+
+      if(guessed!=="general"){
+        category=guessed;
+      }
+
+    }
+
+    if(editingId!==null){
+
+      const index=tasks.findIndex(
+        t=>String(t.id)===String(editingId)
+      );
+
+      if(index!==-1){
+
+        tasks[index]={
+          ...tasks[index],
+          title,
+          date,
+          category,
+          repeat,
+          notes
+        };
+
+      }
+
+      saveTasks();
+
+      closeModal();
+      renderAll();
+
+      showToast("Memory updated.");
+
+      return;
+    }
+
+    tasks.push({
+      id:Date.now(),
+      title,
+      category,
+      date,
+      repeat,
+      notes,
+      completed:false
+    });
+
+    saveTasks();
+
+    closeModal();
+    renderAll();
+
+    showToast("Memory added.");
+
+  });
+
+/* -------------------------
+   COMPLETE TASK
+------------------------- */
+
+function completeTask(id){
+
+  const index=tasks.findIndex(
+    t=>String(t.id)===String(id)
+  );
+
+  if(index===-1)return;
+
+  const task=tasks[index];
+
+  if(task.repeat && task.repeat!=="none"){
+
+    const nextDate=getNextDate(
+      task.date,
+      task.repeat
+    );
+
+    task.date=nextDate;
+
+    task.completed=false;
+
+    showToast("Next maintenance date scheduled.");
+
+  }else{
+
+    task.completed=true;
+
+    showToast("Memory completed.");
+
+  }
+
+  saveTasks();
+  renderAll();
+
+}
+
+/* -------------------------
+   NEXT REPEAT DATE
+------------------------- */
+
+function getNextDate(value,repeat){
+
+  const d=parseDate(value)||new Date();
+
+  if(repeat==="weekly"){
+    d.setDate(d.getDate()+7);
+  }
+
+  if(repeat==="monthly"){
+    d.setMonth(d.getMonth()+1);
+  }
+
+  if(repeat==="3month"){
+    d.setMonth(d.getMonth()+3);
+  }
+
+  if(repeat==="6month"){
+    d.setMonth(d.getMonth()+6);
+  }
+
+  if(repeat==="yearly"){
+    d.setFullYear(d.getFullYear()+1);
+  }
+
+  return localDateString(d);
+}
+
+/* -------------------------
+   DELETE
+------------------------- */
+
+function deleteTask(id){
+
+  const task=validTasks().find(
+    t=>String(t.id)===String(id)
+  );
+
+  if(!task)return;
+
+  const confirmed=confirm(
+    `Delete "${task.title}"?`
+  );
+
+  if(!confirmed)return;
+
+  tasks=tasks.filter(
+    t=>String(t.id)!==String(id)
+  );
+
+  saveTasks();
+  renderAll();
+
+  showToast("Memory deleted.");
+
+}
+
+/* -------------------------
+   REMINDERS
+------------------------- */
+
+function loadReminderSetting(){
+
+  const enabled=
+    localStorage.getItem(REMINDER_KEY)==="true";
+
+  updateReminderButton(enabled);
+
+}
+
+function updateReminderButton(enabled){
+
+  document
+    .getElementById("reminderToggle")
+    .classList.toggle("on",enabled);
+
+}
+
+async function toggleReminders(){
+
+  const current=
+    localStorage.getItem(REMINDER_KEY)==="true";
+
+  if(!current){
+
+    if(!("Notification" in window)){
+
+      showToast("Notifications are not supported here.");
+      return;
+
+    }
+
+    const permission=
+      await Notification.requestPermission();
+
+    if(permission!=="granted"){
+
+      showToast("Notification permission was not granted.");
+      return;
+
+    }
+
+    localStorage.setItem(
+      REMINDER_KEY,
+      "true"
+    );
+
+    updateReminderButton(true);
+
+    showToast("Reminders enabled.");
+
+  }else{
+
+    localStorage.setItem(
+      REMINDER_KEY,
+      "false"
+    );
+
+    updateReminderButton(false);
+
+    showToast("Reminders disabled.");
+
+  }
+
+}
+
+/* -------------------------
+   CLEAR MEMORIES
+------------------------- */
+
+function clearMemories(){
+
+  const confirmed=confirm(
+    "This will remove all Haven memories from this device. Continue?"
+  );
+
+  if(!confirmed)return;
+
+  tasks=[];
+
+  saveTasks();
+
+  renderAll();
+
+  showToast("Memories cleared.");
+
+}
+
+/* -------------------------
+   TOAST
+------------------------- */
+
+let toastTimer;
+
+function showToast(message){
+
+  const toast=document.getElementById("toast");
+
+  toast.textContent=message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer=setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
+
+}
+
+/* -------------------------
+   CLOSE MODAL BY BACKDROP
+------------------------- */
+
+document
+  .getElementById("taskModal")
+  .addEventListener("click",function(e){
+
+    if(e.target===this){
+      closeModal();
+    }
+
+  });
+
+/* -------------------------
+   START HAVEN
+------------------------- */
 
 loadTasks();
 loadReminderSetting();
@@ -2239,8 +2049,5 @@ renderAll();
 
 </script>
 
-</div>
-</div>
-
 </body>
-        </html>
+  </html>
