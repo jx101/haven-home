@@ -263,7 +263,11 @@ body{
   flex-direction:column;
   gap:11px;
 }
-
+.task-card,
+.task-card *{
+  user-select:none;
+  -webkit-user-select:none;
+}
 .task-card{
   background:white;
   border:1px solid var(--border);
