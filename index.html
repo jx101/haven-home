@@ -1418,8 +1418,10 @@ function getStatus(task){
 
   if(days<0){
 
+    const overdueDays=Math.abs(days);
+
     return{
-      label:"Overdue",
+      label:`Overdue by ${overdueDays} ${overdueDays===1?"day":"days"}`,
       className:"status-overdue"
     };
 
@@ -1428,14 +1430,14 @@ function getStatus(task){
   if(days===0){
 
     return{
-      label:"Today",
+      label:"Due today",
       className:"status-today"
     };
 
   }
 
   return{
-    label:"Upcoming",
+    label:`Due in ${days} ${days===1?"day":"days"}`,
     className:"status-upcoming"
   };
 
@@ -2284,4 +2286,4 @@ renderAll();
 </script>
 
 </body>
-  </html>
+</html>
