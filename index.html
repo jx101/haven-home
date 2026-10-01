@@ -43,24 +43,12 @@ body{
   padding-bottom:92px;
 }
 
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
 .app{
   width:100%;
   max-width:760px;
   margin:auto;
 }
 
-/* TOP BAR */
 .topbar{
   height:70px;
   padding:14px 18px;
@@ -126,7 +114,6 @@ button{
   height:20px;
 }
 
-/* PAGES */
 .page{
   display:none;
   padding:0 16px 24px;
@@ -148,7 +135,6 @@ button{
   font-size:14px;
 }
 
-/* HERO */
 .hero{
   min-height:255px;
   border-radius:28px;
@@ -189,7 +175,6 @@ button{
   opacity:.9;
 }
 
-/* SECTION */
 .section{
   margin-top:22px;
 }
@@ -214,7 +199,6 @@ button{
   font-weight:700;
 }
 
-/* HEALTH */
 .health-card{
   background:white;
   border:1px solid var(--border);
@@ -238,6 +222,7 @@ button{
   display:grid;
   place-items:center;
   flex:none;
+  position:relative;
 }
 
 .health-ring::after{
@@ -273,7 +258,6 @@ button{
   line-height:1.4;
 }
 
-/* TASK CARDS */
 .task-list{
   display:flex;
   flex-direction:column;
@@ -298,11 +282,6 @@ button{
   display:grid;
   place-items:center;
   flex:none;
-}
-
-.task-icon svg{
-  width:23px;
-  height:23px;
 }
 
 .task-main{
@@ -352,7 +331,6 @@ button{
   background:#e5f4ec;
 }
 
-/* QUICK ACTIONS */
 .quick-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -404,7 +382,6 @@ button{
   margin-top:2px;
 }
 
-/* FILTERS */
 .filters{
   display:flex;
   gap:8px;
@@ -434,7 +411,6 @@ button{
   border-color:var(--navy);
 }
 
-/* EMPTY */
 .empty{
   background:white;
   border:1px dashed var(--border);
@@ -455,7 +431,6 @@ button{
   margin-bottom:4px;
 }
 
-/* CALENDAR */
 .calendar-day{
   margin-top:16px;
 }
@@ -467,18 +442,6 @@ button{
   margin:0 2px 8px;
 }
 
-.calendar-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:14px;
-  box-shadow:var(--shadow);
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-/* SETTINGS */
 .settings-card{
   background:white;
   border:1px solid var(--border);
@@ -527,7 +490,6 @@ button{
   color:var(--danger);
 }
 
-/* TOGGLE */
 .toggle{
   width:48px;
   height:28px;
@@ -554,7 +516,6 @@ button{
   transform:translateX(20px);
 }
 
-/* FAB */
 .fab{
   position:fixed;
   right:20px;
@@ -576,7 +537,6 @@ button{
   height:25px;
 }
 
-/* BOTTOM NAV */
 .bottom-nav{
   position:fixed;
   left:0;
@@ -620,7 +580,6 @@ button{
   color:var(--blue);
 }
 
-/* MODAL */
 .modal-backdrop{
   display:none;
   position:fixed;
@@ -729,7 +688,23 @@ button{
   color:var(--text);
 }
 
-/* TOAST */
+/* NEW: DELETE BUTTON */
+.delete-memory-btn{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:13px;
+  margin-top:10px;
+  background:#fdeaea;
+  color:var(--danger);
+  font-weight:800;
+  display:none;
+}
+
+.delete-memory-btn.show{
+  display:block;
+}
+
 .toast{
   position:fixed;
   left:50%;
@@ -782,6 +757,7 @@ button{
         <path d="M9.5 21v-6h5v6"/>
       </svg>
     </div>
+
     <div>
       <div class="brand-text">Haven</div>
       <span class="brand-sub">Your home remembers.</span>
@@ -789,14 +765,10 @@ button{
   </div>
 
   <button class="icon-btn" onclick="showPage('settings')" aria-label="Settings">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"/>
-      <path d="m19.4 15 .1.1a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2a1.8 1.8 0 0 0-3.1-1.3l-.1.1a1.8 1.8 0 0 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 0 1 0-3.6h.2a1.8 1.8 0 0 0 1.3-3.1l-.1-.1a1.8 1.8 0 0 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3.1-1.3V1.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 0 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.3 3.1Z"/>
-    </svg>
+    ⚙
   </button>
 </header>
 
-<!-- HOME -->
 <main id="homePage" class="page active">
 
   <section class="hero">
@@ -814,6 +786,7 @@ button{
 
     <div class="health-card">
       <div class="health-row">
+
         <div class="health-ring" id="healthRing">
           <span class="health-score" id="healthScore">100%</span>
         </div>
@@ -822,25 +795,32 @@ button{
           <strong id="healthTitle">Your home is cared for.</strong>
           <span id="healthText">Everything looks good.</span>
         </div>
+
       </div>
     </div>
   </section>
 
   <section class="section">
+
     <div class="section-head">
       <div class="section-title">Upcoming Maintenance</div>
-      <button class="section-link" onclick="showPage('tasks')">View all</button>
+      <button class="section-link" onclick="showPage('tasks')">
+        View all
+      </button>
     </div>
 
     <div class="task-list" id="upcomingList"></div>
+
   </section>
 
   <section class="section">
+
     <div class="section-head">
       <div class="section-title">Quick Actions</div>
     </div>
 
     <div class="quick-grid">
+
       <button class="quick-card" onclick="openAddModal()">
         <div class="quick-icon">＋</div>
         <span class="quick-title">Add Memory</span>
@@ -864,22 +844,45 @@ button{
         <span class="quick-title">Settings</span>
         <span class="quick-sub">Manage Haven</span>
       </button>
+
     </div>
   </section>
 
 </main>
 
-<!-- TASKS -->
 <main id="tasksPage" class="page">
 
   <h1 class="page-title">Your Memories</h1>
-  <p class="page-subtitle">A simple record of the care your home receives.</p>
+  <p class="page-subtitle">
+    A simple record of the care your home receives.
+  </p>
 
   <div class="filters">
-    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
-    <button class="filter-btn" data-filter="today" onclick="setFilter('today')">Today</button>
-    <button class="filter-btn" data-filter="upcoming" onclick="setFilter('upcoming')">Upcoming</button>
-    <button class="filter-btn" data-filter="overdue" onclick="setFilter('overdue')">Overdue</button>
+
+    <button class="filter-btn active"
+            data-filter="all"
+            onclick="setFilter('all')">
+      All
+    </button>
+
+    <button class="filter-btn"
+            data-filter="today"
+            onclick="setFilter('today')">
+      Today
+    </button>
+
+    <button class="filter-btn"
+            data-filter="upcoming"
+            onclick="setFilter('upcoming')">
+      Upcoming
+    </button>
+
+    <button class="filter-btn"
+            data-filter="overdue"
+            onclick="setFilter('overdue')">
+      Overdue
+    </button>
+
   </div>
 
   <section class="section">
@@ -888,58 +891,76 @@ button{
 
 </main>
 
-<!-- CALENDAR -->
 <main id="calendarPage" class="page">
 
   <h1 class="page-title">Calendar</h1>
-  <p class="page-subtitle">What's coming up for your home.</p>
+  <p class="page-subtitle">
+    What's coming up for your home.
+  </p>
 
   <div id="calendarList"></div>
 
 </main>
 
-<!-- SETTINGS -->
 <main id="settingsPage" class="page">
 
   <h1 class="page-title">Settings</h1>
-  <p class="page-subtitle">Keep Haven simple and private.</p>
+  <p class="page-subtitle">
+    Keep Haven simple and private.
+  </p>
 
   <div class="settings-card">
 
     <div class="setting-row">
+
       <div class="setting-left">
         <strong>Reminders</strong>
         <span>Allow Haven to send maintenance reminders.</span>
       </div>
 
-      <button class="toggle" id="reminderToggle" onclick="toggleReminders()">
+      <button class="toggle"
+              id="reminderToggle"
+              onclick="toggleReminders()">
         <span></span>
       </button>
+
     </div>
 
     <div class="setting-row">
+
       <div class="setting-left">
         <strong>Add a Memory</strong>
         <span>Record a new maintenance task.</span>
       </div>
 
-      <button class="setting-btn" onclick="openAddModal()">Add</button>
+      <button class="setting-btn"
+              onclick="openAddModal()">
+        Add
+      </button>
+
     </div>
 
     <div class="setting-row">
+
       <div class="setting-left">
         <strong>Storage</strong>
         <span>Your memories are stored only on this device.</span>
       </div>
+
     </div>
 
     <div class="setting-row">
+
       <div class="setting-left">
         <strong>Clear Memories</strong>
         <span>Remove all saved maintenance memories.</span>
       </div>
 
-      <button class="setting-btn danger-btn" onclick="clearMemories()">Clear</button>
+      <button class="setting-btn danger-btn"
+              onclick="clearMemories()">
+        Clear
+      </button>
+
     </div>
 
   </div>
@@ -948,74 +969,92 @@ button{
 
 </div>
 
-<!-- FAB -->
-<button class="fab" onclick="openAddModal()" aria-label="Add memory">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M12 5v14M5 12h14"/>
-  </svg>
+<button class="fab"
+        onclick="openAddModal()"
+        aria-label="Add memory">
+  ＋
 </button>
 
-<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
+
   <div class="nav-inner">
 
-    <button class="nav-btn active" data-page="home" onclick="showPage('home')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M3 10.5 12 3l9 7.5"/>
-        <path d="M5.5 9.5V21h13V9.5"/>
-        <path d="M9.5 21v-6h5v6"/>
-      </svg>
+    <button class="nav-btn active"
+            data-page="home"
+            onclick="showPage('home')">
+      🏠
       Home
     </button>
 
-    <button class="nav-btn" data-page="calendar" onclick="showPage('calendar')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <rect x="3" y="5" width="18" height="16" rx="2"/>
-        <path d="M16 3v4M8 3v4M3 10h18"/>
-      </svg>
+    <button class="nav-btn"
+            data-page="calendar"
+            onclick="showPage('calendar')">
+      📅
       Calendar
     </button>
 
-    <button class="nav-btn" data-page="tasks" onclick="showPage('tasks')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M5 5h14M5 12h14M5 19h14"/>
-        <circle cx="3.5" cy="5" r=".7" fill="currentColor"/>
-        <circle cx="3.5" cy="12" r=".7" fill="currentColor"/>
-        <circle cx="3.5" cy="19" r=".7" fill="currentColor"/>
-      </svg>
+    <button class="nav-btn"
+            data-page="tasks"
+            onclick="showPage('tasks')">
+      ☑
       Tasks
     </button>
 
-    <button class="nav-btn" data-page="settings" onclick="showPage('settings')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.8 1.8 0 0 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 0 1-3.6 0v-.2A1.8 1.8 0 0 0 7 17.4l-.1.1A1.8 1.8 0 0 1 4.4 15l.1-.1A1.8 1.8 0 0 0 3.2 12h-.2a1.8 1.8 0 0 1 0-3.6h.2A1.8 1.8 0 0 0 4.5 5.3l-.1-.1A1.8 1.8 0 0 1 7 2.7l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 0 1 3.6 0v.2a1.8 1.8 0 0 0 3.1 1.3l.1-.1a1.8 1.8 0 0 1 2.5 2.5l-.1.1A1.8 1.8 0 0 0 20.8 8h.2a1.8 1.8 0 0 1 0 3.6h-.2a1.8 1.8 0 0 0-1.4 3.4Z"/>
-      </svg>
+    <button class="nav-btn"
+            data-page="settings"
+            onclick="showPage('settings')">
+      ⚙
       More
     </button>
 
   </div>
+
 </nav>
 
 <!-- ADD / EDIT MODAL -->
+
 <div class="modal-backdrop" id="taskModal">
+
   <div class="modal">
 
     <div class="modal-head">
-      <div class="modal-title" id="modalTitle">Add a Memory</div>
-      <button class="close-btn" onclick="closeModal()">✕</button>
+
+      <div class="modal-title" id="modalTitle">
+        Add a Memory
+      </div>
+
+      <button class="close-btn"
+              onclick="closeModal()">
+        ✕
+      </button>
+
     </div>
 
     <form id="taskForm">
 
       <div class="form-group">
-        <label class="form-label">What needs care?</label>
-        <input class="form-input" id="taskTitle" placeholder="e.g. AC Cleaning" required>
+
+        <label class="form-label">
+          What needs care?
+        </label>
+
+        <input
+          class="form-input"
+          id="taskTitle"
+          placeholder="e.g. AC Cleaning"
+          required
+        >
+
       </div>
 
       <div class="form-group">
-        <label class="form-label">Category</label>
+
+        <label class="form-label">
+          Category
+        </label>
+
         <select class="form-select" id="taskCategory">
+
           <option value="general">General</option>
           <option value="plumbing">Plumbing</option>
           <option value="electrical">Electrical</option>
@@ -1026,74 +1065,101 @@ button{
           <option value="repair">Repair</option>
           <option value="security">Security</option>
           <option value="inspection">Inspection</option>
+
         </select>
+
       </div>
 
       <div class="form-group">
-        <label class="form-label">Next date</label>
-        <input class="form-input" id="taskDate" type="date" required>
+
+        <label class="form-label">
+          Next date
+        </label>
+
+        <input
+          class="form-input"
+          id="taskDate"
+          type="date"
+          required
+        >
+
       </div>
 
       <div class="form-group">
-        <label class="form-label">Repeat</label>
+
+        <label class="form-label">
+          Repeat
+        </label>
+
         <select class="form-select" id="taskRepeat">
+
           <option value="none">Does not repeat</option>
           <option value="weekly">Every week</option>
           <option value="monthly">Every month</option>
           <option value="3month">Every 3 months</option>
           <option value="6month">Every 6 months</option>
           <option value="yearly">Every year</option>
+
         </select>
+
       </div>
 
       <div class="form-group">
-        <label class="form-label">Notes</label>
-        <textarea class="form-textarea" id="taskNotes" placeholder="Optional notes..."></textarea>
+
+        <label class="form-label">
+          Notes
+        </label>
+
+        <textarea
+          class="form-textarea"
+          id="taskNotes"
+          placeholder="Optional notes..."
+        ></textarea>
+
       </div>
 
       <div class="form-actions">
-        <button type="button" class="secondary-btn" onclick="closeModal()">Cancel</button>
-        <button type="submit" class="primary-btn">Save Memory</button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="closeModal()">
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="primary-btn">
+          Save Memory
+        </button>
+
       </div>
 
+      <!-- DELETE ONLY APPEARS WHEN EDITING -->
+      <button
+        type="button"
+        id="deleteMemoryBtn"
+        class="delete-memory-btn"
+        onclick="deleteEditingTask()">
+        Delete Memory
+      </button>
+
     </form>
+
   </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+
 const STORAGE_KEY="havenTasksV4";
 const REMINDER_KEY="havenRemindersV1";
 
 let tasks=[];
 let currentFilter="all";
 let editingId=null;
-
-const starterTasks=[
-  {
-    id:1,
-    title:"AC Cleaning",
-    category:"appliance",
-    date:"2026-09-30",
-    repeat:"3month",
-    notes:"",
-    completed:false
-  },
-  {
-    id:2,
-    title:"Heater Check",
-    category:"heating",
-    date:"2026-09-30",
-    repeat:"monthly",
-    notes:"",
-    completed:false
-  }
-];
-
-/* -------------------------
-   SAFE DATA LOADING
-------------------------- */
 
 function loadTasks(){
 
@@ -1105,15 +1171,7 @@ function loadTasks(){
 
       const parsed=JSON.parse(saved);
 
-      if(!Array.isArray(parsed)){
-        tasks=[];
-      }else{
-
-        /*
-          Keep only genuine maintenance memories.
-          Empty / broken records are ignored safely.
-          Existing localStorage is NOT cleared.
-        */
+      if(Array.isArray(parsed)){
 
         tasks=parsed
           .filter(task=>{
@@ -1123,14 +1181,26 @@ function loadTasks(){
                    String(task.date||"").trim();
           })
           .map(task=>({
+
             ...task,
+
             title:String(task.title).trim(),
+
             date:String(task.date).trim(),
-            repeat:task.repeat || "none",
+
+            repeat:task.repeat||"none",
+
             notes:String(task.notes||""),
-            category:task.category || guessCategory(task.title),
+
+            category:task.category||guessCategory(task.title),
+
             completed:Boolean(task.completed)
+
           }));
+
+      }else{
+
+        tasks=[];
 
       }
 
@@ -1140,56 +1210,69 @@ function loadTasks(){
 
     }
 
-  }else{
-
-    tasks=starterTasks;
-    saveTasks();
-
   }
+
 }
 
 function saveTasks(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(tasks)
+  );
+
 }
 
-/*
-  Extra protection.
-  Every screen uses this helper instead of trusting
-  raw localStorage data.
-*/
 function validTasks(){
+
   return tasks.filter(task=>{
+
     return task &&
            typeof task==="object" &&
            String(task.title||"").trim() &&
            String(task.date||"").trim();
-  });
-}
 
-/* -------------------------
-   DATE HELPERS
-------------------------- */
+  });
+
+}
 
 function localDateString(date=new Date()){
 
   const y=date.getFullYear();
-  const m=String(date.getMonth()+1).padStart(2,"0");
-  const d=String(date.getDate()).padStart(2,"0");
+
+  const m=String(
+    date.getMonth()+1
+  ).padStart(2,"0");
+
+  const d=String(
+    date.getDate()
+  ).padStart(2,"0");
 
   return `${y}-${m}-${d}`;
+
 }
 
 function parseDate(value){
 
   if(!value)return null;
 
-  const parts=String(value).split("-").map(Number);
+  const parts=String(value)
+    .split("-")
+    .map(Number);
 
-  if(parts.length!==3 || parts.some(Number.isNaN)){
+  if(
+    parts.length!==3 ||
+    parts.some(Number.isNaN)
+  ){
     return null;
   }
 
-  return new Date(parts[0],parts[1]-1,parts[2]);
+  return new Date(
+    parts[0],
+    parts[1]-1,
+    parts[2]
+  );
+
 }
 
 function daysFromToday(value){
@@ -1198,149 +1281,182 @@ function daysFromToday(value){
 
   if(!target)return 999999;
 
-  const today=parseDate(localDateString());
+  const today=parseDate(
+    localDateString()
+  );
 
-  return Math.round((target-today)/86400000);
+  return Math.round(
+    (target-today)/86400000
+  );
+
 }
 
 function formatDate(value){
 
   const d=parseDate(value);
 
-  if(!d)return "Date not set";
+  if(!d)return"Date not set";
 
-  return d.toLocaleDateString(undefined,{
-    day:"numeric",
-    month:"short",
-    year:"numeric"
-  });
+  return d.toLocaleDateString(
+    undefined,
+    {
+      day:"numeric",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
 }
-
-/* -------------------------
-   CATEGORY
-------------------------- */
 
 function guessCategory(title){
 
   const t=String(title||"").toLowerCase();
 
-  if(/water|tap|pipe|leak|drain|plumb/.test(t))return"plumbing";
-  if(/wire|electric|switch|socket|light|fan/.test(t))return"electrical";
-  if(/clean|wash|dust|deep/.test(t))return"cleaning";
-  if(/ac|air conditioner|fridge|refrigerator|washing machine|appliance/.test(t))return"appliance";
-  if(/heater|heating|boiler|radiator/.test(t))return"heating";
-  if(/garden|plant|lawn|tree/.test(t))return"garden";
-  if(/repair|fix|broken/.test(t))return"repair";
-  if(/lock|security|alarm|camera/.test(t))return"security";
-  if(/inspect|check|inspection/.test(t))return"inspection";
+  if(/water|tap|pipe|leak|drain|plumb/.test(t))
+    return"plumbing";
+
+  if(/wire|electric|switch|socket|light|fan/.test(t))
+    return"electrical";
+
+  if(/clean|wash|dust|deep/.test(t))
+    return"cleaning";
+
+  if(/ac|air conditioner|fridge|refrigerator|washing machine|appliance/.test(t))
+    return"appliance";
+
+  if(/heater|heating|boiler|radiator/.test(t))
+    return"heating";
+
+  if(/garden|plant|lawn|tree/.test(t))
+    return"garden";
+
+  if(/repair|fix|broken/.test(t))
+    return"repair";
+
+  if(/lock|security|alarm|camera/.test(t))
+    return"security";
+
+  if(/inspect|check|inspection/.test(t))
+    return"inspection";
 
   return"general";
-}
 
-/* -------------------------
-   ICONS
-------------------------- */
+}
 
 function taskIcon(category){
 
   const icons={
+
     plumbing:{
       emoji:"💧",
       bg:"#e8f5fb"
     },
+
     electrical:{
       emoji:"⚡",
       bg:"#fff2d9"
     },
+
     cleaning:{
-      emoji:"❄️",
+      emoji:"✨",
       bg:"#e9e2f8"
     },
+
     appliance:{
       emoji:"❄️",
       bg:"#e8f5fb"
     },
+
     heating:{
       emoji:"🔥",
       bg:"#fdebdc"
     },
+
     garden:{
       emoji:"🌿",
       bg:"#e5f4ec"
     },
+
     repair:{
       emoji:"🔧",
       bg:"#eef1f4"
     },
+
     security:{
       emoji:"🔒",
       bg:"#e9e2f8"
     },
+
     inspection:{
       emoji:"🔎",
       bg:"#e8f5fb"
     },
+
     general:{
       emoji:"🏠",
       bg:"#eef3f5"
     }
+
   };
 
   return icons[category]||icons.general;
-}
 
-/* -------------------------
-   STATUS
-------------------------- */
+}
 
 function getStatus(task){
 
   if(task.completed){
+
     return{
       label:"Completed",
       className:"status-completed"
     };
+
   }
 
   const days=daysFromToday(task.date);
 
   if(days<0){
+
     return{
       label:"Overdue",
       className:"status-overdue"
     };
+
   }
 
   if(days===0){
+
     return{
       label:"Today",
       className:"status-today"
     };
+
   }
 
   return{
     label:"Upcoming",
     className:"status-upcoming"
   };
+
 }
 
 function repeatLabel(value){
 
   const labels={
+
     none:"",
     weekly:"weekly",
     monthly:"monthly",
     "3month":"every 3 months",
     "6month":"every 6 months",
     yearly:"yearly"
+
   };
 
   return labels[value]||"";
-}
 
-/* -------------------------
-   SAFE HTML
-------------------------- */
+}
 
 function escapeHtml(value){
 
@@ -1350,23 +1466,27 @@ function escapeHtml(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
-/* -------------------------
-   TASK CARD
-------------------------- */
-
-function taskCard(task,showActions=true){
+function taskCard(task){
 
   const icon=taskIcon(task.category);
+
   const status=getStatus(task);
+
   const repeat=repeatLabel(task.repeat);
 
-  return `
+  return`
+
     <div class="task-card">
 
-      <div class="task-icon" style="background:${icon.bg}">
-        <span style="font-size:22px">${icon.emoji}</span>
+      <div
+        class="task-icon"
+        style="background:${icon.bg}">
+        <span style="font-size:22px">
+          ${icon.emoji}
+        </span>
       </div>
 
       <div class="task-main">
@@ -1386,146 +1506,169 @@ function taskCard(task,showActions=true){
         ${status.label}
       </span>
 
-      ${
-        showActions
-        ?
-        `
-        <button
-          class="icon-btn"
-          style="width:36px;height:36px;box-shadow:none;background:#f3f6f7"
-          onclick="completeTask(${task.id})"
-          aria-label="Complete"
-        >
-          ✓
-        </button>
+      <button
+        class="icon-btn"
+        style="width:36px;height:36px;box-shadow:none;background:#f3f6f7"
+        onclick="completeTask(${task.id})">
+        ✓
+      </button>
 
-        <button
-          class="icon-btn"
-          style="width:36px;height:36px;box-shadow:none;background:#f3f6f7"
-          onclick="editTask(${task.id})"
-          aria-label="Edit"
-        >
-          ✎
-        </button>
-        `
-        :""
-      }
+      <button
+        class="icon-btn"
+        style="width:36px;height:36px;box-shadow:none;background:#f3f6f7"
+        onclick="editTask(${task.id})">
+        ✎
+      </button>
 
     </div>
-  `;
-}
 
-/* -------------------------
-   HOME UPCOMING
-------------------------- */
+  `;
+
+}
 
 function renderUpcoming(){
 
-  const list=document.getElementById("upcomingList");
+  const list=document.getElementById(
+    "upcomingList"
+  );
 
   const active=validTasks()
     .filter(t=>!t.completed)
-    .sort((a,b)=>{
-
-      const da=parseDate(a.date);
-      const db=parseDate(b.date);
-
-      return da-db;
-    });
+    .sort(
+      (a,b)=>parseDate(a.date)-parseDate(b.date)
+    );
 
   if(!active.length){
 
     list.innerHTML=`
+
       <div class="empty">
-        <div class="empty-icon">🏡</div>
-        <strong>Nothing needs attention.</strong>
+
+        <div class="empty-icon">
+          🏡
+        </div>
+
+        <strong>
+          Nothing needs attention.
+        </strong>
+
         Your home is caught up.
+
       </div>
+
     `;
 
     return;
+
   }
 
-  list.innerHTML=active.map(task=>taskCard(task)).join("");
-}
+  list.innerHTML=
+    active.map(task=>taskCard(task)).join("");
 
-/* -------------------------
-   MEMORY LIST
-------------------------- */
+}
 
 function renderMemoryList(){
 
-  const list=document.getElementById("memoryList");
+  const list=document.getElementById(
+    "memoryList"
+  );
 
   let filtered=validTasks();
 
   if(currentFilter==="today"){
 
-    filtered=filtered.filter(t=>{
-      return !t.completed && daysFromToday(t.date)===0;
-    });
-
-  }else if(currentFilter==="upcoming"){
-
-    filtered=filtered.filter(t=>{
-      return !t.completed && daysFromToday(t.date)>0;
-    });
-
-  }else if(currentFilter==="overdue"){
-
-    filtered=filtered.filter(t=>{
-      return !t.completed && daysFromToday(t.date)<0;
-    });
+    filtered=filtered.filter(t=>
+      !t.completed &&
+      daysFromToday(t.date)===0
+    );
 
   }
 
-  filtered.sort((a,b)=>{
+  else if(currentFilter==="upcoming"){
 
-    const da=parseDate(a.date);
-    const db=parseDate(b.date);
+    filtered=filtered.filter(t=>
+      !t.completed &&
+      daysFromToday(t.date)>0
+    );
 
-    return da-db;
-  });
+  }
+
+  else if(currentFilter==="overdue"){
+
+    filtered=filtered.filter(t=>
+      !t.completed &&
+      daysFromToday(t.date)<0
+    );
+
+  }
+
+  filtered.sort(
+    (a,b)=>parseDate(a.date)-parseDate(b.date)
+  );
 
   if(!filtered.length){
 
     list.innerHTML=`
+
       <div class="empty">
-        <div class="empty-icon">🌿</div>
-        <strong>No memories here.</strong>
+
+        <div class="empty-icon">
+          🌿
+        </div>
+
+        <strong>
+          No memories here.
+        </strong>
+
         Try another filter or add a new memory.
+
       </div>
+
     `;
 
     return;
+
   }
 
-  list.innerHTML=filtered.map(task=>taskCard(task)).join("");
-}
+  list.innerHTML=
+    filtered.map(task=>taskCard(task)).join("");
 
-/* -------------------------
-   CALENDAR
-------------------------- */
+}
 
 function renderCalendar(){
 
-  const container=document.getElementById("calendarList");
+  const container=document.getElementById(
+    "calendarList"
+  );
 
   const active=validTasks()
     .filter(t=>!t.completed)
-    .sort((a,b)=>parseDate(a.date)-parseDate(b.date));
+    .sort(
+      (a,b)=>parseDate(a.date)-parseDate(b.date)
+    );
 
   if(!active.length){
 
     container.innerHTML=`
+
       <div class="empty">
-        <div class="empty-icon">📅</div>
-        <strong>Nothing scheduled.</strong>
+
+        <div class="empty-icon">
+          📅
+        </div>
+
+        <strong>
+          Nothing scheduled.
+        </strong>
+
         Add a maintenance memory to start your calendar.
+
       </div>
+
     `;
 
     return;
+
   }
 
   const groups={};
@@ -1540,11 +1683,11 @@ function renderCalendar(){
 
   });
 
-  container.innerHTML=Object.keys(groups)
-    .sort()
-    .map(date=>{
+  container.innerHTML=
+    Object.keys(groups)
+      .sort()
+      .map(date=>`
 
-      return `
         <div class="calendar-day">
 
           <div class="calendar-date">
@@ -1552,70 +1695,100 @@ function renderCalendar(){
           </div>
 
           <div class="task-list">
-            ${groups[date].map(task=>taskCard(task)).join("")}
+            ${groups[date]
+              .map(task=>taskCard(task))
+              .join("")}
           </div>
 
         </div>
-      `;
 
-    })
-    .join("");
+      `)
+      .join("");
+
 }
-
-/* -------------------------
-   HEALTH
-------------------------- */
 
 function renderHealth(){
 
-  const active=validTasks().filter(t=>!t.completed);
+  const active=validTasks()
+    .filter(t=>!t.completed);
 
-  const overdue=active.filter(t=>daysFromToday(t.date)<0);
+  const overdue=active.filter(
+    t=>daysFromToday(t.date)<0
+  );
 
   let score=100;
 
   if(active.length){
+
     score=Math.max(
       0,
-      Math.round(100-(overdue.length/active.length*100))
+      Math.round(
+        100-(overdue.length/active.length*100)
+      )
     );
+
   }
 
-  document.getElementById("healthScore").textContent=`${score}%`;
+  document.getElementById(
+    "healthScore"
+  ).textContent=`${score}%`;
 
-  document
-    .getElementById("healthRing")
-    .style.setProperty("--health",`${score}%`);
+  document.getElementById(
+    "healthRing"
+  ).style.setProperty(
+    "--health",
+    `${score}%`
+  );
 
-  const title=document.getElementById("healthTitle");
-  const text=document.getElementById("healthText");
+  const title=document.getElementById(
+    "healthTitle"
+  );
+
+  const text=document.getElementById(
+    "healthText"
+  );
 
   if(!active.length){
 
-    title.textContent="Your home is cared for.";
-    text.textContent="No active maintenance memories.";
+    title.textContent=
+      "Your home is cared for.";
 
-  }else if(overdue.length===0){
-
-    title.textContent="Your home is on track.";
-    text.textContent="Everything looks good.";
-
-  }else if(overdue.length===1){
-
-    title.textContent="One memory needs attention.";
-    text.textContent="You have 1 overdue maintenance task.";
-
-  }else{
-
-    title.textContent="A few memories need attention.";
-    text.textContent=`You have ${overdue.length} overdue maintenance tasks.`;
+    text.textContent=
+      "No active maintenance memories.";
 
   }
-}
 
-/* -------------------------
-   RENDER ALL
-------------------------- */
+  else if(overdue.length===0){
+
+    title.textContent=
+      "Your home is on track.";
+
+    text.textContent=
+      "Everything looks good.";
+
+  }
+
+  else if(overdue.length===1){
+
+    title.textContent=
+      "One memory needs attention.";
+
+    text.textContent=
+      "You have 1 overdue maintenance task.";
+
+  }
+
+  else{
+
+    title.textContent=
+      "A few memories need attention.";
+
+    text.textContent=
+      `You have ${overdue.length} overdue maintenance tasks.`;
+
+  }
+
+}
 
 function renderAll(){
 
@@ -1626,142 +1799,180 @@ function renderAll(){
 
 }
 
-/* -------------------------
-   NAVIGATION
-------------------------- */
-
 function showPage(page){
 
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
-  });
-
-  document.getElementById(page+"Page").classList.add("active");
-
-  document.querySelectorAll(".nav-btn").forEach(btn=>{
-    btn.classList.toggle(
-      "active",
-      btn.dataset.page===page
+  document.querySelectorAll(".page")
+    .forEach(p=>
+      p.classList.remove("active")
     );
-  });
+
+  document.getElementById(
+    page+"Page"
+  ).classList.add("active");
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page===page
+      );
+    });
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
 
-  if(page==="home"){
-    renderHealth();
-    renderUpcoming();
-  }
-
-  if(page==="tasks"){
-    renderMemoryList();
-  }
-
-  if(page==="calendar"){
-    renderCalendar();
-  }
 }
-
-/* -------------------------
-   FILTER
-------------------------- */
 
 function setFilter(filter){
 
   currentFilter=filter;
 
-  document.querySelectorAll(".filter-btn").forEach(btn=>{
-    btn.classList.toggle(
-      "active",
-      btn.dataset.filter===filter
-    );
-  });
+  document.querySelectorAll(".filter-btn")
+    .forEach(btn=>{
+      btn.classList.toggle(
+        "active",
+        btn.dataset.filter===filter
+      );
+    });
 
   renderMemoryList();
 
 }
 
-/* -------------------------
-   MODAL
-------------------------- */
-
 function openAddModal(){
 
   editingId=null;
 
-  document.getElementById("modalTitle").textContent="Add a Memory";
+  document.getElementById(
+    "modalTitle"
+  ).textContent="Add a Memory";
 
-  document.getElementById("taskForm").reset();
+  document.getElementById(
+    "taskForm"
+  ).reset();
 
-  document.getElementById("taskDate").value=localDateString();
+  document.getElementById(
+    "taskDate"
+  ).value=localDateString();
 
-  document.getElementById("taskCategory").value="general";
-  document.getElementById("taskRepeat").value="none";
+  document.getElementById(
+    "taskCategory"
+  ).value="general";
 
-  document.getElementById("taskModal").classList.add("show");
+  document.getElementById(
+    "taskRepeat"
+  ).value="none";
+
+  document.getElementById(
+    "deleteMemoryBtn"
+  ).classList.remove("show");
+
+  document.getElementById(
+    "taskModal"
+  ).classList.add("show");
 
 }
 
 function closeModal(){
 
-  document.getElementById("taskModal").classList.remove("show");
+  document.getElementById(
+    "taskModal"
+  ).classList.remove("show");
 
   editingId=null;
+
+  document.getElementById(
+    "deleteMemoryBtn"
+  ).classList.remove("show");
 
 }
 
 function editTask(id){
 
-  const task=validTasks().find(t=>String(t.id)===String(id));
+  const task=validTasks().find(
+    t=>String(t.id)===String(id)
+  );
 
   if(!task)return;
 
   editingId=id;
 
-  document.getElementById("modalTitle").textContent="Edit Memory";
+  document.getElementById(
+    "modalTitle"
+  ).textContent="Edit Memory";
 
-  document.getElementById("taskTitle").value=task.title;
-  document.getElementById("taskCategory").value=task.category||"general";
-  document.getElementById("taskDate").value=task.date;
-  document.getElementById("taskRepeat").value=task.repeat||"none";
-  document.getElementById("taskNotes").value=task.notes||"";
+  document.getElementById(
+    "taskTitle"
+  ).value=task.title;
 
-  document.getElementById("taskModal").classList.add("show");
+  document.getElementById(
+    "taskCategory"
+  ).value=task.category||"general";
+
+  document.getElementById(
+    "taskDate"
+  ).value=task.date;
+
+  document.getElementById(
+    "taskRepeat"
+  ).value=task.repeat||"none";
+
+  document.getElementById(
+    "taskNotes"
+  ).value=task.notes||"";
+
+  document.getElementById(
+    "deleteMemoryBtn"
+  ).classList.add("show");
+
+  document.getElementById(
+    "taskModal"
+  ).classList.add("show");
 
 }
 
-/* -------------------------
-   ADD / EDIT SUBMIT
-------------------------- */
-
-document
-  .getElementById("taskForm")
-  .addEventListener("submit",function(e){
+document.getElementById(
+  "taskForm"
+).addEventListener(
+  "submit",
+  function(e){
 
     e.preventDefault();
 
-    const title=document.getElementById("taskTitle").value.trim();
-    const date=document.getElementById("taskDate").value;
-    let category=document.getElementById("taskCategory").value;
-    const repeat=document.getElementById("taskRepeat").value;
-    const notes=document.getElementById("taskNotes").value.trim();
+    const title=
+      document.getElementById(
+        "taskTitle"
+      ).value.trim();
 
-    if(!title || !date){
+    const date=
+      document.getElementById(
+        "taskDate"
+      ).value;
 
-      showToast("Please enter a title and date.");
+    const category=
+      document.getElementById(
+        "taskCategory"
+      ).value;
+
+    const repeat=
+      document.getElementById(
+        "taskRepeat"
+      ).value;
+
+    const notes=
+      document.getElementById(
+        "taskNotes"
+      ).value.trim();
+
+    if(!title||!date){
+
+      showToast(
+        "Please enter a title and date."
+      );
+
       return;
-
-    }
-
-    if(category==="general"){
-
-      const guessed=guessCategory(title);
-
-      if(guessed!=="general"){
-        category=guessed;
-      }
 
     }
 
@@ -1787,111 +1998,59 @@ document
       saveTasks();
 
       closeModal();
+
       renderAll();
 
-      showToast("Memory updated.");
+      showToast(
+        "Memory updated."
+      );
 
       return;
+
     }
 
     tasks.push({
+
       id:Date.now(),
+
       title,
-      category,
+
+      category:
+        category==="general"
+          ?guessCategory(title)
+          :category,
+
       date,
+
       repeat,
+
       notes,
+
       completed:false
+
     });
 
     saveTasks();
 
     closeModal();
+
     renderAll();
 
-    showToast("Memory added.");
-
-  });
-
-/* -------------------------
-   COMPLETE TASK
-------------------------- */
-
-function completeTask(id){
-
-  const index=tasks.findIndex(
-    t=>String(t.id)===String(id)
-  );
-
-  if(index===-1)return;
-
-  const task=tasks[index];
-
-  if(task.repeat && task.repeat!=="none"){
-
-    const nextDate=getNextDate(
-      task.date,
-      task.repeat
+    showToast(
+      "Memory added."
     );
 
-    task.date=nextDate;
-
-    task.completed=false;
-
-    showToast("Next maintenance date scheduled.");
-
-  }else{
-
-    task.completed=true;
-
-    showToast("Memory completed.");
-
   }
+);
 
-  saveTasks();
-  renderAll();
+/* NEW DELETE FUNCTION */
 
-}
+function deleteEditingTask(){
 
-/* -------------------------
-   NEXT REPEAT DATE
-------------------------- */
-
-function getNextDate(value,repeat){
-
-  const d=parseDate(value)||new Date();
-
-  if(repeat==="weekly"){
-    d.setDate(d.getDate()+7);
-  }
-
-  if(repeat==="monthly"){
-    d.setMonth(d.getMonth()+1);
-  }
-
-  if(repeat==="3month"){
-    d.setMonth(d.getMonth()+3);
-  }
-
-  if(repeat==="6month"){
-    d.setMonth(d.getMonth()+6);
-  }
-
-  if(repeat==="yearly"){
-    d.setFullYear(d.getFullYear()+1);
-  }
-
-  return localDateString(d);
-}
-
-/* -------------------------
-   DELETE
-------------------------- */
-
-function deleteTask(id){
+  if(editingId===null)return;
 
   const task=validTasks().find(
-    t=>String(t.id)===String(id)
+    t=>String(t.id)===String(editingId)
   );
 
   if(!task)return;
@@ -1903,24 +2062,92 @@ function deleteTask(id){
   if(!confirmed)return;
 
   tasks=tasks.filter(
-    t=>String(t.id)!==String(id)
+    t=>String(t.id)!==String(editingId)
   );
 
   saveTasks();
+
+  closeModal();
+
   renderAll();
 
-  showToast("Memory deleted.");
+  showToast(
+    "Memory deleted."
+  );
 
 }
 
-/* -------------------------
-   REMINDERS
-------------------------- */
+function completeTask(id){
+
+  const index=tasks.findIndex(
+    t=>String(t.id)===String(id)
+  );
+
+  if(index===-1)return;
+
+  const task=tasks[index];
+
+  if(
+    task.repeat &&
+    task.repeat!=="none"
+  ){
+
+    task.date=getNextDate(
+      task.date,
+      task.repeat
+    );
+
+    task.completed=false;
+
+    showToast(
+      "Next maintenance date scheduled."
+    );
+
+  }else{
+
+    task.completed=true;
+
+    showToast(
+      "Memory completed."
+    );
+
+  }
+
+  saveTasks();
+
+  renderAll();
+
+}
+
+function getNextDate(value,repeat){
+
+  const d=parseDate(value)||new Date();
+
+  if(repeat==="weekly")
+    d.setDate(d.getDate()+7);
+
+  if(repeat==="monthly")
+    d.setMonth(d.getMonth()+1);
+
+  if(repeat==="3month")
+    d.setMonth(d.getMonth()+3);
+
+  if(repeat==="6month")
+    d.setMonth(d.getMonth()+6);
+
+  if(repeat==="yearly")
+    d.setFullYear(d.getFullYear()+1);
+
+  return localDateString(d);
+
+}
 
 function loadReminderSetting(){
 
   const enabled=
-    localStorage.getItem(REMINDER_KEY)==="true";
+    localStorage.getItem(
+      REMINDER_KEY
+    )==="true";
 
   updateReminderButton(enabled);
 
@@ -1928,22 +2155,30 @@ function loadReminderSetting(){
 
 function updateReminderButton(enabled){
 
-  document
-    .getElementById("reminderToggle")
-    .classList.toggle("on",enabled);
+  document.getElementById(
+    "reminderToggle"
+  ).classList.toggle(
+    "on",
+    enabled
+  );
 
 }
 
 async function toggleReminders(){
 
   const current=
-    localStorage.getItem(REMINDER_KEY)==="true";
+    localStorage.getItem(
+      REMINDER_KEY
+    )==="true";
 
   if(!current){
 
     if(!("Notification" in window)){
 
-      showToast("Notifications are not supported here.");
+      showToast(
+        "Notifications are not supported here."
+      );
+
       return;
 
     }
@@ -1953,7 +2188,10 @@ async function toggleReminders(){
 
     if(permission!=="granted"){
 
-      showToast("Notification permission was not granted.");
+      showToast(
+        "Notification permission was not granted."
+      );
+
       return;
 
     }
@@ -1965,7 +2203,9 @@ async function toggleReminders(){
 
     updateReminderButton(true);
 
-    showToast("Reminders enabled.");
+    showToast(
+      "Reminders enabled."
+    );
 
   }else{
 
@@ -1976,15 +2216,13 @@ async function toggleReminders(){
 
     updateReminderButton(false);
 
-    showToast("Reminders disabled.");
+    showToast(
+      "Reminders disabled."
+    );
 
   }
 
 }
-
-/* -------------------------
-   CLEAR MEMORIES
-------------------------- */
 
 function clearMemories(){
 
@@ -2000,21 +2238,22 @@ function clearMemories(){
 
   renderAll();
 
-  showToast("Memories cleared.");
+  showToast(
+    "Memories cleared."
+  );
 
 }
-
-/* -------------------------
-   TOAST
-------------------------- */
 
 let toastTimer;
 
 function showToast(message){
 
-  const toast=document.getElementById("toast");
+  const toast=document.getElementById(
+    "toast"
+  );
 
   toast.textContent=message;
+
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
@@ -2025,23 +2264,18 @@ function showToast(message){
 
 }
 
-/* -------------------------
-   CLOSE MODAL BY BACKDROP
-------------------------- */
-
-document
-  .getElementById("taskModal")
-  .addEventListener("click",function(e){
+document.getElementById(
+  "taskModal"
+).addEventListener(
+  "click",
+  function(e){
 
     if(e.target===this){
       closeModal();
     }
 
-  });
-
-/* -------------------------
-   START HAVEN
-------------------------- */
+  }
+);
 
 loadTasks();
 loadReminderSetting();
