@@ -267,12 +267,18 @@ body{
 .task-card{
   background:white;
   border:1px solid var(--border);
-  border-radius:19px;
-  padding:14px;
+  border-radius:21px;
+  padding:15px;
   display:flex;
   align-items:center;
-  gap:12px;
-  box-shadow:0 5px 18px rgba(24,59,86,.055);
+  gap:13px;
+  box-shadow:0 6px 20px rgba(24,59,86,.06);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+
+.task-card:active{
+  transform:scale(.985);
+  box-shadow:0 4px 14px rgba(24,59,86,.05);
 }
 
 .task-icon{
