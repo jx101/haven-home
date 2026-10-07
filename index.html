@@ -1,1647 +1,3060 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#11191b">
-<title>Haven — Your home remembers.</title><style>
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+
+<meta name="theme-color"
+      content="#11191b">
+
+<title>Haven — Your home remembers.</title>
+
+<style>
+
+/* =========================================================
+   HAVEN — DESIGN SYSTEM
+========================================================= */
+
 :root{
+
   --ink:#172326;
   --ink-soft:#405157;
   --muted:#75858a;
+
   --cream:#f5f3ee;
   --paper:#fbfaf7;
   --white:#ffffff;
+
   --glass:rgba(255,255,255,.72);
   --glass-strong:rgba(255,255,255,.84);
+
   --line:rgba(35,52,56,.09);
+
   --blue:#4f8fa6;
   --blue-soft:#e5f0f3;
+
   --mint:#dcece3;
   --mint-dark:#527d69;
+
   --amber:#e6b96f;
   --amber-soft:#f7ecd7;
+
   --lavender:#e8e3f1;
+
   --danger:#b95755;
   --danger-soft:#f7e4e3;
-  --shadow:0 14px 38px rgba(30,45,48,.09);
-  --shadow-deep:0 22px 60px rgba(17,30,33,.15);
+
+  --shadow:
+    0 14px 38px rgba(30,45,48,.09);
+
+  --shadow-deep:
+    0 22px 60px rgba(17,30,33,.15);
+
   --radius:24px;
+
 }
 
 *{
+
   box-sizing:border-box;
+
   -webkit-tap-highlight-color:transparent;
+
 }
 
 html{
+
   scroll-behavior:smooth;
+
 }
 
-html,body{
+html,
+body{
+
   margin:0;
   padding:0;
   min-height:100%;
+
   background:
-    radial-gradient(circle at 15% 5%,rgba(221,236,239,.72),transparent 28%),
-    radial-gradient(circle at 90% 35%,rgba(231,226,242,.48),transparent 28%),
+
+    radial-gradient(
+      circle at 15% 5%,
+      rgba(221,236,239,.72),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 90% 35%,
+      rgba(231,226,242,.48),
+      transparent 28%
+    ),
+
     var(--cream);
+
   color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
 }
 
 body{
+
   min-height:100vh;
+
   padding-bottom:100px;
+
   overflow-x:hidden;
+
 }
 
 body::before{
+
   content:"";
+
   position:fixed;
+
   inset:0;
+
   pointer-events:none;
+
   z-index:-1;
+
   opacity:.035;
+
   background-image:
+
     url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+
 }
 
 button,
 input,
 select,
 textarea{
+
   font:inherit;
+
 }
 
 button{
+
   cursor:pointer;
+
 }
 
 .app{
+
   width:100%;
+
   max-width:760px;
+
   margin:auto;
+
 }
 
-/* =========================
+
+/* =========================================================
    TOP BAR
-========================= */
+========================================================= */
 
 .topbar{
+
   height:72px;
+
   padding:13px 18px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   position:sticky;
+
   top:0;
+
   z-index:50;
-  background:rgba(245,243,238,.76);
-  border-bottom:1px solid rgba(35,52,56,.055);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+
+  background:
+    rgba(245,243,238,.76);
+
+  border-bottom:
+    1px solid rgba(35,52,56,.055);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
 }
 
 .brand{
+
   display:flex;
+
   align-items:center;
+
   gap:11px;
+
 }
 
 .brand-icon{
+
   width:41px;
+
   height:41px;
+
   border-radius:15px;
+
   display:grid;
+
   place-items:center;
+
   color:white;
+
   background:
-    linear-gradient(145deg,#507f88,#294b53);
+    linear-gradient(
+      145deg,
+      #507f88,
+      #294b53
+    );
+
   box-shadow:
-    0 8px 18px rgba(40,76,83,.20),
-    inset 0 1px 0 rgba(255,255,255,.28);
+
+    0 8px 18px
+    rgba(40,76,83,.20),
+
+    inset 0 1px 0
+    rgba(255,255,255,.28);
+
 }
 
 .brand-icon svg{
+
   width:22px;
+
   height:22px;
+
 }
 
 .brand-text{
+
   font-weight:800;
+
   font-size:18px;
+
   letter-spacing:-.5px;
+
 }
 
 .brand-sub{
+
   display:block;
+
   font-size:10px;
+
   color:var(--muted);
+
   font-weight:600;
+
   letter-spacing:.15px;
+
   margin-top:2px;
+
 }
 
 .icon-btn{
+
   width:42px;
+
   height:42px;
-  border:1px solid rgba(35,52,56,.07);
+
+  border:
+    1px solid rgba(35,52,56,.07);
+
   border-radius:14px;
-  background:rgba(255,255,255,.72);
+
+  background:
+    rgba(255,255,255,.72);
+
   color:var(--ink);
-  box-shadow:0 7px 20px rgba(30,45,48,.07);
+
+  box-shadow:
+    0 7px 20px rgba(30,45,48,.07);
+
   display:grid;
+
   place-items:center;
+
   transition:.18s ease;
+
 }
 
 .icon-btn:active{
+
   transform:scale(.94);
+
 }
 
 .icon-btn svg{
+
   width:20px;
+
   height:20px;
+
 }
 
-/* =========================
+
+/* =========================================================
    PAGES
-========================= */
+========================================================= */
 
 .page{
+
   display:none;
-  padding:0 16px 28px;
-  animation:pageIn .42s ease both;
+
+  padding:
+    0 16px 28px;
+
+  animation:
+    pageIn .42s ease both;
+
 }
 
 .page.active{
+
   display:block;
+
 }
 
 @keyframes pageIn{
+
   from{
+
     opacity:0;
-    transform:translateY(8px);
+
+    transform:
+      translateY(8px);
+
   }
+
   to{
+
     opacity:1;
-    transform:translateY(0);
+
+    transform:
+      translateY(0);
+
   }
+
 }
 
 .page-title{
+
   font-size:30px;
-  margin:22px 2px 4px;
+
+  margin:
+    22px 2px 4px;
+
   letter-spacing:-1px;
+
 }
 
 .page-subtitle{
+
   color:var(--muted);
-  margin:0 2px 20px;
+
+  margin:
+    0 2px 20px;
+
   font-size:14px;
+
   line-height:1.5;
+
 }
 
-/* =========================
+
+/* =========================================================
    CINEMATIC HERO
-========================= */
+========================================================= */
 
 .hero{
-  min-height:330px;
-  border-radius:30px;
+
+  min-height:360px;
+
+  border-radius:32px;
+
   overflow:hidden;
+
   position:relative;
+
   isolation:isolate;
+
   background-image:
+
     linear-gradient(
       180deg,
-      rgba(12,27,31,.12) 0%,
-      rgba(12,27,31,.20) 35%,
-      rgba(12,27,31,.78) 100%
+      rgba(7,18,21,.16) 0%,
+      rgba(7,18,21,.20) 30%,
+      rgba(7,18,21,.84) 100%
     ),
+
     url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=88");
+
   background-size:cover;
+
   background-position:center;
+
   display:flex;
+
   align-items:flex-end;
-  padding:26px;
-  box-shadow:var(--shadow-deep);
-  animation:heroReveal .8s ease both;
+
+  padding:28px;
+
+  box-shadow:
+
+    0 24px 70px
+    rgba(17,30,33,.20),
+
+    0 4px 18px
+    rgba(17,30,33,.08);
+
+  animation:
+    heroReveal .8s ease both;
+
+  transition:
+
+    transform
+    .45s cubic-bezier(.2,.8,.2,1),
+
+    filter
+    .45s ease,
+
+    box-shadow
+    .45s ease;
+
 }
+
+
+/* Atmospheric colour layer */
 
 .hero::before{
+
   content:"";
+
   position:absolute;
-  inset:0;
-  z-index:-1;
+
+  inset:-12%;
+
+  z-index:0;
+
+  pointer-events:none;
+
   background:
+
     radial-gradient(
       circle at 78% 18%,
-      rgba(255,232,187,.30),
-      transparent 28%
+      rgba(255,213,145,.48),
+      transparent 24%
     ),
+
+    radial-gradient(
+      circle at 18% 72%,
+      rgba(82,151,174,.32),
+      transparent 31%
+    ),
+
     linear-gradient(
-      110deg,
-      rgba(18,37,40,.42),
-      transparent 52%
+      115deg,
+      rgba(30,76,83,.28),
+      transparent 48%,
+      rgba(218,175,104,.12)
     );
+
+  opacity:.48;
+
+  transform:
+    scale(1.04);
+
+  transition:
+
+    opacity
+    .55s ease,
+
+    transform
+    .8s cubic-bezier(.2,.8,.2,1);
+
 }
+
+
+/* Cinematic vignette */
 
 .hero::after{
+
   content:"";
+
   position:absolute;
+
   inset:0;
+
   pointer-events:none;
+
+  z-index:1;
+
   background:
+
     radial-gradient(
       ellipse at center,
-      transparent 45%,
-      rgba(0,0,0,.27) 100%
+      transparent 34%,
+      rgba(0,0,0,.12) 65%,
+      rgba(0,0,0,.42) 100%
     );
+
+  transition:
+    opacity .5s ease;
+
 }
+
 
 @keyframes heroReveal{
+
   from{
+
     opacity:0;
-    transform:scale(.985);
+
+    transform:
+      scale(.97);
+
   }
+
   to{
+
     opacity:1;
-    transform:scale(1);
+
+    transform:
+      scale(1);
+
   }
+
 }
 
+
+/* =========================================================
+   TOUCH — HERO COMES ALIVE
+========================================================= */
+
+.hero:active{
+
+  transform:
+    scale(.985);
+
+  filter:
+    saturate(1.22)
+    brightness(1.08);
+
+  box-shadow:
+
+    0 28px 78px
+    rgba(17,30,33,.25),
+
+    0 0 0 1px
+    rgba(255,255,255,.10);
+
+}
+
+.hero:active::before{
+
+  opacity:1;
+
+  transform:
+    scale(1);
+
+}
+
+.hero:active::after{
+
+  opacity:.58;
+
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
 .hero-content{
+
   color:white;
+
   max-width:460px;
+
   position:relative;
-  z-index:2;
-  text-shadow:0 2px 14px rgba(0,0,0,.28);
+
+  z-index:3;
+
+  text-shadow:
+
+    0 2px 18px
+    rgba(0,0,0,.38),
+
+    0 1px 3px
+    rgba(0,0,0,.32);
+
+  transform:
+    translateY(0);
+
+  transition:
+
+    transform .45s ease,
+
+    opacity .4s ease;
+
+}
+
+.hero:active .hero-content{
+
+  transform:
+    translateY(-3px);
+
 }
 
 .hero-greeting{
+
   font-size:13px;
-  margin-bottom:9px;
+
+  margin-bottom:10px;
+
   font-weight:650;
-  letter-spacing:.2px;
+
+  letter-spacing:.25px;
+
   opacity:.94;
+
 }
 
 .hero h1{
+
   margin:0;
-  font-size:36px;
-  line-height:1.04;
-  letter-spacing:-1.5px;
-  font-weight:760;
+
+  font-size:38px;
+
+  line-height:1.02;
+
+  letter-spacing:-1.7px;
+
+  font-weight:780;
+
 }
 
 .hero p{
-  margin:12px 0 0;
+
+  margin:
+    13px 0 0;
+
   font-size:14px;
+
   line-height:1.5;
+
   max-width:390px;
-  opacity:.88;
+
+  opacity:.90;
+
 }
 
-/* =========================
+
+/* Cinematic light streak */
+
+.hero-content::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:-20px;
+
+  bottom:-24px;
+
+  width:110px;
+
+  height:2px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,236,190,.75),
+      transparent
+    );
+
+  opacity:.38;
+
+  transition:
+
+    width .6s ease,
+
+    opacity .5s ease;
+
+}
+
+.hero:active .hero-content::after{
+
+  width:180px;
+
+  opacity:.9;
+
+}
+
+
+/* =========================================================
    SECTIONS
-========================= */
+========================================================= */
 
 .section{
+
   margin-top:26px;
+
 }
 
 .section-head{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
-  margin:0 3px 11px;
+
+  margin:
+    0 3px 11px;
+
 }
 
 .section-title{
+
   font-size:17px;
+
   font-weight:800;
+
   letter-spacing:-.25px;
+
 }
 
 .section-link{
+
   border:0;
+
   background:none;
+
   color:var(--blue);
+
   font-size:13px;
+
   font-weight:750;
+
 }
 
-/* =========================
-   HEALTH — GLASS PANEL
-========================= */
+
+/* =========================================================
+   HEALTH
+========================================================= */
 
 .health-card{
+
   position:relative;
+
   overflow:hidden;
+
   background:
+
     linear-gradient(
       135deg,
       rgba(255,255,255,.84),
       rgba(238,246,243,.68)
     );
-  border:1px solid rgba(255,255,255,.78);
-  border-radius:var(--radius);
+
+  border:
+    1px solid rgba(255,255,255,.78);
+
+  border-radius:
+    var(--radius);
+
   padding:19px;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:
+    var(--shadow);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
 }
 
 .health-card::before{
+
   content:"";
+
   position:absolute;
+
   width:150px;
+
   height:150px;
+
   border-radius:50%;
+
   right:-65px;
+
   top:-75px;
-  background:rgba(124,180,158,.16);
-  filter:blur(18px);
+
+  background:
+    rgba(124,180,158,.16);
+
+  filter:
+    blur(18px);
+
 }
 
 .health-row{
+
   display:flex;
+
   align-items:center;
+
   gap:18px;
+
   position:relative;
+
   z-index:1;
+
 }
 
 .health-ring{
+
   width:82px;
+
   height:82px;
+
   border-radius:50%;
+
   background:
+
     conic-gradient(
-      var(--mint-dark) var(--health,57%),
+      var(--mint-dark)
+      var(--health,57%),
       rgba(217,226,223,.70) 0
     );
+
   display:grid;
+
   place-items:center;
+
   flex:none;
+
   position:relative;
+
   box-shadow:
-    0 7px 20px rgba(66,108,91,.12);
+
+    0 7px 20px
+    rgba(66,108,91,.12);
+
 }
 
 .health-ring::after{
+
   content:"";
+
   width:63px;
+
   height:63px;
+
   border-radius:50%;
+
   background:#f7f9f6;
+
   position:absolute;
+
 }
 
 .health-score{
+
   position:relative;
+
   z-index:1;
+
   font-weight:850;
+
   font-size:17px;
+
 }
 
 .health-info{
+
   flex:1;
+
 }
 
 .health-info strong{
+
   display:block;
+
   font-size:16px;
+
   letter-spacing:-.2px;
+
 }
 
 .health-info span{
+
   display:block;
+
   color:var(--muted);
+
   font-size:13px;
+
   margin-top:5px;
+
   line-height:1.45;
+
 }
 
-/* =========================
+
+/* =========================================================
    TASK CARDS
-========================= */
+========================================================= */
 
 .task-list{
+
   display:flex;
+
   flex-direction:column;
+
   gap:11px;
+
 }
 
 .task-card,
 .task-card *{
+
   user-select:none;
+
   -webkit-user-select:none;
+
 }
 
 .task-card{
-  background:rgba(255,255,255,.80);
-  border:1px solid rgba(255,255,255,.92);
+
+  background:
+    rgba(255,255,255,.80);
+
+  border:
+    1px solid rgba(255,255,255,.92);
+
   border-radius:22px;
+
   padding:14px;
+
   display:flex;
+
   align-items:center;
+
   gap:12px;
+
   box-shadow:
-    0 9px 28px rgba(30,45,48,.065);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+
+    0 9px 28px
+    rgba(30,45,48,.065);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
   transition:
+
     transform .18s ease,
+
     box-shadow .18s ease,
+
     background .18s ease;
+
 }
 
 .task-card:active{
-  transform:scale(.982);
-  box-shadow:0 5px 17px rgba(30,45,48,.07);
-  background:rgba(255,255,255,.92);
+
+  transform:
+    scale(.982);
+
+  box-shadow:
+    0 5px 17px
+    rgba(30,45,48,.07);
+
+  background:
+    rgba(255,255,255,.92);
+
 }
 
 .task-icon{
+
   width:47px;
+
   height:47px;
+
   border-radius:16px;
+
   display:grid;
+
   place-items:center;
+
   flex:none;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.5);
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.5);
+
 }
 
 .task-main{
+
   min-width:0;
+
   flex:1;
+
 }
 
 .task-title{
+
   font-weight:760;
+
   font-size:15px;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
+
   letter-spacing:-.15px;
+
 }
 
 .task-date{
+
   font-size:12px;
+
   color:var(--muted);
+
   margin-top:5px;
+
   font-weight:600;
+
 }
 
 .task-status{
+
   font-size:11px;
+
   font-weight:800;
+
   padding:7px 9px;
+
   border-radius:999px;
+
   white-space:nowrap;
+
   letter-spacing:.05px;
+
 }
 
 .status-overdue{
+
   color:#a94846;
-  background:rgba(247,228,227,.92);
+
+  background:
+    rgba(247,228,227,.92);
+
 }
 
 .status-today{
+
   color:#9a671d;
-  background:rgba(247,236,215,.95);
+
+  background:
+    rgba(247,236,215,.95);
+
 }
 
 .status-upcoming{
+
   color:#39758b;
-  background:rgba(229,240,243,.95);
+
+  background:
+    rgba(229,240,243,.95);
+
 }
 
 .status-completed{
+
   color:#4d7b67;
-  background:rgba(220,236,227,.95);
+
+  background:
+    rgba(220,236,227,.95);
+
 }
 
-/* =========================
+
+/* =========================================================
    QUICK ACTIONS
-========================= */
+========================================================= */
 
 .quick-grid{
+
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap:12px;
+
 }
 
 .quick-card{
-  border:1px solid rgba(255,255,255,.7);
+
+  border:
+    1px solid rgba(255,255,255,.7);
+
   min-height:112px;
+
   padding:16px;
+
   text-align:left;
+
   border-radius:22px;
+
   color:var(--ink);
-  box-shadow:0 9px 26px rgba(30,45,48,.055);
+
+  box-shadow:
+    0 9px 26px
+    rgba(30,45,48,.055);
+
   transition:.18s ease;
+
   position:relative;
+
   overflow:hidden;
+
 }
 
 .quick-card::after{
+
   content:"";
+
   position:absolute;
+
   width:90px;
+
   height:90px;
+
   border-radius:50%;
+
   right:-35px;
+
   bottom:-40px;
-  background:rgba(255,255,255,.28);
+
+  background:
+    rgba(255,255,255,.28);
+
   filter:blur(3px);
+
 }
 
 .quick-card:active{
-  transform:scale(.97);
+
+  transform:
+    scale(.97);
+
 }
 
 .quick-card:nth-child(1){
+
   background:
-    linear-gradient(145deg,#e8f3f5,#d9e9ed);
+    linear-gradient(
+      145deg,
+      #e8f3f5,
+      #d9e9ed
+    );
+
 }
 
 .quick-card:nth-child(2){
+
   background:
-    linear-gradient(145deg,#e7f0e9,#d9e8df);
+    linear-gradient(
+      145deg,
+      #e7f0e9,
+      #d9e8df
+    );
+
 }
 
 .quick-card:nth-child(3){
+
   background:
-    linear-gradient(145deg,#f8edd9,#f3dfb9);
+    linear-gradient(
+      145deg,
+      #f8edd9,
+      #f3dfb9
+    );
+
 }
 
 .quick-card:nth-child(4){
+
   background:
-    linear-gradient(145deg,#eee9f5,#e1d9ee);
+    linear-gradient(
+      145deg,
+      #eee9f5,
+      #e1d9ee
+    );
+
 }
 
 .quick-icon{
+
   font-size:23px;
+
   position:relative;
+
   z-index:1;
+
 }
 
 .quick-title{
+
   display:block;
+
   font-weight:800;
+
   margin-top:8px;
+
   font-size:14px;
+
   position:relative;
+
   z-index:1;
+
 }
 
 .quick-sub{
+
   display:block;
+
   color:#66808a;
+
   font-size:11px;
+
   margin-top:3px;
+
   position:relative;
+
   z-index:1;
+
 }
 
-/* =========================
+
+/* =========================================================
    FILTERS
-========================= */
+========================================================= */
 
 .filters{
+
   display:flex;
+
   gap:8px;
+
   overflow-x:auto;
-  padding:2px 0 7px;
+
+  padding:
+    2px 0 7px;
+
   scrollbar-width:none;
+
 }
 
 .filters::-webkit-scrollbar{
+
   display:none;
+
 }
 
 .filter-btn{
-  border:1px solid rgba(35,52,56,.09);
-  background:rgba(255,255,255,.72);
+
+  border:
+    1px solid rgba(35,52,56,.09);
+
+  background:
+    rgba(255,255,255,.72);
+
   color:var(--muted);
-  padding:9px 14px;
+
+  padding:
+    9px 14px;
+
   border-radius:999px;
+
   white-space:nowrap;
+
   font-size:12px;
+
   font-weight:750;
+
 }
 
 .filter-btn.active{
+
   color:white;
+
   background:#263c41;
+
   border-color:#263c41;
-  box-shadow:0 5px 14px rgba(28,47,51,.15);
+
+  box-shadow:
+    0 5px 14px
+    rgba(28,47,51,.15);
+
 }
 
-/* =========================
+
+/* =========================================================
    EMPTY
-========================= */
+========================================================= */
 
 .empty{
-  background:rgba(255,255,255,.67);
-  border:1px dashed rgba(35,52,56,.13);
+
+  background:
+    rgba(255,255,255,.67);
+
+  border:
+    1px dashed rgba(35,52,56,.13);
+
   border-radius:22px;
-  padding:30px 18px;
+
+  padding:
+    30px 18px;
+
   text-align:center;
+
   color:var(--muted);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
 }
 
 .empty-icon{
+
   font-size:34px;
+
   margin-bottom:8px;
+
 }
 
 .empty strong{
+
   color:var(--ink);
+
   display:block;
+
   margin-bottom:5px;
+
 }
 
-/* =========================
+
+/* =========================================================
    CALENDAR
-========================= */
+========================================================= */
 
 .calendar-day{
+
   margin-top:19px;
+
 }
 
 .calendar-date{
+
   font-size:13px;
+
   color:var(--muted);
+
   font-weight:750;
-  margin:0 3px 9px;
+
+  margin:
+    0 3px 9px;
+
 }
 
-/* =========================
+
+/* =========================================================
    SETTINGS
-========================= */
+========================================================= */
 
 .settings-card{
-  background:rgba(255,255,255,.76);
-  border:1px solid rgba(255,255,255,.9);
+
+  background:
+    rgba(255,255,255,.76);
+
+  border:
+    1px solid rgba(255,255,255,.9);
+
   border-radius:23px;
-  box-shadow:var(--shadow);
+
+  box-shadow:
+    var(--shadow);
+
   overflow:hidden;
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+
 }
 
 .setting-row{
+
   padding:17px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   gap:15px;
-  border-bottom:1px solid rgba(35,52,56,.075);
+
+  border-bottom:
+    1px solid rgba(35,52,56,.075);
+
 }
 
 .setting-row:last-child{
+
   border-bottom:0;
+
 }
 
 .setting-left{
+
   flex:1;
+
 }
 
 .setting-left strong{
+
   display:block;
+
   font-size:14px;
+
 }
 
 .setting-left span{
+
   display:block;
+
   font-size:12px;
+
   color:var(--muted);
+
   margin-top:4px;
+
   line-height:1.4;
+
 }
 
 .setting-btn{
+
   border:0;
-  background:var(--blue-soft);
+
+  background:
+    var(--blue-soft);
+
   color:#3e7e93;
-  padding:9px 12px;
+
+  padding:
+    9px 12px;
+
   border-radius:12px;
+
   font-weight:750;
+
   font-size:12px;
+
 }
 
 .danger-btn{
-  background:var(--danger-soft);
+
+  background:
+    var(--danger-soft);
+
   color:var(--danger);
+
 }
 
 .toggle{
+
   width:48px;
+
   height:28px;
+
   border:0;
+
   border-radius:20px;
+
   background:#d5dfe1;
+
   padding:3px;
+
 }
 
 .toggle span{
+
   display:block;
+
   width:22px;
+
   height:22px;
+
   border-radius:50%;
+
   background:white;
-  box-shadow:0 2px 6px rgba(0,0,0,.12);
+
+  box-shadow:
+    0 2px 6px
+    rgba(0,0,0,.12);
+
   transition:.2s;
+
 }
 
 .toggle.on{
-  background:var(--blue);
+
+  background:
+    var(--blue);
+
 }
 
 .toggle.on span{
-  transform:translateX(20px);
+
+  transform:
+    translateX(20px);
+
 }
 
-/* =========================
+
+/* =========================================================
    FLOATING ACTION BUTTON
-========================= */
+========================================================= */
 
 .fab{
+
   position:fixed;
+
   right:20px;
+
   bottom:84px;
+
   width:59px;
+
   height:59px;
-  border:1px solid rgba(255,255,255,.24);
+
+  border:
+    1px solid rgba(255,255,255,.24);
+
   border-radius:20px;
+
   background:
-    linear-gradient(145deg,#3d6269,#203b40);
+
+    linear-gradient(
+      145deg,
+      #3d6269,
+      #203b40
+    );
+
   color:white;
+
   box-shadow:
-    0 13px 32px rgba(24,45,49,.28),
-    0 0 0 7px rgba(255,255,255,.16);
+
+    0 13px 32px
+    rgba(24,45,49,.28),
+
+    0 0 0 7px
+    rgba(255,255,255,.16);
+
   display:grid;
+
   place-items:center;
+
   z-index:40;
+
   font-size:25px;
+
   transition:.18s ease;
+
 }
 
 .fab:active{
-  transform:scale(.92);
+
+  transform:
+    scale(.92);
+
 }
 
-/* =========================
+
+/* =========================================================
    BOTTOM NAV — CINEMATIC DOCK
-========================= */
+========================================================= */
 
 .bottom-nav{
+
   position:fixed;
+
   left:12px;
+
   right:12px;
+
   bottom:10px;
+
   height:68px;
-  background:rgba(255,255,255,.76);
-  border:1px solid rgba(255,255,255,.86);
+
+  background:
+    rgba(255,255,255,.76);
+
+  border:
+    1px solid rgba(255,255,255,.86);
+
   border-radius:24px;
+
   display:flex;
+
   justify-content:center;
+
   z-index:35;
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
+
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
+
   box-shadow:
-    0 14px 38px rgba(26,40,44,.14);
+    0 14px 38px
+    rgba(26,40,44,.14);
+
 }
 
 .nav-inner{
+
   width:100%;
+
   max-width:760px;
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
 }
 
 .nav-btn{
+
   border:0;
+
   background:none;
+
   color:#89969a;
+
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
+
   gap:4px;
+
   font-size:10px;
+
   font-weight:750;
+
   transition:.18s ease;
+
 }
 
 .nav-btn.active{
+
   color:#315f69;
+
 }
 
 .nav-btn.active::before{
+
   content:"";
+
   width:27px;
+
   height:3px;
+
   border-radius:5px;
+
   background:#527d86;
+
   position:absolute;
+
   margin-top:-44px;
+
   opacity:.75;
+
 }
 
 .nav-btn:active{
-  transform:scale(.94);
+
+  transform:
+    scale(.94);
+
 }
 
 .nav-btn svg{
+
   width:20px;
+
   height:20px;
+
 }
 
-/* =========================
+
+/* =========================================================
    MODAL
-========================= */
+========================================================= */
 
 .modal-backdrop{
+
   display:none;
+
   position:fixed;
+
   inset:0;
+
   background:
     rgba(13,27,30,.48);
+
   z-index:100;
+
   padding:18px;
+
   align-items:flex-end;
+
   justify-content:center;
-  backdrop-filter:blur(5px);
-  -webkit-backdrop-filter:blur(5px);
+
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
+
 }
 
 .modal-backdrop.show{
+
   display:flex;
+
 }
 
 .modal{
+
   width:100%;
+
   max-width:620px;
+
   background:
+
     linear-gradient(
       145deg,
       rgba(255,255,255,.96),
       rgba(246,244,239,.96)
     );
-  border:1px solid rgba(255,255,255,.95);
-  border-radius:29px 29px 21px 21px;
+
+  border:
+    1px solid rgba(255,255,255,.95);
+
+  border-radius:
+    29px 29px 21px 21px;
+
   padding:21px;
+
   max-height:90vh;
+
   overflow:auto;
+
   box-shadow:
-    0 -10px 60px rgba(0,0,0,.18);
-  animation:modalIn .28s ease both;
+    0 -10px 60px
+    rgba(0,0,0,.18);
+
+  animation:
+    modalIn .28s ease both;
+
 }
 
 @keyframes modalIn{
+
   from{
-    transform:translateY(25px);
+
+    transform:
+      translateY(25px);
+
     opacity:0;
+
   }
+
   to{
-    transform:translateY(0);
+
+    transform:
+      translateY(0);
+
     opacity:1;
+
   }
+
 }
 
 .modal-head{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   margin-bottom:18px;
+
 }
 
 .modal-title{
+
   font-size:21px;
+
   font-weight:850;
+
   letter-spacing:-.5px;
+
 }
 
 .close-btn{
+
   width:38px;
+
   height:38px;
+
   border:0;
+
   border-radius:13px;
+
   background:#edf1f1;
+
   color:var(--muted);
+
 }
 
 .form-group{
+
   margin-bottom:14px;
+
 }
 
 .form-label{
+
   display:block;
+
   font-size:12px;
+
   font-weight:750;
+
   margin-bottom:6px;
+
   color:#587181;
+
 }
 
 .form-input,
 .form-select,
 .form-textarea{
+
   width:100%;
-  border:1px solid rgba(35,52,56,.09);
-  background:rgba(255,255,255,.72);
+
+  border:
+    1px solid rgba(35,52,56,.09);
+
+  background:
+    rgba(255,255,255,.72);
+
   border-radius:14px;
-  padding:12px 13px;
+
+  padding:
+    12px 13px;
+
   outline:none;
+
   color:var(--ink);
+
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus{
+
   border-color:#9fc9d4;
-  box-shadow:0 0 0 3px rgba(229,240,243,.9);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(229,240,243,.9);
+
 }
 
 .form-textarea{
+
   min-height:90px;
+
   resize:vertical;
+
 }
 
 .form-actions{
+
   display:flex;
+
   gap:10px;
+
   margin-top:18px;
+
 }
 
 .primary-btn,
 .secondary-btn{
+
   flex:1;
+
   border:0;
+
   border-radius:15px;
+
   padding:13px;
+
   font-weight:800;
+
 }
 
 .primary-btn{
+
   background:#263f44;
+
   color:white;
-  box-shadow:0 8px 20px rgba(30,54,59,.17);
+
+  box-shadow:
+    0 8px 20px
+    rgba(30,54,59,.17);
+
 }
 
 .secondary-btn{
+
   background:#e9eeee;
+
   color:var(--ink);
+
 }
 
 .delete-memory-btn{
+
   width:100%;
+
   border:0;
+
   border-radius:15px;
+
   padding:13px;
+
   margin-top:10px;
-  background:var(--danger-soft);
+
+  background:
+    var(--danger-soft);
+
   color:var(--danger);
+
   font-weight:800;
+
   display:none;
+
 }
 
 .delete-memory-btn.show{
+
   display:block;
+
 }
 
-/* =========================
+
+/* =========================================================
    TOAST
-========================= */
+========================================================= */
 
 .toast{
+
   position:fixed;
+
   left:50%;
+
   bottom:91px;
-  transform:translate(-50%,20px);
-  background:rgba(29,47,51,.94);
+
+  transform:
+    translate(-50%,20px);
+
+  background:
+    rgba(29,47,51,.94);
+
   color:white;
-  padding:11px 15px;
+
+  padding:
+    11px 15px;
+
   border-radius:14px;
+
   font-size:12px;
+
   font-weight:700;
+
   opacity:0;
+
   pointer-events:none;
+
   transition:.25s;
+
   z-index:200;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.2);
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
 }
 
 .toast.show{
+
   opacity:1;
-  transform:translate(-50%,0);
+
+  transform:
+    translate(-50%,0);
+
 }
 
-/* =========================
+
+/* =========================================================
    SMALL SCREENS
-========================= */
+========================================================= */
 
 @media(max-width:390px){
 
   .hero{
-    min-height:300px;
-    padding:22px;
+
+    min-height:325px;
+
+    padding:23px;
+
+    border-radius:29px;
+
   }
 
   .hero h1{
-    font-size:30px;
+
+    font-size:32px;
+
   }
 
   .hero p{
+
     font-size:13px;
+
   }
 
   .task-status{
+
     display:none;
+
   }
 
   .task-card{
+
     padding:12px;
+
   }
 
   .task-icon{
+
     width:43px;
+
     height:43px;
+
   }
 
   .fab{
+
     right:17px;
+
   }
 
   .bottom-nav{
+
     left:8px;
+
     right:8px;
+
   }
 
 }
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
   *,
   *::before,
   *::after{
+
     animation-duration:.01ms !important;
+
     animation-iteration-count:1 !important;
+
     transition-duration:.01ms !important;
+
     scroll-behavior:auto !important;
+
   }
 
 }
-</style></head><body><div class="app"><header class="topbar">  <div class="brand"><div class="brand-icon">
 
-  <svg viewBox="0 0 24 24" fill="none"
-       stroke="currentColor" stroke-width="1.8">
-    <path d="M3 10.5 12 3l9 7.5"/>
-    <path d="M5.5 9.5V21h13V9.5"/>
-    <path d="M9.5 21v-6h5v6"/>
-  </svg>
+</style>
 
-</div>
+</head>
 
-<div>
-  <div class="brand-text">Haven</div>
-  <span class="brand-sub">Your home remembers.</span>
-</div>
 
-  </div><button class="icon-btn"
-onclick="showPage('settings')"
-aria-label="Settings">
-⚙
-</button>
+<body>
 
-</header><main id="homePage" class="page active">  <section class="hero"><div class="hero-content">
 
-  <div class="hero-greeting">
-    Good morning, Javaid
-  </div>
+<div class="app">
 
-  <h1>
-    A home worth remembering.
-  </h1>
 
-  <p>
-    Keep the little things cared for,
-    before they become big things.
-  </p>
+<!-- =======================================================
+     TOP BAR
+======================================================= -->
 
-</div>
+<header class="topbar">
 
-  </section>  <section class="section"><div class="section-head">
-  <div class="section-title">
-    Home Health
-  </div>
-</div>
+  <div class="brand">
 
-<div class="health-card">
+    <div class="brand-icon">
 
-  <div class="health-row">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8">
 
-    <div class="health-ring" id="healthRing">
+        <path d="M3 10.5 12 3l9 7.5"/>
 
-      <span class="health-score"
-            id="healthScore">
-        100%
-      </span>
+        <path d="M5.5 9.5V21h13V9.5"/>
+
+        <path d="M9.5 21v-6h5v6"/>
+
+      </svg>
 
     </div>
 
-    <div class="health-info">
 
-      <strong id="healthTitle">
-        Your home is cared for.
-      </strong>
+    <div>
 
-      <span id="healthText">
-        Everything looks good.
+      <div class="brand-text">
+        Haven
+      </div>
+
+      <span class="brand-sub">
+        Your home remembers.
       </span>
 
     </div>
 
   </div>
 
-</div>
-
-  </section>  <section class="section"><div class="section-head">
-
-  <div class="section-title">
-    Upcoming Maintenance
-  </div>
-
-  <button class="section-link"
-          onclick="showPage('tasks')">
-    View all
-  </button>
-
-</div>
-
-<div class="task-list"
-     id="upcomingList">
-</div>
-
-  </section>  <section class="section"><div class="section-head">
-
-  <div class="section-title">
-    Quick Actions
-  </div>
-
-</div>
-
-<div class="quick-grid">
-
-  <button class="quick-card"
-          onclick="openAddModal()">
-
-    <div class="quick-icon">＋</div>
-
-    <span class="quick-title">
-      Add Memory
-    </span>
-
-    <span class="quick-sub">
-      Record maintenance
-    </span>
-
-  </button>
-
-  <button class="quick-card"
-          onclick="showPage('calendar')">
-
-    <div class="quick-icon">📅</div>
-
-    <span class="quick-title">
-      Calendar
-    </span>
-
-    <span class="quick-sub">
-      See what's coming
-    </span>
-
-  </button>
-
-  <button class="quick-card"
-          onclick="setFilter('overdue');showPage('tasks')">
-
-    <div class="quick-icon">⏰</div>
-
-    <span class="quick-title">
-      Needs Attention
-    </span>
-
-    <span class="quick-sub">
-      Check overdue items
-    </span>
-
-  </button>
-
-  <button class="quick-card"
-          onclick="showPage('settings')">
-
-    <div class="quick-icon">⚙️</div>
-
-    <span class="quick-title">
-      Settings
-    </span>
-
-    <span class="quick-sub">
-      Manage Haven
-    </span>
-
-  </button>
-
-</div>
-
-  </section></main><main id="tasksPage" class="page">  <h1 class="page-title">
-    Your Memories
-  </h1>  <p class="page-subtitle">
-    A simple record of the care your home receives.
-  </p>  <div class="filters"><button class="filter-btn active"
-        data-filter="all"
-        onclick="setFilter('all')">
-  All
-</button>
-
-<button class="filter-btn"
-        data-filter="today"
-        onclick="setFilter('today')">
-  Today
-</button>
-
-<button class="filter-btn"
-        data-filter="upcoming"
-        onclick="setFilter('upcoming')">
-  Upcoming
-</button>
-
-<button class="filter-btn"
-        data-filter="overdue"
-        onclick="setFilter('overdue')">
-  Overdue
-</button>
-
-  </div>  <section class="section"><div class="task-list"
-     id="memoryList">
-</div>
-
-  </section></main><main id="calendarPage" class="page">  <h1 class="page-title">
-    Calendar
-  </h1>  <p class="page-subtitle">
-    What's coming up for your home.
-  </p>  <div id="calendarList"></div></main><main id="settingsPage" class="page">  <h1 class="page-title">
-    Settings
-  </h1>  <p class="page-subtitle">
-    Keep Haven simple and private.
-  </p>  <div class="settings-card"><div class="setting-row">
-
-  <div class="setting-left">
-
-    <strong>
-      Reminders
-    </strong>
-
-    <span>
-      Allow Haven to send maintenance reminders.
-    </span>
-
-  </div>
-
-  <button class="toggle"
-          id="reminderToggle"
-          onclick="toggleReminders()">
-
-    <span></span>
-
-  </button>
-
-</div>
-
-<div class="setting-row">
-
-  <div class="setting-left">
-
-    <strong>
-      Add a Memory
-    </strong>
-
-    <span>
-      Record a new maintenance task.
-    </span>
-
-  </div>
-
-  <button class="setting-btn"
-          onclick="openAddModal()">
-    Add
-  </button>
-
-</div>
-
-<div class="setting-row">
-
-  <div class="setting-left">
-
-    <strong>
-      Storage
-    </strong>
-
-    <span>
-      Your memories are stored only on this device.
-    </span>
-
-  </div>
-
-</div>
-
-<div class="setting-row">
-
-  <div class="setting-left">
-
-    <strong>
-      Clear Memories
-    </strong>
-
-    <span>
-      Remove all saved maintenance memories.
-    </span>
-
-  </div>
-
-  <button class="setting-btn danger-btn"
-          onclick="clearMemories()">
-    Clear
-  </button>
-
-</div>
-
-  </div></main></div><button class="fab"
-onclick="openAddModal()"
-aria-label="Add memory">
-＋
-</button>
-
-<nav class="bottom-nav">  <div class="nav-inner"><button class="nav-btn active"
-        data-page="home"
-        onclick="showPage('home')">
-  🏠
-  Home
-</button>
-
-<button class="nav-btn"
-        data-page="calendar"
-        onclick="showPage('calendar')">
-  📅
-  Calendar
-</button>
-
-<button class="nav-btn"
-        data-page="tasks"
-        onclick="showPage('tasks')">
-  ☑
-  Tasks
-</button>
-
-<button class="nav-btn"
-        data-page="settings"
-        onclick="showPage('settings')">
-  ⚙
-  More
-</button>
-
-  </div></nav><div class="modal-backdrop"
-     id="taskModal">  <div class="modal"><div class="modal-head">
-
-  <div class="modal-title"
-       id="modalTitle">
-    Add a Memory
-  </div>
-
-  <button class="close-btn"
-          onclick="closeModal()">
-    ✕
-  </button>
-
-</div>
-
-<form id="taskForm">
-
-  <div class="form-group">
-
-    <label class="form-label">
-      What needs care?
-    </label>
-
-    <input
-      class="form-input"
-      id="taskTitle"
-      placeholder="e.g. AC Cleaning"
-      required
-    >
-
-  </div>
-
-  <div class="form-group">
-
-    <label class="form-label">
-      Category
-    </label>
-
-    <select class="form-select"
-            id="taskCategory">
-
-      <option value="general">
-        General
-      </option>
-
-      <option value="plumbing">
-        Plumbing
-      </option>
-
-      <option value="electrical">
-        Electrical
-      </option>
-
-      <option value="cleaning">
-        Cleaning
-      </option>
-
-      <option value="appliance">
-        Appliance
-      </option>
-
-      <option value="heating">
-        Heating
-      </option>
-
-      <option value="garden">
-        Garden
-      </option>
-
-      <option value="repair">
-        Repair
-      </option>
-
-      <option value="security">
-        Security
-      </option>
-
-      <option value="inspection">
-        Inspection
-      </option>
-
-    </select>
-
-  </div>
-
-  <div class="form-group">
-
-    <label class="form-label">
-      Next date
-    </label>
-
-    <input
-      class="form-input"
-      id="taskDate"
-      type="date"
-      required
-    >
-
-  </div>
-
-  <div class="form-group">
-
-    <label class="form-label">
-      Repeat
-    </label>
-
-    <select class="form-select"
-            id="taskRepeat">
-
-      <option value="none">
-        Does not repeat
-      </option>
-
-      <option value="weekly">
-        Every week
-      </option>
-
-      <option value="monthly">
-        Every month
-      </option>
-
-      <option value="3month">
-        Every 3 months
-      </option>
-
-      <option value="6month">
-        Every 6 months
-      </option>
-
-      <option value="yearly">
-        Every year
-      </option>
-
-    </select>
-
-  </div>
-
-  <div class="form-group">
-
-    <label class="form-label">
-      Notes
-    </label>
-
-    <textarea
-      class="form-textarea"
-      id="taskNotes"
-      placeholder="Optional notes..."
-    ></textarea>
-
-  </div>
-
-  <div class="form-actions">
-
-    <button
-      type="button"
-      class="secondary-btn"
-      onclick="closeModal()">
-      Cancel
-    </button>
-
-    <button
-      type="submit"
-      class="primary-btn">
-      Save Memory
-    </button>
-
-  </div>
 
   <button
-    type="button"
-    id="deleteMemoryBtn"
-    class="delete-memory-btn"
-    onclick="deleteEditingTask()">
-    Delete Memory
+    class="icon-btn"
+    onclick="showPage('settings')"
+    aria-label="Settings">
+
+    ⚙
+
   </button>
 
-</form>
+</header>
 
-  </div></div><div class="toast"
-     id="toast">
-</div><script>
+
+<!-- =======================================================
+     HOME
+======================================================= -->
+
+<main
+  id="homePage"
+  class="page active">
+
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-greeting">
+        Good morning, Javaid
+      </div>
+
+      <h1>
+        A home worth remembering.
+      </h1>
+
+      <p>
+        Keep the little things cared for,
+        before they become big things.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOME HEALTH -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Home Health
+      </div>
+
+    </div>
+
+
+    <div class="health-card">
+
+      <div class="health-row">
+
+
+        <div
+          class="health-ring"
+          id="healthRing">
+
+          <span
+            class="health-score"
+            id="healthScore">
+
+            100%
+
+          </span>
+
+        </div>
+
+
+        <div class="health-info">
+
+          <strong id="healthTitle">
+            Your home is cared for.
+          </strong>
+
+          <span id="healthText">
+            Everything looks good.
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- UPCOMING -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Upcoming Maintenance
+      </div>
+
+      <button
+        class="section-link"
+        onclick="showPage('tasks')">
+
+        View all
+
+      </button>
+
+    </div>
+
+
+    <div
+      class="task-list"
+      id="upcomingList">
+
+    </div>
+
+  </section>
+
+
+  <!-- QUICK ACTIONS -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div class="section-title">
+        Quick Actions
+      </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+
+      <button
+        class="quick-card"
+        onclick="openAddModal()">
+
+        <div class="quick-icon">
+          ＋
+        </div>
+
+        <span class="quick-title">
+          Add Memory
+        </span>
+
+        <span class="quick-sub">
+          Record maintenance
+        </span>
+
+      </button>
+
+
+      <button
+        class="quick-card"
+        onclick="showPage('calendar')">
+
+        <div class="quick-icon">
+          📅
+        </div>
+
+        <span class="quick-title">
+          Calendar
+        </span>
+
+        <span class="quick-sub">
+          See what's coming
+        </span>
+
+      </button>
+
+
+      <button
+        class="quick-card"
+        onclick="setFilter('overdue');showPage('tasks')">
+
+        <div class="quick-icon">
+          ⏰
+        </div>
+
+        <span class="quick-title">
+          Needs Attention
+        </span>
+
+        <span class="quick-sub">
+          Check overdue items
+        </span>
+
+      </button>
+
+
+      <button
+        class="quick-card"
+        onclick="showPage('settings')">
+
+        <div class="quick-icon">
+          ⚙️
+        </div>
+
+        <span class="quick-title">
+          Settings
+        </span>
+
+        <span class="quick-sub">
+          Manage Haven
+        </span>
+
+      </button>
+
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<!-- =======================================================
+     TASKS
+======================================================= -->
+
+<main
+  id="tasksPage"
+  class="page">
+
+
+  <h1 class="page-title">
+    Your Memories
+  </h1>
+
+
+  <p class="page-subtitle">
+    A simple record of the care your home receives.
+  </p>
+
+
+  <div class="filters">
+
+
+    <button
+      class="filter-btn active"
+      data-filter="all"
+      onclick="setFilter('all')">
+
+      All
+
+    </button>
+
+
+    <button
+      class="filter-btn"
+      data-filter="today"
+      onclick="setFilter('today')">
+
+      Today
+
+    </button>
+
+
+    <button
+      class="filter-btn"
+      data-filter="upcoming"
+      onclick="setFilter('upcoming')">
+
+      Upcoming
+
+    </button>
+
+
+    <button
+      class="filter-btn"
+      data-filter="overdue"
+      onclick="setFilter('overdue')">
+
+      Overdue
+
+    </button>
+
+
+  </div>
+
+
+  <section class="section">
+
+    <div
+      class="task-list"
+      id="memoryList">
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<!-- =======================================================
+     CALENDAR
+======================================================= -->
+
+<main
+  id="calendarPage"
+  class="page">
+
+
+  <h1 class="page-title">
+    Calendar
+  </h1>
+
+
+  <p class="page-subtitle">
+    What's coming up for your home.
+  </p>
+
+
+  <div id="calendarList"></div>
+
+
+</main>
+
+
+<!-- =======================================================
+     SETTINGS
+======================================================= -->
+
+<main
+  id="settingsPage"
+  class="page">
+
+
+  <h1 class="page-title">
+    Settings
+  </h1>
+
+
+  <p class="page-subtitle">
+    Keep Haven simple and private.
+  </p>
+
+
+  <div class="settings-card">
+
+
+    <div class="setting-row">
+
+      <div class="setting-left">
+
+        <strong>
+          Reminders
+        </strong>
+
+        <span>
+          Allow Haven to send maintenance reminders.
+        </span>
+
+      </div>
+
+
+      <button
+        class="toggle"
+        id="reminderToggle"
+        onclick="toggleReminders()">
+
+        <span></span>
+
+      </button>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <div class="setting-left">
+
+        <strong>
+          Add a Memory
+        </strong>
+
+        <span>
+          Record a new maintenance task.
+        </span>
+
+      </div>
+
+
+      <button
+        class="setting-btn"
+        onclick="openAddModal()">
+
+        Add
+
+      </button>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <div class="setting-left">
+
+        <strong>
+          Storage
+        </strong>
+
+        <span>
+          Your memories are stored only on this device.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <div class="setting-left">
+
+        <strong>
+          Clear Memories
+        </strong>
+
+        <span>
+          Remove all saved maintenance memories.
+        </span>
+
+      </div>
+
+
+      <button
+        class="setting-btn danger-btn"
+        onclick="clearMemories()">
+
+        Clear
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+</main>
+
+
+</div>
+
+
+<!-- =======================================================
+     FLOATING ACTION BUTTON
+======================================================= -->
+
+<button
+  class="fab"
+  onclick="openAddModal()"
+  aria-label="Add memory">
+
+  ＋
+
+</button>
+
+
+<!-- =======================================================
+     BOTTOM NAV
+======================================================= -->
+
+<nav class="bottom-nav">
+
+
+  <div class="nav-inner">
+
+
+    <button
+      class="nav-btn active"
+      data-page="home"
+      onclick="showPage('home')">
+
+      🏠
+
+      Home
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-page="calendar"
+      onclick="showPage('calendar')">
+
+      📅
+
+      Calendar
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-page="tasks"
+      onclick="showPage('tasks')">
+
+      ☑
+
+      Tasks
+
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-page="settings"
+      onclick="showPage('settings')">
+
+      ⚙
+
+      More
+
+    </button>
+
+
+  </div>
+
+
+</nav>
+
+
+<!-- =======================================================
+     MEMORY MODAL
+======================================================= -->
+
+<div
+  class="modal-backdrop"
+  id="taskModal">
+
+
+  <div class="modal">
+
+
+    <div class="modal-head">
+
+
+      <div
+        class="modal-title"
+        id="modalTitle">
+
+        Add a Memory
+
+      </div>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal()">
+
+        ✕
+
+      </button>
+
+
+    </div>
+
+
+    <form id="taskForm">
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          What needs care?
+        </label>
+
+        <input
+          class="form-input"
+          id="taskTitle"
+          placeholder="e.g. AC Cleaning"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Category
+        </label>
+
+        <select
+          class="form-select"
+          id="taskCategory">
+
+          <option value="general">
+            General
+          </option>
+
+          <option value="plumbing">
+            Plumbing
+          </option>
+
+          <option value="electrical">
+            Electrical
+          </option>
+
+          <option value="cleaning">
+            Cleaning
+          </option>
+
+          <option value="appliance">
+            Appliance
+          </option>
+
+          <option value="heating">
+            Heating
+          </option>
+
+          <option value="garden">
+            Garden
+          </option>
+
+          <option value="repair">
+            Repair
+          </option>
+
+          <option value="security">
+            Security
+          </option>
+
+          <option value="inspection">
+            Inspection
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Next date
+        </label>
+
+        <input
+          class="form-input"
+          id="taskDate"
+          type="date"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Repeat
+        </label>
+
+        <select
+          class="form-select"
+          id="taskRepeat">
+
+          <option value="none">
+            Does not repeat
+          </option>
+
+          <option value="weekly">
+            Every week
+          </option>
+
+          <option value="monthly">
+            Every month
+          </option>
+
+          <option value="3month">
+            Every 3 months
+          </option>
+
+          <option value="6month">
+            Every 6 months
+          </option>
+
+          <option value="yearly">
+            Every year
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Notes
+        </label>
+
+        <textarea
+          class="form-textarea"
+          id="taskNotes"
+          placeholder="Optional notes..."></textarea>
+
+      </div>
+
+
+      <div class="form-actions">
+
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="closeModal()">
+
+          Cancel
+
+        </button>
+
+
+        <button
+          type="submit"
+          class="primary-btn">
+
+          Save Memory
+
+        </button>
+
+
+      </div>
+
+
+      <button
+        type="button"
+        id="deleteMemoryBtn"
+        class="delete-memory-btn"
+        onclick="deleteEditingTask()">
+
+        Delete Memory
+
+      </button>
+
+
+    </form>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+  class="toast"
+  id="toast">
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   STORAGE
+========================================================= */
 
 const STORAGE_KEY="havenTasksV4";
+
 const REMINDER_KEY="havenRemindersV1";
 
 let tasks=[];
+
 let currentFilter="all";
+
 let editingId=null;
+
+
+/* =========================================================
+   LOAD TASKS
+========================================================= */
 
 function loadTasks(){
 
-  const saved=localStorage.getItem(STORAGE_KEY);
+  const saved=
+    localStorage.getItem(STORAGE_KEY);
 
   if(saved){
 
     try{
 
-      const parsed=JSON.parse(saved);
+      const parsed=
+        JSON.parse(saved);
 
       if(Array.isArray(parsed)){
 
         tasks=parsed
+
           .filter(task=>{
+
             return task &&
                    typeof task==="object" &&
                    String(task.title||"").trim() &&
                    String(task.date||"").trim();
+
           })
+
           .map(task=>({
 
             ...task,
 
-            title:String(task.title).trim(),
+            title:
+              String(task.title).trim(),
 
-            date:String(task.date).trim(),
+            date:
+              String(task.date).trim(),
 
-            repeat:task.repeat||"none",
+            repeat:
+              task.repeat||"none",
 
-            notes:String(task.notes||""),
+            notes:
+              String(task.notes||""),
 
-            category:task.category||guessCategory(task.title),
+            category:
+              task.category||
+              guessCategory(task.title),
 
-            completed:Boolean(task.completed)
+            completed:
+              Boolean(task.completed)
 
           }));
 
@@ -1661,6 +3074,11 @@ function loadTasks(){
 
 }
 
+
+/* =========================================================
+   SAVE TASKS
+========================================================= */
+
 function saveTasks(){
 
   localStorage.setItem(
@@ -1669,6 +3087,11 @@ function saveTasks(){
   );
 
 }
+
+
+/* =========================================================
+   VALID TASKS
+========================================================= */
 
 function validTasks(){
 
@@ -1683,35 +3106,49 @@ function validTasks(){
 
 }
 
-function localDateString(date=new Date()){
 
-  const y=date.getFullYear();
+/* =========================================================
+   DATE HELPERS
+========================================================= */
 
-  const m=String(
-    date.getMonth()+1
-  ).padStart(2,"0");
+function localDateString(
+  date=new Date()
+){
 
-  const d=String(
-    date.getDate()
-  ).padStart(2,"0");
+  const y=
+    date.getFullYear();
+
+  const m=
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
+
+  const d=
+    String(
+      date.getDate()
+    ).padStart(2,"0");
 
   return `${y}-${m}-${d}`;
 
 }
 
+
 function parseDate(value){
 
   if(!value)return null;
 
-  const parts=String(value)
-    .split("-")
-    .map(Number);
+  const parts=
+    String(value)
+      .split("-")
+      .map(Number);
 
   if(
     parts.length!==3 ||
     parts.some(Number.isNaN)
   ){
+
     return null;
+
   }
 
   return new Date(
@@ -1722,15 +3159,19 @@ function parseDate(value){
 
 }
 
+
 function daysFromToday(value){
 
-  const target=parseDate(value);
+  const target=
+    parseDate(value);
 
-  if(!target)return 999999;
+  if(!target)
+    return 999999;
 
-  const today=parseDate(
-    localDateString()
-  );
+  const today=
+    parseDate(
+      localDateString()
+    );
 
   return Math.round(
     (target-today)/86400000
@@ -1738,11 +3179,14 @@ function daysFromToday(value){
 
 }
 
+
 function formatDate(value){
 
-  const d=parseDate(value);
+  const d=
+    parseDate(value);
 
-  if(!d)return"Date not set";
+  if(!d)
+    return "Date not set";
 
   return d.toLocaleDateString(
     undefined,
@@ -1755,40 +3199,51 @@ function formatDate(value){
 
 }
 
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
 function guessCategory(title){
 
-  const t=String(title||"").toLowerCase();
+  const t=
+    String(title||"").toLowerCase();
 
   if(/water|tap|pipe|leak|drain|plumb/.test(t))
-    return"plumbing";
+    return "plumbing";
 
   if(/wire|electric|switch|socket|light|fan/.test(t))
-    return"electrical";
+    return "electrical";
 
   if(/clean|wash|dust|deep/.test(t))
-    return"cleaning";
+    return "cleaning";
 
   if(/ac|air conditioner|fridge|refrigerator|washing machine|appliance/.test(t))
-    return"appliance";
+    return "appliance";
 
   if(/heater|heating|boiler|radiator/.test(t))
-    return"heating";
+    return "heating";
 
   if(/garden|plant|lawn|tree/.test(t))
-    return"garden";
+    return "garden";
 
   if(/repair|fix|broken/.test(t))
-    return"repair";
+    return "repair";
 
   if(/lock|security|alarm|camera/.test(t))
-    return"security";
+    return "security";
 
   if(/inspect|check|inspection/.test(t))
-    return"inspection";
+    return "inspection";
 
-  return"general";
+  return "general";
 
 }
+
+
+/* =========================================================
+   TASK ICONS
+========================================================= */
 
 function taskIcon(category){
 
@@ -1850,26 +3305,46 @@ function taskIcon(category){
 
 }
 
+
+/* =========================================================
+   STATUS
+========================================================= */
+
 function getStatus(task){
 
   if(task.completed){
 
     return{
+
       label:"Completed",
-      className:"status-completed"
+
+      className:
+        "status-completed"
+
     };
 
   }
 
-  const days=daysFromToday(task.date);
+  const days=
+    daysFromToday(task.date);
 
   if(days<0){
 
-    const overdueDays=Math.abs(days);
+    const overdueDays=
+      Math.abs(days);
 
     return{
-      label:`Overdue by ${overdueDays} ${overdueDays===1?"day":"days"}`,
-      className:"status-overdue"
+
+      label:
+        `Overdue by ${overdueDays} ${
+          overdueDays===1
+            ?"day"
+            :"days"
+        }`,
+
+      className:
+        "status-overdue"
+
     };
 
   }
@@ -1877,28 +3352,51 @@ function getStatus(task){
   if(days===0){
 
     return{
+
       label:"Due today",
-      className:"status-today"
+
+      className:
+        "status-today"
+
     };
 
   }
 
   return{
-    label:`Due in ${days} ${days===1?"day":"days"}`,
-    className:"status-upcoming"
+
+    label:
+      `Due in ${days} ${
+        days===1
+          ?"day"
+          :"days"
+      }`,
+
+    className:
+      "status-upcoming"
+
   };
 
 }
+
+
+/* =========================================================
+   REPEAT LABEL
+========================================================= */
 
 function repeatLabel(value){
 
   const labels={
 
     none:"",
+
     weekly:"weekly",
+
     monthly:"monthly",
+
     "3month":"every 3 months",
+
     "6month":"every 6 months",
+
     yearly:"yearly"
 
   };
@@ -1907,67 +3405,114 @@ function repeatLabel(value){
 
 }
 
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
 function escapeHtml(value){
 
   return String(value??"")
+
     .replace(/&/g,"&amp;")
+
     .replace(/</g,"&lt;")
+
     .replace(/>/g,"&gt;")
+
     .replace(/"/g,"&quot;")
+
     .replace(/'/g,"&#039;");
 
 }
 
+
+/* =========================================================
+   TASK CARD
+========================================================= */
+
 function taskCard(task){
 
-  const icon=taskIcon(task.category);
+  const icon=
+    taskIcon(task.category);
 
-  const status=getStatus(task);
+  const status=
+    getStatus(task);
 
-  const repeat=repeatLabel(task.repeat);
+  const repeat=
+    repeatLabel(task.repeat);
 
-  return`
+  return `
 
     <div class="task-card">
+
 
       <div
         class="task-icon"
         style="background:${icon.bg}">
+
         <span style="font-size:22px">
+
           ${icon.emoji}
+
         </span>
+
       </div>
+
 
       <div class="task-main">
 
+
         <div class="task-title">
+
           ${escapeHtml(task.title)}
+
         </div>
 
+
         <div class="task-date">
+
           ${formatDate(task.date)}
-          ${repeat ? ` · ${escapeHtml(repeat)}` : ""}
+
+          ${
+            repeat
+              ? ` · ${escapeHtml(repeat)}`
+              : ""
+          }
+
         </div>
+
 
       </div>
 
-      <span class="task-status ${status.className}">
+
+      <span
+        class="task-status ${status.className}">
+
         ${status.label}
+
       </span>
+
 
       <button
         class="icon-btn"
         style="width:36px;height:36px;box-shadow:none;background:#edf1f1"
         onclick="completeTask(${task.id})">
+
         ✓
+
       </button>
+
 
       <button
         class="icon-btn"
         style="width:36px;height:36px;box-shadow:none;background:#edf1f1"
         onclick="editTask(${task.id})">
+
         ✎
+
       </button>
+
 
     </div>
 
@@ -1975,17 +3520,28 @@ function taskCard(task){
 
 }
 
+
+/* =========================================================
+   UPCOMING
+========================================================= */
+
 function renderUpcoming(){
 
-  const list=document.getElementById(
-    "upcomingList"
-  );
-
-  const active=validTasks()
-    .filter(t=>!t.completed)
-    .sort(
-      (a,b)=>parseDate(a.date)-parseDate(b.date)
+  const list=
+    document.getElementById(
+      "upcomingList"
     );
+
+  const active=
+    validTasks()
+
+      .filter(t=>!t.completed)
+
+      .sort(
+        (a,b)=>
+          parseDate(a.date)-
+          parseDate(b.date)
+      );
 
   if(!active.length){
 
@@ -2012,47 +3568,61 @@ function renderUpcoming(){
   }
 
   list.innerHTML=
-    active.map(task=>taskCard(task)).join("");
+    active
+      .map(task=>taskCard(task))
+      .join("");
 
 }
 
+
+/* =========================================================
+   MEMORY LIST
+========================================================= */
+
 function renderMemoryList(){
 
-  const list=document.getElementById(
-    "memoryList"
-  );
+  const list=
+    document.getElementById(
+      "memoryList"
+    );
 
-  let filtered=validTasks();
+  let filtered=
+    validTasks();
 
   if(currentFilter==="today"){
 
-    filtered=filtered.filter(t=>
-      !t.completed &&
-      daysFromToday(t.date)===0
-    );
+    filtered=
+      filtered.filter(t=>
+        !t.completed &&
+        daysFromToday(t.date)===0
+      );
 
   }
 
   else if(currentFilter==="upcoming"){
 
-    filtered=filtered.filter(t=>
-      !t.completed &&
-      daysFromToday(t.date)>0
-    );
+    filtered=
+      filtered.filter(t=>
+        !t.completed &&
+        daysFromToday(t.date)>0
+      );
 
   }
 
   else if(currentFilter==="overdue"){
 
-    filtered=filtered.filter(t=>
-      !t.completed &&
-      daysFromToday(t.date)<0
-    );
+    filtered=
+      filtered.filter(t=>
+        !t.completed &&
+        daysFromToday(t.date)<0
+      );
 
   }
 
   filtered.sort(
-    (a,b)=>parseDate(a.date)-parseDate(b.date)
+    (a,b)=>
+      parseDate(a.date)-
+      parseDate(b.date)
   );
 
   if(!filtered.length){
@@ -2080,21 +3650,34 @@ function renderMemoryList(){
   }
 
   list.innerHTML=
-    filtered.map(task=>taskCard(task)).join("");
+    filtered
+      .map(task=>taskCard(task))
+      .join("");
 
 }
 
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
 function renderCalendar(){
 
-  const container=document.getElementById(
-    "calendarList"
-  );
-
-  const active=validTasks()
-    .filter(t=>!t.completed)
-    .sort(
-      (a,b)=>parseDate(a.date)-parseDate(b.date)
+  const container=
+    document.getElementById(
+      "calendarList"
     );
+
+  const active=
+    validTasks()
+
+      .filter(t=>!t.completed)
+
+      .sort(
+        (a,b)=>
+          parseDate(a.date)-
+          parseDate(b.date)
+      );
 
   if(!active.length){
 
@@ -2125,62 +3708,96 @@ function renderCalendar(){
   active.forEach(task=>{
 
     if(!groups[task.date]){
+
       groups[task.date]=[];
+
     }
 
     groups[task.date].push(task);
 
   });
 
+
   container.innerHTML=
+
     Object.keys(groups)
+
       .sort()
+
       .map(date=>`
 
         <div class="calendar-day">
 
+
           <div class="calendar-date">
+
             ${formatDate(date)}
+
           </div>
 
+
           <div class="task-list">
+
             ${groups[date]
               .map(task=>taskCard(task))
               .join("")}
+
           </div>
+
 
         </div>
 
       `)
+
       .join("");
 
 }
 
+
+/* =========================================================
+   HOME HEALTH
+========================================================= */
+
 function renderHealth(){
 
-  const active=validTasks()
-    .filter(t=>!t.completed);
+  const active=
+    validTasks()
+      .filter(t=>!t.completed);
 
-  const overdue=active.filter(
-    t=>daysFromToday(t.date)<0
-  );
+  const overdue=
+    active.filter(
+      t=>daysFromToday(t.date)<0
+    );
 
   let score=100;
 
   if(active.length){
 
     score=Math.max(
+
       0,
+
       Math.round(
-        100-(overdue.length/active.length*100)
+
+        100-
+        (
+          overdue.length/
+          active.length*
+          100
+        )
+
       )
+
     );
 
   }
 
+
   document.getElementById(
     "healthScore"
-  ).textContent=`${score}%`;
+  ).textContent=
+    `${score}%`;
+
 
   document.getElementById(
     "healthRing"
@@ -2189,13 +3806,17 @@ function renderHealth(){
     `${score}%`
   );
 
-  const title=document.getElementById(
-    "healthTitle"
-  );
 
-  const text=document.getElementById(
-    "healthText"
-  );
+  const title=
+    document.getElementById(
+      "healthTitle"
+    );
+
+  const text=
+    document.getElementById(
+      "healthText"
+    );
+
 
   if(!active.length){
 
@@ -2239,90 +3860,153 @@ function renderHealth(){
 
 }
 
+
+/* =========================================================
+   RENDER EVERYTHING
+========================================================= */
+
 function renderAll(){
 
   renderUpcoming();
+
   renderMemoryList();
+
   renderCalendar();
+
   renderHealth();
 
 }
 
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
 function showPage(page){
 
   document.querySelectorAll(".page")
+
     .forEach(p=>
       p.classList.remove("active")
     );
+
 
   document.getElementById(
     page+"Page"
   ).classList.add("active");
 
+
   document.querySelectorAll(".nav-btn")
+
     .forEach(btn=>{
+
       btn.classList.toggle(
+
         "active",
+
         btn.dataset.page===page
+
       );
+
     });
 
+
   window.scrollTo({
+
     top:0,
+
     behavior:"smooth"
+
   });
 
 }
 
+
+/* =========================================================
+   FILTER
+========================================================= */
+
 function setFilter(filter){
 
-  currentFilter=filter;
+  currentFilter=
+    filter;
 
-  document.querySelectorAll(".filter-btn")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.filter===filter
-      );
-    });
+
+  document.querySelectorAll(
+    ".filter-btn"
+  )
+
+  .forEach(btn=>{
+
+    btn.classList.toggle(
+
+      "active",
+
+      btn.dataset.filter===filter
+
+    );
+
+  });
+
 
   renderMemoryList();
 
 }
 
+
+/* =========================================================
+   ADD MODAL
+========================================================= */
+
 function openAddModal(){
 
   editingId=null;
 
+
   document.getElementById(
     "modalTitle"
-  ).textContent="Add a Memory";
+  ).textContent=
+    "Add a Memory";
+
 
   document.getElementById(
     "taskForm"
   ).reset();
 
+
   document.getElementById(
     "taskDate"
-  ).value=localDateString();
+  ).value=
+    localDateString();
+
 
   document.getElementById(
     "taskCategory"
-  ).value="general";
+  ).value=
+    "general";
+
 
   document.getElementById(
     "taskRepeat"
-  ).value="none";
+  ).value=
+    "none";
+
 
   document.getElementById(
     "deleteMemoryBtn"
   ).classList.remove("show");
+
 
   document.getElementById(
     "taskModal"
   ).classList.add("show");
 
 }
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
 
 function closeModal(){
 
@@ -2330,7 +4014,9 @@ function closeModal(){
     "taskModal"
   ).classList.remove("show");
 
+
   editingId=null;
+
 
   document.getElementById(
     "deleteMemoryBtn"
@@ -2338,43 +4024,64 @@ function closeModal(){
 
 }
 
+
+/* =========================================================
+   EDIT TASK
+========================================================= */
+
 function editTask(id){
 
-  const task=validTasks().find(
-    t=>String(t.id)===String(id)
-  );
+  const task=
+    validTasks().find(
+      t=>String(t.id)===String(id)
+    );
 
   if(!task)return;
 
+
   editingId=id;
+
 
   document.getElementById(
     "modalTitle"
-  ).textContent="Edit Memory";
+  ).textContent=
+    "Edit Memory";
+
 
   document.getElementById(
     "taskTitle"
-  ).value=task.title;
+  ).value=
+    task.title;
+
 
   document.getElementById(
     "taskCategory"
-  ).value=task.category||"general";
+  ).value=
+    task.category||"general";
+
 
   document.getElementById(
     "taskDate"
-  ).value=task.date;
+  ).value=
+    task.date;
+
 
   document.getElementById(
     "taskRepeat"
-  ).value=task.repeat||"none";
+  ).value=
+    task.repeat||"none";
+
 
   document.getElementById(
     "taskNotes"
-  ).value=task.notes||"";
+  ).value=
+    task.notes||"";
+
 
   document.getElementById(
     "deleteMemoryBtn"
   ).classList.add("show");
+
 
   document.getElementById(
     "taskModal"
@@ -2382,38 +4089,51 @@ function editTask(id){
 
 }
 
+
+/* =========================================================
+   SAVE FORM
+========================================================= */
+
 document.getElementById(
   "taskForm"
 ).addEventListener(
+
   "submit",
+
   function(e){
 
     e.preventDefault();
+
 
     const title=
       document.getElementById(
         "taskTitle"
       ).value.trim();
 
+
     const date=
       document.getElementById(
         "taskDate"
       ).value;
+
 
     const category=
       document.getElementById(
         "taskCategory"
       ).value;
 
+
     const repeat=
       document.getElementById(
         "taskRepeat"
       ).value;
 
+
     const notes=
       document.getElementById(
         "taskNotes"
       ).value.trim();
+
 
     if(!title||!date){
 
@@ -2425,24 +4145,39 @@ document.getElementById(
 
     }
 
+
+    /* EDIT */
+
     if(editingId!==null){
 
-      const index=tasks.findIndex(
-        t=>String(t.id)===String(editingId)
-      );
+      const index=
+        tasks.findIndex(
+          t=>
+            String(t.id)===
+            String(editingId)
+        );
+
 
       if(index!==-1){
 
         tasks[index]={
+
           ...tasks[index],
+
           title,
+
           date,
+
           category,
+
           repeat,
+
           notes
+
         };
 
       }
+
 
       saveTasks();
 
@@ -2458,16 +4193,23 @@ document.getElementById(
 
     }
 
+
+    /* NEW */
+
     tasks.push({
 
-      id:Date.now(),
+      id:
+        Date.now(),
 
       title,
 
       category:
+
         category==="general"
-          ?guessCategory(title)
-          :category,
+
+          ? guessCategory(title)
+
+          : category,
 
       date,
 
@@ -2478,6 +4220,7 @@ document.getElementById(
       completed:false
 
     });
+
 
     saveTasks();
 
@@ -2490,27 +4233,49 @@ document.getElementById(
     );
 
   }
+
 );
+
+
+/* =========================================================
+   DELETE
+========================================================= */
 
 function deleteEditingTask(){
 
-  if(editingId===null)return;
+  if(editingId===null)
+    return;
 
-  const task=validTasks().find(
-    t=>String(t.id)===String(editingId)
-  );
 
-  if(!task)return;
+  const task=
+    validTasks().find(
+      t=>
+        String(t.id)===
+        String(editingId)
+    );
 
-  const confirmed=confirm(
-    `Delete "${task.title}"?`
-  );
 
-  if(!confirmed)return;
+  if(!task)
+    return;
 
-  tasks=tasks.filter(
-    t=>String(t.id)!==String(editingId)
-  );
+
+  const confirmed=
+    confirm(
+      `Delete "${task.title}"?`
+    );
+
+
+  if(!confirmed)
+    return;
+
+
+  tasks=
+    tasks.filter(
+      t=>
+        String(t.id)!==
+        String(editingId)
+    );
+
 
   saveTasks();
 
@@ -2524,35 +4289,55 @@ function deleteEditingTask(){
 
 }
 
+
+/* =========================================================
+   COMPLETE TASK
+========================================================= */
+
 function completeTask(id){
 
-  const index=tasks.findIndex(
-    t=>String(t.id)===String(id)
-  );
-
-  if(index===-1)return;
-
-  const task=tasks[index];
-
-  if(
-    task.repeat &&
-    task.repeat!=="none"
-  ){
-
-    task.date=getNextDate(
-      task.date,
-      task.repeat
+  const index=
+    tasks.findIndex(
+      t=>
+        String(t.id)===
+        String(id)
     );
 
+
+  if(index===-1)
+    return;
+
+
+  const task=
+    tasks[index];
+
+
+  if(
+
+    task.repeat &&
+    task.repeat!=="none"
+
+  ){
+
+    task.date=
+      getNextDate(
+        task.date,
+        task.repeat
+      );
+
     task.completed=false;
+
 
     showToast(
       "Next maintenance date scheduled."
     );
 
-  }else{
+  }
+
+  else{
 
     task.completed=true;
+
 
     showToast(
       "Memory completed."
@@ -2560,34 +4345,71 @@ function completeTask(id){
 
   }
 
+
   saveTasks();
 
   renderAll();
 
 }
 
-function getNextDate(value,repeat){
 
-  const d=parseDate(value)||new Date();
+/* =========================================================
+   NEXT DATE
+========================================================= */
+
+function getNextDate(
+  value,
+  repeat
+){
+
+  const d=
+    parseDate(value)||
+    new Date();
+
 
   if(repeat==="weekly")
-    d.setDate(d.getDate()+7);
+
+    d.setDate(
+      d.getDate()+7
+    );
+
 
   if(repeat==="monthly")
-    d.setMonth(d.getMonth()+1);
+
+    d.setMonth(
+      d.getMonth()+1
+    );
+
 
   if(repeat==="3month")
-    d.setMonth(d.getMonth()+3);
+
+    d.setMonth(
+      d.getMonth()+3
+    );
+
 
   if(repeat==="6month")
-    d.setMonth(d.getMonth()+6);
+
+    d.setMonth(
+      d.getMonth()+6
+    );
+
 
   if(repeat==="yearly")
-    d.setFullYear(d.getFullYear()+1);
+
+    d.setFullYear(
+      d.getFullYear()+1
+    );
+
 
   return localDateString(d);
 
 }
+
+
+/* =========================================================
+   REMINDERS
+========================================================= */
 
 function loadReminderSetting(){
 
@@ -2596,11 +4418,17 @@ function loadReminderSetting(){
       REMINDER_KEY
     )==="true";
 
-  updateReminderButton(enabled);
+
+  updateReminderButton(
+    enabled
+  );
 
 }
 
-function updateReminderButton(enabled){
+
+function updateReminderButton(
+  enabled
+){
 
   document.getElementById(
     "reminderToggle"
@@ -2611,12 +4439,14 @@ function updateReminderButton(enabled){
 
 }
 
+
 async function toggleReminders(){
 
   const current=
     localStorage.getItem(
       REMINDER_KEY
     )==="true";
+
 
   if(!current){
 
@@ -2630,8 +4460,10 @@ async function toggleReminders(){
 
     }
 
+
     const permission=
       await Notification.requestPermission();
+
 
     if(permission!=="granted"){
 
@@ -2643,25 +4475,36 @@ async function toggleReminders(){
 
     }
 
+
     localStorage.setItem(
       REMINDER_KEY,
       "true"
     );
 
-    updateReminderButton(true);
+
+    updateReminderButton(
+      true
+    );
+
 
     showToast(
       "Reminders enabled."
     );
 
-  }else{
+  }
+
+  else{
 
     localStorage.setItem(
       REMINDER_KEY,
       "false"
     );
 
-    updateReminderButton(false);
+
+    updateReminderButton(
+      false
+    );
+
 
     showToast(
       "Reminders disabled."
@@ -2671,19 +4514,30 @@ async function toggleReminders(){
 
 }
 
+
+/* =========================================================
+   CLEAR MEMORIES
+========================================================= */
+
 function clearMemories(){
 
-  const confirmed=confirm(
-    "This will remove all Haven memories from this device. Continue?"
-  );
+  const confirmed=
+    confirm(
+      "This will remove all Haven memories from this device. Continue?"
+    );
 
-  if(!confirmed)return;
+
+  if(!confirmed)
+    return;
+
 
   tasks=[];
+
 
   saveTasks();
 
   renderAll();
+
 
   showToast(
     "Memories cleared."
@@ -2691,42 +4545,83 @@ function clearMemories(){
 
 }
 
+
+/* =========================================================
+   TOAST
+========================================================= */
+
 let toastTimer;
+
 
 function showToast(message){
 
-  const toast=document.getElementById(
-    "toast"
+  const toast=
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent=
+    message;
+
+
+  toast.classList.add(
+    "show"
   );
 
-  toast.textContent=message;
 
-  toast.classList.add("show");
+  clearTimeout(
+    toastTimer
+  );
 
-  clearTimeout(toastTimer);
 
-  toastTimer=setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
+  toastTimer=
+    setTimeout(()=>{
+
+      toast.classList.remove(
+        "show"
+      );
+
+    },2200);
 
 }
+
+
+/* =========================================================
+   MODAL BACKDROP
+========================================================= */
 
 document.getElementById(
   "taskModal"
 ).addEventListener(
+
   "click",
+
   function(e){
 
     if(e.target===this){
+
       closeModal();
+
     }
 
   }
+
 );
 
+
+/* =========================================================
+   START HAVEN
+========================================================= */
+
 loadTasks();
+
 loadReminderSetting();
+
 renderAll();
 
-</script></body>
-</html>
+</script>
+
+</body>
+
+  </html>
