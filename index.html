@@ -3,62 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#c7cbce">
+<meta name="theme-color" content="#bfc5c8">
 <title>Haven — Your home remembers.</title>
 
 <style>
 :root{
-  --bg:#c7cbce;
-  --bg2:#d5d9db;
+  --bg:#c4c9cc;
+  --bg-deep:#b5bcc0;
 
-  --panel:rgba(241,244,245,.78);
-  --panel-strong:rgba(232,236,238,.92);
-  --panel-soft:rgba(255,255,255,.45);
+  --panel:rgba(238,242,243,.76);
+  --panel-hi:rgba(248,250,250,.86);
+  --panel-low:rgba(218,224,227,.74);
 
-  --line:rgba(25,35,41,.10);
-  --line-strong:rgba(25,35,41,.15);
+  --text:#1e292f;
+  --muted:#68757c;
+  --dim:#8b969b;
 
-  --text:#202b31;
-  --muted:#66737a;
-  --dim:#899399;
+  --accent:#3ca6ba;
+  --accent2:#78d0dc;
+  --accent-soft:rgba(60,166,186,.14);
+  --accent-glow:rgba(60,166,186,.25);
 
-  --accent:#3e9faf;
-  --accent2:#72c5d1;
-  --accent-soft:rgba(62,159,175,.14);
-  --accent-glow:rgba(62,159,175,.20);
+  --green:#4d9c78;
+  --violet:#7d6ab1;
+  --amber:#b47b39;
+  --red:#c45d68;
 
-  --success:#4c9876;
-  --success-soft:rgba(76,152,118,.14);
-
-  --danger:#c45f68;
-  --danger-soft:rgba(196,95,104,.13);
-
-  --warning:#b47d3d;
-  --warning-soft:rgba(180,125,61,.14);
-
-  --violet:#7d69b0;
-  --violet-soft:rgba(125,105,176,.14);
+  --line:rgba(26,37,43,.10);
+  --white-line:rgba(255,255,255,.68);
 
   --shadow:
-    0 18px 45px rgba(44,53,59,.15),
-    0 3px 10px rgba(44,53,59,.07);
+    0 18px 42px rgba(40,49,55,.17),
+    0 4px 12px rgba(40,49,55,.08);
 
-  --radius:26px;
-  --nav-h:76px;
+  --nav-height:76px;
 }
 
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
 html{
   scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
 }
 
 body{
   margin:0;
   min-height:100vh;
+
+  color:var(--text);
+
   font-family:
     Inter,
     -apple-system,
@@ -66,116 +65,136 @@ body{
     "Segoe UI",
     sans-serif;
 
-  color:var(--text);
-
   background:
     radial-gradient(
-      ellipse 90% 45% at 50% -10%,
+      ellipse 85% 42% at 50% -8%,
       var(--accent-soft),
       transparent 68%
     ),
     linear-gradient(
       180deg,
-      #cdd1d3 0%,
-      #bec3c6 52%,
-      #c9cdd0 100%
+      #cdd2d4 0%,
+      #bcc2c5 52%,
+      #c6cbce 100%
     );
 
   overflow-x:hidden;
+
   transition:
-    background .55s ease,
+    background .6s ease,
     color .35s ease;
 }
 
+/* Futuristic ambient atmosphere */
 body::before{
   content:"";
   position:fixed;
-  inset:-20%;
-  z-index:-2;
+  inset:-25%;
+  z-index:-3;
+  pointer-events:none;
 
   background:
     radial-gradient(
-      circle at 12% 15%,
+      circle at 10% 12%,
       var(--accent-glow),
-      transparent 23%
+      transparent 21%
     ),
     radial-gradient(
-      circle at 90% 72%,
+      circle at 91% 75%,
       var(--accent-soft),
-      transparent 28%
+      transparent 27%
     );
 
-  filter:blur(70px);
-  opacity:.65;
-  pointer-events:none;
+  filter:blur(72px);
+  opacity:.72;
 
-  transition:background .6s ease;
+  transition:background .65s ease;
 }
 
+/* Very subtle architectural grid */
 body::after{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-1;
+  z-index:-2;
   pointer-events:none;
 
-  opacity:.045;
+  opacity:.055;
 
   background-image:
     linear-gradient(
-      rgba(35,45,50,.25) 1px,
+      rgba(30,42,48,.25) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(35,45,50,.25) 1px,
+      rgba(30,42,48,.25) 1px,
       transparent 1px
     );
 
-  background-size:44px 44px;
+  background-size:48px 48px;
 }
 
 button,
 input,
 select{
   font:inherit;
+  -webkit-tap-highlight-color:transparent;
 }
 
 button{
   border:0;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+button:focus{
+  outline:none;
 }
 
 button:focus-visible,
 input:focus-visible,
 select:focus-visible{
-  outline:3px solid var(--accent-soft);
+  outline:2px solid var(--accent);
   outline-offset:2px;
 }
 
-/* =========================
+img{
+  user-select:none;
+  -webkit-user-drag:none;
+}
+
+/* =====================================================
    APP
-========================= */
+===================================================== */
 
 .app{
   width:100%;
-  max-width:620px;
-  margin:0 auto;
+  max-width:650px;
   min-height:100vh;
+
+  margin:0 auto;
+
   padding:
     max(18px,env(safe-area-inset-top))
-    16px
-    calc(var(--nav-h) + 38px + env(safe-area-inset-bottom));
+    15px
+    calc(
+      var(--nav-height)
+      + 42px
+      + env(safe-area-inset-bottom)
+    );
 }
 
-/* =========================
-   HEADER
-========================= */
+/* =====================================================
+   TOP BAR
+===================================================== */
 
 .topbar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  margin:4px 2px 22px;
+  align-items:center;
+
+  margin:4px 3px 22px;
 }
 
 .brand{
@@ -185,12 +204,15 @@ select:focus-visible{
 }
 
 .brand-mark{
-  width:42px;
-  height:42px;
-  border-radius:15px;
+  position:relative;
+
+  width:43px;
+  height:43px;
 
   display:grid;
   place-items:center;
+
+  border-radius:15px;
 
   color:white;
   font-size:20px;
@@ -203,104 +225,135 @@ select:focus-visible{
     );
 
   box-shadow:
-    0 9px 20px var(--accent-glow),
-    inset 0 1px rgba(255,255,255,.45);
+    0 10px 23px var(--accent-glow),
+    inset 0 1px rgba(255,255,255,.55);
 
-  transition:.45s ease;
+  transition:.5s ease;
+}
+
+.brand-mark::after{
+  content:"";
+
+  position:absolute;
+  inset:5px;
+
+  border-radius:11px;
+
+  border:1px solid rgba(255,255,255,.25);
 }
 
 .brand-text strong{
   display:block;
+
   font-size:17px;
-  letter-spacing:-.3px;
+  letter-spacing:-.4px;
 }
 
 .brand-text span{
   display:block;
+
   margin-top:2px;
-  font-size:11px;
+
   color:var(--muted);
-  letter-spacing:.3px;
+
+  font-size:10px;
+  letter-spacing:.7px;
+  text-transform:uppercase;
 }
 
 .profile-dot{
-  width:39px;
-  height:39px;
-  border-radius:50%;
+  width:40px;
+  height:40px;
 
   display:grid;
   place-items:center;
 
-  background:rgba(244,246,247,.72);
-  border:1px solid rgba(255,255,255,.65);
-
-  box-shadow:
-    0 8px 22px rgba(45,53,59,.13),
-    inset 0 1px rgba(255,255,255,.7);
+  border-radius:50%;
 
   color:var(--muted);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(250,252,252,.8),
+      rgba(218,224,227,.7)
+    );
+
+  border:1px solid var(--white-line);
+
+  box-shadow:
+    0 9px 22px rgba(39,48,54,.14),
+    inset 0 1px rgba(255,255,255,.8);
 }
 
-/* =========================
+/* =====================================================
    PAGES
-========================= */
+===================================================== */
 
 .page{
   display:none;
-  animation:pageIn .4s ease;
+
+  animation:
+    pageEnter .42s cubic-bezier(.2,.8,.2,1);
 }
 
 .page.active{
   display:block;
 }
 
-@keyframes pageIn{
+@keyframes pageEnter{
   from{
     opacity:0;
-    transform:translateY(8px);
+    transform:translateY(9px) scale(.995);
   }
+
   to{
     opacity:1;
     transform:none;
   }
 }
 
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
   position:relative;
-  min-height:270px;
+
+  min-height:285px;
+
   overflow:hidden;
 
   border-radius:32px;
 
+  color:white;
+
   background:
     linear-gradient(
-      120deg,
-      rgba(28,37,42,.82),
-      rgba(40,51,56,.40)
+      115deg,
+      rgba(22,30,35,.82),
+      rgba(35,48,53,.50)
     ),
-    url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85")
+    url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1300&q=88")
     center/cover;
 
   box-shadow:
-    0 24px 55px rgba(39,47,53,.23);
+    0 26px 58px rgba(38,47,53,.25);
 
-  color:white;
+  isolation:isolate;
 }
 
 .hero::before{
   content:"";
+
   position:absolute;
   inset:0;
 
   background:
     linear-gradient(
       180deg,
-      rgba(0,0,0,.02),
-      rgba(0,0,0,.60)
+      rgba(0,0,0,.03),
+      rgba(0,0,0,.68)
     );
 
   pointer-events:none;
@@ -308,59 +361,124 @@ select:focus-visible{
 
 .hero::after{
   content:"";
+
   position:absolute;
-  width:180px;
-  height:180px;
-  right:-80px;
-  top:-70px;
+
+  width:220px;
+  height:220px;
+
+  right:-90px;
+  top:-90px;
 
   border-radius:50%;
 
-  background:var(--accent-glow);
-  filter:blur(35px);
+  background:
+    radial-gradient(
+      circle,
+      var(--accent-glow),
+      transparent 68%
+    );
+
+  filter:blur(20px);
 
   pointer-events:none;
+
+  animation:
+    heroGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow{
+  from{
+    opacity:.35;
+    transform:scale(.9);
+  }
+
+  to{
+    opacity:.75;
+    transform:scale(1.12);
+  }
 }
 
 .hero-content{
   position:relative;
   z-index:2;
-  min-height:270px;
+
+  min-height:285px;
 
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
 
-  padding:26px;
+  padding:27px;
 }
 
 .hero-kicker{
-  font-size:11px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  margin-bottom:10px;
+
+  color:rgba(255,255,255,.66);
+
+  font-size:9px;
+  font-weight:750;
+  letter-spacing:2.2px;
   text-transform:uppercase;
-  letter-spacing:2px;
-  opacity:.72;
-  margin-bottom:8px;
+}
+
+.hero-kicker::before{
+  content:"";
+
+  width:23px;
+  height:1px;
+
+  background:var(--accent2);
+
+  box-shadow:
+    0 0 9px var(--accent2);
 }
 
 .hero h1{
   margin:0;
-  font-size:34px;
-  line-height:1.03;
-  letter-spacing:-1.5px;
+
+  max-width:500px;
+
+  font-size:35px;
+  line-height:1.02;
+
+  letter-spacing:-1.7px;
 }
 
 .hero p{
-  margin:11px 0 0;
-  max-width:420px;
+  margin:12px 0 0;
 
-  color:rgba(255,255,255,.78);
-  font-size:14px;
-  line-height:1.55;
+  max-width:430px;
+
+  color:rgba(255,255,255,.76);
+
+  font-size:13px;
+  line-height:1.6;
 }
 
-/* =========================
-   SECTION
-========================= */
+/* futuristic corner detail */
+.hero-corner{
+  position:absolute;
+  top:18px;
+  right:18px;
+
+  width:45px;
+  height:45px;
+
+  border-top:1px solid rgba(255,255,255,.35);
+  border-right:1px solid rgba(255,255,255,.35);
+
+  opacity:.65;
+}
+
+/* =====================================================
+   SECTIONS
+===================================================== */
 
 .section{
   margin-top:22px;
@@ -368,25 +486,27 @@ select:focus-visible{
 
 .section-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+
   margin-bottom:12px;
 }
 
 .section-head h2{
   margin:0;
+
   font-size:18px;
-  letter-spacing:-.4px;
+  letter-spacing:-.45px;
 }
 
 .section-head span{
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
 }
 
-/* =========================
-   GLASS CARDS
-========================= */
+/* =====================================================
+   GLASS CARD
+===================================================== */
 
 .card{
   position:relative;
@@ -395,83 +515,120 @@ select:focus-visible{
     linear-gradient(
       145deg,
       rgba(247,249,250,.82),
-      rgba(220,225,228,.72)
+      rgba(218,224,227,.72)
     );
 
-  border:1px solid rgba(255,255,255,.58);
+  border:1px solid var(--white-line);
 
-  border-radius:var(--radius);
+  border-radius:26px;
 
   box-shadow:
     var(--shadow),
-    inset 0 1px rgba(255,255,255,.68);
+    inset 0 1px rgba(255,255,255,.72);
 
   overflow:hidden;
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
 }
 
 .card::before{
   content:"";
+
   position:absolute;
+
   left:0;
   right:0;
   top:0;
+
   height:1px;
 
-  background:rgba(255,255,255,.72);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.85),
+      transparent
+    );
 
   pointer-events:none;
 }
 
-/* =========================
+/* =====================================================
    HEALTH
-========================= */
+===================================================== */
 
 .health-card{
-  padding:20px;
-
   display:flex;
   align-items:center;
   gap:18px;
+
+  padding:20px;
 }
 
 .health-ring{
-  width:92px;
-  height:92px;
-  flex:0 0 92px;
+  position:relative;
 
-  border-radius:50%;
+  width:94px;
+  height:94px;
+
+  flex:0 0 94px;
 
   display:grid;
   place-items:center;
 
+  border-radius:50%;
+
   background:
     conic-gradient(
       var(--accent) var(--health,57%),
-      rgba(80,91,97,.13) 0
+      rgba(75,88,95,.12) 0
     );
 
   box-shadow:
-    0 8px 22px var(--accent-glow);
+    0 9px 25px var(--accent-glow);
 
-  position:relative;
-
-  transition:.5s ease;
+  transition:
+    background .5s ease,
+    box-shadow .5s ease;
 }
 
 .health-ring::before{
   content:"";
+
   position:absolute;
   inset:9px;
 
   border-radius:50%;
 
-  background:#d9dddf;
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      #e9edef,
+      #d2d8db
+    );
 
-  border:1px solid rgba(30,40,46,.08);
+  border:1px solid rgba(28,39,45,.08);
 
   box-shadow:
-    inset 0 2px 5px rgba(0,0,0,.07),
+    inset 0 2px 5px rgba(0,0,0,.06),
     0 1px rgba(255,255,255,.8);
+}
+
+.health-ring::after{
+  content:"";
+
+  position:absolute;
+  inset:3px;
+
+  border-radius:50%;
+
+  border:1px solid var(--accent-glow);
+
+  pointer-events:none;
 }
 
 .health-number{
@@ -479,7 +636,7 @@ select:focus-visible{
   z-index:2;
 
   font-size:21px;
-  font-weight:750;
+  font-weight:800;
 }
 
 .health-copy{
@@ -488,24 +645,31 @@ select:focus-visible{
 
 .health-copy small{
   color:var(--muted);
-  font-size:11px;
+
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:1.5px;
 }
 
 .health-copy h3{
-  margin:4px 0 5px;
+  margin:5px 0;
+
   font-size:18px;
+  letter-spacing:-.4px;
 }
 
 .health-copy p{
   margin:0;
+
   color:var(--muted);
-  font-size:12px;
-  line-height:1.45;
+
+  font-size:11px;
+  line-height:1.5;
 }
 
-/* =========================
+/* =====================================================
    STATS
-========================= */
+===================================================== */
 
 .stats{
   display:grid;
@@ -514,94 +678,143 @@ select:focus-visible{
 }
 
 .stat{
+  min-height:108px;
   padding:17px;
-  min-height:105px;
 }
 
 .stat-icon{
-  width:34px;
-  height:34px;
-
-  border-radius:12px;
+  width:35px;
+  height:35px;
 
   display:grid;
   place-items:center;
 
-  color:var(--accent);
-  background:var(--accent-soft);
-
   margin-bottom:11px;
+
+  border-radius:12px;
+
+  background:var(--accent-soft);
+  color:var(--accent);
+
+  font-size:17px;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.5);
 }
 
 .stat strong{
   display:block;
+
   font-size:25px;
+  line-height:1;
+
   letter-spacing:-1px;
 }
 
 .stat span{
   display:block;
-  margin-top:2px;
-  font-size:11px;
+
+  margin-top:5px;
+
   color:var(--muted);
+
+  font-size:10px;
 }
 
-/* =========================
-   TASK CARD
-========================= */
+/* =====================================================
+   TASK LIST
+===================================================== */
 
 .task-list{
   display:grid;
   gap:12px;
 }
 
+/* =====================================================
+   CINEMATIC TASK CARD
+===================================================== */
+
 .task-card{
   position:relative;
-  padding:17px;
 
   display:grid;
   grid-template-columns:48px 1fr;
   gap:13px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(246,248,249,.87),
-      rgba(220,225,228,.76)
-    );
-
-  border:1px solid rgba(255,255,255,.60);
-  border-radius:23px;
-
-  box-shadow:
-    0 13px 30px rgba(43,52,58,.13),
-    inset 0 1px rgba(255,255,255,.66);
+  padding:17px;
 
   overflow:hidden;
 
+  background:
+    linear-gradient(
+      145deg,
+      rgba(247,249,250,.88),
+      rgba(217,223,226,.75)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.67);
+
+  border-radius:24px;
+
+  box-shadow:
+    0 15px 34px rgba(41,50,56,.14),
+    inset 0 1px rgba(255,255,255,.76);
+
   transition:
-    transform .2s ease,
+    transform .18s ease,
     box-shadow .3s ease,
     opacity .3s ease;
 }
 
-.task-card::before,
-.task-card::after{
-  pointer-events:none !important;
-}
-
+/* accent side rail */
 .task-card::before{
   content:"";
+
   position:absolute;
+
   left:0;
-  top:16px;
-  bottom:16px;
+  top:15px;
+  bottom:15px;
+
   width:3px;
 
   border-radius:0 4px 4px 0;
 
-  background:var(--accent);
-  opacity:.65;
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      var(--accent),
+      transparent
+    );
+
+  box-shadow:
+    0 0 12px var(--accent-glow);
+
+  pointer-events:none !important;
+}
+
+/* subtle cyber grid inside card */
+.task-card::after{
+  content:"";
+
+  position:absolute;
+  right:-40px;
+  bottom:-45px;
+
+  width:140px;
+  height:140px;
+
+  border-radius:50%;
+
+  border:1px solid var(--accent-soft);
+
+  box-shadow:
+    0 0 0 15px rgba(255,255,255,.04),
+    0 0 0 30px rgba(255,255,255,.025);
+
+  pointer-events:none !important;
 }
 
 .task-card:active{
@@ -609,7 +822,7 @@ select:focus-visible{
 }
 
 .task-card.done{
-  opacity:.68;
+  opacity:.64;
 }
 
 .task-card.done .task-name{
@@ -617,6 +830,9 @@ select:focus-visible{
 }
 
 .task-icon{
+  position:relative;
+  z-index:2;
+
   width:48px;
   height:48px;
 
@@ -626,26 +842,42 @@ select:focus-visible{
   border-radius:16px;
 
   color:var(--accent);
-  background:var(--accent-soft);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.56),
+      var(--accent-soft)
+    );
+
+  border:1px solid rgba(255,255,255,.55);
 
   font-size:20px;
+
+  box-shadow:
+    0 7px 16px var(--accent-glow),
+    inset 0 1px rgba(255,255,255,.65);
 }
 
 .task-main{
   min-width:0;
+  position:relative;
+  z-index:2;
 }
 
 .task-top{
   display:flex;
-  justify-content:space-between;
-  gap:10px;
   align-items:flex-start;
+  justify-content:space-between;
+
+  gap:9px;
 }
 
 .task-name{
-  font-weight:700;
-  font-size:15px;
-  line-height:1.25;
+  font-size:14px;
+  font-weight:750;
+  line-height:1.3;
+  letter-spacing:-.15px;
 }
 
 .task-status{
@@ -655,23 +887,24 @@ select:focus-visible{
 
   border-radius:999px;
 
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:.4px;
-  text-transform:uppercase;
-
   background:var(--accent-soft);
   color:var(--accent);
+
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.7px;
+  text-transform:uppercase;
 }
 
 .task-status.overdue{
-  background:var(--danger-soft);
-  color:var(--danger);
+  background:rgba(196,93,104,.13);
+  color:var(--red);
 }
 
 .task-status.today{
-  background:var(--warning-soft);
-  color:var(--warning);
+  background:rgba(180,123,57,.14);
+  color:var(--amber);
 }
 
 .task-meta{
@@ -682,7 +915,8 @@ select:focus-visible{
   margin-top:8px;
 
   color:var(--muted);
-  font-size:11px;
+
+  font-size:10px;
 }
 
 .task-meta span{
@@ -693,6 +927,7 @@ select:focus-visible{
 
 .task-actions{
   grid-column:2;
+
   display:flex;
   flex-wrap:wrap;
   gap:7px;
@@ -704,23 +939,25 @@ select:focus-visible{
 }
 
 .task-action{
-  min-height:40px;
-  padding:0 13px;
+  min-height:42px;
 
-  border-radius:12px;
+  padding:0 13px;
 
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:5px;
 
-  font-size:11px;
-  font-weight:700;
+  border-radius:12px;
+
+  font-size:10px;
+  font-weight:800;
 
   position:relative !important;
   z-index:999 !important;
 
   pointer-events:auto !important;
+
   cursor:pointer;
 
   touch-action:manipulation;
@@ -729,64 +966,129 @@ select:focus-visible{
   user-select:none;
 
   transition:
-    transform .16s ease,
-    background .2s ease;
+    transform .14s ease,
+    box-shadow .2s ease;
 }
 
 .task-action:active{
-  transform:scale(.95);
+  transform:scale(.94);
 }
 
 .action-done{
-  background:var(--success-soft);
-  color:var(--success);
+  color:var(--green);
+  background:rgba(77,156,120,.14);
 }
 
 .action-edit{
-  background:var(--accent-soft);
   color:var(--accent);
+  background:var(--accent-soft);
 }
 
 .action-delete{
-  background:var(--danger-soft);
-  color:var(--danger);
+  color:var(--red);
+  background:rgba(196,93,104,.13);
 }
 
 .action-restore{
-  background:var(--violet-soft);
   color:var(--violet);
+  background:rgba(125,106,177,.14);
 }
 
-/* =========================
+/* =====================================================
+   ATTENTION
+===================================================== */
+
+.attention{
+  padding:16px 17px;
+}
+
+.attention-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:11px 0;
+
+  border-bottom:1px solid var(--line);
+}
+
+.attention-item:last-child{
+  border-bottom:0;
+  padding-bottom:1px;
+}
+
+.attention-dot{
+  width:8px;
+  height:8px;
+
+  flex:0 0 8px;
+
+  border-radius:50%;
+
+  background:var(--red);
+
+  box-shadow:
+    0 0 0 5px rgba(196,93,104,.12),
+    0 0 12px rgba(196,93,104,.25);
+}
+
+.attention-item strong{
+  display:block;
+
+  font-size:12px;
+}
+
+.attention-item span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+/* =====================================================
    EMPTY
-========================= */
+===================================================== */
 
 .empty{
-  padding:35px 20px;
+  padding:32px 20px;
+
   text-align:center;
 }
 
 .empty-icon{
-  font-size:35px;
   margin-bottom:10px;
+
+  font-size:34px;
+
+  color:var(--accent);
+
   opacity:.65;
+
+  text-shadow:
+    0 0 15px var(--accent-glow);
 }
 
 .empty h3{
   margin:0 0 6px;
-  font-size:16px;
+
+  font-size:15px;
 }
 
 .empty p{
   margin:0;
+
   color:var(--muted);
-  font-size:12px;
+
+  font-size:11px;
   line-height:1.5;
 }
 
-/* =========================
+/* =====================================================
    CALENDAR
-========================= */
+===================================================== */
 
 .calendar-card{
   padding:17px;
@@ -794,14 +1096,17 @@ select:focus-visible{
 
 .calendar-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+
   margin-bottom:17px;
 }
 
 .month-title{
   font-size:18px;
-  font-weight:750;
+  font-weight:800;
+
+  letter-spacing:-.4px;
 }
 
 .month-buttons{
@@ -810,31 +1115,44 @@ select:focus-visible{
 }
 
 .month-btn{
-  width:38px;
-  height:38px;
+  width:39px;
+  height:39px;
 
-  border-radius:12px;
+  border-radius:13px;
 
-  background:rgba(255,255,255,.55);
+  background:
+    rgba(255,255,255,.57);
+
   color:var(--text);
 
   border:1px solid rgba(255,255,255,.65);
 
   cursor:pointer;
+
+  touch-action:manipulation;
+}
+
+.month-btn:active{
+  transform:scale(.94);
 }
 
 .weekdays,
 .calendar-grid{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+
+  grid-template-columns:
+    repeat(7,1fr);
+
   gap:5px;
 }
 
 .weekdays div{
   text-align:center;
+
   color:var(--dim);
-  font-size:10px;
-  font-weight:700;
+
+  font-size:9px;
+  font-weight:800;
 }
 
 .calendar-grid{
@@ -842,7 +1160,7 @@ select:focus-visible{
 }
 
 .day{
-  min-height:43px;
+  min-height:44px;
 
   display:flex;
   flex-direction:column;
@@ -852,24 +1170,41 @@ select:focus-visible{
   border-radius:13px;
 
   color:var(--text);
-  font-size:12px;
+
+  font-size:11px;
 
   position:relative;
+
   cursor:pointer;
 
-  transition:.2s ease;
+  touch-action:manipulation;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .15s ease;
+}
+
+.day:active{
+  transform:scale(.92);
 }
 
 .day.muted{
-  color:#a3aaae;
+  color:#a3abad;
 }
 
 .day.selected{
-  background:var(--accent);
   color:white;
 
+  background:
+    linear-gradient(
+      145deg,
+      var(--accent2),
+      var(--accent)
+    );
+
   box-shadow:
-    0 8px 18px var(--accent-glow);
+    0 8px 19px var(--accent-glow);
 }
 
 .day.today:not(.selected){
@@ -880,28 +1215,38 @@ select:focus-visible{
 .day-dot{
   width:4px;
   height:4px;
-  border-radius:50%;
-  background:var(--accent);
+
   margin-top:3px;
+
+  border-radius:50%;
+
+  background:var(--accent);
+
+  box-shadow:
+    0 0 7px var(--accent-glow);
 }
 
 .day.selected .day-dot{
   background:white;
+  box-shadow:none;
 }
 
 .calendar-tasks{
-  margin-top:17px;
+  margin-top:18px;
 }
 
 .selected-date{
-  font-size:12px;
-  color:var(--muted);
   margin-bottom:10px;
+
+  color:var(--muted);
+
+  font-size:10px;
+  font-weight:700;
 }
 
-/* =========================
+/* =====================================================
    SETTINGS
-========================= */
+===================================================== */
 
 .settings-list{
   display:grid;
@@ -909,26 +1254,29 @@ select:focus-visible{
 }
 
 .setting{
-  padding:17px;
-
   display:flex;
   align-items:center;
   gap:13px;
+
+  padding:17px;
 }
 
 .setting-icon{
-  width:43px;
-  height:43px;
+  width:44px;
+  height:44px;
 
-  flex:0 0 43px;
+  flex:0 0 44px;
 
   display:grid;
   place-items:center;
 
   border-radius:14px;
 
-  background:var(--accent-soft);
   color:var(--accent);
+  background:var(--accent-soft);
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.55);
 }
 
 .setting-copy{
@@ -938,26 +1286,32 @@ select:focus-visible{
 
 .setting-copy strong{
   display:block;
-  font-size:14px;
+
+  font-size:13px;
 }
 
 .setting-copy span{
   display:block;
+
   margin-top:3px;
+
   color:var(--muted);
-  font-size:11px;
-  line-height:1.4;
+
+  font-size:10px;
+  line-height:1.45;
 }
 
 .switch{
-  width:48px;
-  height:28px;
+  width:49px;
+  height:29px;
 
   padding:3px;
 
+  flex:0 0 49px;
+
   border-radius:999px;
 
-  background:#aeb5b9;
+  background:#aab2b6;
 
   cursor:pointer;
 
@@ -967,65 +1321,74 @@ select:focus-visible{
 .switch span{
   display:block;
 
-  width:22px;
-  height:22px;
+  width:23px;
+  height:23px;
 
   border-radius:50%;
 
   background:white;
 
-  box-shadow:0 3px 7px rgba(0,0,0,.16);
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.16);
 
   transition:.25s ease;
 }
 
 .switch.on{
   background:var(--accent);
+
+  box-shadow:
+    0 0 14px var(--accent-glow);
 }
 
 .switch.on span{
   transform:translateX(20px);
 }
 
-/* =========================
+/* =====================================================
    BOTTOM NAV
-========================= */
+===================================================== */
 
 .bottom-nav{
   position:fixed;
 
   left:50%;
-  bottom:max(14px,env(safe-area-inset-bottom));
+  bottom:max(13px,env(safe-area-inset-bottom));
 
   transform:translateX(-50%);
 
-  width:min(590px,calc(100% - 24px));
+  width:min(
+    610px,
+    calc(100% - 24px)
+  );
 
-  height:var(--nav-h);
+  height:var(--nav-height);
 
   padding:7px;
 
   display:grid;
   grid-template-columns:repeat(4,1fr);
+
   gap:5px;
 
-  border-radius:27px;
+  border-radius:28px;
 
   background:
     linear-gradient(
       145deg,
-      rgba(245,247,248,.92),
-      rgba(222,227,229,.91)
+      rgba(247,249,250,.93),
+      rgba(219,225,228,.91)
     );
 
-  border:1px solid rgba(255,255,255,.72);
+  border:
+    1px solid rgba(255,255,255,.78);
 
   box-shadow:
-    0 18px 45px rgba(35,44,50,.23),
-    inset 0 1px rgba(255,255,255,.8);
+    0 19px 46px rgba(34,43,49,.24),
+    inset 0 1px rgba(255,255,255,.88);
 
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
 
   z-index:500;
 }
@@ -1033,24 +1396,27 @@ select:focus-visible{
 .nav-btn{
   position:relative;
 
-  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap:4px;
+
+  border-radius:21px;
 
   background:transparent;
 
-  color:#758187;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:4px;
+  color:#758188;
 
   cursor:pointer;
+
+  touch-action:manipulation;
 
   transition:
     color .35s ease,
     background .35s ease,
-    transform .2s ease;
+    transform .18s ease;
 }
 
 .nav-btn .nav-icon{
@@ -1059,74 +1425,109 @@ select:focus-visible{
 }
 
 .nav-btn span:last-child{
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:.25px;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.35px;
 }
 
 .nav-btn:active{
-  transform:scale(.94);
+  transform:scale(.93);
 }
-
-/* Active colors */
 
 .nav-btn.active{
   color:var(--accent);
 
-  background:var(--accent-soft);
+  background:
+    linear-gradient(
+      145deg,
+      var(--accent-soft),
+      rgba(255,255,255,.16)
+    );
 
   box-shadow:
-    inset 0 1px rgba(255,255,255,.55),
-    0 5px 16px var(--accent-glow);
+    inset 0 1px rgba(255,255,255,.62),
+    0 5px 18px var(--accent-glow);
 }
 
-/* page-specific accent */
+.nav-btn.active::after{
+  content:"";
+
+  position:absolute;
+
+  bottom:5px;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:var(--accent);
+
+  box-shadow:
+    0 0 9px var(--accent);
+}
+
+/* =====================================================
+   PAGE ACCENTS
+===================================================== */
 
 body[data-page="home"]{
-  --accent:#3e9faf;
-  --accent2:#72c5d1;
-  --accent-soft:rgba(62,159,175,.14);
-  --accent-glow:rgba(62,159,175,.20);
+  --accent:#3ca6ba;
+  --accent2:#78d0dc;
+  --accent-soft:rgba(60,166,186,.14);
+  --accent-glow:rgba(60,166,186,.25);
 }
 
 body[data-page="calendar"]{
-  --accent:#7d69b0;
-  --accent2:#a797cf;
-  --accent-soft:rgba(125,105,176,.14);
-  --accent-glow:rgba(125,105,176,.20);
+  --accent:#7d6ab1;
+  --accent2:#a89bd0;
+  --accent-soft:rgba(125,106,177,.14);
+  --accent-glow:rgba(125,106,177,.25);
 }
 
 body[data-page="tasks"]{
-  --accent:#4c9876;
-  --accent2:#7ab99a;
-  --accent-soft:rgba(76,152,118,.14);
-  --accent-glow:rgba(76,152,118,.20);
+  --accent:#4d9c78;
+  --accent2:#7cc09e;
+  --accent-soft:rgba(77,156,120,.14);
+  --accent-glow:rgba(77,156,120,.25);
 }
 
 body[data-page="settings"]{
-  --accent:#b47d3d;
-  --accent2:#d0a66d;
-  --accent-soft:rgba(180,125,61,.14);
-  --accent-glow:rgba(180,125,61,.20);
+  --accent:#b47b39;
+  --accent2:#d1a66e;
+  --accent-soft:rgba(180,123,57,.14);
+  --accent-glow:rgba(180,123,57,.25);
 }
 
-/* =========================
+/* =====================================================
    FAB
-========================= */
+===================================================== */
 
 .fab{
   position:fixed;
 
-  right:max(20px,calc((100vw - 620px)/2 + 12px));
-  bottom:calc(var(--nav-h) + 28px + env(safe-area-inset-bottom));
+  right:
+    max(
+      19px,
+      calc((100vw - 650px)/2 + 10px)
+    );
 
-  width:57px;
-  height:57px;
+  bottom:
+    calc(
+      var(--nav-height)
+      + 27px
+      + env(safe-area-inset-bottom)
+    );
 
-  border-radius:20px;
+  width:58px;
+  height:58px;
 
   display:grid;
   place-items:center;
+
+  border-radius:20px;
+
+  color:white;
 
   background:
     linear-gradient(
@@ -1135,31 +1536,45 @@ body[data-page="settings"]{
       var(--accent)
     );
 
-  color:white;
-
-  font-size:27px;
+  font-size:28px;
   font-weight:300;
 
   box-shadow:
-    0 13px 27px var(--accent-glow),
-    inset 0 1px rgba(255,255,255,.4);
+    0 13px 29px var(--accent-glow),
+    inset 0 1px rgba(255,255,255,.48);
 
   cursor:pointer;
+
+  touch-action:manipulation;
 
   z-index:450;
 
   transition:
-    transform .25s ease,
-    background .4s ease;
+    transform .2s ease,
+    background .45s ease,
+    box-shadow .45s ease;
+}
+
+.fab::after{
+  content:"";
+
+  position:absolute;
+  inset:-4px;
+
+  border-radius:23px;
+
+  border:1px solid var(--accent-glow);
+
+  pointer-events:none;
 }
 
 .fab:active{
   transform:scale(.91) rotate(3deg);
 }
 
-/* =========================
+/* =====================================================
    MODAL
-========================= */
+===================================================== */
 
 .modal-backdrop{
   position:fixed;
@@ -1169,10 +1584,11 @@ body[data-page="settings"]{
   align-items:flex-end;
   justify-content:center;
 
-  background:rgba(37,44,48,.35);
+  background:
+    rgba(38,46,51,.36);
 
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
 
   z-index:1000;
 }
@@ -1182,75 +1598,82 @@ body[data-page="settings"]{
 }
 
 .modal{
-  width:min(620px,100%);
+  width:min(650px,100%);
 
   padding:
-    20px
+    19px
     18px
     calc(20px + env(safe-area-inset-bottom));
 
-  border-radius:30px 30px 0 0;
+  border-radius:31px 31px 0 0;
 
   background:
     linear-gradient(
       145deg,
-      #e9edef,
-      #d6dbde
+      #edf0f1,
+      #d4dade
     );
 
-  border:1px solid rgba(255,255,255,.75);
+  border:
+    1px solid rgba(255,255,255,.8);
 
   box-shadow:
-    0 -22px 55px rgba(34,42,47,.23),
-    inset 0 1px rgba(255,255,255,.8);
+    0 -24px 58px rgba(33,42,47,.24),
+    inset 0 1px rgba(255,255,255,.9);
 
-  animation:modalIn .3s ease;
+  animation:
+    modalEnter .3s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes modalIn{
+@keyframes modalEnter{
   from{
-    transform:translateY(30px);
     opacity:0;
+    transform:translateY(35px);
   }
+
   to{
-    transform:none;
     opacity:1;
+    transform:none;
   }
 }
 
 .modal-handle{
-  width:42px;
+  width:43px;
   height:4px;
+
+  margin:0 auto 17px;
 
   border-radius:10px;
 
-  background:#a9b0b4;
-
-  margin:0 auto 17px;
+  background:#a5adb1;
 }
 
 .modal-head{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
 
   margin-bottom:18px;
 }
 
 .modal-head h2{
   margin:0;
+
   font-size:20px;
+  letter-spacing:-.5px;
 }
 
 .close-btn{
-  width:37px;
-  height:37px;
+  width:38px;
+  height:38px;
 
-  border-radius:12px;
+  border-radius:13px;
 
-  background:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.59);
 
   color:var(--muted);
+
+  font-size:22px;
 
   cursor:pointer;
 }
@@ -1266,32 +1689,41 @@ body[data-page="settings"]{
 
   color:var(--muted);
 
-  font-size:11px;
-  font-weight:700;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-transform:uppercase;
 }
 
 .form-input{
   width:100%;
-  height:48px;
-
-  border-radius:14px;
-
-  border:1px solid rgba(30,40,46,.10);
-
-  background:rgba(255,255,255,.70);
-
-  color:var(--text);
+  height:49px;
 
   padding:0 14px;
 
+  border-radius:14px;
+
+  border:1px solid rgba(30,41,47,.10);
+
+  background:
+    rgba(255,255,255,.72);
+
+  color:var(--text);
+
   outline:none;
 
+  user-select:text;
+  -webkit-user-select:text;
+
   box-shadow:
-    inset 0 1px 3px rgba(0,0,0,.04);
+    inset 0 1px 4px rgba(0,0,0,.04);
+
+  transition:.2s ease;
 }
 
 .form-input:focus{
   border-color:var(--accent);
+
   box-shadow:
     0 0 0 3px var(--accent-soft);
 }
@@ -1299,62 +1731,80 @@ body[data-page="settings"]{
 .modal-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
+
   gap:10px;
 
   margin-top:20px;
 }
 
 .modal-btn{
-  height:48px;
+  height:49px;
 
   border-radius:15px;
 
-  font-weight:700;
+  font-weight:800;
 
   cursor:pointer;
+
+  touch-action:manipulation;
 }
 
 .cancel-btn{
-  background:rgba(255,255,255,.58);
   color:var(--muted);
+  background:rgba(255,255,255,.59);
 }
 
 .save-btn{
-  background:var(--accent);
   color:white;
 
+  background:
+    linear-gradient(
+      145deg,
+      var(--accent2),
+      var(--accent)
+    );
+
   box-shadow:
-    0 8px 18px var(--accent-glow);
+    0 8px 19px var(--accent-glow);
 }
 
-/* =========================
+/* =====================================================
    TOAST
-========================= */
+===================================================== */
 
 .toast{
   position:fixed;
 
   left:50%;
-  bottom:calc(var(--nav-h) + 20px + env(safe-area-inset-bottom));
+
+  bottom:
+    calc(
+      var(--nav-height)
+      + 20px
+      + env(safe-area-inset-bottom)
+    );
 
   transform:
     translate(-50%,20px);
 
   opacity:0;
+
   pointer-events:none;
 
   padding:11px 16px;
 
   border-radius:14px;
 
-  background:rgba(39,48,54,.91);
+  background:
+    rgba(38,47,53,.93);
+
   color:white;
 
-  font-size:12px;
-  font-weight:650;
+  font-size:11px;
+  font-weight:750;
 
   box-shadow:
-    0 12px 28px rgba(30,38,43,.25);
+    0 13px 29px rgba(28,36,41,.25);
 
   z-index:1200;
 
@@ -1365,74 +1815,29 @@ body[data-page="settings"]{
 
 .toast.show{
   opacity:1;
-  transform:translate(-50%,0);
+
+  transform:
+    translate(-50%,0);
 }
 
-/* =========================
-   ATTENTION
-========================= */
-
-.attention{
-  padding:17px;
-}
-
-.attention-item{
-  display:flex;
-  align-items:center;
-  gap:11px;
-
-  padding:11px 0;
-
-  border-bottom:1px solid var(--line);
-}
-
-.attention-item:last-child{
-  border-bottom:0;
-  padding-bottom:0;
-}
-
-.attention-dot{
-  width:8px;
-  height:8px;
-
-  flex:0 0 8px;
-
-  border-radius:50%;
-
-  background:var(--danger);
-
-  box-shadow:0 0 0 5px var(--danger-soft);
-}
-
-.attention-item strong{
-  display:block;
-  font-size:12px;
-}
-
-.attention-item span{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-top:2px;
-}
-
-/* =========================
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media(max-width:430px){
+
   .app{
-    padding-left:13px;
-    padding-right:13px;
+    padding-left:12px;
+    padding-right:12px;
   }
 
   .hero{
-    min-height:250px;
-    border-radius:28px;
+    min-height:255px;
+    border-radius:29px;
   }
 
   .hero-content{
-    min-height:250px;
+    min-height:255px;
     padding:22px;
   }
 
@@ -1445,9 +1850,9 @@ body[data-page="settings"]{
   }
 
   .health-ring{
-    width:80px;
-    height:80px;
-    flex-basis:80px;
+    width:82px;
+    height:82px;
+    flex-basis:82px;
   }
 
   .task-card{
@@ -1461,12 +1866,21 @@ body[data-page="settings"]{
     border-radius:14px;
   }
 
+  .task-actions{
+    gap:6px;
+  }
+
+  .task-action{
+    padding:0 11px;
+  }
+
   .fab{
-    right:18px;
+    right:17px;
   }
 }
 
 @media(min-width:700px){
+
   .app{
     padding-top:30px;
   }
@@ -1474,325 +1888,455 @@ body[data-page="settings"]{
 </style>
 </head>
 
+
 <body data-page="home">
 
 <div class="app">
 
-  <!-- ================= HEADER ================= -->
+<!-- ===================================================
+     TOP BAR
+=================================================== -->
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark">⌂</div>
+<header class="topbar">
 
-      <div class="brand-text">
-        <strong>Haven</strong>
-        <span>Your home remembers.</span>
-      </div>
+  <div class="brand">
+
+    <div class="brand-mark">
+      ⌂
     </div>
 
-    <div class="profile-dot">J</div>
-  </header>
+    <div class="brand-text">
+      <strong>Haven</strong>
+      <span>Your home remembers.</span>
+    </div>
+
+  </div>
+
+  <div class="profile-dot">
+    J
+  </div>
+
+</header>
 
 
-  <!-- ================= HOME ================= -->
+<!-- ===================================================
+     HOME
+=================================================== -->
 
-  <main id="homePage" class="page active">
+<main
+  id="homePage"
+  class="page active"
+>
 
-    <section class="hero">
-      <div class="hero-content">
+  <section class="hero">
 
-        <div class="hero-kicker">Home memory system</div>
+    <div class="hero-corner"></div>
 
-        <h1 id="greeting">
-          Good morning, Javaid
-        </h1>
+    <div class="hero-content">
+
+      <div class="hero-kicker">
+        Home memory system
+      </div>
+
+      <h1 id="greeting">
+        Good morning, Javaid
+      </h1>
+
+      <p>
+        A quieter way to remember the small
+        things that keep your home healthy.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="card health-card">
+
+      <div
+        class="health-ring"
+        id="healthRing"
+        style="--health:57%"
+      >
+
+        <div
+          class="health-number"
+          id="healthValue"
+        >
+          57%
+        </div>
+
+      </div>
+
+
+      <div class="health-copy">
+
+        <small>HOME HEALTH</small>
+
+        <h3 id="healthStatus">
+          Needs a little attention
+        </h3>
 
         <p>
-          A quieter way to remember the small things
-          that keep your home healthy.
+          Keep your maintenance memories
+          up to date and stay ahead of problems.
         </p>
 
       </div>
-    </section>
+
+    </div>
+
+  </section>
 
 
-    <section class="section">
+  <section class="section">
 
-      <div class="card health-card">
+    <div class="stats">
 
-        <div
-          class="health-ring"
-          id="healthRing"
-          style="--health:57%"
-        >
-          <div
-            class="health-number"
-            id="healthValue"
-          >
-            57%
-          </div>
+      <div class="card stat">
+
+        <div class="stat-icon">
+          !
         </div>
 
-        <div class="health-copy">
-          <small>HOME HEALTH</small>
-
-          <h3 id="healthStatus">
-            Needs a little attention
-          </h3>
-
-          <p>
-            Keep a few maintenance memories
-            up to date and your home stays ahead.
-          </p>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <section class="section">
-
-      <div class="stats">
-
-        <div class="card stat">
-          <div class="stat-icon">!</div>
-
-          <strong id="attentionCount">0</strong>
-          <span>Need attention</span>
-        </div>
-
-        <div class="card stat">
-          <div class="stat-icon">◷</div>
-
-          <strong id="upcomingCount">0</strong>
-          <span>Upcoming memories</span>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <section class="section">
-
-      <div class="section-head">
-        <h2>Needs attention</h2>
-        <span>Right now</span>
-      </div>
-
-      <div
-        class="card attention"
-        id="attentionList"
-      ></div>
-
-    </section>
-
-
-    <section class="section">
-
-      <div class="section-head">
-        <h2>Upcoming maintenance</h2>
+        <strong id="attentionCount">
+          0
+        </strong>
 
         <span>
-          <span id="upcomingCountSmall">0</span>
-          memories
+          Need attention
         </span>
+
       </div>
 
-      <div
-        class="task-list"
-        id="upcomingList"
-      ></div>
 
-    </section>
+      <div class="card stat">
 
-  </main>
-
-
-  <!-- ================= CALENDAR ================= -->
-
-  <main id="calendarPage" class="page">
-
-    <section class="section" style="margin-top:0">
-
-      <div class="section-head">
-        <div>
-          <h2>Calendar</h2>
-          <span>See what your home remembers.</span>
+        <div class="stat-icon">
+          ◷
         </div>
+
+        <strong id="upcomingCount">
+          0
+        </strong>
+
+        <span>
+          Upcoming memories
+        </span>
+
       </div>
 
-      <div class="card calendar-card">
+    </div>
 
-        <div class="calendar-header">
+  </section>
 
-          <div
-            class="month-title"
-            id="calendarMonth"
-          >
-            October 2026
-          </div>
 
-          <div class="month-buttons">
+  <section class="section">
 
-            <button
-              type="button"
-              class="month-btn"
-              id="prevMonth"
-            >
-              ‹
-            </button>
+    <div class="section-head">
 
-            <button
-              type="button"
-              class="month-btn"
-              id="nextMonth"
-            >
-              ›
-            </button>
+      <h2>
+        Needs attention
+      </h2>
 
-          </div>
+      <span>
+        Right now
+      </span>
 
-        </div>
+    </div>
 
-        <div class="weekdays">
-          <div>Sun</div>
-          <div>Mon</div>
-          <div>Tue</div>
-          <div>Wed</div>
-          <div>Thu</div>
-          <div>Fri</div>
-          <div>Sat</div>
-        </div>
+    <div
+      class="card attention"
+      id="attentionList"
+    ></div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <h2>
+        Upcoming maintenance
+      </h2>
+
+      <span>
+        <span id="upcomingCountSmall">0</span>
+        memories
+      </span>
+
+    </div>
+
+    <div
+      class="task-list"
+      id="upcomingList"
+    ></div>
+
+  </section>
+
+</main>
+
+
+<!-- ===================================================
+     CALENDAR
+=================================================== -->
+
+<main
+  id="calendarPage"
+  class="page"
+>
+
+  <section
+    class="section"
+    style="margin-top:0"
+  >
+
+    <div class="section-head">
+
+      <div>
+
+        <h2>
+          Calendar
+        </h2>
+
+        <span>
+          See what your home remembers.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="card calendar-card">
+
+      <div class="calendar-header">
 
         <div
-          class="calendar-grid"
-          id="calendarGrid"
-        ></div>
-
-        <div
-          class="calendar-tasks"
-          id="calendarTasks"
-        ></div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- ================= TASKS ================= -->
-
-  <main id="tasksPage" class="page">
-
-    <section class="section" style="margin-top:0">
-
-      <div class="section-head">
-
-        <div>
-          <h2>All memories</h2>
-
-          <span>
-            <span id="taskCount">0</span>
-            maintenance tasks
-          </span>
+          class="month-title"
+          id="calendarMonth"
+        >
+          October 2026
         </div>
 
-      </div>
-
-      <div
-        class="task-list"
-        id="allTasksList"
-      ></div>
-
-    </section>
-
-  </main>
-
-
-  <!-- ================= SETTINGS ================= -->
-
-  <main id="settingsPage" class="page">
-
-    <section class="section" style="margin-top:0">
-
-      <div class="section-head">
-        <div>
-          <h2>Haven settings</h2>
-          <span>Keep your home memory system simple.</span>
-        </div>
-      </div>
-
-
-      <div class="settings-list">
-
-        <div class="card setting">
-
-          <div class="setting-icon">◷</div>
-
-          <div class="setting-copy">
-            <strong>Maintenance reminders</strong>
-
-            <span>
-              Allow Haven to remind you when
-              a maintenance memory is due.
-            </span>
-          </div>
+        <div class="month-buttons">
 
           <button
             type="button"
-            class="switch"
-            id="reminderToggle"
-            aria-label="Toggle reminders"
+            class="month-btn"
+            id="prevMonth"
           >
-            <span></span>
+            ‹
+          </button>
+
+          <button
+            type="button"
+            class="month-btn"
+            id="nextMonth"
+          >
+            ›
           </button>
 
         </div>
 
+      </div>
 
-        <div class="card setting">
 
-          <div class="setting-icon">⌂</div>
+      <div class="weekdays">
 
-          <div class="setting-copy">
-            <strong>Local memory</strong>
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
 
-            <span>
-              Your maintenance data stays on
-              this device using local storage.
-            </span>
-          </div>
+      </div>
+
+
+      <div
+        class="calendar-grid"
+        id="calendarGrid"
+      ></div>
+
+
+      <div
+        class="calendar-tasks"
+        id="calendarTasks"
+      ></div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- ===================================================
+     TASKS
+=================================================== -->
+
+<main
+  id="tasksPage"
+  class="page"
+>
+
+  <section
+    class="section"
+    style="margin-top:0"
+  >
+
+    <div class="section-head">
+
+      <div>
+
+        <h2>
+          All memories
+        </h2>
+
+        <span>
+          <span id="taskCount">0</span>
+          maintenance tasks
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="task-list"
+      id="allTasksList"
+    ></div>
+
+  </section>
+
+</main>
+
+
+<!-- ===================================================
+     SETTINGS
+=================================================== -->
+
+<main
+  id="settingsPage"
+  class="page"
+>
+
+  <section
+    class="section"
+    style="margin-top:0"
+  >
+
+    <div class="section-head">
+
+      <div>
+
+        <h2>
+          Haven settings
+        </h2>
+
+        <span>
+          Keep your home memory system simple.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="settings-list">
+
+      <div class="card setting">
+
+        <div class="setting-icon">
+          ◷
+        </div>
+
+        <div class="setting-copy">
+
+          <strong>
+            Maintenance reminders
+          </strong>
+
+          <span>
+            Allow Haven to remind you when
+            a maintenance memory is due.
+          </span>
 
         </div>
 
+        <button
+          type="button"
+          class="switch"
+          id="reminderToggle"
+          aria-label="Toggle reminders"
+        >
+          <span></span>
+        </button>
 
-        <div class="card setting">
+      </div>
 
-          <div class="setting-icon">✦</div>
 
-          <div class="setting-copy">
-            <strong>Haven</strong>
+      <div class="card setting">
 
-            <span>
-              Your home remembers.
-            </span>
-          </div>
+        <div class="setting-icon">
+          ⌂
+        </div>
+
+        <div class="setting-copy">
+
+          <strong>
+            Local memory
+          </strong>
+
+          <span>
+            Your maintenance data stays on
+            this device using local storage.
+          </span>
 
         </div>
 
       </div>
 
-    </section>
 
-  </main>
+      <div class="card setting">
+
+        <div class="setting-icon">
+          ✦
+        </div>
+
+        <div class="setting-copy">
+
+          <strong>
+            Haven
+          </strong>
+
+          <span>
+            Your home remembers.
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
 
 </div>
 
 
-<!-- ================= FAB ================= -->
+<!-- ===================================================
+     FAB
+=================================================== -->
 
 <button
   type="button"
@@ -1804,7 +2348,9 @@ body[data-page="settings"]{
 </button>
 
 
-<!-- ================= BOTTOM NAV ================= -->
+<!-- ===================================================
+     NAVIGATION
+=================================================== -->
 
 <nav class="bottom-nav">
 
@@ -1813,41 +2359,74 @@ body[data-page="settings"]{
     class="nav-btn active"
     data-page="home"
   >
-    <span class="nav-icon">⌂</span>
-    <span>Home</span>
+
+    <span class="nav-icon">
+      ⌂
+    </span>
+
+    <span>
+      Home
+    </span>
+
   </button>
+
 
   <button
     type="button"
     class="nav-btn"
     data-page="calendar"
   >
-    <span class="nav-icon">▦</span>
-    <span>Calendar</span>
+
+    <span class="nav-icon">
+      ▦
+    </span>
+
+    <span>
+      Calendar
+    </span>
+
   </button>
+
 
   <button
     type="button"
     class="nav-btn"
     data-page="tasks"
   >
-    <span class="nav-icon">✓</span>
-    <span>Tasks</span>
+
+    <span class="nav-icon">
+      ✓
+    </span>
+
+    <span>
+      Tasks
+    </span>
+
   </button>
+
 
   <button
     type="button"
     class="nav-btn"
     data-page="settings"
   >
-    <span class="nav-icon">⚙</span>
-    <span>More</span>
+
+    <span class="nav-icon">
+      ⚙
+    </span>
+
+    <span>
+      More
+    </span>
+
   </button>
 
 </nav>
 
 
-<!-- ================= MODAL ================= -->
+<!-- ===================================================
+     MODAL
+=================================================== -->
 
 <div
   class="modal-backdrop"
@@ -1857,6 +2436,7 @@ body[data-page="settings"]{
   <div class="modal">
 
     <div class="modal-handle"></div>
+
 
     <div class="modal-head">
 
@@ -1916,9 +2496,19 @@ body[data-page="settings"]{
         class="form-input"
         id="taskRepeat"
       >
-        <option value="none">Does not repeat</option>
-        <option value="monthly">Monthly</option>
-        <option value="yearly">Yearly</option>
+
+        <option value="none">
+          Does not repeat
+        </option>
+
+        <option value="monthly">
+          Monthly
+        </option>
+
+        <option value="yearly">
+          Yearly
+        </option>
+
       </select>
 
     </div>
@@ -1956,13 +2546,16 @@ body[data-page="settings"]{
 
 
 <script>
+
 /* =====================================================
-   HAVEN V5
-   Premium Grey Cinematic
+   HAVEN V6
+   Grey Cyberpunk Cinematic
 ===================================================== */
 
 
-/* ================= STORAGE ================= */
+/* =====================================================
+   STORAGE
+===================================================== */
 
 const STORAGE_KEY = "havenTasksV4";
 const REMINDER_KEY = "havenRemindersV1";
@@ -1971,9 +2564,12 @@ let tasks = [];
 let editingId = null;
 
 
-/* ================= SAMPLE DATA ================= */
+/* =====================================================
+   STARTER MAINTENANCE
+===================================================== */
 
 const starterTasks = [
+
   {
     id: crypto.randomUUID(),
     name: "AC Cleaning",
@@ -1981,6 +2577,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Heater Check",
@@ -1988,6 +2585,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Check Plumbing & Taps",
@@ -1995,6 +2593,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Water Tank Inspection",
@@ -2002,6 +2601,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Kitchen Exhaust Cleaning",
@@ -2009,6 +2609,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Refrigerator Deep Clean",
@@ -2016,6 +2617,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Water Filter Replacement",
@@ -2023,6 +2625,7 @@ const starterTasks = [
     repeat: "none",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Electrical Safety Check",
@@ -2030,6 +2633,7 @@ const starterTasks = [
     repeat: "yearly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Window & Glass Cleaning",
@@ -2037,6 +2641,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Washing Machine Care",
@@ -2044,6 +2649,7 @@ const starterTasks = [
     repeat: "monthly",
     done: false
   },
+
   {
     id: crypto.randomUUID(),
     name: "Roof / Drain Inspection",
@@ -2051,10 +2657,13 @@ const starterTasks = [
     repeat: "yearly",
     done: false
   }
+
 ];
 
 
-/* ================= INIT STORAGE ================= */
+/* =====================================================
+   STORAGE FUNCTIONS
+===================================================== */
 
 function loadTasks(){
 
@@ -2065,7 +2674,8 @@ function loadTasks(){
 
     if(saved){
 
-      const parsed = JSON.parse(saved);
+      const parsed =
+        JSON.parse(saved);
 
       if(Array.isArray(parsed)){
         tasks = parsed;
@@ -2075,14 +2685,27 @@ function loadTasks(){
 
   }catch(error){
 
-    console.error("Could not load Haven data.",error);
+    console.error(
+      "Could not load Haven data.",
+      error
+    );
 
   }
 
 
-  if(!Array.isArray(tasks) || tasks.length === 0){
+  /*
+     IMPORTANT:
+     Only seed if storage is empty.
+     Existing user data is never replaced.
+  */
 
-    tasks = starterTasks;
+  if(
+    !Array.isArray(tasks) ||
+    tasks.length === 0
+  ){
+
+    tasks =
+      starterTasks;
 
     saveTasks();
 
@@ -2102,28 +2725,37 @@ function saveTasks(){
 
   }catch(error){
 
-    console.error("Could not save Haven data.",error);
+    console.error(
+      "Could not save Haven data.",
+      error
+    );
 
   }
 
 }
 
 
-/* ================= DATE HELPERS ================= */
+/* =====================================================
+   DATE FUNCTIONS
+===================================================== */
 
 function todayString(){
 
-  const d = new Date();
+  const d =
+    new Date();
 
-  const y = d.getFullYear();
+  const y =
+    d.getFullYear();
 
-  const m = String(
-    d.getMonth()+1
-  ).padStart(2,"0");
+  const m =
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0");
 
-  const day = String(
-    d.getDate()
-  ).padStart(2,"0");
+  const day =
+    String(
+      d.getDate()
+    ).padStart(2,"0");
 
   return `${y}-${m}-${day}`;
 
@@ -2132,61 +2764,58 @@ function todayString(){
 
 function parseDate(dateString){
 
-  const [y,m,d] =
-    dateString.split("-").map(Number);
+  const [
+    y,
+    m,
+    d
+  ] =
+    dateString
+      .split("-")
+      .map(Number);
 
-  return new Date(y,m-1,d);
+  return new Date(
+    y,
+    m-1,
+    d
+  );
 
 }
 
 
 function formatDate(dateString){
 
-  if(!dateString) return "";
+  if(!dateString)
+    return "";
 
-  const d = parseDate(dateString);
-
-  return d.toLocaleDateString(
-    undefined,
-    {
-      day:"numeric",
-      month:"short",
-      year:"numeric"
-    }
-  );
-
-}
-
-
-function formatShortDate(dateString){
-
-  if(!dateString) return "";
-
-  const d = parseDate(dateString);
-
-  return d.toLocaleDateString(
-    undefined,
-    {
-      day:"numeric",
-      month:"short"
-    }
-  );
+  return parseDate(dateString)
+    .toLocaleDateString(
+      undefined,
+      {
+        day:"numeric",
+        month:"short",
+        year:"numeric"
+      }
+    );
 
 }
 
 
 function repeatLabel(repeat){
 
-  if(repeat === "monthly") return "Monthly";
+  if(repeat === "monthly")
+    return "Monthly";
 
-  if(repeat === "yearly") return "Yearly";
+  if(repeat === "yearly")
+    return "Yearly";
 
   return "One time";
 
 }
 
 
-/* ================= TASK STATUS ================= */
+/* =====================================================
+   STATUS
+===================================================== */
 
 function getTaskStatus(task){
 
@@ -2199,20 +2828,21 @@ function getTaskStatus(task){
 
   }
 
+
   const today =
     parseDate(todayString());
 
   const date =
     parseDate(task.date);
 
-  const difference =
+  const diff =
     Math.round(
       (date - today) /
       86400000
     );
 
 
-  if(difference < 0){
+  if(diff < 0){
 
     return {
       label:"Overdue",
@@ -2221,7 +2851,8 @@ function getTaskStatus(task){
 
   }
 
-  if(difference === 0){
+
+  if(diff === 0){
 
     return {
       label:"Today",
@@ -2230,7 +2861,8 @@ function getTaskStatus(task){
 
   }
 
-  if(difference === 1){
+
+  if(diff === 1){
 
     return {
       label:"Tomorrow",
@@ -2238,6 +2870,7 @@ function getTaskStatus(task){
     };
 
   }
+
 
   return {
     label:"Upcoming",
@@ -2247,54 +2880,50 @@ function getTaskStatus(task){
 }
 
 
-/* ================= ICON ================= */
+/* =====================================================
+   MAINTENANCE ICONS
+===================================================== */
 
 function getTaskIcon(name){
 
   const n =
     name.toLowerCase();
 
-  if(n.includes("ac"))
+
+  if(
+    n.includes("ac") ||
+    n.includes("air conditioner")
+  )
     return "❄";
 
-  if(n.includes("heater"))
+
+  if(
+    n.includes("heater") ||
+    n.includes("heating")
+  )
     return "♨";
 
-  if(
-    n.includes("water") ||
-    n.includes("tank") ||
-    n.includes("plumbing") ||
-    n.includes("tap")
-  )
-    return "◌";
 
   if(
-    n.includes("elect")
+    n.includes("plumbing") ||
+    n.includes("tap") ||
+    n.includes("pipe")
   )
     return "⌁";
 
-  if(
-    n.includes("window") ||
-    n.includes("glass")
-  )
-    return "▱";
 
   if(
-    n.includes("refrigerator") ||
-    n.includes("fridge")
+    n.includes("tank") ||
+    n.includes("water")
   )
-    return "□";
+    return "◌";
+
 
   if(
-    n.includes("washing")
+    n.includes("filter")
   )
-    return "◍";
+    return "▽";
 
-  if(
-    n.includes("roof") ||
-    n.includes("drain")
-  )
-    return "⌂";
 
   if(
     n.includes("kitchen") ||
@@ -2302,17 +2931,86 @@ function getTaskIcon(name){
   )
     return "≋";
 
+
+  if(
+    n.includes("refrigerator") ||
+    n.includes("fridge")
+  )
+    return "▣";
+
+
+  if(
+    n.includes("electrical") ||
+    n.includes("electric")
+  )
+    return "⚡";
+
+
+  if(
+    n.includes("window") ||
+    n.includes("glass")
+  )
+    return "▱";
+
+
+  if(
+    n.includes("washing") ||
+    n.includes("machine")
+  )
+    return "◉";
+
+
+  if(
+    n.includes("roof") ||
+    n.includes("drain")
+  )
+    return "⌂";
+
+
+  if(
+    n.includes("garden") ||
+    n.includes("plant")
+  )
+    return "♧";
+
+
+  if(
+    n.includes("door") ||
+    n.includes("lock")
+  )
+    return "▣";
+
+
   return "✦";
 
 }
 
 
-/* ================= TASK HTML ================= */
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   TASK HTML
+===================================================== */
 
 function taskHTML(task){
 
   const status =
     getTaskStatus(task);
+
 
   return `
 
@@ -2419,43 +3117,33 @@ function taskHTML(task){
 }
 
 
-/* ================= ESCAPE HTML ================= */
-
-function escapeHTML(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* ================= DASHBOARD ================= */
+/* =====================================================
+   DASHBOARD
+===================================================== */
 
 function renderDashboard(){
 
-  const activeTasks =
-    tasks.filter(t => !t.done);
+  const active =
+    tasks.filter(
+      t => !t.done
+    );
+
 
   const attention =
-    activeTasks.filter(t => {
-
-      return parseDate(t.date)
-        < parseDate(todayString());
-
-    });
+    active.filter(
+      t =>
+        parseDate(t.date)
+        <
+        parseDate(todayString())
+    );
 
 
   const upcoming =
-    activeTasks
-      .sort(
-        (a,b) =>
-          parseDate(a.date) -
-          parseDate(b.date)
-      );
+    [...active].sort(
+      (a,b) =>
+        parseDate(a.date) -
+        parseDate(b.date)
+    );
 
 
   document.getElementById(
@@ -2478,14 +3166,18 @@ function renderDashboard(){
 
   renderAttention(attention);
 
-  renderUpcoming(upcoming.slice(0,5));
+  renderUpcoming(
+    upcoming.slice(0,5)
+  );
 
   updateHealth();
 
 }
 
 
-/* ================= ATTENTION ================= */
+/* =====================================================
+   ATTENTION
+===================================================== */
 
 function renderAttention(list){
 
@@ -2501,9 +3193,13 @@ function renderAttention(list){
 
       <div class="empty">
 
-        <div class="empty-icon">✓</div>
+        <div class="empty-icon">
+          ✓
+        </div>
 
-        <h3>Everything looks good</h3>
+        <h3>
+          Everything looks good
+        </h3>
 
         <p>
           No maintenance memories need
@@ -2522,31 +3218,37 @@ function renderAttention(list){
   container.innerHTML =
     list
       .slice(0,4)
-      .map(task => `
+      .map(
+        task => `
 
-        <div class="attention-item">
+          <div class="attention-item">
 
-          <div class="attention-dot"></div>
+            <div class="attention-dot"></div>
 
-          <div>
-            <strong>
-              ${escapeHTML(task.name)}
-            </strong>
+            <div>
 
-            <span>
-              Due ${formatDate(task.date)}
-            </span>
+              <strong>
+                ${escapeHTML(task.name)}
+              </strong>
+
+              <span>
+                Due ${formatDate(task.date)}
+              </span>
+
+            </div>
+
           </div>
 
-        </div>
-
-      `)
+        `
+      )
       .join("");
 
 }
 
 
-/* ================= UPCOMING ================= */
+/* =====================================================
+   UPCOMING
+===================================================== */
 
 function renderUpcoming(list){
 
@@ -2562,9 +3264,13 @@ function renderUpcoming(list){
 
       <div class="card empty">
 
-        <div class="empty-icon">✦</div>
+        <div class="empty-icon">
+          ✦
+        </div>
 
-        <h3>No upcoming maintenance</h3>
+        <h3>
+          No upcoming maintenance
+        </h3>
 
         <p>
           Add a memory for something
@@ -2581,12 +3287,16 @@ function renderUpcoming(list){
 
 
   container.innerHTML =
-    list.map(taskHTML).join("");
+    list
+      .map(taskHTML)
+      .join("");
 
 }
 
 
-/* ================= ALL TASKS ================= */
+/* =====================================================
+   ALL TASKS
+===================================================== */
 
 function renderAllTasks(){
 
@@ -2616,9 +3326,13 @@ function renderAllTasks(){
 
       <div class="card empty">
 
-        <div class="empty-icon">✦</div>
+        <div class="empty-icon">
+          ✦
+        </div>
 
-        <h3>Your home has no memories yet</h3>
+        <h3>
+          Your home has no memories yet
+        </h3>
 
         <p>
           Add your first maintenance memory.
@@ -2634,18 +3348,25 @@ function renderAllTasks(){
 
 
   container.innerHTML =
-    sorted.map(taskHTML).join("");
+    sorted
+      .map(taskHTML)
+      .join("");
 
 }
 
 
-/* ================= HEALTH ================= */
+/* =====================================================
+   HEALTH
+===================================================== */
 
 function updateHealth(){
 
   if(tasks.length === 0){
 
-    setHealth(100,"Excellent");
+    setHealth(
+      100,
+      "Excellent"
+    );
 
     return;
 
@@ -2653,15 +3374,19 @@ function updateHealth(){
 
 
   const overdue =
-    tasks.filter(t =>
-      !t.done &&
-      parseDate(t.date)
-      < parseDate(todayString())
+    tasks.filter(
+      t =>
+        !t.done &&
+        parseDate(t.date)
+        <
+        parseDate(todayString())
     ).length;
 
 
   const completed =
-    tasks.filter(t => t.done).length;
+    tasks.filter(
+      t => t.done
+    ).length;
 
 
   let score =
@@ -2673,7 +3398,10 @@ function updateHealth(){
   score =
     Math.max(
       0,
-      Math.min(100,score)
+      Math.min(
+        100,
+        score
+      )
     );
 
 
@@ -2681,19 +3409,31 @@ function updateHealth(){
     "Healthy";
 
 
-  if(score < 40)
-    status = "Needs attention";
+  if(score < 40){
 
-  else if(score < 70)
-    status = "Needs a little attention";
+    status =
+      "Needs attention";
+
+  }else if(score < 70){
+
+    status =
+      "Needs a little attention";
+
+  }
 
 
-  setHealth(score,status);
+  setHealth(
+    score,
+    status
+  );
 
 }
 
 
-function setHealth(score,status){
+function setHealth(
+  score,
+  status
+){
 
   const ring =
     document.getElementById(
@@ -2725,15 +3465,27 @@ function setHealth(score,status){
 }
 
 
-/* ================= TASK ACTIONS ================= */
+/* =====================================================
+   DONE
+===================================================== */
 
 function completeTask(id){
 
   const task =
-    tasks.find(t => t.id === id);
+    tasks.find(
+      t => t.id === id
+    );
 
-  if(!task) return;
 
+  if(!task)
+    return;
+
+
+  /*
+     Repeating maintenance:
+     completion moves it to its
+     next scheduled date.
+  */
 
   if(
     task.repeat &&
@@ -2746,7 +3498,8 @@ function completeTask(id){
         task.repeat
       );
 
-    task.done = false;
+    task.done =
+      false;
 
     saveTasks();
 
@@ -2761,34 +3514,55 @@ function completeTask(id){
   }
 
 
-  task.done = true;
+  task.done =
+    true;
+
 
   saveTasks();
 
   renderEverything();
 
-  showToast("Maintenance marked done");
+  showToast(
+    "Maintenance marked done"
+  );
 
 }
 
+
+/* =====================================================
+   RESTORE
+===================================================== */
 
 function uncompleteTask(id){
 
   const task =
-    tasks.find(t => t.id === id);
+    tasks.find(
+      t => t.id === id
+    );
 
-  if(!task) return;
 
-  task.done = false;
+  if(!task)
+    return;
+
+
+  task.done =
+    false;
+
 
   saveTasks();
 
   renderEverything();
 
-  showToast("Memory restored");
+  showToast(
+    "Memory restored"
+  );
 
 }
 
+
+/* =====================================================
+   REPEAT DATE
+===================================================== */
 
 function nextRepeatDate(
   dateString,
@@ -2836,17 +3610,24 @@ function nextRepeatDate(
 }
 
 
-/* ================= EDIT ================= */
+/* =====================================================
+   EDIT
+===================================================== */
 
 function editTask(id){
 
   const task =
-    tasks.find(t => t.id === id);
+    tasks.find(
+      t => t.id === id
+    );
 
-  if(!task) return;
+
+  if(!task)
+    return;
 
 
-  editingId = id;
+  editingId =
+    id;
 
 
   document.getElementById(
@@ -2870,7 +3651,8 @@ function editTask(id){
   document.getElementById(
     "taskRepeat"
   ).value =
-    task.repeat || "none";
+    task.repeat ||
+    "none";
 
 
   openModal();
@@ -2878,23 +3660,31 @@ function editTask(id){
 }
 
 
-/* ================= DELETE ================= */
+/* =====================================================
+   DELETE
+===================================================== */
 
 function deleteTask(id){
 
   const task =
-    tasks.find(t => t.id === id);
-
-  if(!task) return;
-
-
-  const confirmed =
-    window.confirm(
-      `Delete "${task.name}"?`
+    tasks.find(
+      t => t.id === id
     );
 
 
-  if(!confirmed) return;
+  if(!task)
+    return;
+
+
+  if(
+    !window.confirm(
+      `Delete "${task.name}"?`
+    )
+  ){
+
+    return;
+
+  }
 
 
   tasks =
@@ -2907,16 +3697,21 @@ function deleteTask(id){
 
   renderEverything();
 
-  showToast("Memory deleted");
+  showToast(
+    "Memory deleted"
+  );
 
 }
 
 
-/* ================= ADD ================= */
+/* =====================================================
+   ADD
+===================================================== */
 
 function openAddModal(){
 
-  editingId = null;
+  editingId =
+    null;
 
 
   document.getElementById(
@@ -2952,16 +3747,21 @@ function openModal(){
 
   document.getElementById(
     "taskModal"
-  ).classList.add("show");
+  ).classList.add(
+    "show"
+  );
 
 
-  setTimeout(() => {
+  setTimeout(
+    () => {
 
-    document.getElementById(
-      "taskName"
-    ).focus();
+      document.getElementById(
+        "taskName"
+      ).focus();
 
-  },120);
+    },
+    120
+  );
 
 }
 
@@ -2970,9 +3770,12 @@ function closeModal(){
 
   document.getElementById(
     "taskModal"
-  ).classList.remove("show");
+  ).classList.remove(
+    "show"
+  );
 
-  editingId = null;
+  editingId =
+    null;
 
 }
 
@@ -3029,11 +3832,17 @@ function saveTask(){
 
     if(task){
 
-      task.name = name;
-      task.date = date;
-      task.repeat = repeat;
+      task.name =
+        name;
+
+      task.date =
+        date;
+
+      task.repeat =
+        repeat;
 
     }
+
 
     showToast(
       "Memory updated"
@@ -3043,7 +3852,8 @@ function saveTask(){
 
     tasks.push({
 
-      id:crypto.randomUUID(),
+      id:
+        crypto.randomUUID(),
 
       name,
 
@@ -3072,7 +3882,9 @@ function saveTask(){
 }
 
 
-/* ================= NAVIGATION ================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function switchPage(page){
 
@@ -3103,33 +3915,52 @@ function switchPage(page){
 
   Object.values(pages)
     .forEach(
-      p => p.classList.remove("active")
+      p =>
+        p.classList.remove(
+          "active"
+        )
     );
 
 
   if(pages[page]){
-    pages[page].classList.add("active");
+
+    pages[page]
+      .classList.add(
+        "active"
+      );
+
   }
 
 
   document
-    .querySelectorAll(".nav-btn")
-    .forEach(btn => {
+    .querySelectorAll(
+      ".nav-btn"
+    )
+    .forEach(
+      btn => {
 
-      btn.classList.toggle(
-        "active",
-        btn.dataset.page === page
-      );
+        btn.classList.toggle(
+          "active",
+          btn.dataset.page === page
+        );
 
-    });
+      }
+    );
 
+
+  /*
+     This changes the complete
+     accent atmosphere.
+  */
 
   document.body.dataset.page =
     page;
 
 
   if(page === "calendar"){
+
     renderCalendar();
+
   }
 
 
@@ -3141,7 +3972,9 @@ function switchPage(page){
 }
 
 
-/* ================= CALENDAR ================= */
+/* =====================================================
+   CALENDAR
+===================================================== */
 
 let calendarDate =
   new Date();
@@ -3205,22 +4038,22 @@ function renderCalendar(){
     ).getDate();
 
 
-  let html = "";
+  let html =
+    "";
 
 
   for(
-    let i = firstDay-1;
-    i >= 0;
+    let i=firstDay-1;
+    i>=0;
     i--
   ){
 
-    const day =
-      previousMonthDays-i;
-
     html += `
+
       <div class="day muted">
-        ${day}
+        ${previousMonthDays-i}
       </div>
+
     `;
 
   }
@@ -3234,9 +4067,11 @@ function renderCalendar(){
 
     const date =
       `${year}-${
-        String(month+1).padStart(2,"0")
+        String(month+1)
+          .padStart(2,"0")
       }-${
-        String(day).padStart(2,"0")
+        String(day)
+          .padStart(2,"0")
       }`;
 
 
@@ -3247,11 +4082,13 @@ function renderCalendar(){
 
 
     const isToday =
-      date === todayString();
+      date ===
+      todayString();
 
 
     const isSelected =
-      date === selectedDate;
+      date ===
+      selectedDate;
 
 
     html += `
@@ -3269,9 +4106,15 @@ function renderCalendar(){
 
         ${
           hasTask
+
           ?
-          `<div class="day-dot"></div>`
+
+          `
+          <div class="day-dot"></div>
+          `
+
           :
+
           ""
         }
 
@@ -3282,14 +4125,15 @@ function renderCalendar(){
   }
 
 
-  const totalCells =
-    firstDay + daysInMonth;
+  const total =
+    firstDay +
+    daysInMonth;
 
 
   const remaining =
-    totalCells % 7 === 0
+    total % 7 === 0
     ? 0
-    : 7-(totalCells%7);
+    : 7-(total%7);
 
 
   for(
@@ -3299,9 +4143,11 @@ function renderCalendar(){
   ){
 
     html += `
+
       <div class="day muted">
         ${day}
       </div>
+
     `;
 
   }
@@ -3316,6 +4162,10 @@ function renderCalendar(){
 }
 
 
+/* =====================================================
+   SELECTED CALENDAR DAY
+===================================================== */
+
 function renderSelectedCalendarTasks(){
 
   const container =
@@ -3326,15 +4176,19 @@ function renderSelectedCalendarTasks(){
 
   const dateTasks =
     tasks.filter(
-      t => t.date === selectedDate
+      t =>
+        t.date ===
+        selectedDate
     );
 
 
   const d =
-    parseDate(selectedDate);
+    parseDate(
+      selectedDate
+    );
 
 
-  const dateLabel =
+  const label =
     d.toLocaleDateString(
       undefined,
       {
@@ -3351,14 +4205,18 @@ function renderSelectedCalendarTasks(){
     container.innerHTML = `
 
       <div class="selected-date">
-        ${dateLabel}
+        ${label}
       </div>
 
       <div class="card empty">
 
-        <div class="empty-icon">◷</div>
+        <div class="empty-icon">
+          ◷
+        </div>
 
-        <h3>Nothing scheduled</h3>
+        <h3>
+          Nothing scheduled
+        </h3>
 
         <p>
           No maintenance memory is
@@ -3377,11 +4235,15 @@ function renderSelectedCalendarTasks(){
   container.innerHTML = `
 
     <div class="selected-date">
-      ${dateLabel}
+      ${label}
     </div>
 
     <div class="task-list">
-      ${dateTasks.map(taskHTML).join("")}
+      ${
+        dateTasks
+          .map(taskHTML)
+          .join("")
+      }
     </div>
 
   `;
@@ -3389,7 +4251,9 @@ function renderSelectedCalendarTasks(){
 }
 
 
-/* ================= CALENDAR NAV ================= */
+/* =====================================================
+   CALENDAR MONTH
+===================================================== */
 
 function changeMonth(amount){
 
@@ -3400,12 +4264,15 @@ function changeMonth(amount){
       1
     );
 
+
   renderCalendar();
 
 }
 
 
-/* ================= REMINDERS ================= */
+/* =====================================================
+   REMINDERS
+===================================================== */
 
 function loadReminderState(){
 
@@ -3415,27 +4282,25 @@ function loadReminderState(){
     );
 
 
-  const enabled =
-    saved === "true";
-
-
-  updateReminderUI(enabled);
+  updateReminderUI(
+    saved === "true"
+  );
 
 }
 
 
-function updateReminderUI(enabled){
+function updateReminderUI(
+  enabled
+){
 
-  const toggle =
-    document.getElementById(
+  document
+    .getElementById(
       "reminderToggle"
+    )
+    .classList.toggle(
+      "on",
+      enabled
     );
-
-
-  toggle.classList.toggle(
-    "on",
-    enabled
-  );
 
 }
 
@@ -3448,18 +4313,22 @@ async function toggleReminders(){
     );
 
 
-  const currentlyOn =
-    toggle.classList.contains("on");
+  const isOn =
+    toggle.classList.contains(
+      "on"
+    );
 
 
-  if(currentlyOn){
+  if(isOn){
 
     localStorage.setItem(
       REMINDER_KEY,
       "false"
     );
 
-    updateReminderUI(false);
+    updateReminderUI(
+      false
+    );
 
     showToast(
       "Reminders turned off"
@@ -3505,7 +4374,10 @@ async function toggleReminders(){
   );
 
 
-  updateReminderUI(true);
+  updateReminderUI(
+    true
+  );
+
 
   showToast(
     "Maintenance reminders enabled"
@@ -3514,9 +4386,12 @@ async function toggleReminders(){
 }
 
 
-/* ================= TOAST ================= */
+/* =====================================================
+   TOAST
+===================================================== */
 
-let toastTimer = null;
+let toastTimer =
+  null;
 
 
 function showToast(message){
@@ -3536,22 +4411,29 @@ function showToast(message){
   );
 
 
-  clearTimeout(toastTimer);
+  clearTimeout(
+    toastTimer
+  );
 
 
   toastTimer =
-    setTimeout(() => {
+    setTimeout(
+      () => {
 
-      toast.classList.remove(
-        "show"
-      );
+        toast.classList.remove(
+          "show"
+        );
 
-    },2200);
+      },
+      2200
+    );
 
 }
 
 
-/* ================= RENDER EVERYTHING ================= */
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
 
 function renderEverything(){
 
@@ -3559,10 +4441,15 @@ function renderEverything(){
 
   renderAllTasks();
 
+
   if(
     document
-      .getElementById("calendarPage")
-      .classList.contains("active")
+      .getElementById(
+        "calendarPage"
+      )
+      .classList.contains(
+        "active"
+      )
   ){
 
     renderCalendar();
@@ -3573,9 +4460,7 @@ function renderEverything(){
 
 
 /* =====================================================
-   CRITICAL TOUCH/CLICK HANDLER
-   Delegated capture handler keeps Done/Edit/Delete
-   working reliably on mobile.
+   CRITICAL MOBILE ACTION HANDLER
 ===================================================== */
 
 document.addEventListener(
@@ -3588,7 +4473,8 @@ document.addEventListener(
       );
 
 
-    if(!button) return;
+    if(!button)
+      return;
 
 
     e.preventDefault();
@@ -3604,7 +4490,8 @@ document.addEventListener(
       button.dataset.action;
 
 
-    if(!id || !action) return;
+    if(!id || !action)
+      return;
 
 
     switch(action){
@@ -3632,30 +4519,40 @@ document.addEventListener(
 );
 
 
-/* ================= NAV EVENTS ================= */
+/* =====================================================
+   NAV EVENTS
+===================================================== */
 
 document
-  .querySelectorAll(".nav-btn")
-  .forEach(btn => {
+  .querySelectorAll(
+    ".nav-btn"
+  )
+  .forEach(
+    btn => {
 
-    btn.addEventListener(
-      "click",
-      function(){
+      btn.addEventListener(
+        "click",
+        function(){
 
-        switchPage(
-          this.dataset.page
-        );
+          switchPage(
+            this.dataset.page
+          );
 
-      }
-    );
+        }
+      );
 
-  });
+    }
+  );
 
 
-/* ================= OTHER EVENTS ================= */
+/* =====================================================
+   GENERAL EVENTS
+===================================================== */
 
 document
-  .getElementById("addTaskBtn")
+  .getElementById(
+    "addTaskBtn"
+  )
   .addEventListener(
     "click",
     openAddModal
@@ -3663,7 +4560,9 @@ document
 
 
 document
-  .getElementById("closeModal")
+  .getElementById(
+    "closeModal"
+  )
   .addEventListener(
     "click",
     closeModal
@@ -3671,7 +4570,9 @@ document
 
 
 document
-  .getElementById("cancelModal")
+  .getElementById(
+    "cancelModal"
+  )
   .addEventListener(
     "click",
     closeModal
@@ -3679,7 +4580,9 @@ document
 
 
 document
-  .getElementById("saveTask")
+  .getElementById(
+    "saveTask"
+  )
   .addEventListener(
     "click",
     saveTask
@@ -3687,34 +4590,60 @@ document
 
 
 document
-  .getElementById("prevMonth")
+  .getElementById(
+    "prevMonth"
+  )
   .addEventListener(
     "click",
-    () => changeMonth(-1)
+    () =>
+      changeMonth(-1)
   );
 
 
 document
-  .getElementById("nextMonth")
+  .getElementById(
+    "nextMonth"
+  )
   .addEventListener(
     "click",
-    () => changeMonth(1)
+    () =>
+      changeMonth(1)
   );
 
 
 document
-  .getElementById("reminderToggle")
+  .getElementById(
+    "reminderToggle"
+  )
   .addEventListener(
     "click",
     toggleReminders
   );
 
 
-/* ================= CALENDAR DAY CLICK ================= */
+/* =====================================================
+   CALENDAR DAY TOUCH
+===================================================== */
 
 document.addEventListener(
   "click",
   function(e){
+
+    /*
+       Don't let task buttons or other
+       controls accidentally trigger this.
+    */
+
+    if(
+      e.target.closest(
+        ".task-action"
+      )
+    ){
+
+      return;
+
+    }
+
 
     const day =
       e.target.closest(
@@ -3722,7 +4651,8 @@ document.addEventListener(
       );
 
 
-    if(!day) return;
+    if(!day)
+      return;
 
 
     selectedDate =
@@ -3735,15 +4665,21 @@ document.addEventListener(
 );
 
 
-/* ================= MODAL BACKDROP ================= */
+/* =====================================================
+   MODAL BACKDROP
+===================================================== */
 
 document
-  .getElementById("taskModal")
+  .getElementById(
+    "taskModal"
+  )
   .addEventListener(
     "click",
     function(e){
 
-      if(e.target === this){
+      if(
+        e.target === this
+      ){
 
         closeModal();
 
@@ -3753,13 +4689,17 @@ document
   );
 
 
-/* ================= ESC KEY ================= */
+/* =====================================================
+   ESC
+===================================================== */
 
 document.addEventListener(
   "keydown",
   function(e){
 
-    if(e.key === "Escape"){
+    if(
+      e.key === "Escape"
+    ){
 
       closeModal();
 
@@ -3769,7 +4709,9 @@ document.addEventListener(
 );
 
 
-/* ================= GREETING ================= */
+/* =====================================================
+   GREETING
+===================================================== */
 
 function updateGreeting(){
 
@@ -3781,12 +4723,20 @@ function updateGreeting(){
     "Good morning";
 
 
-  if(hour >= 12 && hour < 17){
+  if(
+    hour >= 12 &&
+    hour < 17
+  ){
 
     greeting =
       "Good afternoon";
 
-  }else if(hour >= 17){
+  }
+
+
+  if(
+    hour >= 17
+  ){
 
     greeting =
       "Good evening";
@@ -3802,7 +4752,9 @@ function updateGreeting(){
 }
 
 
-/* ================= START ================= */
+/* =====================================================
+   START HAVEN
+===================================================== */
 
 loadTasks();
 
@@ -3817,4 +4769,4 @@ renderCalendar();
 </script>
 
 </body>
-        </html>
+  </html>a
