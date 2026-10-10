@@ -1,24 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#edf4f7">
+<meta name="description" content="Haven — a private, offline-friendly home maintenance tracker.">
 <title>Haven — Your home remembers.</title>
 <style>
 :root {
-  --bg:#edf3f6; --ink:#183342; --muted:#738792;
+  --bg:#edf3f6; --ink:#183342; --muted:#566d78;
   --blue:#258fcb; --teal:#22a99b; --line:#e1eaf0;
   --shadow:0 12px 32px #24465a12;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);
-font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 -webkit-tap-highlight-color:transparent}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
+.hidden{display:none!important}
 .app{max-width:760px;margin:auto;padding:16px 16px 120px}
 .topline{display:flex;align-items:center;justify-content:space-between;padding:5px 2px 15px}
 .brand{display:flex;align-items:center;gap:9px;font-weight:850}
@@ -48,18 +49,19 @@ font-size:22px;color:#258eae}
 padding:0 42px 0 48px;background:linear-gradient(110deg,#fff,#eafffb);
 box-shadow:0 8px 22px #247f9514;color:var(--ink);outline:none;
 transition:.25s}
-.search::placeholder{color:#718e99}
+.search::placeholder{color:#5f7a86}
 .search:focus{border-color:#36b9bd;box-shadow:0 0 0 4px #4fc5cb2b,0 10px 25px #247f9516}
 .clearsearch{position:absolute;right:10px;top:50%;transform:translateY(-50%);
 border:0;border-radius:12px;width:32px;height:32px;background:#d9f3ef;
 color:#357b87;display:none}
+.clearsearch.show{display:block}
 .sectionhead{display:flex;align-items:center;justify-content:space-between;
 gap:10px;margin:22px 2px 12px}
 .sectionhead h2{font-size:18px;letter-spacing:-.45px;margin:0}
 .subtle{font-size:12px;color:var(--muted)}
-.textbtn{border:0;background:transparent;color:#218eb2;font-weight:800;font-size:12px;padding:8px}
+.textbtn{border:0;background:transparent;color:#1a7a9c;font-weight:800;font-size:12px;padding:8px}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.stat{background:#fff;border:1px solid #e5edf1;border-radius:20px;
+.stat{background:#fff;border:1px solid #e5edf1;border-radius:20px;color:inherit;
 padding:14px 12px;box-shadow:var(--shadow)}
 .stat-icon{width:33px;height:33px;border-radius:12px;display:grid;place-items:center;
 background:#e5f6f5;font-size:17px;margin-bottom:10px}
@@ -80,9 +82,9 @@ border-radius:15px;background:var(--soft);font-size:23px}
 .maintenance h3{margin:14px 0 5px;font-size:15px}
 .maintenance p{margin:0;color:var(--muted);font-size:11px;line-height:1.4}
 .pill{display:inline-block;margin-top:10px;border-radius:99px;padding:5px 8px;
-background:#e4f8ef;color:#268c70;font-size:10px;font-weight:800}
-.pill.overdue{background:#fff0e9;color:#c9623e}
-.pill.soon{background:#fff7df;color:#a57818}
+background:#e4f8ef;color:#1f7a61;font-size:10px;font-weight:800}
+.pill.overdue{background:#fff0e9;color:#b4532f}
+.pill.soon{background:#fff7df;color:#8c6510}
 .activity,.calendarbox,.panel{background:white;border:1px solid var(--line);
 border-radius:22px;padding:12px 15px;box-shadow:var(--shadow)}
 .activityrow{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf1f4}
@@ -92,6 +94,7 @@ place-items:center;background:#e5f6f5;font-size:20px;flex-shrink:0}
 .activitytext,.taskinfo{min-width:0;flex:1}
 .activitytext strong,.taskinfo strong{font-size:13px;display:block}
 .activitytext small,.taskinfo small{display:block;color:var(--muted);margin-top:4px;font-size:11px}
+.taskinfo{background:none;border:0;padding:0;text-align:left;color:inherit;cursor:pointer}
 .empty{padding:25px 12px;text-align:center;color:var(--muted);font-size:13px}
 .page{display:none;animation:fade .25s}
 .page.active{display:block}
@@ -105,7 +108,7 @@ box-shadow:0 14px 38px #214a5c20,0 2px 8px #2c82930d,inset 0 1px white}
 .navitem{position:relative;isolation:isolate;display:flex;flex:1;min-width:0;
 align-items:center;justify-content:center;flex-direction:column;gap:4px;
 min-height:59px;padding:4px 2px;border:1px solid transparent;border-radius:20px;
-background:transparent;color:#81949e;font-size:10px;font-weight:800;
+background:transparent;color:#5f747e;font-size:10px;font-weight:800;
 transition:color .24s,transform .24s,background .24s,border-color .24s;overflow:hidden}
 .navitem:before{content:"";position:absolute;inset:3px;border-radius:16px;
 background:linear-gradient(135deg,#dff8f2,#e1efff);opacity:0;transform:scale(.75);
@@ -131,21 +134,20 @@ background:linear-gradient(145deg,#259fd0,#25b5a5);color:white;font-size:29px;
 box-shadow:0 10px 24px #2399a54a;transition:transform .2s}
 .fab:active{transform:scale(.9) rotate(8deg)}
 .filters{display:flex;gap:8px;overflow:auto;padding:1px 0 12px}
-.filter{white-space:nowrap;border:1px solid #dce7ec;background:#fff;color:#6b818c;
+.filter{white-space:nowrap;border:1px solid #dce7ec;background:#fff;color:#506873;
 padding:9px 13px;border-radius:99px;font-size:11px;font-weight:800}
-.filter.active{background:#dff6f2;border-color:#c4eee6;color:#188f8b}
+.filter.active{background:#dff6f2;border-color:#c4eee6;color:#14766f}
 .tasklist{display:grid;gap:10px}
 .taskrow{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
 border-radius:18px;padding:12px;box-shadow:0 5px 16px #234a5d08}
-.taskinfo{cursor:pointer}
 .taskactions{display:flex;gap:5px}
-.tinybtn{border:0;border-radius:11px;width:34px;height:34px;background:#edf7f5;color:#268d86}
+.tinybtn{border:0;border-radius:11px;width:34px;height:34px;background:#edf7f5;color:#1f7f79}
 .monthhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
 .monthhead button{border:0;background:#edf7f7;border-radius:12px;width:35px;height:35px;font-size:18px}
 .weekdays,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}
 .weekdays span{font-size:10px;color:var(--muted);padding:8px 0}
 .day{border:0;background:transparent;min-height:39px;border-radius:12px;color:var(--ink);font-size:12px;position:relative}
-.day.muted{color:#bdc8cd}.day.today{background:#dff6f1;color:#178a87;font-weight:900}
+.day.muted{color:#8a9aa2}.day.today{background:#dff6f1;color:#106f6c;font-weight:900}
 .day.selected{background:#258fcb;color:white;font-weight:900}
 .day.has:after{content:"";position:absolute;width:4px;height:4px;background:#f18a61;
 border-radius:50%;bottom:4px;left:calc(50% - 2px)}
@@ -155,6 +157,7 @@ backdrop-filter:blur(5px);align-items:flex-end;justify-content:center}
 .sheet{width:min(760px,100%);max-height:90dvh;overflow:auto;background:#f8fbfc;
 border-radius:28px 28px 0 0;padding:18px 19px calc(25px + env(safe-area-inset-bottom));
 box-shadow:0 -15px 45px #163c4c20;animation:sheetup .28s ease-out}
+.sheet:focus{outline:none}
 .sheethead{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}
 .sheethead h2{margin:0;font-size:21px}
 .close{border:0;background:#e8f0f3;border-radius:13px;width:38px;height:38px;font-size:23px}
@@ -163,36 +166,42 @@ box-shadow:0 -15px 45px #163c4c20;animation:sheetup .28s ease-out}
 .field input,.field select,.field textarea{width:100%;padding:13px;border:1px solid #dce8ed;
 border-radius:13px;background:white;color:var(--ink);outline:none}
 .field textarea{min-height:75px;resize:vertical}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
-.full{grid-column:1/-1}
 .actions{display:flex;gap:9px;margin-top:15px}
 .primary,.secondary,.redbtn{flex:1;border:0;border-radius:14px;padding:13px;font-weight:800}
-.primary{background:linear-gradient(135deg,#259fd0,#25b5a5);color:white}
+.primary{background:linear-gradient(135deg,#1f8fbf,#1c9a8c);color:white}
 .secondary{background:#e4f0f4;color:#456773}
-.redbtn{background:#fff0e9;color:#bd5b3c}
+.redbtn{background:#fff0e9;color:#b4532f}
 .detailhero{display:flex;align-items:center;gap:13px;padding:14px;
 border-radius:18px;background:linear-gradient(135deg,#e0f6f2,#e4efff)}
 .bigico{font-size:30px}
 .detailhero strong{display:block;font-size:16px}
 .detailhero small{display:block;color:var(--muted);margin-top:4px}
-.repeatline{padding:12px 0;border-bottom:1px solid var(--line)}
-.repeatline p{font-size:13px;color:var(--muted);line-height:1.5}
+.panel p{font-size:13px;color:var(--muted);line-height:1.5}
 .moretile{display:flex;align-items:center;gap:13px;background:white;border:1px solid var(--line);
 border-radius:18px;padding:14px;margin-top:11px}
 .moretile strong{display:block;font-size:13px}
 .moretile small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.namepanel{margin-top:11px}
+.namepanel .field{margin:0}
+.toast{position:fixed;z-index:40;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));
+transform:translate(-50%,12px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:14px;
+max-width:calc(100% - 32px);padding:12px 16px;border-radius:16px;background:#183342;color:#fff;
+font-size:13px;box-shadow:0 12px 30px #0003;transition:opacity .2s,transform .2s}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.toast button{border:0;background:transparent;color:#7fe0d4;font-weight:800;padding:4px}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes sheetup{from{transform:translateY(35px);opacity:.6}to{transform:translateY(0);opacity:1}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @media(min-width:600px){.app{padding-top:25px}.maintenance-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.welcome{padding:28px 25px}.welcome h1{font-size:31px}.bottomnav{bottom:18px}.fab{right:max(20px,calc((100vw - 720px)/2))}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #36b9bd!important;outline-offset:2px}
 </style>
 </head>
 <body>
 <main class="app">
 <header class="topline">
-  <div class="brand"><span class="brandmark">🏡</span><span>Haven</span></div>
+  <div class="brand"><span class="brandmark" aria-hidden="true">🏡</span><span>Haven</span></div>
   <button class="iconbtn" id="profileBtn" aria-label="About Haven">✦</button>
 </header>
 
@@ -200,17 +209,17 @@ border-radius:18px;padding:14px;margin-top:11px}
   <div class="welcome">
     <div class="welcome-row">
       <div><div class="eyebrow">YOUR HOME, IN GOOD HANDS</div>
-        <h1>Good morning,<br>Javaid <span>☀️</span></h1>
+        <h1 id="greeting">Hello</h1>
         <p>A little care today makes a happier home tomorrow.</p>
       </div>
-      <div class="avatar" id="avatar">🏡</div>
+      <div class="avatar" id="avatar" role="button" tabindex="0" aria-label="About Haven">🏡</div>
     </div>
   </div>
-  <div class="searchwrap"><span class="searchicon">⌕</span>
-    <input id="search" class="search" placeholder="Search maintenance, tasks…" autocomplete="off">
-    <button class="clearsearch" id="clearSearch">×</button>
+  <div class="searchwrap"><span class="searchicon" aria-hidden="true">⌕</span>
+    <input id="search" class="search" placeholder="Search maintenance, tasks…" aria-label="Search maintenance and tasks" autocomplete="off">
+    <button type="button" class="clearsearch" id="clearSearch" aria-label="Clear search">×</button>
   </div>
-  
+
 <div class="sectionhead">
   <h2>Home at a glance</h2>
   <span class="subtle" id="todayLabel"></span>
@@ -218,47 +227,48 @@ border-radius:18px;padding:14px;margin-top:11px}
 
 <div class="stats">
   <button type="button" class="stat" data-stat="health">
-    <div class="stat-icon">🌿</div>
+    <div class="stat-icon" aria-hidden="true">🌿</div>
     <strong id="healthStat">100%</strong>
     <span>Home health</span>
   </button>
 
   <button type="button" class="stat" data-stat="attention">
-    <div class="stat-icon">🧠</div>
+    <div class="stat-icon" aria-hidden="true">🧠</div>
     <strong id="attentionStat">0</strong>
     <span>Need attention</span>
   </button>
 
   <button type="button" class="stat" data-stat="upcoming">
-    <div class="stat-icon">🗓️</div>
+    <div class="stat-icon" aria-hidden="true">🗓️</div>
     <strong id="upcomingStat">0</strong>
     <span>Upcoming tasks</span>
   </button>
 </div>
 
-  <div class="sectionhead"><h2>Home maintenance</h2><button class="textbtn" id="allMaintenance">View all ↗</button></div>
+  <div class="sectionhead"><h2>Home maintenance</h2><button type="button" class="textbtn" id="allMaintenance">View all ↗</button></div>
   <div class="maintenance-grid" id="maintenanceGrid"></div>
-  <div class="sectionhead"><h2>Coming up</h2><button class="textbtn" id="viewTasks">All tasks ↗</button></div>
+  <div class="sectionhead"><h2>Coming up</h2><button type="button" class="textbtn" id="viewTasks">All tasks ↗</button></div>
   <div class="activity" id="upcomingList"></div>
 </section>
 
 <section class="page" id="page-calendar">
   <div class="sectionhead"><h2>Your calendar</h2><span class="subtle">Plan ahead, calmly</span></div>
   <div class="calendarbox"><div class="monthhead">
-    <button id="prevMonth">‹</button><strong id="monthTitle"></strong><button id="nextMonth">›</button>
-  </div><div class="weekdays"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+    <button type="button" id="prevMonth" aria-label="Previous month">‹</button><strong id="monthTitle" aria-live="polite"></strong><button type="button" id="nextMonth" aria-label="Next month">›</button>
+  </div><div class="weekdays" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
   <div class="days" id="calendarDays"></div></div>
-  <div class="sectionhead"><h2 id="selectedDateTitle">Tasks</h2><button class="textbtn" id="addCalendarTask">+ Add</button></div>
+  <div class="sectionhead"><h2 id="selectedDateTitle">Tasks</h2><button type="button" class="textbtn" id="addCalendarTask">+ Add</button></div>
   <div class="tasklist" id="calendarTasks"></div>
 </section>
 
 <section class="page" id="page-tasks">
-  <div class="sectionhead"><h2>Maintenance tasks</h2><button class="textbtn" id="addTaskTop">+ New task</button></div>
+  <div class="sectionhead"><h2>Maintenance tasks</h2><button type="button" class="textbtn" id="addTaskTop">+ New task</button></div>
   <div class="filters">
-    <button class="filter active" data-filter="all">All tasks</button>
-    <button class="filter" data-filter="open">To do</button>
-    <button class="filter" data-filter="done">Completed</button>
-    <button class="filter" data-filter="overdue">Overdue</button>
+    <button type="button" class="filter active" data-filter="all">All tasks</button>
+    <button type="button" class="filter" data-filter="open">To do</button>
+    <button type="button" class="filter" data-filter="attention">Needs attention</button>
+    <button type="button" class="filter" data-filter="done">Completed</button>
+    <button type="button" class="filter" data-filter="overdue">Overdue</button>
   </div>
   <div class="tasklist" id="taskList"></div>
 </section>
@@ -269,33 +279,36 @@ border-radius:18px;padding:14px;margin-top:11px}
     <h1>Small care.<br>Lasting comfort.</h1>
     <p>Your maintenance notes stay on this device, so your home's history stays close at hand.</p>
   </div>
-  <div class="moretile"><div class="taskico">🔒</div><div><strong>Your privacy</strong><small>Tasks are saved locally in this browser.</small></div></div>
-  <div class="moretile"><div class="taskico">🔁</div><div><strong>Repeating maintenance</strong><small>Set weekly, monthly, yearly, or custom schedules.</small></div></div>
-  <div class="moretile"><div class="taskico">🏡</div><div><strong>Haven — Your home remembers.</strong><small>Made for a healthier home and a happier you.</small></div></div>
-  <div class="actions"><button class="secondary" id="exportBtn">Export tasks</button><button class="secondary" id="importBtn">Import backup</button><input id="importFile" type="file" accept="application/json,.json" hidden></div>
+  <div class="panel namepanel"><div class="field"><label for="nameInput">Your name (shown in the greeting)</label><input id="nameInput" maxlength="30" autocomplete="given-name" placeholder="Your name"></div></div>
+  <div class="moretile"><div class="taskico" aria-hidden="true">🔒</div><div><strong>Your privacy</strong><small>Tasks are saved locally in this browser. Export a backup now and then.</small></div></div>
+  <div class="moretile"><div class="taskico" aria-hidden="true">🔁</div><div><strong>Repeating maintenance</strong><small>Set weekly, monthly, yearly, or custom schedules.</small></div></div>
+  <div class="moretile"><div class="taskico" aria-hidden="true">🏡</div><div><strong>Haven — Your home remembers.</strong><small>Made for a healthier home and a happier you.</small></div></div>
+  <div class="actions"><button type="button" class="secondary" id="exportBtn">Export tasks</button><button type="button" class="secondary" id="importBtn">Import backup</button><input id="importFile" type="file" accept="application/json,.json" hidden></div>
 </section>
 </main>
 
-<button class="fab" id="fab" aria-label="Add maintenance">＋</button>
+<button type="button" class="fab" id="fab" aria-label="Add maintenance task">＋</button>
 
 <nav class="bottomnav" aria-label="Main navigation">
-  <button class="navitem active" data-page="home" aria-current="page"><span class="navglyph"><span class="navicon">⌂</span></span><span class="navlabel">Home</span></button>
-  <button class="navitem" data-page="calendar"><span class="navglyph"><span class="navicon">▦</span></span><span class="navlabel">Calendar</span></button>
-  <button class="navitem" data-page="tasks"><span class="navglyph"><span class="navicon">✓</span></span><span class="navlabel">Tasks</span></button>
-  <button class="navitem" data-page="more"><span class="navglyph"><span class="navicon">•••</span></span><span class="navlabel">More</span></button>
+  <button type="button" class="navitem active" data-page="home" aria-current="page"><span class="navglyph" aria-hidden="true"><span class="navicon">⌂</span></span><span class="navlabel">Home</span></button>
+  <button type="button" class="navitem" data-page="calendar"><span class="navglyph" aria-hidden="true"><span class="navicon">▦</span></span><span class="navlabel">Calendar</span></button>
+  <button type="button" class="navitem" data-page="tasks"><span class="navglyph" aria-hidden="true"><span class="navicon">✓</span></span><span class="navlabel">Tasks</span></button>
+  <button type="button" class="navitem" data-page="more"><span class="navglyph" aria-hidden="true"><span class="navicon">•••</span></span><span class="navlabel">More</span></button>
 </nav>
 
-<div class="overlay" id="detailOverlay"><section class="sheet"><div class="sheethead"><h2 id="detailHeading">Maintenance</h2><button class="close" data-close="detailOverlay">×</button></div><div id="detailContent"></div></section></div>
-<div class="overlay" id="taskOverlay"><section class="sheet">
-  <div class="sheethead"><h2 id="taskFormTitle">Add a task</h2><button class="close" data-close="taskOverlay">×</button></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="overlay" id="detailOverlay"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="detailHeading" tabindex="-1"><div class="sheethead"><h2 id="detailHeading">Maintenance</h2><button type="button" class="close" data-close="detailOverlay" aria-label="Close">×</button></div><div id="detailContent"></div></section></div>
+<div class="overlay" id="taskOverlay"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="taskFormTitle" tabindex="-1">
+  <div class="sheethead"><h2 id="taskFormTitle">Add a task</h2><button type="button" class="close" data-close="taskOverlay" aria-label="Close">×</button></div>
   <form id="taskForm">
     <input id="editId" type="hidden">
     <div class="field" id="nameField"><label for="taskName">Task name</label><input id="taskName" required maxlength="90" placeholder="e.g. Clean water tank"></div>
-    <div class="field" id="categoryField"><label for="taskCategory">Category</label><select id="taskCategory"><option value="general">General</option><option value="ac">AC & cooling</option><option value="heater">Heating</option><option value="water">Water</option><option value="electric">Electrical</option><option value="kitchen">Kitchen</option><option value="garden">Garden</option><option value="safety">Safety</option></select></div>
+    <div class="field" id="categoryField"><label for="taskCategory">Category</label><select id="taskCategory"><option value="general">General</option><option value="ac">AC &amp; cooling</option><option value="heater">Heating</option><option value="water">Water</option><option value="electric">Electrical</option><option value="kitchen">Kitchen</option><option value="garden">Garden</option><option value="safety">Safety</option></select></div>
     <div class="field" id="dateField"><label for="taskDate">Due date</label><input id="taskDate" type="date" required></div>
     <div class="field"><label for="taskRepeat">Repeat</label><select id="taskRepeat"><option value="none">Does not repeat</option><option value="daily">Every day</option><option value="weekly">Every week</option><option value="monthly">Every month</option><option value="yearly">Every year</option><option value="custom">Custom interval</option></select></div>
-    <div class="field" id="customEveryWrap" style="display:none"><label for="customEvery">Repeat every</label><input id="customEvery" type="number" min="1" max="999" value="2"></div>
-    <div class="field" id="customUnitWrap" style="display:none"><label for="customUnit">Unit</label><select id="customUnit"><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option></select></div>
+    <div class="field hidden" id="customEveryWrap"><label for="customEvery">Repeat every</label><input id="customEvery" type="number" min="1" max="999" value="2"></div>
+    <div class="field hidden" id="customUnitWrap"><label for="customUnit">Unit</label><select id="customUnit"><option value="days">Days</option><option value="weeks">Weeks</option><option value="months">Months</option><option value="years">Years</option></select></div>
     <div class="field" id="notesField"><label for="taskNotes">Notes (optional)</label><textarea id="taskNotes" placeholder="Parts, reminders, or details to remember…"></textarea></div>
     <div class="actions"><button type="button" class="secondary" data-close="taskOverlay">Cancel</button><button type="submit" class="primary">Save task</button></div>
   </form>
@@ -304,7 +317,11 @@ border-radius:18px;padding:14px;margin-top:11px}
 <script>
 (()=>{
 'use strict';
-const TASK_KEY='havenTasksV4', RULE_KEY='havenRepeatRulesV1';
+const TASK_KEY='havenTasksV4', OLD_RULE_KEY='havenRepeatRulesV1', NAME_KEY='havenName';
+const DEFAULT_NAME='Javaid';
+const REPEATS=['none','daily','weekly','monthly','yearly','custom'];
+const UNITS=['days','weeks','months','years'];
+const ISO_RE=/^\d{4}-\d{2}-\d{2}$/;
 const CATS=[
 {name:'AC Cleaning',key:'ac',icon:'❄️',accent:'#2497d1',soft:'#e8f5fb',desc:'Keep cooling fresh'},
 {name:'Heater Check',key:'heater',icon:'♨️',accent:'#ee704b',soft:'#fff0e8',desc:'Stay warm safely'},
@@ -322,31 +339,96 @@ const addDays=(s,n)=>{const d=parseDate(s);d.setDate(d.getDate()+n);return local
 function addMonths(s,n){const d=parseDate(s),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);d.setDate(Math.min(day,new Date(d.getFullYear(),d.getMonth()+1,0).getDate()));return localISO(d)}
 function addYears(s,n){const d=parseDate(s),m=d.getMonth(),day=d.getDate();d.setDate(1);d.setFullYear(d.getFullYear()+n);d.setMonth(m);d.setDate(Math.min(day,new Date(d.getFullYear(),m+1,0).getDate()));return localISO(d)}
 const today=()=>localISO(new Date());
-function read(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch{return fallback}}
-let tasks=read(TASK_KEY,[]),rules=read(RULE_KEY,{}),filter='all';
-let calendarDate=new Date(),selectedDate=today();
-if(!Array.isArray(tasks))tasks=[];
-tasks=tasks.filter(t=>t&&t.id&&t.name&&t.due).map(t=>({...t,category:t.category||t.key||'general',repeat:t.repeat||'none',done:!!t.done}));
-const persist=()=>{localStorage.setItem(TASK_KEY,JSON.stringify(tasks));localStorage.setItem(RULE_KEY,JSON.stringify(rules))};
 const uid=()=>'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
-const cat=k=>CATS.find(c=>c.key===k)||CATS[7];
+const cat=k=>CATS.find(c=>c.key===k)||CATS[CATS.length-1];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dateLabel=s=>parseDate(s).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
 const shortDate=s=>parseDate(s).toLocaleDateString(undefined,{day:'numeric',month:'short'});
+
+/* ---------- storage ---------- */
+function read(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch{return fallback}}
+
+let toastTimer;
+function toast(msg,label,fn){
+ const el=$('toast');el.textContent='';
+ const s=document.createElement('span');s.textContent=msg;el.appendChild(s);
+ if(label){const b=document.createElement('button');b.type='button';b.textContent=label;
+  b.onclick=()=>{el.classList.remove('show');fn()};el.appendChild(b)}
+ el.classList.add('show');clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>el.classList.remove('show'),label?6000:3500);
+}
+
+/* One normalizer used for both load and import. */
+function normalize(t){
+ if(!t||typeof t!=='object')return null;
+ const name=String(t.name||'').trim().slice(0,90),due=String(t.due||'');
+ if(!name||!ISO_RE.test(due))return null;
+ const key=t.category||t.key;
+ return {
+  id:typeof t.id==='string'&&t.id?t.id:uid(),
+  name,due,
+  category:CATS.some(c=>c.key===key)?key:'general',
+  repeat:REPEATS.includes(t.repeat)?t.repeat:'none',
+  customEvery:Math.min(999,Math.max(1,parseInt(t.customEvery,10)||1)),
+  customUnit:UNITS.includes(t.customUnit)?t.customUnit:'days',
+  notes:String(t.notes||''),
+  done:!!t.done,
+  completedAt:ISO_RE.test(t.completedAt||'')?t.completedAt:null,
+  spawnedId:typeof t.spawnedId==='string'&&t.spawnedId?t.spawnedId:null
+ };
+}
+function normalizeList(arr){
+ const seen=new Set();
+ return (Array.isArray(arr)?arr:[]).map(normalize).filter(Boolean).map(t=>{
+  if(seen.has(t.id))t.id=uid();
+  seen.add(t.id);return t;
+ });
+}
+
+let tasks=normalizeList(read(TASK_KEY,[])),filter='all';
+let calendarDate=new Date(),selectedDate=today();
+try{localStorage.removeItem(OLD_RULE_KEY)}catch{}
+
+function persist(){
+ try{localStorage.setItem(TASK_KEY,JSON.stringify(tasks));return true}
+ catch{toast('Couldn’t save — storage is full or blocked. Export a backup.');return false}
+}
+
+/* ---------- name & greeting ---------- */
+function getName(){try{const v=localStorage.getItem(NAME_KEY);return v===null?DEFAULT_NAME:v}catch{return DEFAULT_NAME}}
+function renderGreeting(){
+ const h=new Date().getHours(),name=getName().trim();
+ const [g,e]=h<5?['Good evening','🌙']:h<12?['Good morning','☀️']:h<17?['Good afternoon','🌤️']:['Good evening','🌙'];
+ $('greeting').innerHTML=name?`${g},<br>${esc(name)} <span>${e}</span>`:`${g} <span>${e}</span>`;
+}
+
+/* ---------- status & repeats ---------- */
 const status=t=>t.done?'Completed':t.due<today()?'Overdue':t.due<=addDays(today(),7)?'Due soon':'Upcoming';
 const sorted=list=>[...list].sort((a,b)=>(a.done?1:0)-(b.done?1:0)||a.due.localeCompare(b.due));
-function nextDue(t){
- if(!t.repeat||t.repeat==='none')return null;
- if(t.repeat==='daily')return addDays(t.due,1);
- if(t.repeat==='weekly')return addDays(t.due,7);
- if(t.repeat==='monthly')return addMonths(t.due,1);
- if(t.repeat==='yearly')return addYears(t.due,1);
- if(t.repeat==='custom'){const n=Math.max(1,+t.customEvery||1),u=t.customUnit||'days';return u==='weeks'?addDays(t.due,n*7):u==='months'?addMonths(t.due,n):u==='years'?addYears(t.due,n):addDays(t.due,n)}
+function step(s,t){
+ if(t.repeat==='daily')return addDays(s,1);
+ if(t.repeat==='weekly')return addDays(s,7);
+ if(t.repeat==='monthly')return addMonths(s,1);
+ if(t.repeat==='yearly')return addYears(s,1);
+ if(t.repeat==='custom'){
+  const n=Math.max(1,+t.customEvery||1),u=t.customUnit||'days';
+  return u==='weeks'?addDays(s,n*7):u==='months'?addMonths(s,n):u==='years'?addYears(s,n):addDays(s,n);
+ }
  return null;
 }
+/* Next occurrence after the due date, skipping forward so it is never already in the past. */
+function nextDue(t){
+ if(!t.repeat||t.repeat==='none')return null;
+ let nd=step(t.due,t);if(!nd)return null;
+ const td=today();let guard=0;
+ while(nd<td&&guard++<5000){const n=step(nd,t);if(!n||n<=nd)break;nd=n}
+ return nd;
+}
 function repeatLabel(t){if(t.repeat==='custom')return `Every ${t.customEvery||1} ${t.customUnit||'days'}`;return ({daily:'Every day',weekly:'Every week',monthly:'Every month',yearly:'Every year'})[t.repeat]||'Does not repeat'}
+
+/* ---------- rendering ---------- */
 function render(){
- renderStats();renderMaintenance();renderUpcoming();renderTasks();renderCalendar();
+ renderGreeting();renderStats();renderMaintenance();renderUpcoming();renderTasks();renderCalendar();
 }
 function renderStats(){
  const open=tasks.filter(t=>!t.done),over=open.filter(t=>t.due<today()).length;
@@ -362,36 +444,34 @@ function renderMaintenance(){
  $('maintenanceGrid').innerHTML=list.map((m,i)=>{
  const group=tasks.filter(t=>t.category===m.key&&!t.done).sort((a,b)=>a.due.localeCompare(b.due));
  const next=group[0],s=next?status(next):'All clear';
- return `<button class="maintenance" style="--accent:${m.accent};--soft:${m.soft};animation-delay:${i*.035}s" data-maint="${m.key}">
- <div class="maint-top"><span class="maint-icon">${m.icon}</span><span class="arrow">↗</span></div>
+ return `<button type="button" class="maintenance" style="--accent:${m.accent};--soft:${m.soft};animation-delay:${i*.035}s" data-maint="${m.key}">
+ <div class="maint-top"><span class="maint-icon" aria-hidden="true">${m.icon}</span><span class="arrow" aria-hidden="true">↗</span></div>
  <h3>${esc(m.name)}</h3><p>${esc(m.desc)}</p>
  <span class="pill ${s==='Overdue'?'overdue':s==='Due soon'?'soon':''}">${next?esc(s+' · '+shortDate(next.due)):'✓ '+s}</span></button>`;
  }).join('')||'<div class="empty">No matching maintenance categories.</div>';
- $('maintenanceGrid').querySelectorAll('[data-maint]').forEach(b=>b.onclick=()=>openMaintenance(b.dataset.maint));
 }
 function taskCard(t){
- const c=cat(t.category),s=status(t);
- return `<div class="taskrow"><div class="taskico" style="background:${c.soft}">${c.icon}</div>
- <div class="taskinfo" data-open-task="${t.id}"><strong>${esc(t.name)}</strong><small>${esc(dateLabel(t.due))} · ${esc(s)}${t.repeat!=='none'?' · 🔁 Repeats':''}</small></div>
- <div class="taskactions"><button class="tinybtn" data-toggle="${t.id}" title="Complete">${t.done?'↶':'✓'}</button><button class="tinybtn" data-edit="${t.id}" title="Edit">✎</button></div></div>`;
-}
-function bindTasks(root){
- root.querySelectorAll('[data-open-task]').forEach(b=>b.onclick=()=>openTask(b.dataset.openTask));
- root.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=()=>toggleTask(b.dataset.toggle));
- root.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openForm(b.dataset.edit));
+ const c=cat(t.category),s=status(t),n=esc(t.name),id=esc(t.id);
+ return `<div class="taskrow"><div class="taskico" style="background:${c.soft}" aria-hidden="true">${c.icon}</div>
+ <button type="button" class="taskinfo" data-open-task="${id}"><strong>${n}</strong><small>${esc(dateLabel(t.due))} · ${esc(s)}${t.repeat!=='none'?' · 🔁 Repeats':''}</small></button>
+ <div class="taskactions"><button type="button" class="tinybtn" data-toggle="${id}" aria-label="${t.done?'Reopen':'Mark complete'}: ${n}">${t.done?'↶':'✓'}</button><button type="button" class="tinybtn" data-edit="${id}" aria-label="Edit ${n}">✎</button></div></div>`;
 }
 function renderUpcoming(){
- const list=sorted(tasks.filter(t=>!t.done)).slice(0,4);
- $('upcomingList').innerHTML=list.length?list.map(t=>`<div class="activityrow"><div class="activitydot" style="background:${cat(t.category).soft}">${cat(t.category).icon}</div><div class="activitytext"><strong>${esc(t.name)}</strong><small>${esc(dateLabel(t.due))} · ${esc(status(t))}</small></div><button class="tinybtn" data-open-task="${t.id}">›</button></div>`).join(''):'<div class="empty">A clear schedule feels good. Add a task whenever your home needs care.</div>';
- bindTasks($('upcomingList'));
+ const q=$('search').value.trim().toLowerCase();
+ const list=q
+  ?sorted(tasks.filter(t=>(t.name+' '+(t.notes||'')+' '+cat(t.category).name).toLowerCase().includes(q)))
+  :sorted(tasks.filter(t=>!t.done)).slice(0,4);
+ $('upcomingList').innerHTML=list.length?list.map(t=>`<div class="activityrow"><div class="activitydot" style="background:${cat(t.category).soft}" aria-hidden="true">${cat(t.category).icon}</div><div class="activitytext"><strong>${esc(t.name)}</strong><small>${esc(dateLabel(t.due))} · ${esc(status(t))}</small></div><button type="button" class="tinybtn" data-open-task="${esc(t.id)}" aria-label="Open ${esc(t.name)}">›</button></div>`).join('')
+  :`<div class="empty">${q?'No matching tasks found.':'A clear schedule feels good. Add a task whenever your home needs care.'}</div>`;
 }
 function renderTasks(){
  let list=sorted(tasks);
+ const soonLimit=addDays(today(),7);
  if(filter==='open')list=list.filter(t=>!t.done);
+ if(filter==='attention')list=list.filter(t=>!t.done&&t.due<=soonLimit);
  if(filter==='done')list=list.filter(t=>t.done);
  if(filter==='overdue')list=list.filter(t=>!t.done&&t.due<today());
  $('taskList').innerHTML=list.length?list.map(taskCard).join(''):'<div class="empty">Nothing here just now. Your home is in good hands.</div>';
- bindTasks($('taskList'));
 }
 function renderCalendar(){
  const y=calendarDate.getFullYear(),m=calendarDate.getMonth();
@@ -405,119 +485,185 @@ function renderCalendar(){
   else{day=i-offset+1;dt=new Date(y,m,day)}
   const iso=localISO(dt),has=tasks.some(t=>t.due===iso&&!t.done);
   const cls=['day',muted?'muted':'',iso===today()?'today':'',iso===selectedDate?'selected':'',has?'has':''].filter(Boolean).join(' ');
-  html+=`<button class="${cls}" data-day="${iso}">${day}</button>`;
+  html+=`<button type="button" class="${cls}" data-day="${iso}" aria-label="${esc(dateLabel(iso))}${has?', has tasks':''}" aria-pressed="${iso===selectedDate}">${day}</button>`;
  }
  $('calendarDays').innerHTML=html;
- $('calendarDays').querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>{selectedDate=b.dataset.day;calendarDate=parseDate(selectedDate);renderCalendar()});
  $('selectedDateTitle').textContent='Tasks · '+dateLabel(selectedDate);
  const due=sorted(tasks.filter(t=>t.due===selectedDate));
  $('calendarTasks').innerHTML=due.length?due.map(taskCard).join(''):'<div class="empty">No tasks planned for this day.</div>';
- bindTasks($('calendarTasks'));
 }
+
+/* ---------- navigation & overlays ---------- */
 function go(page){
  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));
  document.querySelectorAll('.navitem').forEach(b=>{
   const active=b.dataset.page===page;
   b.classList.toggle('active',active);b.classList.remove('just-activated');
-  b.setAttribute('aria-current',active?'page':'false');
-  if(active){void b.offsetWidth;b.classList.add('just-activated')}
+  if(active){b.setAttribute('aria-current','page');void b.offsetWidth;b.classList.add('just-activated')}
+  else b.removeAttribute('aria-current');
  });
- $('fab').style.display=page==='more'?'none':'block';
- if(page==='calendar')renderCalendar();if(page==='tasks')renderTasks();
+ $('fab').classList.toggle('hidden',page==='more');
+ if(page==='calendar')renderCalendar();
+ if(page==='tasks')renderTasks();
  window.scrollTo({top:0,behavior:'smooth'});
 }
-function openOverlay(id){$(id).classList.add('open');document.body.style.overflow='hidden'}
-function closeOverlay(id){$(id).classList.remove('open');if(!document.querySelector('.overlay.open'))document.body.style.overflow=''}
+function setFilter(f){
+ filter=f;
+ document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
+ renderTasks();
+}
+function openOverlay(id){
+ const o=$(id);
+ if(!o.classList.contains('open'))o._ret=document.activeElement;
+ o.classList.add('open');document.body.style.overflow='hidden';
+ o.querySelector('.sheet').focus({preventScroll:true});
+}
+function closeOverlay(id){
+ const o=$(id);if(!o.classList.contains('open'))return;
+ o.classList.remove('open');
+ if(!document.querySelector('.overlay.open'))document.body.style.overflow='';
+ const r=o._ret;o._ret=null;
+ if(r&&document.contains(r)&&r.focus)r.focus({preventScroll:true});
+}
 function openMaintenance(key){
  const m=cat(key),list=sorted(tasks.filter(t=>t.category===key));
  $('detailHeading').textContent=m.name;
- $('detailContent').innerHTML=`<div class="detailhero"><div class="bigico">${m.icon}</div><div><strong>${esc(m.name)}</strong><small>${esc(m.desc)}</small></div></div>
+ $('detailContent').innerHTML=`<div class="detailhero"><div class="bigico" aria-hidden="true">${m.icon}</div><div><strong>${esc(m.name)}</strong><small>${esc(m.desc)}</small></div></div>
  <div class="sectionhead"><h2>Maintenance history</h2><span class="subtle">${list.length} task(s)</span></div>
  ${list.length?`<div class="tasklist">${list.map(taskCard).join('')}</div>`:'<div class="empty">No records yet. Add a task to start remembering your home care.</div>'}
- <div class="actions"><button class="primary" id="addForCategory">＋ Add maintenance</button></div>`;
- bindTasks($('detailContent'));
+ <div class="actions"><button type="button" class="primary" id="addForCategory">＋ Add maintenance</button></div>`;
  $('addForCategory').onclick=()=>{closeOverlay('detailOverlay');openForm(null,key)};
  openOverlay('detailOverlay');
 }
 function openTask(id){
  const t=tasks.find(x=>x.id===id);if(!t)return;
- const c=cat(t.category),next=nextDue(t);
+ const c=cat(t.category),next=t.done?null:nextDue(t);
  $('detailHeading').textContent='Task details';
- $('detailContent').innerHTML=`<div class="detailhero"><div class="bigico">${c.icon}</div><div><strong>${esc(t.name)}</strong><small>${esc(c.name)} · ${esc(status(t))}</small></div></div>
+ $('detailContent').innerHTML=`<div class="detailhero"><div class="bigico" aria-hidden="true">${c.icon}</div><div><strong>${esc(t.name)}</strong><small>${esc(c.name)} · ${esc(status(t))}</small></div></div>
  <div class="panel"><p><b>Due date:</b> ${esc(dateLabel(t.due))}</p><p><b>Repeat:</b> ${esc(repeatLabel(t))}</p>
  ${next?`<p><b>Next date:</b> ${esc(dateLabel(next))}</p>`:''}${t.notes?`<p>${esc(t.notes)}</p>`:''}</div>
- <div class="actions"><button class="primary" id="completeBtn">${t.done?'↶ Reopen task':'✓ Mark complete'}</button><button class="secondary" id="editBtn">✎ Edit</button></div>
- <div class="actions"><button class="secondary" id="repeatBtn">🔁 Change repeat</button><button class="redbtn" id="deleteBtn">Delete</button></div>`;
+ <div class="actions"><button type="button" class="primary" id="completeBtn">${t.done?'↶ Reopen task':'✓ Mark complete'}</button><button type="button" class="secondary" id="editBtn">✎ Edit</button></div>
+ <div class="actions"><button type="button" class="secondary" id="repeatBtn">🔁 Change repeat</button><button type="button" class="redbtn" id="deleteBtn">Delete</button></div>`;
  $('completeBtn').onclick=()=>{closeOverlay('detailOverlay');toggleTask(id)};
  $('editBtn').onclick=()=>{closeOverlay('detailOverlay');openForm(id)};
- $('repeatBtn').onclick=()=>{closeOverlay('detailOverlay');openForm(id,true)};
- $('deleteBtn').onclick=()=>{if(confirm('Delete this maintenance task?')){tasks=tasks.filter(x=>x.id!==id);persist();closeOverlay('detailOverlay');render()}};
+ $('repeatBtn').onclick=()=>{closeOverlay('detailOverlay');openForm(id,null,true)};
+ $('deleteBtn').onclick=()=>deleteTask(id);
  openOverlay('detailOverlay');
+}
+function deleteTask(id){
+ const idx=tasks.findIndex(x=>x.id===id);if(idx<0)return;
+ const removed=tasks[idx];
+ tasks.splice(idx,1);persist();closeOverlay('detailOverlay');render();
+ toast('Task deleted','Undo',()=>{tasks.splice(Math.min(idx,tasks.length),0,removed);persist();render()});
 }
 function toggleTask(id){
  const t=tasks.find(x=>x.id===id);if(!t)return;
- if(!t.done){const nd=nextDue(t);t.done=true;t.completedAt=today();if(nd)tasks.push({...t,id:uid(),due:nd,done:false,completedAt:null})}
- else{t.done=false;t.completedAt=null}
+ if(!t.done){
+  t.done=true;t.completedAt=today();
+  const nd=nextDue(t);
+  /* Only spawn the next occurrence if one doesn't already exist. */
+  if(nd&&!(t.spawnedId&&tasks.some(x=>x.id===t.spawnedId))){
+   const child={...t,id:uid(),due:nd,done:false,completedAt:null,spawnedId:null};
+   t.spawnedId=child.id;tasks.push(child);
+  }
+ }else{
+  t.done=false;t.completedAt=null;
+  /* Reopening removes the untouched auto-created next task so completing again doesn't duplicate. */
+  if(t.spawnedId){
+   const child=tasks.find(x=>x.id===t.spawnedId);
+   if(child&&!child.done){tasks=tasks.filter(x=>x!==child);t.spawnedId=null}
+  }
+ }
  persist();render();
 }
+
+/* ---------- form ---------- */
 function openForm(id=null,categoryKey='general',repeatOnly=false){
  const t=id?tasks.find(x=>x.id===id):null;
+ const hideBasics=!!(repeatOnly&&t);
  $('taskForm').reset();$('editId').value=id||'';
- $('taskFormTitle').textContent=t?'Edit maintenance':repeatOnly?'Set repeat schedule':'Add a task';
- $('taskName').value=t?.name||'';$('taskCategory').value=t?.category||categoryKey;
- $('taskDate').value=t?.due||today();$('taskRepeat').value=repeatOnly?(t?.repeat||'monthly'):(t?.repeat||'none');
+ $('taskFormTitle').textContent=t?(hideBasics?'Set repeat schedule':'Edit maintenance'):'Add a task';
+ $('taskName').value=t?.name||'';
+ $('taskCategory').value=t?.category||categoryKey||'general';
+ $('taskDate').value=t?.due||today();
+ $('taskRepeat').value=t?.repeat||(hideBasics?'monthly':'none');
  $('customEvery').value=t?.customEvery||2;$('customUnit').value=t?.customUnit||'months';$('taskNotes').value=t?.notes||'';
- ['nameField','categoryField','dateField','notesField'].forEach(id=>$(id).style.display=repeatOnly&&t?'none':'flex');
+ ['nameField','categoryField','dateField','notesField'].forEach(f=>$(f).classList.toggle('hidden',hideBasics));
+ $('taskName').required=!hideBasics;$('taskDate').required=!hideBasics;
  updateCustom();openOverlay('taskOverlay');
 }
-function updateCustom(){const yes=$('taskRepeat').value==='custom';$('customEveryWrap').style.display=yes?'flex':'none';$('customUnitWrap').style.display=yes?'flex':'none'}
-$('taskRepeat').onchange=updateCustom;
-$('taskForm').onsubmit=e=>{
+function updateCustom(){const yes=$('taskRepeat').value==='custom';$('customEveryWrap').classList.toggle('hidden',!yes);$('customUnitWrap').classList.toggle('hidden',!yes)}
+$('taskRepeat').addEventListener('change',updateCustom);
+$('taskForm').addEventListener('submit',e=>{
  e.preventDefault();const id=$('editId').value,old=id?tasks.find(t=>t.id===id):null;
- const t={id:id||uid(),name:$('taskName').value.trim()||old?.name||'Maintenance',
+ const t=normalize({id:id||uid(),name:$('taskName').value.trim()||old?.name||'Maintenance',
  category:$('taskCategory').value||old?.category||'general',due:$('taskDate').value||old?.due||today(),
- repeat:$('taskRepeat').value,customEvery:Math.max(1,+$('customEvery').value||1),
- customUnit:$('customUnit').value,notes:$('taskNotes').value.trim(),
- done:old?.done||false,completedAt:old?.completedAt||null};
+ repeat:$('taskRepeat').value,customEvery:$('customEvery').value,customUnit:$('customUnit').value,
+ notes:$('taskNotes').value.trim(),done:old?.done||false,completedAt:old?.completedAt||null,spawnedId:old?.spawnedId||null});
+ if(!t){toast('Please enter a name and a valid date.');return}
  if(old)Object.assign(old,t);else tasks.push(t);
- if(t.repeat!=='none')rules[t.id]={repeat:t.repeat,customEvery:t.customEvery,customUnit:t.customUnit};else delete rules[t.id];
  persist();closeOverlay('taskOverlay');render();
-};
-$('fab').onclick=()=>openForm();
-$('addTaskTop').onclick=()=>openForm();
-$('addCalendarTask').onclick=()=>{openForm();$('taskDate').value=selectedDate};
-$('allMaintenance').onclick=()=>{filter='all';document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));go('tasks')};
-$('viewTasks').onclick=()=>go('tasks');
-$('prevMonth').onclick=()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()-1,1);renderCalendar()};
-$('nextMonth').onclick=()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+1,1);renderCalendar()};
-document.querySelectorAll('.navitem').forEach(b=>b.onclick=()=>go(b.dataset.page));
-document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeOverlay(b.dataset.close));
-document.querySelectorAll('.overlay').forEach(o=>o.onclick=e=>{if(e.target===o)closeOverlay(o.id)});
-document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{
- filter=b.dataset.filter;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));renderTasks()
 });
-$('search').oninput=()=>{
- const q=$('search').value.trim().toLowerCase();$('clearSearch').style.display=q?'block':'none';
- renderMaintenance();
- if(q){
-  const found=tasks.filter(t=>(t.name+' '+t.notes+' '+cat(t.category).name).toLowerCase().includes(q));
-  $('upcomingList').innerHTML=found.length?found.map(t=>`<div class="activityrow"><div class="activitydot">${cat(t.category).icon}</div><div class="activitytext"><strong>${esc(t.name)}</strong><small>${esc(dateLabel(t.due))}</small></div><button class="tinybtn" data-open-task="${t.id}">›</button></div>`).join(''):'<div class="empty">No matching tasks found.</div>';
-  bindTasks($('upcomingList'));
- }else renderUpcoming();
-};
-$('clearSearch').onclick=()=>{$('search').value='';$('search').dispatchEvent(new Event('input'));$('search').focus()};
-$('profileBtn').onclick=$('avatar').onclick=()=>go('more');
-$('exportBtn').onclick=()=>{
- const blob=new Blob([JSON.stringify({tasks,rules,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
+
+/* ---------- events (delegated) ---------- */
+document.addEventListener('click',e=>{
+ const el=e.target.closest('[data-open-task],[data-toggle],[data-edit],[data-maint],[data-day],[data-stat]');
+ if(!el)return;
+ const d=el.dataset;
+ if(d.toggle!==undefined){closeOverlay('detailOverlay');toggleTask(d.toggle)}
+ else if(d.edit!==undefined){closeOverlay('detailOverlay');openForm(d.edit)}
+ else if(d.openTask!==undefined){openTask(d.openTask)}
+ else if(d.maint!==undefined){openMaintenance(d.maint)}
+ else if(d.day!==undefined){selectedDate=d.day;calendarDate=parseDate(selectedDate);renderCalendar()}
+ else if(d.stat!==undefined){setFilter(d.stat==='attention'?'attention':'open');go('tasks')}
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){const open=[...document.querySelectorAll('.overlay.open')].pop();if(open)closeOverlay(open.id)}
+});
+$('fab').addEventListener('click',()=>openForm());
+$('addTaskTop').addEventListener('click',()=>openForm());
+$('addCalendarTask').addEventListener('click',()=>{openForm();$('taskDate').value=selectedDate});
+$('allMaintenance').addEventListener('click',()=>{setFilter('all');go('tasks')});
+$('viewTasks').addEventListener('click',()=>go('tasks'));
+$('prevMonth').addEventListener('click',()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()-1,1);renderCalendar()});
+$('nextMonth').addEventListener('click',()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+1,1);renderCalendar()});
+document.querySelectorAll('.navitem').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeOverlay(b.dataset.close)));
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeOverlay(o.id)}));
+document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.filter)));
+$('search').addEventListener('input',()=>{
+ $('clearSearch').classList.toggle('show',!!$('search').value.trim());
+ renderMaintenance();renderUpcoming();
+});
+$('clearSearch').addEventListener('click',()=>{$('search').value='';$('search').dispatchEvent(new Event('input'));$('search').focus()});
+$('profileBtn').addEventListener('click',()=>go('more'));
+$('avatar').addEventListener('click',()=>go('more'));
+$('avatar').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go('more')}});
+
+/* ---------- settings, export & import ---------- */
+$('nameInput').value=getName();
+$('nameInput').addEventListener('input',()=>{
+ try{localStorage.setItem(NAME_KEY,$('nameInput').value.slice(0,30))}catch{}
+ renderGreeting();
+});
+$('exportBtn').addEventListener('click',()=>{
+ const blob=new Blob([JSON.stringify({version:1,tasks,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='haven-backup.json';a.click();URL.revokeObjectURL(url);
-};
-$('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=async e=>{
+});
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{
  const f=e.target.files[0];if(!f)return;
- try{const data=JSON.parse(await f.text());if(!Array.isArray(data.tasks))throw Error('Invalid backup');
- if(confirm('Import backup and replace current tasks?')){tasks=data.tasks;rules=data.rules||data.repeatRules||{};persist();render();alert('Backup restored.')}}
- catch{alert('That file is not a valid Haven backup.')}e.target.value='';
-};
+ try{
+  const data=JSON.parse(await f.text());
+  if(!data||!Array.isArray(data.tasks))throw Error('Invalid backup');
+  const list=normalizeList(data.tasks);
+  if(confirm(`Import ${list.length} task(s) and replace your current tasks?`)){
+   tasks=list;persist();render();toast('Backup restored.');
+  }
+ }catch{toast('That file is not a valid Haven backup.')}
+ e.target.value='';
+});
+
 persist();render();
 })();
 </script>
