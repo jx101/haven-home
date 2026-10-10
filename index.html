@@ -181,7 +181,69 @@ svg{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:20px;
+  margin:-18px -18px 20px;
+  padding:18px 18px 16px;
+  background:
+    linear-gradient(135deg,#ffffff 0%,#f1f8fa 58%,#e9f7f5 100%);
+  border-bottom:1px solid rgba(25,183,170,.07);
+  border-radius:0 0 24px 24px;
+}
+
+.greeting{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* Premium Haven profile mark */
+.avatar{
+  width:50px;
+  height:50px;
+  border-radius:17px;
+  background:
+    linear-gradient(145deg,#dff7f4,#bcebe5);
+  display:grid;
+  place-items:center;
+  color:#149e96;
+  box-shadow:
+    0 7px 18px rgba(25,183,170,.15),
+    inset 0 0 0 1px rgba(255,255,255,.75);
+  position:relative;
+  overflow:hidden;
+}
+
+.avatar::before{
+  content:"";
+  position:absolute;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(255,255,255,.45);
+  top:-13px;
+  right:-9px;
+}
+
+.avatar svg{
+  width:29px;
+  height:29px;
+  position:relative;
+  z-index:2;
+  stroke-width:1.8;
+}
+
+.hello{
+  font-size:12px;
+  color:#6b7d85;
+  line-height:1.1;
+  font-weight:550;
+}
+
+.name{
+  margin-top:3px;
+  font-size:21px;
+  font-weight:780;
+  letter-spacing:-.5px;
+  color:#17323d;
 }
 
 .greeting{
