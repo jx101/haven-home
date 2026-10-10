@@ -210,12 +210,32 @@ border-radius:18px;padding:14px;margin-top:11px}
     <input id="search" class="search" placeholder="Search maintenance, tasks…" autocomplete="off">
     <button class="clearsearch" id="clearSearch">×</button>
   </div>
-  <div class="sectionhead"><h2>Home at a glance</h2><span class="subtle" id="todayLabel"></span></div>
-  <div class="stats">
-    <div class="stat"><div class="stat-icon">🌿</div><strong id="healthStat">100%</strong><span>Home health</span></div>
-    <div class="stat"><div class="stat-icon">🧠</div><strong id="attentionStat">0</strong><span>Need attention</span></div>
-    <div class="stat"><div class="stat-icon">🗓️</div><strong id="upcomingStat">0</strong><span>Upcoming tasks</span></div>
-  </div>
+  
+<div class="sectionhead">
+  <h2>Home at a glance</h2>
+  <span class="subtle" id="todayLabel"></span>
+</div>
+
+<div class="stats">
+  <button type="button" class="stat" data-stat="health">
+    <div class="stat-icon">🌿</div>
+    <strong id="healthStat">100%</strong>
+    <span>Home health</span>
+  </button>
+
+  <button type="button" class="stat" data-stat="attention">
+    <div class="stat-icon">🧠</div>
+    <strong id="attentionStat">0</strong>
+    <span>Need attention</span>
+  </button>
+
+  <button type="button" class="stat" data-stat="upcoming">
+    <div class="stat-icon">🗓️</div>
+    <strong id="upcomingStat">0</strong>
+    <span>Upcoming tasks</span>
+  </button>
+</div>
+
   <div class="sectionhead"><h2>Home maintenance</h2><button class="textbtn" id="allMaintenance">View all ↗</button></div>
   <div class="maintenance-grid" id="maintenanceGrid"></div>
   <div class="sectionhead"><h2>Coming up</h2><button class="textbtn" id="viewTasks">All tasks ↗</button></div>
